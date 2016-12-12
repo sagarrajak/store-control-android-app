@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/admin_employee"
+        android:title="Employee/Retailer" />
+    <item
+        android:title="About"
+        android:id="@+id/store_details"/>
+    <item
+        android:title="Checkin"
+        android:id="@+id/store_checkin"/>
+    <item
+        android:title="Checkout"
+        android:id="@+id/store_checkout"/>
+    <item
+        android:title="Dashboard"
+        android:id="@+id/store_dashboard"/>
+    <item
+        android:title="Product"
+        android:id="@+id/store_Product"/>
+    <item
+        android:title="Logout"
+        android:id="@+id/logout"/>
+</menu>
