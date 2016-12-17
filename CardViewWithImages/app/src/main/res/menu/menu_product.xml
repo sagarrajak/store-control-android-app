@@ -5,10 +5,8 @@
         android:id="@+id/product_menu_details"/>
     <item
         android:title="Delete"
-        android:id="@+id/Product_menu_delete"
-        />
+        android:id="@+id/product_menu_delete"/>
     <item
         android:title="Edit"
-        android:id="@+id/Product_menu_edit"
-        />
+        android:id="@+id/product_menu_edit"/>
 </menu>

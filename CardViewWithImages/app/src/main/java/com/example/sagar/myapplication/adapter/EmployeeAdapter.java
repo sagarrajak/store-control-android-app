@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sagar.myapplication.storingClass.Employee;
 import com.example.sagar.myapplication.R;
+import com.example.sagar.myapplication.modal.Employee;
 
 import java.util.ArrayList;
 
@@ -20,6 +20,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
     private Context mContext;
     private ArrayList<Employee> mlist;
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
 
@@ -27,11 +28,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
          return new MyViewHolder(itemView);
 
     }
-    public EmployeeAdapter(Context mContext , ArrayList<Employee> mlist){
-
+    public EmployeeAdapter(Context mContext){
         this.mContext = mContext;
-        this.mlist = mlist;
-
+        mlist = new ArrayList<>();
     }
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int i ){
@@ -82,5 +81,18 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
 
             }
      }
+
+    public void setFilter(ArrayList<Employee> mlist){
+        this.mlist = mlist;
+        notifyDataSetChanged();
+    }
+
+    public  void addData(Employee obj){
+        mlist.add(obj);
+        notifyDataSetChanged();
+    }
+    public ArrayList<Employee> getMlist(){
+        return  mlist;
+    }
 
   }

@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.sagar.myapplication.intent.Product_Activity;
+import com.example.sagar.myapplication.intent.Product_activity;
 
 public class NavigationDrawer{
 
@@ -38,7 +38,7 @@ public class NavigationDrawer{
                             mActivity.startActivity(intent);
                             break;
                         case R.id.store_Product :
-                            Intent intent1 = new Intent(mActivity.getApplicationContext() , Product_Activity.class);
+                            Intent intent1 = new Intent(mActivity.getApplicationContext() , Product_activity.class);
                             mActivity.startActivity(intent1);
                             break;
                     }

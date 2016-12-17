@@ -46,30 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setNavigationView(){
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-//        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                   switch (item.getItemId()){
-//                   case   R.id.admin_employee :
-//                       Intent intent =  new Intent( getApplicationContext() ,Create_employee.class);
-//                       startActivity(intent);
-//                       break;
-//                 }
-//                return false;
-//            }
-//        });
-//        ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle( this , drawerLayout , toolbar , R.string.open_drawer , R.string.close_drawer ){
-//            @Override
-//            public void onDrawerClosed(View drawerView) {
-//                super.onDrawerClosed(drawerView);
-//            }
-//            @Override
-//            public void onDrawerOpened(View drawerView) {
-//                super.onDrawerOpened(drawerView);
-//            }
-//        };
-//        drawerLayout.addDrawerListener(mActionBarDrawerToggle);
-//        mActionBarDrawerToggle.syncState();
         NavigationDrawer navigationDrawer = new NavigationDrawer(toolbar,drawerLayout,mNavigationView,this);
         navigationDrawer.setNavigationDrawer();
     }

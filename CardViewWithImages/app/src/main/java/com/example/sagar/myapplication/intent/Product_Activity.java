@@ -18,7 +18,7 @@ import com.example.sagar.myapplication.fragment.Product_fragment;
 
 import java.util.ArrayList;
 
-public class Product_Activity extends AppCompatActivity{
+public class Product_activity extends AppCompatActivity{
 
     private Toolbar mToolbar;
     private NavigationView mNavigationView;

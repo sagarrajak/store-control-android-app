@@ -1,4 +1,4 @@
-package com.example.sagar.myapplication.storingClass;
+package com.example.sagar.myapplication.modal;
 public class Product{
     public String getName() {
         return name;

@@ -2,7 +2,8 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_margin="2dp"
+    android:layout_height="wrap_content">
  <RelativeLayout
      android:layout_width="match_parent"
      android:layout_height="160dp">
@@ -12,11 +13,12 @@
          android:id="@+id/image_product"
          android:src="@drawable/product"
          android:layout_alignParentStart="true"
-         android:layout_above="@+id/ic_menu" />
+         android:layout_above="@+id/ic_menu_dots" />
      <ImageView
-         android:id="@+id/ic_menu"
+         android:id="@+id/ic_menu_dots"
          android:layout_width="40dp"
          android:layout_height="40dp"
+         android:padding="5dp"
          android:layout_alignParentBottom="true"
          android:layout_alignParentEnd="true"
          android:src="@drawable/ic_dots" />
@@ -26,17 +28,19 @@
          android:textSize="15sp"
          android:text="Large Text"
          android:id="@+id/product_name"
+         android:layout_marginLeft="5dp"
          android:layout_below="@+id/image_product"
          android:layout_alignParentStart="true"
-         android:layout_toStartOf="@+id/ic_menu" />
+         android:layout_toStartOf="@+id/ic_menu_dots" />
      <TextView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:textSize="10sp"
          android:text="Small Text"
          android:id="@+id/product_price"
+         android:layout_marginLeft="5dp"
          android:layout_alignParentStart="true"
          android:layout_below="@+id/product_name"
-         android:layout_toStartOf="@+id/ic_menu" />
+         android:layout_toStartOf="@+id/ic_menu_dots" />
  </RelativeLayout>
 </android.support.v7.widget.CardView>
