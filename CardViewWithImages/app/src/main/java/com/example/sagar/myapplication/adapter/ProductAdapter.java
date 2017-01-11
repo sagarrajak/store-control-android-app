@@ -44,7 +44,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyProduc
     private void showMenu(View view){
         PopupMenu  popupMenu = new PopupMenu(mContext,view);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
-        menuInflater.inflate(R.menu.menu_product , popupMenu.getMenu());
+        menuInflater.inflate(R.menu.menu_product,popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
             @Override
             public boolean onMenuItemClick(MenuItem item){

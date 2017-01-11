@@ -4,13 +4,4 @@
     android:layout_height="match_parent"
     tools:context=".fragment.Admin_fragment">
     <include layout="@layout/recycleview"></include>
-    <android.support.design.widget.FloatingActionButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:layout_marginRight="16dp"
-        android:layout_gravity="right|bottom"
-        android:id="@+id/fab"
-        >
-    </android.support.design.widget.FloatingActionButton>
 </FrameLayout>

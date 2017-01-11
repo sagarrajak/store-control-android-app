@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent">
-<android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="1dp"
         android:background="@android:color/white">
-  <RelativeLayout
-        android:id="@+id/relative_layout"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-    <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="160dp"
-          android:id="@+id/imageView"
-          android:layout_alignParentTop="true"
-          android:src="@drawable/employee"
-       />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="1dp"
-        android:paddingBottom="1dp"
-        android:layout_marginLeft="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ramesh chandra hajiram malik"
-        android:textSize="15sp"
-        android:id="@+id/name"
-        android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/imageViewLog"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/imageViewLog" />
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:paddingTop="1dp"
-        android:paddingBottom="1dp"
-        android:id="@+id/imageViewLog"
-        android:src="@drawable/ic_dots"
-        android:layout_alignTop="@+id/name"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/mail" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/mail"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@+id/name"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/imageViewLog" />
-  </RelativeLayout>
-</android.support.v7.widget.CardView>
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <ImageView
+                android:id="@+id/employee_picture"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/employee" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/imageViewLog"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/employee_picture"
+                android:layout_marginLeft="5dp"
+                android:layout_toStartOf="@+id/imageViewLog"
+                android:paddingBottom="1dp"
+                android:paddingTop="1dp"
+                android:text="ramesh chandra hajiram malik"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15sp" />
+            <ImageView
+                android:id="@+id/imageViewLog"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/mail"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/name"
+                android:paddingBottom="1dp"
+                android:paddingTop="1dp"
+                android:src="@drawable/ic_dots" />
+            <TextView
+                android:id="@+id/mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/name"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toStartOf="@+id/imageViewLog"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="10sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

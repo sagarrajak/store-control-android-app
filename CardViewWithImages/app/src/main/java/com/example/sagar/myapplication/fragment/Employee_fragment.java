@@ -2,7 +2,8 @@ package com.example.sagar.myapplication.fragment;
 
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -22,8 +23,7 @@ import android.view.ViewGroup;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.SpaceItemDecoration;
 import com.example.sagar.myapplication.adapter.EmployeeAdapter;
-import com.example.sagar.myapplication.api.Employee_api;
-import com.example.sagar.myapplication.intent.Create_employee_activity;
+import com.example.sagar.myapplication.api.EmployeeApi;
 import com.example.sagar.myapplication.modal.Employee;
 
 import java.util.ArrayList;
@@ -31,46 +31,48 @@ import java.util.ArrayList;
 public class Employee_fragment extends Fragment implements SearchView.OnQueryTextListener{
 
     Activity mActivity;
-    EmployeeAdapter employeeAdapter;
+    private EmployeeAdapter mEmployeeAdapter;
+    private EmployeeApi mEmployeeApi;
+
     private FloatingActionButton fab;
-
-
-
     public Employee_fragment(){}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)   {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_employee, container, false);
+        return inflater.inflate(R.layout.fragment_employee,container,false);
     }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        mEmployeeAdapter = EmployeeAdapter.getEmployeeAdapter(getContext());
+        mEmployeeApi = EmployeeApi.getEmloyeeApi(mEmployeeAdapter,getActivity());
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         setRecycleView();
-        fab = (FloatingActionButton) getView().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent( getActivity().getApplicationContext() , Create_employee_activity.class );
-                startActivity(intent);
-            }
-        });
         super.onActivityCreated(savedInstanceState);
     }
 
-
+    private ProgressDialog createProgressDialog(){
+            ProgressDialog dialog = new ProgressDialog(getActivity());
+            dialog.setIndeterminate(true);
+            dialog.setCanceledOnTouchOutside(false);
+            return  dialog;
+    }
 
     private void setRecycleView(){
 
-        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_vew);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(1));
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        employeeAdapter = new EmployeeAdapter(getActivity());
-        recyclerView.setAdapter(employeeAdapter);
-        recyclerView.setLayoutManager(mGridLayoutManager);
-
-        Employee_api employee_api = new Employee_api(getActivity(),employeeAdapter);
-        employee_api.getEmployee();
+             RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_vew);
+             recyclerView.addItemDecoration(new SpaceItemDecoration(1));
+             GridLayoutManager mGridLayoutManager = new GridLayoutManager( getActivity(),2,RecyclerView.VERTICAL , true );
+             recyclerView.setItemAnimator(new DefaultItemAnimator());
+             recyclerView.setAdapter(mEmployeeAdapter);
+             recyclerView.setLayoutManager(mGridLayoutManager);
+             Dialog dialog = createProgressDialog();
+             dialog.show();
+             mEmployeeApi.getEmployee(dialog);
 
     }
 
@@ -84,7 +86,7 @@ public class Employee_fragment extends Fragment implements SearchView.OnQueryTex
         MenuItemCompat.setOnActionExpandListener(item , new MenuItemCompat.OnActionExpandListener(){
             @Override
             public boolean onMenuItemActionExpand(MenuItem menuItem){
-                employeeAdapter.setFilter(employeeAdapter.getMlist());
+//                mEmployeeAdapter.setFilter(mEmployeeAdapter.getMlist());
                 return true;
             }
             @Override
@@ -95,23 +97,20 @@ public class Employee_fragment extends Fragment implements SearchView.OnQueryTex
         super.onCreateOptionsMenu(menu,inflater);
     }
 
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
 
-
     @Override
     public boolean onQueryTextChange(String s) {
-        employeeAdapter.setFilter(filter(s));
+        mEmployeeAdapter.setFilter(filter(s));
         return true;
     }
 
-
     private  ArrayList<Employee> filter(String query ){
          ArrayList<Employee> rlist = new ArrayList<>();
-         for( Employee obj : employeeAdapter.getMlist() ){
+         for( Employee obj : mEmployeeAdapter.getMlist() ){
              if(obj.getName().contains(query)||obj.getMail().contains(query))
                  rlist.add(obj);
          }

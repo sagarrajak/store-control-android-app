@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="16dp"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/bottom_sheet_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
+        android:text="Gallery"
+        android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/bottom_sheet_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorAccent"
+        android:text="Camera"
+        android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/bottom_sheet_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorAccent"
+        android:text="Delete"
+        android:textColor="@android:color/white" />
+</LinearLayout>

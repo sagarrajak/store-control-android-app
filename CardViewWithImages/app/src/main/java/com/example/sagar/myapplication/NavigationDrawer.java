@@ -27,14 +27,14 @@ public class NavigationDrawer{
     }
 
     public  void setNavigationDrawer(){
+
             mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                     switch (item.getItemId()){
-
                         case  R.id.admin_employee :
                             Intent intent = new Intent(mActivity.getApplicationContext() , MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             mActivity.startActivity(intent);
                             break;
                         case R.id.store_Product :
@@ -45,6 +45,7 @@ public class NavigationDrawer{
                     return false;
                 }
             });
+
             ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle( mActivity , mDrawerLayout, mToolbar , R.string.open , R.string.close ){
                 @Override
                 public void onDrawerClosed(View drawerView) {

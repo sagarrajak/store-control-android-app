@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-         android:title="edit details"
+         android:title="Edit details"
          android:id="@+id/edit_employee"
          android:orderInCategory="100"
      />
     <item
-        android:title="delete"
+        android:title="Delete"
         android:id="@+id/delete"
         android:orderInCategory="101"
     />
     <item
-        android:title="send message"
+        android:title="Send message"
         android:id="@+id/send_message"
         android:orderInCategory="101"
     />

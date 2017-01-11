@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.sagar.myapplication.NavigationDrawer;
 import com.example.sagar.myapplication.R;
+import com.example.sagar.myapplication.fragment.Brand_fragment;
 import com.example.sagar.myapplication.fragment.Category_fragment;
 import com.example.sagar.myapplication.fragment.Product_fragment;
 
@@ -49,6 +50,7 @@ public class Product_activity extends AppCompatActivity{
         CustumViewPager custumViewPager = new CustumViewPager(getSupportFragmentManager());
         custumViewPager.addNewFragment(new Category_fragment(),"CATEGORY");
         custumViewPager.addNewFragment(new Product_fragment(),"PRODUCT");
+        custumViewPager.addNewFragment(new Brand_fragment(),"BRAND");
         mViewPager.setAdapter(custumViewPager);
         mTabLayout.setupWithViewPager(mViewPager);
     }

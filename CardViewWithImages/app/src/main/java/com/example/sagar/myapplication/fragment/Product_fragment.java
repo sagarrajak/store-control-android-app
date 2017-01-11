@@ -18,7 +18,7 @@ import com.example.sagar.myapplication.modal.Product;
 
 import java.util.ArrayList;
 
-public class Product_fragment extends Fragment {
+public class Product_fragment extends Fragment{
     public Product_fragment(){
     }
     @Override
@@ -26,13 +26,11 @@ public class Product_fragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_product_frag, container, false);
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         createRecycleView();
         super.onActivityCreated(savedInstanceState);
     }
-
     private void createRecycleView(){
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_vew);
         recyclerView.addItemDecoration(new SpaceItemDecoration(1));

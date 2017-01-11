@@ -3,9 +3,10 @@ package com.example.sagar.myapplication.modal;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class Employee{
+public class Employee implements Serializable{
+    public  Employee(){}
     public Employee(String name, String mail, String  image) {
         this.name = name;
         this.mail = mail;
@@ -17,6 +18,7 @@ public class Employee{
         this.image = image;
         this.dateOfJoin   =  dateOfJoin;
         this.dateOfBirth  =  dateOfBirth;
+        this.phoneNumber="182892892389";
     }
     @SerializedName("_id")
     @Expose
@@ -24,9 +26,6 @@ public class Employee{
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("age")
-    @Expose
-    private String  age;
     @SerializedName("date_of_birth")
     @Expose
     private String dateOfBirth;
@@ -36,12 +35,10 @@ public class Employee{
     @SerializedName("pan_num")
     @Expose
     private String panNum;
-    @SerializedName("__v")
-    @Expose
-    private String  v;
+
     @SerializedName("phone_number")
     @Expose
-    private List<String > phoneNumber = null;
+    private String  phoneNumber ;
     @SerializedName("date_of_join")
     @Expose
     private String  dateOfJoin;
@@ -63,14 +60,6 @@ public class Employee{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String  getAge() {
-        return age;
-    }
-
-    public void setAge(String  age) {
-        this.age = age;
     }
 
     public String  getDateOfBirth() {
@@ -97,19 +86,11 @@ public class Employee{
         this.panNum = panNum;
     }
 
-    public String  getV() {
-        return v;
-    }
-
-    public void setV(String  v) {
-        this.v = v;
-    }
-
-    public List<String> getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(List<String > phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -129,3 +110,4 @@ public class Employee{
         this.image = image;
     }
 }
+
