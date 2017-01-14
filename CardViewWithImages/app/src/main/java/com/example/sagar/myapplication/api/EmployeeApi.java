@@ -19,7 +19,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 public class EmployeeApi{
-
     private Context mContext;
     private EmployeeAdapter mEmployeeAdapter;
     ApiEmployeeInterface apiEmployeeInterface;
@@ -34,7 +33,6 @@ public class EmployeeApi{
         this.mEmployeeAdapter = mEmployeeAdapter;
         apiEmployeeInterface = ApiClient.getClient().create(ApiEmployeeInterface.class);
     }
-
 
     public  void getEmployee(final Dialog dialog){
          Call<List<Employee>> employee_obj  =  apiEmployeeInterface.getEmployee();
@@ -51,9 +49,8 @@ public class EmployeeApi{
          });
     }
 
-
     public boolean  addEmployeeImage(MultipartBody.Part body , final Employee employee , final Dialog dialog ){
-          final boolean[] output = {false};
+
           Call<Data>  obj = apiEmployeeInterface.addEmployeeImage(body);
           obj.enqueue(new Callback<Data>() {
               @Override
@@ -75,6 +72,7 @@ public class EmployeeApi{
                     t.printStackTrace();
               }
           });
+
          return true;
     }
 
@@ -105,9 +103,9 @@ public class EmployeeApi{
             @Override
             public void onFailure(Call<Responce> call, Throwable t) {
 //                Err.s( mContext , "Failed to create employee");
-                t.printStackTrace();
-                Err.e("In employee");
-                dialog.dismiss();
+                    t.printStackTrace();
+                    Err.e("In employee");
+                    dialog.dismiss();
             }
         });
     }
@@ -124,8 +122,8 @@ public class EmployeeApi{
                                         getEmployee(dialog);
                                     }
                                    else{
-                                       Err.e( Integer.toString(response.code()));
-                                       dialog.dismiss();
+                                         Err.e( Integer.toString(response.code()));
+                                         dialog.dismiss();
                                     }
                             }
                             @Override
@@ -134,11 +132,35 @@ public class EmployeeApi{
                                     t.printStackTrace();
                             }
                         });
+    }
+
+    public void deleteEmployeeImage(final String  id , final Dialog  dialog){
+        apiEmployeeInterface
+                        .deleteEmployeImage(id)
+                                .enqueue(new Callback<Data>(){
+                                        @Override
+                                        public void onResponse(Call<Data> call , Response<Data> response ){
+                                                if( response.code() == 200 ){
+                                                    Err.e("image deleted");
+                                                    deleteEmployeeApi(id,dialog);
+                                                }
+                                                else{
+                                                    dialog.dismiss();
+                                                    Err.e("failed");
+                                                }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Data> call, Throwable t){
+                                            Err.e("Employee deleted");
+                                            t.printStackTrace();
+                                            dialog.dismiss();
+                                        }
+                                });
 
     }
 
-
-    public static EmployeeApi getEmloyeeApi(EmployeeAdapter mEmployeeAdapter , Context mContext){
+    public static EmployeeApi getEmloyeeApi( EmployeeAdapter mEmployeeAdapter , Context mContext){
         if( mEmployeeApi == null ){
             mEmployeeApi = new EmployeeApi(mContext,mEmployeeAdapter);
         }

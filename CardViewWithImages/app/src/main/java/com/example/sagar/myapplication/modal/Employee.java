@@ -12,6 +12,7 @@ public class Employee implements Serializable{
         this.mail = mail;
         this.image = image;
     }
+
     public  Employee( String name , String mail , String image , String   dateOfBirth , String  dateOfJoin ){
         this.name = name ;
         this.mail = mail;
@@ -20,6 +21,8 @@ public class Employee implements Serializable{
         this.dateOfBirth  =  dateOfBirth;
         this.phoneNumber="182892892389";
     }
+
+
     @SerializedName("_id")
     @Expose
     private String id;

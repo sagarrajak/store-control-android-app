@@ -1,4 +1,4 @@
-package com.example.sagar.myapplication;
+package com.example.sagar.myapplication.intent;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,12 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.sagar.myapplication.NavigationDrawer;
+import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.EmployeeAdapter;
 import com.example.sagar.myapplication.api.EmployeeApi;
 import com.example.sagar.myapplication.fragment.Admin_fragment;
 import com.example.sagar.myapplication.fragment.Employee_fragment;
 import com.example.sagar.myapplication.fragment.Retailer_fragment;
-import com.example.sagar.myapplication.intent.Create_employee_activity;
 
 import java.util.ArrayList;
 

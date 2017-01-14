@@ -36,28 +36,28 @@ public class Product_fragment extends Fragment{
         recyclerView.addItemDecoration(new SpaceItemDecoration(1));
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(new ProductAdapter( getActivity() , create() ));
+        recyclerView.setAdapter(new ProductAdapter( getActivity() ) );
         recyclerView.setLayoutManager(mGridLayoutManager);
     }
 
     private ArrayList<Product> create(){
         ArrayList<Product> mList = new ArrayList<>();
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
-        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
+//        mList.add(new Product("xyz product"," xyz brand", "bla bla bla" ,"54"));
         return mList;
     }
 

@@ -18,7 +18,7 @@ public class About_employee_activity extends AppCompatActivity {
     private ImageView    mImageView;
     private TextView mName , mEmail , mPhoneNumber  , mPanNumber , mDateOfJoin,mDateOfBirth;
 //    private final String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_400,h_400,c_crop,g_face/w_400/v1482011353/";
-    private final String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_400,h_400,c_crop,g_face/w_400/v1482011353/";
+    private final String url = "http://res.cloudinary.com/droxr0kdp/image/upload/v1482011353/";
     private Employee employee;
 
     @Override
@@ -51,7 +51,7 @@ public class About_employee_activity extends AppCompatActivity {
 
 
 
-        Glide.with(this)
+        Glide.with(this.getApplicationContext())
                 .load(url+employee.getImage())
                     .centerCrop()
                         .placeholder(R.drawable.employee)

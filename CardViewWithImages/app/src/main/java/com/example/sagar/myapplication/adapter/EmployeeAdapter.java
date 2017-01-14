@@ -39,6 +39,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
 
         return  mEmployeeAdapter;
     }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
          View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.emploee_card, parent , false);
@@ -53,7 +54,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int i ){
 
-        String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_300,h_300,c_crop,g_face/w_200/v1482011353/";
+        String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_300,h_300,c_crop/w_200/v1482011353/";
+//        String url = "http://res.cloudinary.com/droxr0kdp/image/upload/v1482011353/";
 
         holder.name.setText(mlist.get(i).getName());
         holder.email.setText(mlist.get(i).getMail());
@@ -64,7 +66,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
             }
         });
 
-        Glide.with(mContext)
+        Glide.with(mContext.getApplicationContext())
                     .load(url+mlist.get(i).getImage())
                         .centerCrop()
                                 .placeholder(R.drawable.employee)
@@ -122,6 +124,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
             return  false;
         }
         private void createDeleteDialog(final int position){
+
         /*Dialog   to  delete   employee*/
             new AlertDialog.Builder(mContext)
                     .setTitle("Delete Employee")
@@ -132,7 +135,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
                             ProgressDialog progressDialog = createProgressDialog();
                             Err.e(mlist.get(position).getId());
                             progressDialog.show();
-                            mEmployeeApi.deleteEmployeeApi( mlist.get(position).getId() , progressDialog );
+                            mEmployeeApi.deleteEmployeeImage( mlist.get(position).getId() , progressDialog );
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -158,14 +161,12 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
             public  ImageView employeePicture;
             public  int position;
             public MyViewHolder(View view){
-
                 super(view);
                 this.view = view;
                 name  = (TextView) view.findViewById(R.id.name);
                 email = (TextView) view.findViewById(R.id.mail);
                 mImageView = (ImageView)view.findViewById(R.id.imageViewLog);
                 employeePicture = (ImageView) view.findViewById(R.id.employee_picture);
-
             }
      }
 
@@ -182,6 +183,4 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
     public List<Employee> getMlist(){
         return  mlist;
     }
-
-
   }

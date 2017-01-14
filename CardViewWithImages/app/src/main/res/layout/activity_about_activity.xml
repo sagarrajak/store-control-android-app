@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
-    tools:context=".intent.About_employee_activity"
+    android:background="@color/colorPrimary" tools:context=".intent.About_employee_activity"
     android:weightSum="1">
+
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
+        android:layout_width="match_parent">
        <include layout="@layout/toolbar" android:id="@+id/about_employee_toolbar"></include>
     </android.support.design.widget.AppBarLayout>
 

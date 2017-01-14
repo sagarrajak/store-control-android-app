@@ -26,9 +26,9 @@ public interface ApiEmployeeInterface {
     @FormUrlEncoded
     @POST("api/employee/create-employee")
      Call<Responce>  createEmployee(
-                    @Field("name") String name,
-                    @Field("date_of_birth") Date date_of_birth,
-                    @Field("date_of_join") Date date_of_join,
+                    @Field("name")   String name,
+                    @Field("date_of_birth")  Date date_of_birth,
+                    @Field("date_of_join")  Date date_of_join,
                     @Field("mail") String mail,
                     @Field("pan_num") String pan_num,
                     @Field("phone_num") String phone_number,
@@ -43,10 +43,17 @@ public interface ApiEmployeeInterface {
                    @Part MultipartBody.Part image
              );
 
+
     @DELETE("api/employee/{id}")
     Call<Data> deleteEmployee(
              @Path("id") String id
      );
+
+    @FormUrlEncoded
+    @POST("api/employee/delete-employee-image")
+    Call<Data> deleteEmployeImage(
+            @Field("id") String image
+    );
 
 
 
