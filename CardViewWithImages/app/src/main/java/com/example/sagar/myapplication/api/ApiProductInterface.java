@@ -24,11 +24,11 @@ public interface ApiProductInterface{
     @FormUrlEncoded
     @POST("api/product/")
     Call<Data>  createProduct(
-            @Field("name") String name,
-            @Field("brand") String brand,
-            @Field("type") String  type,
+            @Field("name")  String name,
+            @Field("brand")  String brand,
+            @Field("type")   List<String>  type,
             @Field("detail") String details,
-            @Field("price") Integer price
+            @Field("price")  String price
     );
 
     @Multipart

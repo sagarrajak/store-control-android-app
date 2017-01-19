@@ -13,6 +13,10 @@ public class ProductType {
     @SerializedName("details")
     @Expose
     private String detials;
+    @SerializedName("_id")
+    @Expose
+    String id;
+
     public String getProductType() {
         return productType;
     }
@@ -24,5 +28,11 @@ public class ProductType {
     }
     public void setDetials(String detials) {
         this.detials = detials;
+    }
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 }

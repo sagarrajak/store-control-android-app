@@ -7,25 +7,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".intent.Setting_activity"
+    tools:context=".intent.setting.Setting_activity"
     tools:openDrawer="start">
-
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:fitsSystemWindows="true">
-
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <include layout="@layout/toolbar" android:id="@+id/setting_toolbar"></include>
-
+            <include
+                android:id="@+id/setting_toolbar"
+                layout="@layout/toolbar">
+            </include>
         </android.support.design.widget.AppBarLayout>
-
+        <include
+            layout="@layout/activity_setting_helper_activity"
+            ></include>
     </android.support.design.widget.CoordinatorLayout>
-
-    <include layout="@layout/navigation_drawer" ></include>
-
+    <include layout="@layout/navigation_drawer"></include>
 </android.support.v4.widget.DrawerLayout>
+

@@ -5,15 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary" tools:context=".intent.About_employee_activity"
+    android:background="@color/colorPrimary" tools:context=".intent.employee.About_employee_activity"
     android:weightSum="1">
-
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
        <include layout="@layout/toolbar" android:id="@+id/about_employee_toolbar"></include>
     </android.support.design.widget.AppBarLayout>
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -26,7 +24,6 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="1dp"
         android:adjustViewBounds="false" />
-
     <LinearLayout
         android:orientation="vertical"
         android:background="@android:color/white"

@@ -23,7 +23,8 @@ public interface ApiBrandInterface {
     @POST("api/product-brand")
     public  Call<Data>  addNewBrand(
           @Field("brand") String brand ,
-          @Field("details") String details
+          @Field("details") String details,
+          @Field("image") String image
     );
 
     @DELETE ("api/product-brand/{id}")

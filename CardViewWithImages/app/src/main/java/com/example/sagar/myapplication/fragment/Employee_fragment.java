@@ -1,7 +1,6 @@
 package com.example.sagar.myapplication.fragment;
 
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 
 public class Employee_fragment extends Fragment implements SearchView.OnQueryTextListener{
 
-    Activity mActivity;
     private EmployeeAdapter mEmployeeAdapter;
     private EmployeeApi mEmployeeApi;
 
@@ -39,12 +37,12 @@ public class Employee_fragment extends Fragment implements SearchView.OnQueryTex
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_employee,container,false);
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         mEmployeeAdapter = EmployeeAdapter.getEmployeeAdapter(getContext());
         mEmployeeApi = EmployeeApi.getEmloyeeApi(mEmployeeAdapter,getActivity());
     }
@@ -56,15 +54,17 @@ public class Employee_fragment extends Fragment implements SearchView.OnQueryTex
     }
 
     private ProgressDialog createProgressDialog(){
+
             ProgressDialog dialog = new ProgressDialog(getActivity());
             dialog.setIndeterminate(true);
             dialog.setCanceledOnTouchOutside(false);
             return  dialog;
+
     }
 
     private void setRecycleView(){
 
-             RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_vew);
+             RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_view);
              recyclerView.addItemDecoration(new SpaceItemDecoration(1));
              GridLayoutManager mGridLayoutManager = new GridLayoutManager( getActivity(),2,RecyclerView.VERTICAL , true );
              recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -86,7 +86,7 @@ public class Employee_fragment extends Fragment implements SearchView.OnQueryTex
         MenuItemCompat.setOnActionExpandListener(item , new MenuItemCompat.OnActionExpandListener(){
             @Override
             public boolean onMenuItemActionExpand(MenuItem menuItem){
-//                mEmployeeAdapter.setFilter(mEmployeeAdapter.getMlist());
+
                 return true;
             }
             @Override

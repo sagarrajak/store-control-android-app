@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 /**
  * Created by SAGAR on 1/2/2017.
  */
@@ -30,12 +31,14 @@ public class ApiClient {
                                                           .readTimeout(15,TimeUnit.DAYS)
                                                               .build();
 
-            if (retrofit == null)
-                  retrofit = new Retrofit.Builder()
-                                  .baseUrl(baseUrl)
-                                      .addConverterFactory(GsonConverterFactory.create(gson))
-                                         .client(client)
-                                               .build();
+            if (retrofit == null){
+                    retrofit = new Retrofit.Builder()
+                                    .baseUrl(baseUrl)
+                                        .addConverterFactory(GsonConverterFactory.create(gson))
+                                            .client(client)
+                                                .build();
+            }
+
 
         return retrofit;
     }

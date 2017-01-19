@@ -3,6 +3,7 @@ package com.example.sagar.myapplication.api;
 import android.app.Dialog;
 
 import com.example.sagar.myapplication.Err;
+import com.example.sagar.myapplication.adapter.CategoryAdapter;
 import com.example.sagar.myapplication.modal.Data;
 import com.example.sagar.myapplication.modal.ProductType;
 
@@ -20,12 +21,17 @@ public class ProductTypeApi{
 
 
     private static  ProductTypeApi  mProductTypeApi;
+
+
     private ApiProductTypeInterface mApiProductInterface;
+    private CategoryAdapter mCategoryAdapter ;
+
     private List<ProductType> mList;
 
-    public ProductTypeApi(){
-        mList = new ArrayList<>();
-        mApiProductInterface = ApiClient.getClient().create(ApiProductTypeInterface.class);
+    public ProductTypeApi(CategoryAdapter mCategoryAdapter){
+         mList = new ArrayList<>();
+         mApiProductInterface = ApiClient.getClient().create(ApiProductTypeInterface.class);
+         this.mCategoryAdapter = mCategoryAdapter;
     }
 
 
@@ -50,7 +56,6 @@ public class ProductTypeApi{
     }
 
 
-
     public void  deleteProductType(String id , final  Dialog  dialog ){
         mApiProductInterface
                 .deleteProduct(id)
@@ -73,9 +78,6 @@ public class ProductTypeApi{
                     });
     }
 
-
-
-
     public void listProductType(final  Dialog dialog) {
         mApiProductInterface
                 .getProductTypeList()
@@ -85,7 +87,6 @@ public class ProductTypeApi{
                         if( response.code() == 200 ){
                             mList = response.body();
                         }
-
                     }
                     @Override
                     public void onFailure(Call<List<ProductType>> call, Throwable t) {
@@ -94,9 +95,9 @@ public class ProductTypeApi{
                 });
     }
 
-    public static  ProductTypeApi getmProductTypeApi(){
+    public static  ProductTypeApi getmProductTypeApi(CategoryAdapter mCategoryAdapter){
           if(mProductTypeApi == null)
-              mProductTypeApi = new ProductTypeApi();
+              mProductTypeApi = new ProductTypeApi(mCategoryAdapter);
          return  mProductTypeApi;
     }
 

@@ -1,6 +1,9 @@
 package com.example.sagar.myapplication.adapter;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,72 +14,119 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.R;
+import com.example.sagar.myapplication.api.ProductApi;
 import com.example.sagar.myapplication.modal.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyProductViewHodler>{
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyProductViewHodler> {
     private Context mContext;
     private List<Product> mList;
+    private int position;
+    private  static  ProductAdapter mProductAdapter=null;
+    private ProductApi mProductApi ;
 
-    private  static  ProductAdapter mProductAdapter;
-
-    public  ProductAdapter( Context  mContext ){
+    public  ProductAdapter( Context  mContext , String check ){
+          Err.e(check);
           this.mContext = mContext;
           mList = new ArrayList<>();
+          mProductApi = ProductApi.getmProductApi(this);
     }
 
     @Override
     public MyProductViewHodler onCreateViewHolder(ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.product_card, parent , false );
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Err.s(mContext.getApplicationContext() , "working");
+            View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.product_card , parent , false );
+            return  new MyProductViewHodler(view);
+    }
+
+    class  MyMenuCLickListener implements  PopupMenu.OnMenuItemClickListener{
+        int position ;
+        public  MyMenuCLickListener(int position){
+            this.position = position;
+        }
+        @Override
+        public boolean onMenuItemClick(MenuItem item){
+            switch(item.getItemId()){
+                case R.id.product_menu_details :
+                    break;
+                case R.id.product_menu_delete :
+                    alertDialogBuilder(position);
+                    break;
+                case R.id.product_menu_edit:
+                    break;
             }
-        });
-        return  new MyProductViewHodler(view);
+            return false;
+        }
     }
 
     @Override
-    public void onBindViewHolder(final MyProductViewHodler holder, int i){
-        holder.mTextViewPrice.setText(mList.get(i).getPrice());
-        holder.mTextViewName.setText(mList.get(i).getName());
-        holder.mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showMenu(holder.mImageView);
-            }
-        });
+    public void onBindViewHolder(final MyProductViewHodler holder,final int i){
+
+           String url = "http://res.cloudinary.com/droxr0kdp/image/upload/v1482011353/";
+            holder.mTextViewPrice.setText(mList.get(i).getPrice());
+            holder.mTextViewName.setText(mList.get(i).getName());
+            holder.mImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showMenu(holder.mImageView , i);
+                }
+            });
+
+            Glide
+                .with(mContext.getApplicationContext())
+                 .load(url+mList.get(i).getImage())
+                    .centerCrop()
+                      .placeholder(R.drawable.product)
+                                .crossFade()
+                                    .into(holder.mProductView);
+
+
     }
 
+    private ProgressDialog createProgressDialog(){
+        ProgressDialog dialog = new ProgressDialog(mContext);
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        return  dialog;
+    }
+
+
+    private void alertDialogBuilder(final int position){
+
+        new AlertDialog
+                .Builder(mContext)
+                    .setMessage("Are you sure to want to delete this product")
+                       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialogInterface, int i){
+                                    ProgressDialog mProgressDialog =  createProgressDialog();
+                                    mProgressDialog.show();
+                                    mProductApi.deleteProduct(mList.get(position).getId(),mProgressDialog);
+                           }
+                       })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                    Err.s(mContext,"Delete Canceled");
+                            }
+                        }).show();
+
+    }
 
     @Override
     public int getItemCount() {
         return mList.size();
     }
-    private void showMenu(View view){
+    private void showMenu(View view , int position){
         PopupMenu  popupMenu = new PopupMenu(mContext,view);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.menu_product,popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
-            @Override
-            public boolean onMenuItemClick(MenuItem item){
-               // TODO: 12/13/2016
-                switch (item.getItemId()){
-                    case R.id.product_menu_details :
-                        break;
-                    case R.id.product_menu_delete :
-                        break;
-                    case R.id.product_menu_edit:
-                        break;
-                }
-                return false;
-            }
-        });
+        popupMenu.setOnMenuItemClickListener(new MyMenuCLickListener(position));
         popupMenu.show();
     }
 
@@ -87,20 +137,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyProduc
 
     public class MyProductViewHodler extends  RecyclerView.ViewHolder{
         public TextView mTextViewName ,mTextViewPrice;
-        public ImageView mImageView;
+        public ImageView mImageView,mProductView;
         public MyProductViewHodler(View itemView){
             super(itemView);
             mTextViewName = (TextView) itemView.findViewById(R.id.product_name);
             mImageView   =   (ImageView) itemView.findViewById(R.id.ic_menu_dots);
             mTextViewPrice = (TextView) itemView.findViewById(R.id.product_price);
+            mProductView = (ImageView) itemView.findViewById(R.id.image_product);
         }
     }
 
-    public static ProductAdapter getProductAdapter(Context mContext){
-        if(mProductAdapter == null )
-            mProductAdapter = new ProductAdapter(mContext);
-
+    public static ProductAdapter getProductAdapter(Context Con , String check){
+        if(mProductAdapter == null ){
+            mProductAdapter = new ProductAdapter(Con , check);
+        }
         return mProductAdapter;
+
     }
 
 }

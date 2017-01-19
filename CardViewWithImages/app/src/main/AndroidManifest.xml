@@ -12,23 +12,36 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".intent.login_activity">
+        <activity android:name=".intent.setting.login_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".intent.Create_employee_activity" />
-        <activity android:name=".intent.Product_activity" />
-        <activity android:name=".intent.About_employee_activity" />
-        <activity android:name=".intent.Transaction_activity" />
-        <activity android:name=".intent.About_store_activity" />
-        <activity android:name=".intent.MainActivity" />
-        <activity android:name=".intent.Setting_activity" />
+        <activity android:name=".intent.employee.Create_employee_activity" />
+        <activity android:name=".intent.product.Product_activity" />
+        <activity android:name=".intent.employee.About_employee_activity" />
+        <activity android:name=".intent.transaction.Transaction_activity" />
+        <activity android:name=".intent.about_store.About_store_activity" />
+        <activity android:name=".intent.employee.MainActivity" />
+        <activity android:name=".intent.setting.Setting_activity" />
         <activity android:name=".intent.Setting" />
-        <activity android:name=".intent.DashBoard_activity" />
-        <activity android:name=".intent.Work_profile_activity"></activity>
+        <activity android:name=".intent.dashboard.DashBoard_activity" />
+        <activity android:name=".intent.product.About_product_activity" />
+        <activity android:name=".intent.product.Activity_create_product" />
+        <activity android:name=".intent.stock.Activity_about_stock" />
+        <activity android:name=".intent.work_profile.About_work_profile_activity" />
+        <activity android:name=".intent.stock.Manage_stock_activity" />
+        <activity android:name=".intent.stock.Acitivity_create_new_stock" />
+        <activity android:name=".intent.brand.Brand_activity" />
+        <activity android:name=".intent.brand.About_brand" />
+        <activity android:name=".intent.brand.Brand_products_details" />
+        <activity android:name=".intent.work_profile.Create_work_profle" />
+        <activity android:name=".intent.right.Create_new_right" />
+        <activity android:name=".intent.product_category.Create_new_product_category" />
+        <activity android:name=".intent.product_category.Product_by_category" />
+        <activity android:name=".intent.product_category.Product_category_details"></activity>
     </application>
 
 </manifest>

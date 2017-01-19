@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.api.EmployeeApi;
-import com.example.sagar.myapplication.intent.About_employee_activity;
+import com.example.sagar.myapplication.intent.employee.About_employee_activity;
 import com.example.sagar.myapplication.modal.Employee;
 
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
     private  EmployeeApi mEmployeeApi;
 
     public  static EmployeeAdapter  getEmployeeAdapter(Context mContext){
-        if(mEmployeeAdapter==null)
+        if(mEmployeeAdapter==null){
             mEmployeeAdapter = new EmployeeAdapter(mContext);
-
+        }
         return  mEmployeeAdapter;
     }
 
@@ -45,6 +45,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
          View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.emploee_card, parent , false);
          return new MyViewHolder(itemView);
     }
+
     public EmployeeAdapter(Context mContext){
         this.mContext = mContext;
         mlist = new ArrayList<>();
@@ -56,7 +57,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
 
         String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_300,h_300,c_crop/w_200/v1482011353/";
 //        String url = "http://res.cloudinary.com/droxr0kdp/image/upload/v1482011353/";
-
         holder.name.setText(mlist.get(i).getName());
         holder.email.setText(mlist.get(i).getMail());
         holder.mImageView.setOnClickListener(new View.OnClickListener(){
@@ -166,7 +166,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
                 name  = (TextView) view.findViewById(R.id.name);
                 email = (TextView) view.findViewById(R.id.mail);
                 mImageView = (ImageView)view.findViewById(R.id.imageViewLog);
-                employeePicture = (ImageView) view.findViewById(R.id.employee_picture);
+                employeePicture = (ImageView)view.findViewById(R.id.employee_picture);
             }
      }
 

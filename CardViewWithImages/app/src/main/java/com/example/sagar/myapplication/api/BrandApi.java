@@ -3,10 +3,10 @@ package com.example.sagar.myapplication.api;
 import android.app.Dialog;
 
 import com.example.sagar.myapplication.Err;
+import com.example.sagar.myapplication.adapter.BrandAdapter;
 import com.example.sagar.myapplication.modal.Brand;
 import com.example.sagar.myapplication.modal.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,16 +17,16 @@ public class BrandApi{
 
     private ApiBrandInterface mApiBrandInterface;
     private  static  BrandApi mBrandApi;
-    private   List<Brand> mBrand;
+    private BrandAdapter  mBrandAdapter;
 
-    public  BrandApi(){
-          mBrand = new ArrayList<>();
+    public  BrandApi(BrandAdapter brandAdapter){
           mApiBrandInterface = ApiClient.getClient().create(ApiBrandInterface.class);
+          this.mBrandAdapter = brandAdapter;
     }
 
-    public  void  addNewBrand(String brand , String details , final Dialog dialog ){
+    public  void  addNewBrand(String brand, String  details,String  logo ,final Dialog dialog ){
         mApiBrandInterface.addNewBrand(
-             brand , details
+             brand , details , logo
         ).enqueue(new Callback<Data>(){
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
@@ -75,7 +75,7 @@ public class BrandApi{
             @Override
             public void onResponse(Call<List<Brand>> call, Response<List<Brand>> response) {
                 if(response.code() == 200){
-                    mBrand = response.body();
+                    mBrandAdapter.addNewItems(response.body());
                 }
                 else dialog.dismiss();
             }
@@ -87,9 +87,11 @@ public class BrandApi{
         });
 
     }
-    public static BrandApi getBrandApi(){
+    public static BrandApi getBrandApi(BrandAdapter mBrandAdapter){
+
         if(mBrandApi==null)
-            mBrandApi = new BrandApi();
+             mBrandApi = new BrandApi(mBrandAdapter);
+
         return  mBrandApi;
     }
 

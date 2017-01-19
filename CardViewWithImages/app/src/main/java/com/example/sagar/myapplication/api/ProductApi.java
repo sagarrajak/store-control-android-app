@@ -31,7 +31,7 @@ public class ProductApi{
               mProduct.getName() , mProduct.getBrand() , mProduct.getType() , mProduct.getDetail() , mProduct.getPrice()
         ).enqueue(new Callback<Data>() {
             @Override
-            public void onResponse( Call<Data> call , Response<Data> response ){
+            public void onResponse( Call<Data> call  , Response<Data> response  ){
                 if( response.code() == 200 ){
                     listProduct(dialog);
                 }
@@ -72,8 +72,6 @@ public class ProductApi{
     }
 
     public  void  addImage(MultipartBody.Part part , final Product mProduct , final Dialog dialog ){
-
-
         mApiProductInterface.addProductImage(part).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response){
@@ -120,7 +118,7 @@ public class ProductApi{
         employee_obj.enqueue(new Callback<List<Product>>(){
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response){
-                if(response.code() == 200){
+                if ( response.code() == 200 ){
                     mProductAdapter.addProductList(response.body());
                 }
                 else Err.e("failed to List product");

@@ -32,7 +32,7 @@ public class Retailer_fragment extends Fragment{
     }
 
     private void createRecycleView(){
-        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_vew);
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_view);
         recyclerView.addItemDecoration(new SpaceItemDecoration(1));
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
         recyclerView.setItemAnimator(new DefaultItemAnimator());

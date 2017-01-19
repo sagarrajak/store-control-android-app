@@ -3,7 +3,10 @@ package com.example.sagar.myapplication.modal;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Product{
+
     @SerializedName("_id")
     @Expose
     private String id;
@@ -15,19 +18,30 @@ public class Product{
     private String brand;
     @SerializedName("type")
     @Expose
-    private String type;
+    private List<String> type;
     @SerializedName("detail")
     @Expose
     private String detail;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private String price;
     @SerializedName("image")
     @Expose
     private String image;
     @SerializedName("__v")
     @Expose
     private Integer v;
+    @SerializedName("retailer")
+    @Expose
+    private  List<String> retailer;
+
+    public List<String> getRetailer() {
+        return retailer;
+    }
+
+    public void setRetailer(List<String> retailer) {
+        this.retailer = retailer;
+    }
 
     public String getId() {
         return id;
@@ -53,11 +67,11 @@ public class Product{
         this.brand = brand;
     }
 
-    public String getType() {
+    public List<String> getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(List<String> type) {
         this.type = type;
     }
 
@@ -69,11 +83,11 @@ public class Product{
         this.detail = detail;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
