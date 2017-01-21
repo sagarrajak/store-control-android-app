@@ -1,4 +1,4 @@
-package com.example.sagar.myapplication.api;
+package com.example.sagar.myapplication.api.interfaces;
 
 import com.example.sagar.myapplication.modal.Data;
 import com.example.sagar.myapplication.modal.Employee;
@@ -55,6 +55,13 @@ public interface ApiEmployeeInterface {
             @Field("id") String image
     );
 
+    @GET("api/routes/employee/name/{id}")
+    Call<List<Employee>> sortByName( @Path("id") Integer id );
 
+    @GET("api/routes/employee/age/{id}")
+    Call<List<Employee>> sortByAge( @Path("id") Integer id);
+
+    @GET("api/routes/employee/date-of-join/{id}")
+    Call<List<Employee>>  sortByDateOFJoin( @Path("id") Integer id );
 
 }

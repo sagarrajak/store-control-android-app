@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.sagar.myapplication.R;
 
 public class Create_new_product_category extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

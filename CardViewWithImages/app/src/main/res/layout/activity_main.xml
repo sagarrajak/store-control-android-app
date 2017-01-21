@@ -33,14 +33,6 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </android.support.v4.view.ViewPager>
-    <android.support.design.widget.FloatingActionButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_gravity="bottom|end"
-        android:id="@+id/fab">
-    </android.support.design.widget.FloatingActionButton>
 </android.support.design.widget.CoordinatorLayout>
 <include layout="@layout/navigation_drawer">
         </include>

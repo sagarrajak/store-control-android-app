@@ -34,14 +34,15 @@
         <activity android:name=".intent.work_profile.About_work_profile_activity" />
         <activity android:name=".intent.stock.Manage_stock_activity" />
         <activity android:name=".intent.stock.Acitivity_create_new_stock" />
-        <activity android:name=".intent.brand.Brand_activity" />
-        <activity android:name=".intent.brand.About_brand" />
         <activity android:name=".intent.brand.Brand_products_details" />
         <activity android:name=".intent.work_profile.Create_work_profle" />
         <activity android:name=".intent.right.Create_new_right" />
         <activity android:name=".intent.product_category.Create_new_product_category" />
         <activity android:name=".intent.product_category.Product_by_category" />
-        <activity android:name=".intent.product_category.Product_category_details"></activity>
+        <activity android:name=".intent.product_category.Product_category_details" />
+        <activity android:name=".intent.employee.Activity_create_new_retailer" />
+        <activity android:name=".intent.employee.About_retailer" />
+        <activity android:name=".intent.employee.Product_associated_with_retailer"></activity>
     </application>
 
 </manifest>

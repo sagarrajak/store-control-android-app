@@ -24,31 +24,27 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
     private ProductTypeApi mProductTypeApi;
     private List<Category> mList;
     private static  CategoryAdapter mCategoryAdapter;
-
+    String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_300,h_300,c_crop/w_200/v1482011353/";
 
     private CategoryAdapter(Context mContext){
           this.mContext = mContext;
           mProductTypeApi =  ProductTypeApi.getmProductTypeApi(this);
           mList  = new ArrayList<>();
     }
-
     @Override
     public CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
          View view  = LayoutInflater.from(parent.getContext()).inflate( R.layout.category_card , parent , false);
          return  new MyViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(CategoryAdapter.MyViewHolder holder, int position) {
         holder.category_details.setText(mList.get(position).getCategory_name());
         holder.category_name.setText(mList.get(position).getCategory_name());
     }
-
     @Override
     public int getItemCount() {
         return mList.size();
     }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView category_name , category_details;
         public MyViewHolder(View itemView) {
@@ -58,12 +54,8 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
         }
     }
     public  static  CategoryAdapter  getmCategoryAdapter(Context mContext){
-
          if(mCategoryAdapter == null)
              mCategoryAdapter = new CategoryAdapter(mContext);
-
         return  mCategoryAdapter;
-
     }
-
 }

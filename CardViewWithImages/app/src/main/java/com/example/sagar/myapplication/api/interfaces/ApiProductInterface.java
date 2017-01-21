@@ -1,4 +1,4 @@
-package com.example.sagar.myapplication.api;
+package com.example.sagar.myapplication.api.interfaces;
 
 import com.example.sagar.myapplication.modal.Data;
 import com.example.sagar.myapplication.modal.Product;

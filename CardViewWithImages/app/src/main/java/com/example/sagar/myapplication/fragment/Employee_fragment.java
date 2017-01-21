@@ -3,34 +3,37 @@ package com.example.sagar.myapplication.fragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.SpaceItemDecoration;
-import com.example.sagar.myapplication.adapter.EmployeeAdapter;
+import com.example.sagar.myapplication.adapter.EmployeeGridAdapter;
+import com.example.sagar.myapplication.adapter.EmployeeListAdapter;
 import com.example.sagar.myapplication.api.EmployeeApi;
-import com.example.sagar.myapplication.modal.Employee;
+import com.example.sagar.myapplication.intent.employee.Create_employee_activity;
 
-import java.util.ArrayList;
+public class Employee_fragment extends Fragment {
 
-public class Employee_fragment extends Fragment implements SearchView.OnQueryTextListener{
-
-    private EmployeeAdapter mEmployeeAdapter;
+    private EmployeeGridAdapter mEmployeeGridAdapter;
     private EmployeeApi mEmployeeApi;
+    private RecyclerView recyclerView;
+    private boolean isListLayout ;
+    private MenuItem listToGrid;
 
     private FloatingActionButton fab;
     public Employee_fragment(){}
@@ -43,8 +46,10 @@ public class Employee_fragment extends Fragment implements SearchView.OnQueryTex
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mEmployeeAdapter = EmployeeAdapter.getEmployeeAdapter(getContext());
-        mEmployeeApi = EmployeeApi.getEmloyeeApi(mEmployeeAdapter,getActivity());
+        mEmployeeGridAdapter = EmployeeGridAdapter.getEmployeeAdapter(getContext());
+        mEmployeeGridAdapter.setmContext(getContext());
+        isListLayout = false;
+        mEmployeeApi = EmployeeApi.getEmloyeeApi( mEmployeeGridAdapter ,getActivity());
     }
 
     @Override
@@ -54,67 +59,124 @@ public class Employee_fragment extends Fragment implements SearchView.OnQueryTex
     }
 
     private ProgressDialog createProgressDialog(){
-
             ProgressDialog dialog = new ProgressDialog(getActivity());
             dialog.setIndeterminate(true);
             dialog.setCanceledOnTouchOutside(false);
             return  dialog;
-
     }
-
     private void setRecycleView(){
-
-             RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_view);
+             recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_view);
              recyclerView.addItemDecoration(new SpaceItemDecoration(1));
              GridLayoutManager mGridLayoutManager = new GridLayoutManager( getActivity(),2,RecyclerView.VERTICAL , true );
-             recyclerView.setItemAnimator(new DefaultItemAnimator());
-             recyclerView.setAdapter(mEmployeeAdapter);
+             recyclerView.setAdapter(mEmployeeGridAdapter);
              recyclerView.setLayoutManager(mGridLayoutManager);
              Dialog dialog = createProgressDialog();
              dialog.show();
              mEmployeeApi.getEmployee(dialog);
-
     }
 
+    private void changeListToGride(){
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager( getActivity(),2,RecyclerView.VERTICAL , true );
+        recyclerView.setAdapter(mEmployeeGridAdapter);
+        recyclerView.setLayoutManager(mGridLayoutManager);
+        mEmployeeApi.addNewAdapter(mEmployeeGridAdapter);
+        Dialog dialog = createProgressDialog();
+        dialog.show();
+        mEmployeeApi.getEmployee(dialog);
+    }
+
+    private void changeGridToList(){
+        EmployeeListAdapter mEmployeeListAdapter = EmployeeListAdapter.getmEmployeeListAdapter(getContext());
+        mEmployeeApi.addNewAdapter(mEmployeeListAdapter);
+        recyclerView.setAdapter(mEmployeeListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        Dialog dialog = createProgressDialog();
+        dialog.show();
+        mEmployeeApi.getEmployee(dialog);
+    }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.toolbar_menu ,menu);
-        final MenuItem item = menu.findItem(R.id.employee_search);
-        final  SearchView searchView  =  (SearchView)MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);
-        MenuItemCompat.setOnActionExpandListener(item , new MenuItemCompat.OnActionExpandListener(){
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem menuItem){
+    public void onCreateOptionsMenu( Menu menu , MenuInflater inflater ){
+        inflater.inflate(R.menu.menu_employee_fragment ,menu);
+        listToGrid = menu.findItem(R.id.list_to_grid);
 
-                return true;
-            }
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                return true;
-            }
-        });
+        if(isListLayout)
+            listToGrid.setIcon(R.drawable.ic_grid_24dp);
+        else
+            listToGrid.setIcon(R.drawable.ic_list_black_24dp);
+
         super.onCreateOptionsMenu(menu,inflater);
     }
 
     @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case  R.id.list_to_grid :
+                if(isListLayout){
+                    changeListToGride();
+                    if(listToGrid!=null){
+                       listToGrid.setIcon(R.drawable.ic_list_black_24dp);
+                    }
+                    isListLayout = !isListLayout;
+                }
+                else{
+                    changeGridToList();
+                    if(listToGrid!=null){
+                        listToGrid.setIcon(R.drawable.ic_grid_24dp);
+                    }
+                    isListLayout = !isListLayout;
+                }
+                break;
+            case R.id.create_employee :
+                Intent intent = new Intent( getActivity().getApplicationContext() , Create_employee_activity.class);
+                startActivity(intent);
+                break;
+            case R.id.fragment_menu_sort :
+                creteButtomSheet();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
+   private void creteButtomSheet(){
 
-    @Override
-    public boolean onQueryTextChange(String s) {
-        mEmployeeAdapter.setFilter(filter(s));
-        return true;
-    }
+        final RadioButton salary,name,date_of_join;
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
+        View view = getActivity().getLayoutInflater().inflate(R.layout.buttom_sheet_employee_fragment,null);
+        bottomSheetDialog.setContentView(view);
 
-    private  ArrayList<Employee> filter(String query ){
-         ArrayList<Employee> rlist = new ArrayList<>();
-         for( Employee obj : mEmployeeAdapter.getMlist() ){
-             if(obj.getName().contains(query)||obj.getMail().contains(query))
-                 rlist.add(obj);
-         }
-        return  rlist;
-    }
+        salary = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_salery_radiobottom);
+        name = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_name_radiobottom);
+        date_of_join = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_date_of_join_radiobottm);
 
+
+           name.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view){
+                     Dialog dialog = createProgressDialog();
+                     dialog.show();
+                     mEmployeeApi.getSortByName(dialog);
+                     date_of_join.setChecked(false);
+                     salary.setChecked(false);
+                 }
+             });
+            date_of_join.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Dialog dialog = createProgressDialog();
+                   dialog.show();
+                   mEmployeeApi.getSortByDateOfJoin(dialog);
+                    name.setChecked(false);
+                    salary.setChecked(false);
+               }
+           });
+            salary.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                //// TODO: 1/20/2017
+                 name.setChecked(false);
+                 date_of_join.setChecked(false);
+             }
+         });
+       bottomSheetDialog.show();
+   }
 }

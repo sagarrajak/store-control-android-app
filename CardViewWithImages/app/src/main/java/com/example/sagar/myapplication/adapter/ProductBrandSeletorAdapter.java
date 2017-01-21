@@ -9,7 +9,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.api.ApiBrandInterface;
+import com.example.sagar.myapplication.api.interfaces.ApiBrandInterface;
 import com.example.sagar.myapplication.api.ApiClient;
 import com.example.sagar.myapplication.modal.Brand;
 
@@ -65,12 +65,16 @@ public class ProductBrandSeletorAdapter extends RecyclerView.Adapter<ProductBran
             @Override
             public void onClick(View view){
                 if(!checked){
-                    checked=true;
-                    radiobutton = holder.radioButton;
+                        checked=true;
+                        radiobutton=holder.radioButton;
+                }
+                else if(radiobutton == holder.radioButton){
+                        radiobutton=null;
+                        checked=false;
                 }
                 else{
-                    radiobutton.setChecked(false);
-                    radiobutton = holder.radioButton;
+                        radiobutton.setChecked(false);
+                        radiobutton = holder.radioButton;
                 }
                 ans_brand = brand.get(position);
             }
@@ -91,6 +95,9 @@ public class ProductBrandSeletorAdapter extends RecyclerView.Adapter<ProductBran
         }
     }
     public  Brand getProductBrand(){
-        return  ans_brand;
+        if(radiobutton==null)
+            return null;
+        else
+            return  ans_brand;
     }
 }

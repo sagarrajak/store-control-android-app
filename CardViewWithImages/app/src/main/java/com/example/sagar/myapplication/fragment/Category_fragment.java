@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.CategoryAdapter;
 import com.example.sagar.myapplication.api.ProductTypeApi;
@@ -51,18 +50,20 @@ public class Category_fragment extends Fragment{
             recyclerView.setAdapter(mCategoryAdapter);
         }
     }
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-            inflater.inflate(R.menu.menu_category_fragment , menu);
+        inflater.inflate(R.menu.menu_category_fragment , menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case   R.id.category_product :
-                Err.s(getContext() ," working for category fragment");
-                break;
-        }
+
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

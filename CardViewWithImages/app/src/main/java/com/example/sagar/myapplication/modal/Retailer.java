@@ -4,20 +4,16 @@ package com.example.sagar.myapplication.modal;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Retailer {
-
-
-
+public class Retailer{
     @SerializedName("_id")
     @Expose
     private String id;
-
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("phone_num")
     @Expose
-    private Integer phoneNum;
+    private String  phoneNum;
     @SerializedName("mail")
     @Expose
     private String mail;
@@ -36,11 +32,11 @@ public class Retailer {
         this.name = name;
     }
 
-    public Integer getPhoneNum() {
+    public String  getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(Integer phoneNum) {
+    public void setPhoneNum(String  phoneNum) {
         this.phoneNum = phoneNum;
     }
 
@@ -75,5 +71,4 @@ public class Retailer {
     public void setId(String id) {
         this.id = id;
     }
-
 }

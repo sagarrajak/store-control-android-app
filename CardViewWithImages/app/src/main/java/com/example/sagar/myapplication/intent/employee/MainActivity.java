@@ -1,8 +1,6 @@
 package com.example.sagar.myapplication.intent.employee;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,27 +10,22 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.example.sagar.myapplication.NavigationDrawer;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.EmployeeAdapter;
-import com.example.sagar.myapplication.api.EmployeeApi;
 import com.example.sagar.myapplication.fragment.Admin_fragment;
 import com.example.sagar.myapplication.fragment.Employee_fragment;
 import com.example.sagar.myapplication.fragment.Retailer_fragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
     private   Toolbar toolbar ;
     private   DrawerLayout drawerLayout;
     private   NavigationView mNavigationView ;
     private   TabLayout  mTabLayout;
     private   ViewPager  mViewPager;
-    private   FloatingActionButton mFloatingActionButton;
-    private   EmployeeApi mEmployeeApi;
-    private   EmployeeAdapter mEmployeeAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -41,10 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             drawerLayout  =  (DrawerLayout)findViewById(R.id.drawer_layout);
             mTabLayout   =   (TabLayout) findViewById(R.id.tab_layout);
             mViewPager   =   (ViewPager) findViewById(R.id.view_pager);
-            mFloatingActionButton  = (FloatingActionButton) findViewById(R.id.fab);
-            mFloatingActionButton.setOnClickListener(this);
-            mEmployeeAdapter  = EmployeeAdapter.getEmployeeAdapter(this);
-            mEmployeeApi     =  EmployeeApi.getEmloyeeApi(mEmployeeAdapter,this);
+
          setSupportActionBar(toolbar);
          setTitle("Employee");
          getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -69,12 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
           mViewPager.setAdapter(adapter);
           mTabLayout.setupWithViewPager(mViewPager);
     }
-    @Override
-    public void onClick(View view){
-        // on click listener for  fab button
-        Intent intent = new Intent( getApplicationContext() , Create_employee_activity.class);
-        startActivity(intent);
-    }
+
     class  ViewPagerAdapter extends FragmentPagerAdapter{
         ArrayList<Fragment>    mListFrgament  =  new ArrayList<>();
         ArrayList<String>      mListString    =  new ArrayList<>();

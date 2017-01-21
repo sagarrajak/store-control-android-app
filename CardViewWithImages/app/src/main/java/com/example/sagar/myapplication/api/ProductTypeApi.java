@@ -4,6 +4,7 @@ import android.app.Dialog;
 
 import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.adapter.CategoryAdapter;
+import com.example.sagar.myapplication.api.interfaces.ApiProductTypeInterface;
 import com.example.sagar.myapplication.modal.Data;
 import com.example.sagar.myapplication.modal.ProductType;
 

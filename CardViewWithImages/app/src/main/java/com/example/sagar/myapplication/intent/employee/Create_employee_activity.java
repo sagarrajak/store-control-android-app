@@ -30,7 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.EmployeeAdapter;
+import com.example.sagar.myapplication.adapter.EmployeeGridAdapter;
 import com.example.sagar.myapplication.api.EmployeeApi;
 import com.example.sagar.myapplication.modal.Employee;
 
@@ -54,17 +54,10 @@ public class Create_employee_activity extends AppCompatActivity  {
     private BottomSheetDialog mBottomSheetDialog;
     private File file ;
     private ArrayAdapter<String> adapter = null;
-
-
-
     private EmployeeApi mEmployeeApi;
-    private EmployeeAdapter mEmployeeAdapter;
-
-
-
+    private EmployeeGridAdapter mEmployeeGridAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_employee);
         toolbar = (Toolbar) findViewById(R.id.activity_create_employee_toolbar);
@@ -72,11 +65,8 @@ public class Create_employee_activity extends AppCompatActivity  {
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-
             setTitle("Create employee");
-
             calendar = Calendar.getInstance();
-
             name = (EditText) findViewById(R.id.add_employee_name);
             mail = (EditText) findViewById(R.id.add_employee_mail);
             date_of_birth = (EditText) findViewById(R.id.add_employee_layout_date_of_birth);
@@ -90,10 +80,10 @@ public class Create_employee_activity extends AppCompatActivity  {
             adapter = new ArrayAdapter<String>( Create_employee_activity.this,android.R.layout.select_dialog_item );
 
 //          mEmployeeApi = (EmployeeApi) getIntent().getExtras().get("EmployeeApi");
-//          mEmployeeAdapter = (EmployeeAdapter) getIntent().getExtras().get("EmployeeAdapter");
+//          mEmployeeGridAdapter = (EmployeeGridAdapter) getIntent().getExtras().get("EmployeeGridAdapter");
 
-            mEmployeeAdapter =  EmployeeAdapter.getEmployeeAdapter(getApplicationContext());
-            mEmployeeApi = EmployeeApi.getEmloyeeApi(mEmployeeAdapter,getApplicationContext());
+            mEmployeeGridAdapter =  EmployeeGridAdapter.getEmployeeAdapter(getApplicationContext());
+            mEmployeeApi = EmployeeApi.getEmloyeeApi(mEmployeeGridAdapter,getApplicationContext());
 
             final DatePickerDialog.OnDateSetListener dateOfBirth = new DatePickerDialog.OnDateSetListener() {
                 @Override
@@ -185,7 +175,6 @@ public class Create_employee_activity extends AppCompatActivity  {
                 startActivityForResult(intent,12345);
             }
         });
-
         view.findViewById(R.id.bottom_sheet_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -235,10 +224,7 @@ public class Create_employee_activity extends AppCompatActivity  {
             ActivityCompat.requestPermissions( Create_employee_activity.this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE },
                     1 );
-
-
         }
-
     }
 
     private boolean checkError(){
@@ -323,7 +309,7 @@ public class Create_employee_activity extends AppCompatActivity  {
                                 RequestBody reqfile =  RequestBody.create(MediaType.parse("image/*"),file);
                                 MultipartBody.Part body = MultipartBody.Part.createFormData("upload",file.getName(),reqfile);
                                 if( mEmployeeApi.addEmployeeImage(body , getEmployee() , dialog )) {
-                                    mEmployeeAdapter.notifyDataSetChanged();
+                                    mEmployeeGridAdapter.notifyDataSetChanged();
                                 }
                         }
 

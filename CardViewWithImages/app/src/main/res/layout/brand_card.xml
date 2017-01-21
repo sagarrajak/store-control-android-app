@@ -2,7 +2,12 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:elevation="2dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -13,21 +18,30 @@
             android:layout_weight="0.2"
             android:orientation="vertical">
             <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black"
                 android:text="Large Text"
                 android:id="@+id/brand_card_brand_name" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
                 android:text="Small Text"
                 android:id="@+id/brand_card_brand_details"/>
         </LinearLayout>
          <ImageView
              android:layout_width="wrap_content"
-             android:layout_height="match_parent"
+             android:layout_height="70dp"
+             android:paddingTop="1dp"
+             android:paddingBottom="1dp"
+             android:paddingLeft="1dp"
+             android:paddingRight="1dp"
              android:src="@drawable/product"
              android:padding="0.1dp"
              android:id="@+id/brand_card_brand_logo"

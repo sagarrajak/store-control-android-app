@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.R;
+import com.example.sagar.myapplication.adapter.interfaces.EmployeeAdapterInterface;
 import com.example.sagar.myapplication.api.EmployeeApi;
 import com.example.sagar.myapplication.intent.employee.About_employee_activity;
 import com.example.sagar.myapplication.modal.Employee;
@@ -26,18 +27,18 @@ import com.example.sagar.myapplication.modal.Employee;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyViewHolder>{
+public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapter.MyViewHolder> implements EmployeeAdapterInterface {
 
     private Context mContext;
     private  List<Employee> mlist;
-    private  static EmployeeAdapter mEmployeeAdapter;
+    private  static EmployeeGridAdapter mEmployeeGridAdapter;
     private  EmployeeApi mEmployeeApi;
 
-    public  static EmployeeAdapter  getEmployeeAdapter(Context mContext){
-        if(mEmployeeAdapter==null){
-            mEmployeeAdapter = new EmployeeAdapter(mContext);
+    public  static EmployeeGridAdapter getEmployeeAdapter(Context mContext){
+        if(mEmployeeGridAdapter==null){
+            mEmployeeGridAdapter=new EmployeeGridAdapter(mContext);
         }
-        return  mEmployeeAdapter;
+        return mEmployeeGridAdapter;
     }
 
     @Override
@@ -46,7 +47,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
          return new MyViewHolder(itemView);
     }
 
-    public EmployeeAdapter(Context mContext){
+    public EmployeeGridAdapter(Context mContext){
         this.mContext = mContext;
         mlist = new ArrayList<>();
         mEmployeeApi = EmployeeApi.getEmloyeeApi(this,mContext);
@@ -86,7 +87,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
     private void  showPopUpMenu(View view , int i){
         PopupMenu popupMenu = new PopupMenu(mContext,view);
         MenuInflater mMenuInflater = popupMenu.getMenuInflater();
-        mMenuInflater.inflate(R.menu.menu , popupMenu.getMenu());
+        mMenuInflater.inflate(R.menu.grid_view_employee_card_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new MyMenuOnClickListerner(i));
         popupMenu.show();
     }
@@ -101,6 +102,12 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
         return  dialog;
+    }
+
+    @Override
+    public void addNewEmployeeList(List<Employee> mEmployee) {
+        this.mlist = mEmployee;
+        notifyDataSetChanged();
     }
 
     class  MyMenuOnClickListerner implements  PopupMenu.OnMenuItemClickListener{
@@ -146,10 +153,12 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.MyView
                     })
                     .show();
         }
-
     }
 
 
+    public  void setmContext(Context mContext){
+        this.mContext = mContext;
+    }
     @Override
     public int getItemCount(){
         return mlist.size();

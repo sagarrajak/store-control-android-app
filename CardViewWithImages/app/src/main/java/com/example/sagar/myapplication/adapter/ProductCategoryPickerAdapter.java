@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.api.ApiClient;
-import com.example.sagar.myapplication.api.ApiProductTypeInterface;
+import com.example.sagar.myapplication.api.interfaces.ApiProductTypeInterface;
 import com.example.sagar.myapplication.modal.ProductType;
 
 import java.util.ArrayList;

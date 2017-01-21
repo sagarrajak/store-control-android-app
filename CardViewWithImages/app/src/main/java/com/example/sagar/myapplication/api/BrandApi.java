@@ -4,6 +4,7 @@ import android.app.Dialog;
 
 import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.adapter.BrandAdapter;
+import com.example.sagar.myapplication.api.interfaces.ApiBrandInterface;
 import com.example.sagar.myapplication.modal.Brand;
 import com.example.sagar.myapplication.modal.Data;
 
@@ -77,7 +78,7 @@ public class BrandApi{
                 if(response.code() == 200){
                     mBrandAdapter.addNewItems(response.body());
                 }
-                else dialog.dismiss();
+                dialog.dismiss();
             }
             @Override
             public void onFailure( Call<List<Brand>> call , Throwable t ){

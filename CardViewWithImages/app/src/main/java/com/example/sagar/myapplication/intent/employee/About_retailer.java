@@ -1,15 +1,15 @@
-package com.example.sagar.myapplication.intent.brand;
+package com.example.sagar.myapplication.intent.employee;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.sagar.myapplication.R;
 
-public class Brand_activity extends AppCompatActivity {
+public class About_retailer extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_brand_activity);
+        setContentView(R.layout.activity_about_retailer);
     }
 }
