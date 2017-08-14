@@ -3,6 +3,7 @@ package com.example.sagar.myapplication.api;
 import android.app.Dialog;
 
 import com.example.sagar.myapplication.Err;
+import com.example.sagar.myapplication.Token;
 import com.example.sagar.myapplication.adapter.CategoryAdapter;
 import com.example.sagar.myapplication.api.interfaces.ApiProductTypeInterface;
 import com.example.sagar.myapplication.modal.Data;
@@ -38,7 +39,7 @@ public class ProductTypeApi{
 
     public void  addProductType(String product_type , String details , final Dialog dialog ){
         mApiProductInterface
-                .addProductType(product_type,details)
+                .addProductType( product_type , details , Token.token )
                     .enqueue(new Callback<Data>(){
                         @Override
                         public void onResponse(Call<Data> call,Response<Data> response){
@@ -59,7 +60,7 @@ public class ProductTypeApi{
 
     public void  deleteProductType(String id , final  Dialog  dialog ){
         mApiProductInterface
-                .deleteProduct(id)
+                .deleteProduct( id , Token.token )
                     .enqueue(new Callback<Data>() {
                         @Override
                         public void onResponse(Call<Data> call, Response<Data> response) {
@@ -81,7 +82,7 @@ public class ProductTypeApi{
 
     public void listProductType(final  Dialog dialog) {
         mApiProductInterface
-                .getProductTypeList()
+                .getProductTypeList( Token.token )
                 .enqueue(new Callback<List<ProductType>>(){
                     @Override
                     public void onResponse(Call<List<ProductType>> call, Response<List<ProductType>> response) {

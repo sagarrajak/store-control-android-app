@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".intent.setting.Setting_activity"
+    tools:context=".intent.login.Setting_activity"
     tools:openDrawer="start">
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

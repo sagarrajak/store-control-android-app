@@ -9,12 +9,10 @@ import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-/**
- * Created by SAGAR on 1/14/2017.
- */
 public interface ApiBrandInterface {
 
     @GET("api/product-brand")
@@ -24,12 +22,14 @@ public interface ApiBrandInterface {
     public  Call<Data>  addNewBrand(
           @Field("brand") String brand ,
           @Field("details") String details,
-          @Field("image") String image
+          @Field("image") String image,
+          @Header("token") String token
     );
 
     @DELETE ("api/product-brand/{id}")
     public Call<Data> deleteBrand(
-            @Path("id") String id
+            @Path("id") String id,
+            @Header("token") String token
     );
 
 }

@@ -7,21 +7,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-/**
- * Created by SAGAR on 1/2/2017.
- */
-public class ApiClient {
-
-    public static final String baseUrl = "http://192.168.43.180:3000";
+public class ApiClient{
+    public static final String baseUrl = "http://192.168.237.117:8080";
     private static Retrofit retrofit = null;
-
     private static Gson gson = new com.google.gson.GsonBuilder()
                                     .setLenient()
                                         .create();
-
     public static Retrofit getClient(){
-
              HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
              interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
              OkHttpClient client  = new OkHttpClient.Builder()
@@ -38,8 +30,6 @@ public class ApiClient {
                                             .client(client)
                                                 .build();
             }
-
-
-        return retrofit;
+            return retrofit;
     }
 }

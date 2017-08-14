@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -19,10 +20,10 @@ import retrofit2.http.Path;
  */
 public interface ApiStockInterface{
 
-    @GET("api/stock")
+    @GET("api/Stock")
     Call<List<Stock>>   getStockList();
 
-    @POST("api/stock")
+    @POST("api/Stock")
     Call<Data>  createStock(
 
             @Field("quantity")    Integer name,
@@ -31,16 +32,20 @@ public interface ApiStockInterface{
             @Field("buyed_price") Integer buyed_price,
             @Field("exp_date")    Date exp_date,
             @Field("details")     String details,
-            @Field("buyed_date")  Date buyed_date
+            @Field("buyed_date")  Date buyed_date ,
+            @Header("token") String token
 
     );
 
-    @DELETE("api/stock/{id}")
+    @DELETE("api/Stock/{id}")
     Call<Data>  deleteEmployee(
-         @Path("id") String id
+         @Path("id") String id ,
+         @Header("token") String token
     );
 
-    @PUT("api/stock/{id}")
-    Call<Data> updateStock();
+    @PUT("api/Stock/{id}")
+    Call<Data> updateStock(
+            @Header("token") String token
+    );
 
 }

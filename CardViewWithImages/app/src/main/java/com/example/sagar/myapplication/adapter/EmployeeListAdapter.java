@@ -26,9 +26,6 @@ import com.example.sagar.myapplication.modal.Employee;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by SAGAR on 1/20/2017.
- */
 public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapter.MyViewHolder> implements EmployeeAdapterInterface {
     private Context mContext;
     private EmployeeApi mEmployeeApi;
@@ -40,23 +37,19 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
         mEmployeeApi = EmployeeApi.getEmloyeeApi(this,mContext);
         employees = new ArrayList<>();
     }
-
     public static  EmployeeListAdapter getmEmployeeListAdapter(Context mContext){
         if(mEmployeeListAdapter == null )
              mEmployeeListAdapter =  new EmployeeListAdapter(mContext);
         return  mEmployeeListAdapter;
     }
-
     public void setmContext(Context mContext){
         this.mContext = mContext;
     }
-
     @Override
     public EmployeeListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.employee_list_card,parent,false);
         return new MyViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(final EmployeeListAdapter.MyViewHolder holder, final int position) {
         holder.name.setText(employees.get(position).getName());
@@ -78,19 +71,15 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
             }
         });
     }
-
-
     @Override
     public int getItemCount() {
         return employees.size();
     }
-
     @Override
     public void addNewEmployeeList(List<Employee> mEmployee) {
         this.employees = mEmployee;
         notifyDataSetChanged();
     }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name,mail;
         public ImageView mImageView;
@@ -139,7 +128,6 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
             return  false;
         }
         private void createDeleteDialog(final int position){
-
         /*Dialog   to  delete   employee*/
             new AlertDialog.Builder(mContext)
                     .setTitle("Delete Employee")

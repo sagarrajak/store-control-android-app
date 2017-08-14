@@ -1,4 +1,4 @@
-package com.example.sagar.myapplication.intent.setting;
+package com.example.sagar.myapplication.intent.login;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;

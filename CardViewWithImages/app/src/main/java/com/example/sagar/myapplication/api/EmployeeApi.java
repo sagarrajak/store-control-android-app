@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 
 import com.example.sagar.myapplication.Err;
+import com.example.sagar.myapplication.Token;
 import com.example.sagar.myapplication.adapter.interfaces.EmployeeAdapterInterface;
 import com.example.sagar.myapplication.adapter.EmployeeGridAdapter;
 import com.example.sagar.myapplication.api.interfaces.ApiEmployeeInterface;
@@ -37,7 +38,7 @@ public class EmployeeApi{
     }
 
     public  void getEmployee(final Dialog dialog){
-         Call<List<Employee>> employee_obj  =  apiEmployeeInterface.getEmployee();
+         Call<List<Employee>> employee_obj  =  apiEmployeeInterface.getEmployee(Token.token);
          employee_obj.enqueue(new Callback<List<Employee>>(){
              @Override
              public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
@@ -54,7 +55,7 @@ public class EmployeeApi{
 
     public  void getSortByName(final Dialog dialog ){
         Integer id=1;
-        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByName(id);
+        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByName( id , Token.token );
         employee_obj.enqueue(new Callback<List<Employee>>(){
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
@@ -70,7 +71,7 @@ public class EmployeeApi{
     
     public  void getSortByAge(final Dialog dialog){
         Integer id = 1;
-        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByAge(id);
+        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByAge( id , Token.token );
         employee_obj.enqueue(new Callback<List<Employee>>(){
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
@@ -86,7 +87,7 @@ public class EmployeeApi{
 
     public  void getSortByDateOfJoin(final Dialog dialog){
         Integer id = 1;
-        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByDateOFJoin(id);
+        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByDateOFJoin( id , Token.token );
         employee_obj.enqueue(new Callback<List<Employee>>(){
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
@@ -103,7 +104,7 @@ public class EmployeeApi{
 
     public boolean  addEmployeeImage(MultipartBody.Part body , final Employee employee , final Dialog dialog ){
 
-          Call<Data>  obj = apiEmployeeInterface.addEmployeeImage(body);
+          Call<Data>  obj = apiEmployeeInterface.addEmployeeImage( body , Token.token );
           obj.enqueue(new Callback<Data>() {
               @Override
               public void onResponse(Call<Data> call, Response<Data> response){
@@ -141,7 +142,8 @@ public class EmployeeApi{
                                                                     employee.getPanNum(),
                                                                     employee.getPhoneNumber(),
                                                                     "",
-                                                                    image
+                                                                    image ,
+                                                                    Token.token
                                                                 );
 
         responceCall.enqueue(new Callback<Responce>() {
@@ -166,7 +168,7 @@ public class EmployeeApi{
     public  void deleteEmployeeApi(String  id , final Dialog dialog){
           Err.e(id);
           apiEmployeeInterface
-                    .deleteEmployee(id)
+                    .deleteEmployee(id , Token.token )
                         .enqueue(new Callback<Data>() {
                             @Override
                             public void onResponse(Call<Data> call, Response<Data> response){
@@ -188,7 +190,7 @@ public class EmployeeApi{
 
     public void deleteEmployeeImage(final String  id , final Dialog  dialog){
         apiEmployeeInterface
-                        .deleteEmployeImage(id)
+                        .deleteEmployeImage(id , Token.token)
                                 .enqueue(new Callback<Data>(){
                                         @Override
                                         public void onResponse(Call<Data> call , Response<Data> response ){

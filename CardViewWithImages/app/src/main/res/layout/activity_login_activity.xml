@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/colorPrimary"
-    tools:context=".intent.setting.login_activity"
+    tools:context=".intent.login.login_activity"
     android:orientation="vertical">
     <android.support.design.widget.TextInputLayout
         android:layout_marginTop="16dp"
@@ -26,7 +26,6 @@
             android:hint="Email"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
-
     <android.support.design.widget.TextInputLayout
         android:layout_marginTop="16dp"
         android:layout_marginLeft="8dp"
@@ -52,5 +51,10 @@
         android:background="@color/colorAccent"
         android:textColor="@color/colorPrimary"
         android:id="@+id/login_button" />
-    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

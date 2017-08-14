@@ -13,7 +13,7 @@ import android.view.View;
 import com.example.sagar.myapplication.intent.about_store.About_store_activity;
 import com.example.sagar.myapplication.intent.employee.MainActivity;
 import com.example.sagar.myapplication.intent.product.Product_activity;
-import com.example.sagar.myapplication.intent.setting.Setting_activity;
+import com.example.sagar.myapplication.intent.login.Setting_activity;
 
 public class NavigationDrawer{
 

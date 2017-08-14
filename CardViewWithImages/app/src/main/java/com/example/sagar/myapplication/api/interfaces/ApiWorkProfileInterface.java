@@ -9,29 +9,29 @@ import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
-
-/**
- * Created by SAGAR on 1/15/2017.
- */
 public interface ApiWorkProfileInterface {
 
     @GET("api/work-profile")
-    public Call<List<WorkProfile>> getWorkProfileList();
+    public Call<List<WorkProfile>> getWorkProfileList(
+           @Header("token") String token
+    );
 
     @POST("api/work-profile")
     public  Call<Data> addWorkProfile(
-
             @Field("name") String name,
             @Field("hr_of_work") Integer hr_of_work,
             @Field("salary") Integer salary,
-            @Field("right") String right
-
+            @Field("right") String right ,
+            @Header("token") String token
     );
+
 
     @DELETE("api/work-profile")
     public Call<Data>   deleteWorkProfile(
-         @Field("id")  String id
+         @Field("id")  String id ,
+         @Header("token") String token
     );
 
 }

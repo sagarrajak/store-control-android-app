@@ -3,6 +3,7 @@ package com.example.sagar.myapplication.api;
 import android.app.Dialog;
 
 import com.example.sagar.myapplication.Err;
+import com.example.sagar.myapplication.Token;
 import com.example.sagar.myapplication.adapter.ProductAdapter;
 import com.example.sagar.myapplication.api.interfaces.ApiProductInterface;
 import com.example.sagar.myapplication.modal.Data;
@@ -29,7 +30,7 @@ public class ProductApi{
     public  void  addProduct(Product mProduct , final Dialog dialog , String  message ){
 
         mApiProductInterface.createProduct(
-              mProduct.getName() , mProduct.getBrand() , mProduct.getType() , mProduct.getDetail() , mProduct.getPrice()
+              mProduct.getName() , mProduct.getBrand() , mProduct.getType() , mProduct.getDetail() , mProduct.getPrice() , Token.token
         ).enqueue(new Callback<Data>() {
             @Override
             public void onResponse( Call<Data> call  , Response<Data> response  ){
@@ -52,7 +53,7 @@ public class ProductApi{
 
     public  void  deleteProduct(String id , final Dialog  dialog){
 
-            mApiProductInterface.deleteProduct(id)
+            mApiProductInterface.deleteProduct( id , Token.token )
                         .enqueue(new Callback<Data>() {
                             @Override
                             public void onResponse(Call<Data> call, Response<Data> response){
@@ -73,7 +74,7 @@ public class ProductApi{
     }
 
     public  void  addImage(MultipartBody.Part part , final Product mProduct , final Dialog dialog ){
-        mApiProductInterface.addProductImage(part).enqueue(new Callback<Data>() {
+        mApiProductInterface.addProductImage(part , Token.token ).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response){
                         if( response.code() == 200 ){
@@ -95,7 +96,7 @@ public class ProductApi{
 
     public  void  deleteImage(final  String id  , final Dialog  dialog ){
 
-        mApiProductInterface.deleteProduct(id).enqueue(new Callback<Data>() {
+        mApiProductInterface.deleteProduct( id , Token.token ).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call,Response<Data> response){
                 if(response.code() == 200){
@@ -115,7 +116,7 @@ public class ProductApi{
     }
 
     public  void  listProduct(final Dialog dialog){
-        Call<List<Product>> employee_obj  =  mApiProductInterface.getProduct();
+        Call<List<Product>> employee_obj  =  mApiProductInterface.getProduct(Token.token);
         employee_obj.enqueue(new Callback<List<Product>>(){
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response){

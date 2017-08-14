@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".intent.setting.login_activity">
+        <activity android:name=".intent.login.login_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
         <activity android:name=".intent.transaction.Transaction_activity" />
         <activity android:name=".intent.about_store.About_store_activity" />
         <activity android:name=".intent.employee.MainActivity" />
-        <activity android:name=".intent.setting.Setting_activity" />
+        <activity android:name=".intent.login.Setting_activity" />
         <activity android:name=".intent.Setting" />
         <activity android:name=".intent.dashboard.DashBoard_activity" />
         <activity android:name=".intent.product.About_product_activity" />
@@ -42,7 +42,8 @@
         <activity android:name=".intent.product_category.Product_category_details" />
         <activity android:name=".intent.employee.Activity_create_new_retailer" />
         <activity android:name=".intent.employee.About_retailer" />
-        <activity android:name=".intent.employee.Product_associated_with_retailer"></activity>
+        <activity android:name=".intent.employee.Product_associated_with_retailer" />
+        <activity android:name=".intent.login.SignUpActivity"></activity>
     </application>
 
 </manifest>

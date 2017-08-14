@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -18,17 +19,21 @@ import retrofit2.http.Path;
 public interface ApiProductTypeInterface{
 
     @GET("api/product-type")
-    public Call<List<ProductType>> getProductTypeList();
+    public Call<List<ProductType>> getProductTypeList(
+            @Header("Token") String token
+    );
 
     @POST("api/product-type")
     public Call<Data> addProductType(
         @Field("product_type") String type ,
-        @Field("details")  String details
+        @Field("details")  String details ,
+        @Header("token") String token
     );
 
     @DELETE("api/product-type/{id}")
     public Call<Data>  deleteProduct(
-        @Path("id") String id
+        @Path("id") String id ,
+        @Header("token") String token
     );
 
 }

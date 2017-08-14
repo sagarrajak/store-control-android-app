@@ -1,8 +1,10 @@
 package com.example.sagar.myapplication.api;
 
 import android.app.Dialog;
+import android.content.Context;
 
 import com.example.sagar.myapplication.Err;
+import com.example.sagar.myapplication.Token;
 import com.example.sagar.myapplication.adapter.BrandAdapter;
 import com.example.sagar.myapplication.api.interfaces.ApiBrandInterface;
 import com.example.sagar.myapplication.modal.Brand;
@@ -20,14 +22,14 @@ public class BrandApi{
     private  static  BrandApi mBrandApi;
     private BrandAdapter  mBrandAdapter;
 
-    public  BrandApi(BrandAdapter brandAdapter){
+    public  BrandApi(BrandAdapter brandAdapter ){
           mApiBrandInterface = ApiClient.getClient().create(ApiBrandInterface.class);
           this.mBrandAdapter = brandAdapter;
     }
 
     public  void  addNewBrand(String brand, String  details,String  logo ,final Dialog dialog ){
         mApiBrandInterface.addNewBrand(
-             brand , details , logo
+             brand , details , logo , Token.token
         ).enqueue(new Callback<Data>(){
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
@@ -49,9 +51,8 @@ public class BrandApi{
 
 
     public  void  deleteBrand(String id , final  Dialog dialog){
-
         mApiBrandInterface
-                .deleteBrand(id)
+                .deleteBrand(id , Token.token )
                         .enqueue(new Callback<Data>() {
                             @Override
                             public void onResponse(Call<Data> call, Response<Data> response) {
@@ -66,12 +67,10 @@ public class BrandApi{
                                  Err.e("Error in deleting employee in printStackTrace");
                             }
                         });
-
     }
 
 
     public  void  listBrand(final Dialog dialog){
-
         mApiBrandInterface.listBrand().enqueue(new Callback<List<Brand>>() {
             @Override
             public void onResponse(Call<List<Brand>> call, Response<List<Brand>> response) {
@@ -89,10 +88,8 @@ public class BrandApi{
 
     }
     public static BrandApi getBrandApi(BrandAdapter mBrandAdapter){
-
         if(mBrandApi==null)
              mBrandApi = new BrandApi(mBrandAdapter);
-
         return  mBrandApi;
     }
 

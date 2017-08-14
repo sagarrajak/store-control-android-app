@@ -2,10 +2,6 @@ package com.example.sagar.myapplication.modal;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-/**
- * Created by SAGAR on 1/20/2017.
- */
 public class Stock {
     @SerializedName("quantity")
     @Expose

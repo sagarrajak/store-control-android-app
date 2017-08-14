@@ -3,6 +3,7 @@ package com.example.sagar.myapplication.api;
 import android.app.Dialog;
 
 import com.example.sagar.myapplication.Err;
+import com.example.sagar.myapplication.Token;
 import com.example.sagar.myapplication.api.interfaces.ApiWorkProfileInterface;
 import com.example.sagar.myapplication.modal.Data;
 import com.example.sagar.myapplication.modal.WorkProfile;
@@ -14,9 +15,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by SAGAR on 1/15/2017.
- */
 public class WorkProfileApi{
     private List<WorkProfile> mList;
     private static WorkProfileApi mWorkProfileApi;
@@ -30,7 +28,7 @@ public class WorkProfileApi{
     public  void  addWorkProfile(String work_profile , Integer hr_of_work , Integer salary ,  String right  , final  Dialog dialog ){
 
         mApiWorkProfileInterface
-                .addWorkProfile(work_profile, hr_of_work, salary, right)
+                .addWorkProfile( work_profile , hr_of_work , salary , right , Token.token )
                 .enqueue(new Callback<Data>() {
                     @Override
                     public void onResponse(Call<Data> call, Response<Data> response) {
@@ -51,7 +49,7 @@ public class WorkProfileApi{
     public  void  deleteWorkProfile(String id ,final Dialog dialog){
 
             mApiWorkProfileInterface
-                        .deleteWorkProfile(id)
+                        .deleteWorkProfile( id , Token.token )
                             .enqueue(new Callback<Data>() {
                                 @Override
                                 public void onResponse( Call<Data> call , Response<Data> response ){
@@ -71,10 +69,13 @@ public class WorkProfileApi{
     }
     public  void  modifyWorkProfile(){
             //todo api for modifying work profile api
-
     }
+
+
     public  void  listWorkProfile(final Dialog dialog){
-            mApiWorkProfileInterface.getWorkProfileList().enqueue(new Callback<List<WorkProfile>>() {
+            mApiWorkProfileInterface.getWorkProfileList(
+                    Token.token
+            ).enqueue(new Callback<List<WorkProfile>>() {
                 @Override
                 public void onResponse( Call<List<WorkProfile>> call , Response<List<WorkProfile>> response){
 
