@@ -21,9 +21,6 @@ import com.example.sagar.myapplication.modal.Retailer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by SAGAR on 1/18/2017.
- */
 public class RetailerListAdapter extends RecyclerView.Adapter<RetailerListAdapter.MyViewHolder> implements RetailerAdapterInterface{
 
     private List<Retailer> retailer;
@@ -61,11 +58,12 @@ public class RetailerListAdapter extends RecyclerView.Adapter<RetailerListAdapte
     }
     @Override
     public int getItemCount() {
-        return retailer.size();
+         return retailer.size();
     }
     @Override
-    public void addNewReatilerList(List<Retailer> retailer) {
-        this.retailer = retailer;
+    public void addNewReatilerList(List<Retailer> retailer){
+          this.retailer = retailer;
+          notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

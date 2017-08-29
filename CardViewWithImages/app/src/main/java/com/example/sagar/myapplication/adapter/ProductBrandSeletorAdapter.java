@@ -9,9 +9,10 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.api.interfaces.ApiBrandInterface;
 import com.example.sagar.myapplication.api.ApiClient;
+import com.example.sagar.myapplication.api.interfaces.ApiBrandInterface;
 import com.example.sagar.myapplication.modal.Brand;
+import com.example.sagar.myapplication.utill.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by SAGAR on 1/19/2017.
- */
 public class ProductBrandSeletorAdapter extends RecyclerView.Adapter<ProductBrandSeletorAdapter.MyViewHolder>{
 
     private Context context;
@@ -40,11 +38,14 @@ public class ProductBrandSeletorAdapter extends RecyclerView.Adapter<ProductBran
         checked = false;
     }
     private void createRecylceView(){
-        mApiBrandInterface.listBrand().enqueue(new Callback<List<Brand>>() {
+        mApiBrandInterface.listBrand(
+                Token.token
+        ).enqueue(new Callback<List<Brand>>() {
             @Override
             public void onResponse(Call<List<Brand>> call, Response<List<Brand>> response) {
                     if(response.code()==200){
-                       brand = response.body();
+                        brand = response.body();
+                        notifyDataSetChanged();
                     }
             }
             @Override

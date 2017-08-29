@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,12 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.interfaces.EmployeeAdapterInterface;
 import com.example.sagar.myapplication.api.EmployeeApi;
 import com.example.sagar.myapplication.intent.employee.About_employee_activity;
 import com.example.sagar.myapplication.modal.Employee;
+import com.example.sagar.myapplication.utill.Err;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,26 +32,19 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
 
     private Context mContext;
     private  List<Employee> mlist;
-    private  static EmployeeGridAdapter mEmployeeGridAdapter;
-    private  EmployeeApi mEmployeeApi;
-
-    public  static EmployeeGridAdapter getEmployeeAdapter(Context mContext){
-        if(mEmployeeGridAdapter==null){
-            mEmployeeGridAdapter=new EmployeeGridAdapter(mContext);
-        }
-        return mEmployeeGridAdapter;
-    }
+    private EmployeeApi mEmployeeApi;
+    private static  EmployeeGridAdapter mEmployeeGridAdapter;
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.emploee_card, parent , false);
+         View itemView = LayoutInflater.from(parent.getContext()).inflate( R.layout.emploee_card, parent , false);
          return new MyViewHolder(itemView);
     }
 
     public EmployeeGridAdapter(Context mContext){
         this.mContext = mContext;
-        mlist = new ArrayList<>();
-        mEmployeeApi = EmployeeApi.getEmloyeeApi(this,mContext);
+        this.mlist = new ArrayList<>();
+        this.mEmployeeApi = EmployeeApi.getEmloyeeApi(this);
     }
 
     @Override
@@ -80,10 +74,14 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
                       Bundle bundle = new Bundle();
                       Intent intent = new Intent( mContext.getApplicationContext() , About_employee_activity.class );
                       intent.putExtra("Employee" , mlist.get(i));
+                      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                       mContext.startActivity(intent);
             }
         });
+
     }
+
+
     private void  showPopUpMenu(View view , int i){
         PopupMenu popupMenu = new PopupMenu(mContext,view);
         MenuInflater mMenuInflater = popupMenu.getMenuInflater();
@@ -92,10 +90,6 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
         popupMenu.show();
     }
 
-    public void addEmployeeList(List<Employee> body){
-        mlist = body;
-        notifyDataSetChanged();
-    }
 
     private ProgressDialog createProgressDialog(){
         ProgressDialog dialog = new ProgressDialog(mContext);
@@ -105,8 +99,9 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
     }
 
     @Override
-    public void addNewEmployeeList(List<Employee> mEmployee) {
-        this.mlist = mEmployee;
+    public void addNewEmployeeList(List<Employee> mEmployee){
+        if(mEmployee!=null)
+            this.mlist = mEmployee;
         notifyDataSetChanged();
     }
 
@@ -130,9 +125,9 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
             }
             return  false;
         }
-        private void createDeleteDialog(final int position){
 
-        /*Dialog   to  delete   employee*/
+
+        private void createDeleteDialog(final int position){
             new AlertDialog.Builder(mContext)
                     .setTitle("Delete Employee")
                     .setMessage("Are you sure to want to delete this employee")
@@ -159,10 +154,14 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
     public  void setmContext(Context mContext){
         this.mContext = mContext;
     }
+
+
     @Override
     public int getItemCount(){
-        return mlist.size();
+          return mlist.size();
     }
+
+
     public class MyViewHolder extends RecyclerView.ViewHolder{
             public  View view;
             public TextView name,email;
@@ -179,17 +178,13 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
             }
      }
 
-    public void setFilter(ArrayList<Employee> mlist){
-        this.mlist = mlist;
-        notifyDataSetChanged();
-    }
+     public  static EmployeeGridAdapter getEmployeeGridAdapter(Context mContext){
+          if(mEmployeeGridAdapter==null)
+              mEmployeeGridAdapter = new EmployeeGridAdapter(mContext);
+          else
+              mEmployeeGridAdapter.setmContext(mContext);
+          return  mEmployeeGridAdapter;
+     }
 
-    public  void addData(Employee obj){
-        mlist.add(obj);
-        notifyDataSetChanged();
-    }
 
-    public List<Employee> getMlist(){
-        return  mlist;
-    }
   }

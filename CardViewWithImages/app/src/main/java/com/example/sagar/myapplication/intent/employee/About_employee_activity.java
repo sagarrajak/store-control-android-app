@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.modal.Employee;
 
@@ -23,13 +24,46 @@ public class About_employee_activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         setTitle("Employee/Retailer/Admin");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_activity);
         toolbar = (Toolbar) findViewById(R.id.about_employee_toolbar);
+
+        setUiElement();
+        setToolBar();
+
+        employee = (Employee)getIntent().getSerializableExtra("Employee");
+
+        if (employee != null ){
+                mName.setText(employee.getName());
+                mEmail.setText(employee.getMail());
+                mDateOfJoin.setText(employee.getDateOfJoin());
+                mDateOfBirth.setText(employee.getDateOfBirth());
+                mPanNumber.setText(employee.getPanNum());
+                mPhoneNumber.setText(employee.getPhoneNumber());
+        }
+
+        Glide.with(this.getApplicationContext())
+                .load(url+employee.getImage())
+                    .centerCrop()
+                        .placeholder(R.drawable.employee)
+                            .crossFade()
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(mImageView);
+
+
+    }
+
+    private void setToolBar(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    private void setUiElement(){
+
         mImageView = (ImageView) findViewById(R.id.about_employee_image);
         mName = (TextView) findViewById(R.id.about_employee_name);
         mEmail = (TextView) findViewById(R.id.about_employee_mail);
@@ -38,28 +72,8 @@ public class About_employee_activity extends AppCompatActivity {
         mDateOfBirth    = (TextView) findViewById(R.id.about_employee_date_of_birth);
         mDateOfJoin = (TextView) findViewById(R.id.about_employee_date_of_join);
 
-            employee = (Employee)getIntent().getSerializableExtra("Employee");
-
-            if (employee != null ){
-                    mName.setText(employee.getName());
-                    mEmail.setText(employee.getMail());
-                    mDateOfJoin.setText(employee.getDateOfJoin());
-                    mDateOfBirth.setText(employee.getDateOfBirth());
-                    mPanNumber.setText(employee.getPanNum());
-                    mPhoneNumber.setText(employee.getPhoneNumber());
-            }
-
-
-
-        Glide.with(this.getApplicationContext())
-                .load(url+employee.getImage())
-                    .centerCrop()
-                        .placeholder(R.drawable.employee)
-                            .crossFade()
-                                    .into(mImageView);
-
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_about_employee_menu , menu);

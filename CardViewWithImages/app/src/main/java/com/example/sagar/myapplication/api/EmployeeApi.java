@@ -2,11 +2,11 @@ package com.example.sagar.myapplication.api;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 
-import com.example.sagar.myapplication.Err;
-import com.example.sagar.myapplication.Token;
+import com.example.sagar.myapplication.utill.Err;
+import com.example.sagar.myapplication.utill.Token;
 import com.example.sagar.myapplication.adapter.interfaces.EmployeeAdapterInterface;
-import com.example.sagar.myapplication.adapter.EmployeeGridAdapter;
 import com.example.sagar.myapplication.api.interfaces.ApiEmployeeInterface;
 import com.example.sagar.myapplication.modal.Data;
 import com.example.sagar.myapplication.modal.Employee;
@@ -23,26 +23,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 public class EmployeeApi{
     private Context mContext;
-    private EmployeeAdapterInterface employeeAdapterInterface;
+    private EmployeeAdapterInterface mEployeeAdapterInterface;
     ApiEmployeeInterface apiEmployeeInterface;
     private static EmployeeApi mEmployeeApi ;
 
-    public  EmployeeApi( Context mContext, EmployeeAdapterInterface employeeAdapterInterface){
-        this.employeeAdapterInterface = employeeAdapterInterface;
+    public  EmployeeApi( EmployeeAdapterInterface employeeAdapterInterface){
+
+        this.mEployeeAdapterInterface = employeeAdapterInterface;
         apiEmployeeInterface = ApiClient.getClient().create(ApiEmployeeInterface.class);
+
     }
 
-    public EmployeeApi(EmployeeGridAdapter employeeAdapterInterface){
-        this.employeeAdapterInterface = employeeAdapterInterface;
-        apiEmployeeInterface = ApiClient.getClient().create(ApiEmployeeInterface.class);
-    }
+    public  void listEmployee(final Dialog dialog){
 
-    public  void getEmployee(final Dialog dialog){
          Call<List<Employee>> employee_obj  =  apiEmployeeInterface.getEmployee(Token.token);
          employee_obj.enqueue(new Callback<List<Employee>>(){
              @Override
              public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
-                    employeeAdapterInterface.addNewEmployeeList(response.body());
+                    mEployeeAdapterInterface.addNewEmployeeList(response.body());
                     dialog.dismiss();
              }
              @Override
@@ -50,32 +48,19 @@ public class EmployeeApi{
                  t.printStackTrace();
              }
          });
+
+
     }
 
 
     public  void getSortByName(final Dialog dialog ){
+
         Integer id=1;
         Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByName( id , Token.token );
         employee_obj.enqueue(new Callback<List<Employee>>(){
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
-                employeeAdapterInterface.addNewEmployeeList(response.body());
-                dialog.dismiss();
-            }
-            @Override
-            public void onFailure(Call<List<Employee>> call,Throwable t){
-                t.printStackTrace();
-            }
-        });
-    }
-    
-    public  void getSortByAge(final Dialog dialog){
-        Integer id = 1;
-        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByAge( id , Token.token );
-        employee_obj.enqueue(new Callback<List<Employee>>(){
-            @Override
-            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
-                employeeAdapterInterface.addNewEmployeeList(response.body());
+                mEployeeAdapterInterface.addNewEmployeeList(response.body());
                 dialog.dismiss();
             }
             @Override
@@ -85,13 +70,15 @@ public class EmployeeApi{
         });
     }
 
-    public  void getSortByDateOfJoin(final Dialog dialog){
+
+    public  void getSortByAge(final Dialog dialog){
+
         Integer id = 1;
-        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByDateOFJoin( id , Token.token );
+        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByAge( id , Token.token );
         employee_obj.enqueue(new Callback<List<Employee>>(){
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
-                employeeAdapterInterface.addNewEmployeeList(response.body());
+                mEployeeAdapterInterface.addNewEmployeeList(response.body());
                 dialog.dismiss();
             }
             @Override
@@ -99,6 +86,27 @@ public class EmployeeApi{
                 t.printStackTrace();
             }
         });
+
+    }
+
+    public  void getSortByDateOfJoin(final Dialog dialog){
+
+
+        Integer id = 1;
+        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.sortByDateOFJoin( id , Token.token );
+        employee_obj.enqueue(new Callback<List<Employee>>(){
+            @Override
+            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
+                mEployeeAdapterInterface.addNewEmployeeList(response.body());
+                dialog.dismiss();
+            }
+            @Override
+            public void onFailure(Call<List<Employee>> call,Throwable t){
+                t.printStackTrace();
+            }
+        });
+
+
     }
 
 
@@ -107,11 +115,11 @@ public class EmployeeApi{
           Call<Data>  obj = apiEmployeeInterface.addEmployeeImage( body , Token.token );
           obj.enqueue(new Callback<Data>() {
               @Override
-              public void onResponse(Call<Data> call, Response<Data> response){
+              public void onResponse( Call<Data> call, Response<Data> response ){
                   if(response.body()!=null){
                       Err.e(response.body().getMessage());
                       try {
-                          createEmployee(employee,response.body().getMessage() , dialog);
+                          createEmployee(employee,response.body().getMessage() , dialog );
                       } catch (ParseException e){
                           Err.e("Parse exception");
                           e.printStackTrace();
@@ -132,6 +140,8 @@ public class EmployeeApi{
 
     /**  Method for creating employee  **/
     public  void createEmployee(Employee employee , String image  , final Dialog dialog) throws ParseException {
+
+
         Date date_of_birth = new SimpleDateFormat("dd/MM/yyyy").parse(employee.getDateOfBirth());
         Date date_of_join = new SimpleDateFormat("dd/MM/yyyy").parse(employee.getDateOfJoin());
         Call<Responce> responceCall =  apiEmployeeInterface.createEmployee(
@@ -151,29 +161,30 @@ public class EmployeeApi{
             public void onResponse(Call<Responce> call, Response<Responce> response){
                 if( response.code() == 200 ){
                     Err.e("Employee created");
-                    getEmployee(dialog);
+                    listEmployee(dialog);
                 }
             }
             @Override
             public void onFailure(Call<Responce> call, Throwable t) {
-//                Err.s( mContext , "Failed to create employee");
                     t.printStackTrace();
                     Err.e("In employee");
                     dialog.dismiss();
             }
         });
+
+
     }
 
 
     public  void deleteEmployeeApi(String  id , final Dialog dialog){
-          Err.e(id);
+
           apiEmployeeInterface
                     .deleteEmployee(id , Token.token )
                         .enqueue(new Callback<Data>() {
                             @Override
                             public void onResponse(Call<Data> call, Response<Data> response){
                                     if(response.code() == 200){
-                                        getEmployee(dialog);
+                                        listEmployee(dialog);
                                     }
                                    else{
                                          Err.e( Integer.toString(response.code()));
@@ -186,9 +197,14 @@ public class EmployeeApi{
                                     t.printStackTrace();
                             }
                         });
+
+
     }
 
+
     public void deleteEmployeeImage(final String  id , final Dialog  dialog){
+
+
         apiEmployeeInterface
                         .deleteEmployeImage(id , Token.token)
                                 .enqueue(new Callback<Data>(){
@@ -212,17 +228,48 @@ public class EmployeeApi{
                                         }
                                 });
 
+
+
     }
 
-    public static EmployeeApi getEmloyeeApi(EmployeeAdapterInterface mEmployeeInterface, Context mContext){
-        if( mEmployeeApi == null ){
-            mEmployeeApi = new EmployeeApi(mContext, mEmployeeInterface);
-        }
+    public void listEmployee(final  SwipeRefreshLayout swipeRefreshLayout){
+
+                        Call<List<Employee>> employee_obj  =  apiEmployeeInterface.getEmployee(Token.token);
+                        employee_obj.enqueue(new Callback<List<Employee>>(){
+                            @Override
+                            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response){
+                                if( response.code() == 200 ) {
+                                    mEployeeAdapterInterface.addNewEmployeeList(response.body());
+                                }
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+                            @Override
+                            public void onFailure(Call<List<Employee>> call,Throwable t){
+                                t.printStackTrace();
+                            }
+                        });
+
+    }
+
+
+    public void setAdapter( EmployeeAdapterInterface mEmployeeAdapterInterface){
+
+        this.mEployeeAdapterInterface = mEmployeeAdapterInterface;
+
+    }
+
+    public static EmployeeApi  getEmloyeeApi( EmployeeAdapterInterface mEmployeeInterface ){
+
+        if( mEmployeeApi == null )
+            mEmployeeApi = new EmployeeApi(mEmployeeInterface);
+        else
+            mEmployeeApi.mEployeeAdapterInterface = mEmployeeInterface;
+
         return mEmployeeApi;
     }
 
     public void addNewAdapter(EmployeeAdapterInterface employeeAdapterInterface){
-        this.employeeAdapterInterface = employeeAdapterInterface;
+        this.mEployeeAdapterInterface = employeeAdapterInterface;
     }
 
 }

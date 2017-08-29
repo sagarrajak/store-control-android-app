@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,18 +18,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.sagar.myapplication.Err;
-import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.SpaceItemDecoration;
-import com.example.sagar.myapplication.adapter.ProductAdapter;
+import com.example.sagar.myapplication.CustumProgressDialog;
+import com.example.sagar.myapplication.adapter.ProductListAdapter;
 import com.example.sagar.myapplication.api.ProductApi;
+import com.example.sagar.myapplication.utill.Err;
+import com.example.sagar.myapplication.R;
+import com.example.sagar.myapplication.utill.SpaceItemDecoration;
+import com.example.sagar.myapplication.adapter.ProductGridAdapter;
 import com.example.sagar.myapplication.intent.product.Activity_create_product;
 
 public class Product_fragment extends Fragment{
 
-    private ProductAdapter mProductAdapter;
     private ProductApi mProductApi;
     private RecyclerView recyclerView;
+    private Boolean isListLayout;
+    private MenuItem listToGrid;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     public Product_fragment(){}
@@ -40,8 +46,16 @@ public class Product_fragment extends Fragment{
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
-        createRecycleView();
         super.onActivityCreated(savedInstanceState);
+        isListLayout = false;
+        mSwipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_to_refresh_product);
+        createRecycleView();
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mProductApi.listProduct(mSwipeRefreshLayout);
+            }
+        });
     }
 
     @Override
@@ -50,43 +64,78 @@ public class Product_fragment extends Fragment{
         setHasOptionsMenu(true);
     }
 
+
     private void createRecycleView(){
 
-        recyclerView = (RecyclerView)getView().findViewById(R.id.recycle_product_view);
-        mProductAdapter  = ProductAdapter.getProductAdapter( getContext() , "fragment" );
-        mProductApi  = ProductApi.getmProductApi(mProductAdapter);
-
-        if( recyclerView != null ){
+            recyclerView = (RecyclerView)getView().findViewById( R.id.recycle_product_view );
             recyclerView.addItemDecoration(new SpaceItemDecoration(1));
             GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(mProductAdapter);
+            recyclerView.setAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
             recyclerView.setLayoutManager(mGridLayoutManager);
-            ProgressDialog mProgressDialog = createProgressDialog();
+            ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(getActivity());
             mProgressDialog.show();
+            mProductApi = ProductApi.getmProductApi(ProductGridAdapter.getProductAdapter(getActivity()));
             mProductApi.listProduct(mProgressDialog);
-        }
-        else{
-            Err.e("fuck recycleview is null");
-        }
+
     }
-    private ProgressDialog createProgressDialog(){
-        ProgressDialog dialog = new ProgressDialog(getActivity());
-        dialog.setIndeterminate(true);
-        dialog.setCanceledOnTouchOutside(false);
-        return  dialog;
+
+
+
+    private void changeGridToList(){
+
+            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager( getActivity() , LinearLayoutManager.VERTICAL , false);
+            recyclerView.setLayoutManager(mLinearLayoutManager);
+            recyclerView.setAdapter(ProductListAdapter.getProductListAdapter(getActivity()));
+            ProgressDialog mProgressDialog  = CustumProgressDialog.getProgressDialog(getActivity());
+            mProgressDialog.show();
+            mProductApi.addNewAdapter(ProductListAdapter.getProductListAdapter(getActivity()));
+            mProductApi.listProduct(mProgressDialog);
+
     }
+
+    private void changeListToGrid(){
+
+            recyclerView.addItemDecoration(new SpaceItemDecoration(1));
+            GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
+            recyclerView.setLayoutManager(mGridLayoutManager);
+            ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(getActivity());
+            mProgressDialog.show();
+            mProductApi.addNewAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
+            mProductApi.listProduct(mProgressDialog);
+
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.menu_product_fragment  , menu);
-        super.onCreateOptionsMenu(menu, inflater);
+
+            inflater.inflate(R.menu.menu_product_fragment  , menu);
+            listToGrid = menu.findItem(R.id.list_to_grid);
+            if(isListLayout) listToGrid.setIcon(R.drawable.ic_grid_24dp);
+            else  listToGrid.setIcon(R.drawable.ic_list_black_24dp);
+            super.onCreateOptionsMenu( menu , inflater );
+
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case   R.id.product_product :
                 Intent intent = new Intent( getActivity().getApplicationContext() , Activity_create_product.class);
                 startActivity(intent);
+                break;
+            case R.id.list_to_grid :
+                if(isListLayout){
+                    listToGrid.setIcon(R.drawable.ic_list_black_24dp);
+                    changeListToGrid();
+                }
+                else{
+                    listToGrid.setIcon(R.drawable.ic_grid_24dp);
+                    changeGridToList();
+                }
+                isListLayout=!isListLayout;
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -40,10 +40,11 @@
         <activity android:name=".intent.product_category.Create_new_product_category" />
         <activity android:name=".intent.product_category.Product_by_category" />
         <activity android:name=".intent.product_category.Product_category_details" />
-        <activity android:name=".intent.employee.Activity_create_new_retailer" />
-        <activity android:name=".intent.employee.About_retailer" />
         <activity android:name=".intent.employee.Product_associated_with_retailer" />
-        <activity android:name=".intent.login.SignUpActivity"></activity>
+        <activity android:name=".intent.login.SignUpActivity" />
+        <activity android:name=".intent.retailer.Create_retailer_activity" />
+        <activity android:name=".intent.retailer.About_retailer_activity" />
+        <activity android:name=".intent.brand.Create_brand_activity"></activity>
     </application>
 
 </manifest>

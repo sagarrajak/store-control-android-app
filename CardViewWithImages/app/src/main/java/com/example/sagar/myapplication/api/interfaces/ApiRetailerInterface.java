@@ -44,10 +44,11 @@ public interface ApiRetailerInterface {
          @Header("token") String token
     );
 
+    @FormUrlEncoded
     @Multipart
     @POST("api/retailer/image")
     Call<Data> uploadRetailerImage(
-            @Part("image") MultipartBody.Part image ,
+            @Part  MultipartBody.Part image ,
             @Header("token") String token
     );
 

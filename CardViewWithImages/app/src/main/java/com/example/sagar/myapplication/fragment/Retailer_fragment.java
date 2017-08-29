@@ -2,9 +2,11 @@ package com.example.sagar.myapplication.fragment;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,12 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sagar.myapplication.CustumProgressDialog;
-import com.example.sagar.myapplication.Err;
+import com.example.sagar.myapplication.api.RetailerApi;
+import com.example.sagar.myapplication.intent.retailer.Create_retailer_activity;
+import com.example.sagar.myapplication.utill.Err;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.SpaceItemDecoration;
+import com.example.sagar.myapplication.utill.SpaceItemDecoration;
 import com.example.sagar.myapplication.adapter.RetailerGridAdapter;
 import com.example.sagar.myapplication.adapter.RetailerListAdapter;
-import com.example.sagar.myapplication.api.RetailerApi;
+
+import static com.example.sagar.myapplication.R.id.swipe_to_refresh_retailer;
 
 public class Retailer_fragment extends Fragment{
 
@@ -31,6 +36,7 @@ public class Retailer_fragment extends Fragment{
     private RecyclerView recyclerView;
     private boolean isListView;
     private MenuItem menuItem;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public Retailer_fragment(){}
 
@@ -39,8 +45,15 @@ public class Retailer_fragment extends Fragment{
         setHasOptionsMenu(true);
         mRetailerGridAdapter = RetailerGridAdapter.getRetailerGridAdapter(getContext());
         mRetailerApi = RetailerApi.getmReteilerApi(mRetailerGridAdapter);
+
         isListView = false;
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume(){
+        mRetailerGridAdapter.setmContext(getActivity().getBaseContext());
+        super.onResume();
     }
 
     @Override
@@ -50,10 +63,14 @@ public class Retailer_fragment extends Fragment{
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
-        createRecycleView();
         super.onActivityCreated(savedInstanceState);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(swipe_to_refresh_retailer);
+        createRecycleView();
     }
+
+
     private void createRecycleView(){
+
         recyclerView = (RecyclerView)getView().findViewById(R.id.recycle_view);
         recyclerView.addItemDecoration(new SpaceItemDecoration(1));
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
@@ -62,7 +79,8 @@ public class Retailer_fragment extends Fragment{
         recyclerView.setLayoutManager(mGridLayoutManager);
         Dialog dialog = CustumProgressDialog.getProgressDialog(getContext());
         dialog.show();
-        mRetailerApi.listEmployee(dialog);
+        mRetailerApi.listRetailer(dialog);
+
     }
 
     private void gridToList(){
@@ -72,7 +90,7 @@ public class Retailer_fragment extends Fragment{
         recyclerView.setAdapter(mRetailerListAdapter);
         Dialog dialog = CustumProgressDialog.getProgressDialog(getContext());
         dialog.show();
-        mRetailerApi.listEmployee(dialog);
+        mRetailerApi.listRetailer(dialog);
     }
 
     private void  lisToGrid(){
@@ -80,16 +98,16 @@ public class Retailer_fragment extends Fragment{
         recyclerView.addItemDecoration(new SpaceItemDecoration(1));
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
         recyclerView.setLayoutManager(mGridLayoutManager);
-        recyclerView.setAdapter(mRetailerGridAdapter);
         mRetailerApi.setRetailerAdapterInterface(mRetailerGridAdapter);
         Dialog dialog = CustumProgressDialog.getProgressDialog(getContext());
         dialog.show();
-        mRetailerApi.listEmployee(dialog);
+        mRetailerApi.listRetailer(dialog);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         inflater.inflate(R.menu.menu_retailer_fragment ,menu);
+        menuItem = menu.findItem(R.id.list_to_grid);
         menuItem = menu.findItem(R.id.list_to_grid);
         if(isListView)
             menuItem.setIcon(R.drawable.ic_grid_24dp);
@@ -103,20 +121,20 @@ public class Retailer_fragment extends Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case   R.id.category_product :
-                Err.s(getContext()  , "working for category fragment");
+                Intent intent =  new Intent( getActivity().getApplicationContext() , Create_retailer_activity.class );
+                startActivity(intent);
                 break;
             case   R.id.list_to_grid :
                     Err.s(getContext()  , "working with my ass");
                     if(!isListView){
-                        isListView=true;
                         lisToGrid();
                         menuItem.setIcon(R.drawable.ic_list_black_24dp);
                     }
                     else{
-                        isListView=false;
                         gridToList();
                         menuItem.setIcon(R.drawable.ic_grid_24dp);
                     }
+                    isListView=!isListView;
                 break;
             case   R.id.fragment_menu_sort :
                 Err.s(getContext()  , "working with my ass");
@@ -124,4 +142,6 @@ public class Retailer_fragment extends Fragment{
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

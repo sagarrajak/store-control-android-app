@@ -47,7 +47,7 @@ import okhttp3.RequestBody;
 public class Create_employee_activity extends AppCompatActivity  {
 
     private Toolbar toolbar;
-    private EditText name, mail, date_of_birth, date_of_join, phone_num, pan_num, adress, work_profile;
+    private EditText name, mail, date_of_birth, date_of_join,phone_num,pan_num,address,work_profile;
     private ImageView imageView;
     private Calendar calendar;
     private FloatingActionButton mFloatingActionButton;
@@ -56,35 +56,18 @@ public class Create_employee_activity extends AppCompatActivity  {
     private ArrayAdapter<String> adapter = null;
     private EmployeeApi mEmployeeApi;
     private EmployeeGridAdapter mEmployeeGridAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_employee);
-        toolbar = (Toolbar) findViewById(R.id.activity_create_employee_toolbar);
-        setSupportActionBar(toolbar);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_create_employee);
+            setUiElement();
+            setToolbar();
+            setUpOnClickListener();
+    }
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            setTitle("Create employee");
+    private void setUpOnClickListener(){
             calendar = Calendar.getInstance();
-            name = (EditText) findViewById(R.id.add_employee_name);
-            mail = (EditText) findViewById(R.id.add_employee_mail);
-            date_of_birth = (EditText) findViewById(R.id.add_employee_layout_date_of_birth);
-            date_of_join = (EditText) findViewById(R.id.add_employee_date_of_join);
-            phone_num = (EditText) findViewById(R.id.add_employee_phone_num);
-            pan_num = (EditText) findViewById(R.id.add_employee_pan_num);
-            adress = (EditText) findViewById(R.id.add_employee_adress);
-            work_profile = (EditText) findViewById(R.id.add_employee_work_profile);
-            mFloatingActionButton = (FloatingActionButton) findViewById(R.id.add_button_float);
-            imageView  = (ImageView) findViewById(R.id.add_employee_image_view);
-            adapter = new ArrayAdapter<String>( Create_employee_activity.this,android.R.layout.select_dialog_item );
-
-//          mEmployeeApi = (EmployeeApi) getIntent().getExtras().get("EmployeeApi");
-//          mEmployeeGridAdapter = (EmployeeGridAdapter) getIntent().getExtras().get("EmployeeGridAdapter");
-
-            mEmployeeGridAdapter =  EmployeeGridAdapter.getEmployeeAdapter(getApplicationContext());
-            mEmployeeApi = EmployeeApi.getEmloyeeApi(mEmployeeGridAdapter,getApplicationContext());
-
             final DatePickerDialog.OnDateSetListener dateOfBirth = new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int day_of_month) {
@@ -94,7 +77,6 @@ public class Create_employee_activity extends AppCompatActivity  {
                     date_of_birth.setText(new SimpleDateFormat("dd/MM/yyyy").format(calendar.getTime()));
                 }
             };
-
             final DatePickerDialog.OnDateSetListener dateOfJoin = new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int day_of_month) {
@@ -111,14 +93,12 @@ public class Create_employee_activity extends AppCompatActivity  {
                     new DatePickerDialog(Create_employee_activity.this, dateOfBirth, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
                 }
             });
-
             date_of_join.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new DatePickerDialog(Create_employee_activity.this, dateOfJoin, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
                 }
             });
-
             mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -127,10 +107,36 @@ public class Create_employee_activity extends AppCompatActivity  {
             });
             work_profile.setOnClickListener(new View.OnClickListener() {
                 @Override
-                 public void onClick(View view) {
-                     createAlertDialog();
-                 }
+                public void onClick(View view) {
+                    createAlertForSelectingWorkProfile();
+                }
             });
+    }
+
+    private void  setToolbar(){
+            toolbar = (Toolbar) findViewById(R.id.activity_create_employee_toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            setTitle("Create Employee");
+    }
+
+    private void setUiElement(){
+
+        name            = (EditText) findViewById(R.id.add_employee_name);
+        mail            = (EditText) findViewById(R.id.add_employee_mail);
+        date_of_birth   = (EditText) findViewById(R.id.add_employee_layout_date_of_birth);
+        date_of_join    = (EditText) findViewById(R.id.add_employee_date_of_join);
+        phone_num       = (EditText) findViewById(R.id.add_employee_phone_num);
+        pan_num         = (EditText) findViewById(R.id.add_employee_pan_num);
+        address         = (EditText) findViewById(R.id.add_employee_adress);
+        work_profile    = (EditText) findViewById(R.id.add_employee_work_profile);
+        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.add_button_float);
+        imageView       = (ImageView) findViewById(R.id.add_employee_image_view);
+        adapter         = new ArrayAdapter<String>( Create_employee_activity.this,android.R.layout.select_dialog_item );
+        mEmployeeGridAdapter =  new EmployeeGridAdapter(getApplicationContext());
+        mEmployeeApi    = EmployeeApi.getEmloyeeApi(mEmployeeGridAdapter);
+
     }
 
     @Override
@@ -139,7 +145,8 @@ public class Create_employee_activity extends AppCompatActivity  {
         return true;
     }
 
-    public void createAlertDialog(){
+    public void createAlertForSelectingWorkProfile(){
+
         adapter.add("Something");
         adapter.add("Something");
         adapter.add("Something");
@@ -160,9 +167,12 @@ public class Create_employee_activity extends AppCompatActivity  {
                 }
             });
         builder.show();
+
     }
+
     private void createBottomSheet(){
 
+        checkPermission();
         mBottomSheetDialog  = new BottomSheetDialog(this);
         mBottomSheetDialog.setTitle("Profile picture");
         View view = getLayoutInflater().inflate( R.layout.bottom_sheet_image_select_dilaog , null );
@@ -171,7 +181,7 @@ public class Create_employee_activity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 mBottomSheetDialog.dismiss();
-                Intent intent = new Intent(Intent.ACTION_PICK , MediaStore.Images.Media.INTERNAL_CONTENT_URI  );
+                Intent intent = new Intent( Intent.ACTION_PICK , MediaStore.Images.Media.INTERNAL_CONTENT_URI  );
                 startActivityForResult(intent,12345);
             }
         });
@@ -189,8 +199,8 @@ public class Create_employee_activity extends AppCompatActivity  {
                 startActivityForResult(intent,1234);
             }
         });
-
         mBottomSheetDialog.show();
+
     }
 
 
@@ -201,7 +211,7 @@ public class Create_employee_activity extends AppCompatActivity  {
             case  12345 :
                 if( resultCode == RESULT_OK ){
                     try{
-                            checkPermission();
+
                             Uri imageUri = data.getData();
                             file  = new File(getPath(imageUri));
                             final InputStream  imageStream = getContentResolver().openInputStream(imageUri);
@@ -209,7 +219,7 @@ public class Create_employee_activity extends AppCompatActivity  {
                             imageView.setImageBitmap(selectedImage);
 
                     }catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                            e.printStackTrace();
                     }
                 }
             break;
@@ -229,7 +239,6 @@ public class Create_employee_activity extends AppCompatActivity  {
 
     private boolean checkError(){
 //        // TODO: 1/8/2017 to check error in filed
-        Snackbar snackbar ;
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_create_employee);
         if( file==null ){
             Snackbar.make( coordinatorLayout , "Select image" , Snackbar.LENGTH_LONG).show();
@@ -275,7 +284,7 @@ public class Create_employee_activity extends AppCompatActivity  {
         employee.setName(name.getText().toString());
         employee.setPanNum(pan_num.getText().toString());
         employee.setPhoneNumber(phone_num.getText().toString());
-       return  employee;
+        return  employee;
     }
 
     private ProgressDialog createProgressDialog(){
@@ -284,7 +293,6 @@ public class Create_employee_activity extends AppCompatActivity  {
         dialog.setCanceledOnTouchOutside(false);
         return  dialog;
     }
-
     public String getPath(Uri uri){
         String res = null;
         String[] projection = { MediaStore.Images.Media.DATA };
@@ -297,29 +305,27 @@ public class Create_employee_activity extends AppCompatActivity  {
         return res;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-
         switch (item.getItemId()){
-
             case R.id.create_employee :
                     ProgressDialog dialog = createProgressDialog();
                         if(checkError()){
                                 dialog.show();
                                 RequestBody reqfile =  RequestBody.create(MediaType.parse("image/*"),file);
                                 MultipartBody.Part body = MultipartBody.Part.createFormData("upload",file.getName(),reqfile);
-                                if( mEmployeeApi.addEmployeeImage(body , getEmployee() , dialog )) {
+                                if( mEmployeeApi.addEmployeeImage( body , getEmployee() , dialog )) {
                                     mEmployeeGridAdapter.notifyDataSetChanged();
                                 }
                         }
-
                 break;
-
             case R.id.cancel_employee :
                 finish();
                 break;
         }
         return true;
     }
+
 
 }

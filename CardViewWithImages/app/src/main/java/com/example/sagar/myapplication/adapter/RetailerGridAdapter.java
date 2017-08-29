@@ -15,18 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.sagar.myapplication.Err;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.sagar.myapplication.api.RetailerApi;
+import com.example.sagar.myapplication.utill.Err;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.interfaces.RetailerAdapterInterface;
-import com.example.sagar.myapplication.api.RetailerApi;
 import com.example.sagar.myapplication.modal.Retailer;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Created by SAGAR on 1/21/2017.
- */
-
 public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapter.MyViewHolder> implements RetailerAdapterInterface {
 
 
@@ -36,21 +33,25 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
     private static RetailerGridAdapter mRetailerGridAdapter;
 
     public  RetailerGridAdapter(Context mContext){
+
          this.mContext = mContext;
          mRetailerApi = RetailerApi.getmReteilerApi(this);
          retailer = new ArrayList<>();
+
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.emploee_card,parent,false);
         return new MyViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int i) {
+
         String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_300,h_300,c_crop/w_200/v1482011353/";
-//        String url = "http://res.cloudinary.com/droxr0kdp/image/upload/v1482011353/";
         holder.name.setText(retailer.get(i).getName());
         holder.email.setText(retailer.get(i).getMail());
         holder.mImageView.setOnClickListener(new View.OnClickListener(){
@@ -63,8 +64,9 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
                 .load(url+retailer.get(i).getImage())
                    .centerCrop()
                      .placeholder(R.drawable.employee)
-                         .crossFade()
-                              .into(holder.employeePicture);
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .crossFade()
+                                        .into(holder.employeePicture);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +74,13 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
                 Err.s(mContext,"working");
             }
         });
+
+
+    }
+
+
+    public  void setmContext(Context mConetext){
+        this.mContext = mConetext;
     }
 
     @Override
@@ -82,11 +91,15 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
 
     @Override
     public void addNewReatilerList(List<Retailer> retailer) {
+
         this.retailer = retailer;
         notifyDataSetChanged();
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
+
+
         public  View view;
         public TextView name,email;
         public ImageView mImageView;
@@ -100,24 +113,24 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
             mImageView = (ImageView)view.findViewById(R.id.imageViewLog);
             employeePicture = (ImageView)view.findViewById(R.id.employee_picture);
         }
+
+
     }
 
-    private void  showPopUpMenu(View view,int i){
+    private void  showPopUpMenu( View view , int i){
+
         PopupMenu popupMenu = new PopupMenu(mContext,view);
         MenuInflater mMenuInflater = popupMenu.getMenuInflater();
         mMenuInflater.inflate(R.menu.grid_view_retailer_card_menu , popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new MyMenuOnClickListerner(i));
         popupMenu.show();
+
     }
 
-    private ProgressDialog createProgressDialog(){
-        ProgressDialog dialog = new ProgressDialog(mContext);
-        dialog.setIndeterminate(true);
-        dialog.setCanceledOnTouchOutside(false);
-        return  dialog;
-    }
 
     class  MyMenuOnClickListerner implements  PopupMenu.OnMenuItemClickListener{
+
+
         private int position;
         public MyMenuOnClickListerner(int position ){
             this.position = position;
@@ -140,9 +153,11 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
             }
             return  false;
         }
+
+
         private void createDeleteDialog(final int position){
 
-        /*Dialog   to  delete   employee*/
+            /*Dialog   to  delete   employee*/
             new AlertDialog.Builder(mContext)
                     .setTitle("Delete Employee")
                     .setMessage("Are you sure to want to delete this employee")
@@ -159,12 +174,21 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
                         }
                     })
                     .show();
+
+           }
         }
-    }
-    public static  RetailerGridAdapter getRetailerGridAdapter(Context mContext){
+
+
+       public static  RetailerGridAdapter getRetailerGridAdapter(Context mContext){
+
          if(mRetailerGridAdapter==null)
              mRetailerGridAdapter  = new RetailerGridAdapter(mContext);
+         else
+             mRetailerGridAdapter.setmContext(mContext);
+
+
         return  mRetailerGridAdapter;
+
     }
 
 }

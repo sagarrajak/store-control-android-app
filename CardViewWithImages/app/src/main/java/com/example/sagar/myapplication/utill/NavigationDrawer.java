@@ -1,4 +1,4 @@
-package com.example.sagar.myapplication;
+package com.example.sagar.myapplication.utill;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.intent.about_store.About_store_activity;
 import com.example.sagar.myapplication.intent.employee.MainActivity;
 import com.example.sagar.myapplication.intent.product.Product_activity;

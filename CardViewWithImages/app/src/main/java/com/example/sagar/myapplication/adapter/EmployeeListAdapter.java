@@ -16,17 +16,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sagar.myapplication.Err;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.interfaces.EmployeeAdapterInterface;
 import com.example.sagar.myapplication.api.EmployeeApi;
 import com.example.sagar.myapplication.intent.employee.About_employee_activity;
 import com.example.sagar.myapplication.modal.Employee;
+import com.example.sagar.myapplication.utill.Err;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapter.MyViewHolder> implements EmployeeAdapterInterface {
+
     private Context mContext;
     private EmployeeApi mEmployeeApi;
     private static  EmployeeListAdapter mEmployeeListAdapter;
@@ -34,14 +35,10 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
 
     public EmployeeListAdapter( Context mContext ){
         this.mContext = mContext;
-        mEmployeeApi = EmployeeApi.getEmloyeeApi(this,mContext);
+        mEmployeeApi = EmployeeApi.getEmloyeeApi(this);
         employees = new ArrayList<>();
     }
-    public static  EmployeeListAdapter getmEmployeeListAdapter(Context mContext){
-        if(mEmployeeListAdapter == null )
-             mEmployeeListAdapter =  new EmployeeListAdapter(mContext);
-        return  mEmployeeListAdapter;
-    }
+
     public void setmContext(Context mContext){
         this.mContext = mContext;
     }
@@ -50,6 +47,8 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.employee_list_card,parent,false);
         return new MyViewHolder(view);
     }
+
+
     @Override
     public void onBindViewHolder(final EmployeeListAdapter.MyViewHolder holder, final int position) {
         holder.name.setText(employees.get(position).getName());
@@ -71,15 +70,19 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
             }
         });
     }
+
     @Override
-    public int getItemCount() {
+    public int getItemCount(){
         return employees.size();
     }
+
     @Override
     public void addNewEmployeeList(List<Employee> mEmployee) {
-        this.employees = mEmployee;
+        if(mEmployee!=null)
+            this.employees = mEmployee;
         notifyDataSetChanged();
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name,mail;
         public ImageView mImageView;
@@ -92,6 +95,8 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
             mImageView = (ImageView)itemView.findViewById(R.id.emloyee_list_view_image_view_menu);
         }
     }
+
+
     private ProgressDialog createProgressDialog(){
         ProgressDialog dialog = new ProgressDialog(mContext);
         dialog.setIndeterminate(true);
@@ -127,8 +132,10 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
             }
             return  false;
         }
+
+
         private void createDeleteDialog(final int position){
-        /*Dialog   to  delete   employee*/
+            /*Dialog   to  delete   employee*/
             new AlertDialog.Builder(mContext)
                     .setTitle("Delete Employee")
                     .setMessage("Are you sure to want to delete this employee")
@@ -149,6 +156,17 @@ public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapt
                     })
                     .show();
         }
+
     }
+
+    public static  EmployeeListAdapter getmEmployeeListAdapter(Context mContext){
+        if(mEmployeeListAdapter == null )
+            mEmployeeListAdapter =  new EmployeeListAdapter(mContext);
+        else
+            mEmployeeListAdapter.setmContext(mContext);
+
+        return  mEmployeeListAdapter;
+    }
+
 
 }

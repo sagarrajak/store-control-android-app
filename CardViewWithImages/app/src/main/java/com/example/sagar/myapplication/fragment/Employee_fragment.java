@@ -2,13 +2,14 @@ package com.example.sagar.myapplication.fragment;
 
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,92 +21,109 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 
+import com.example.sagar.myapplication.CustumProgressDialog;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.SpaceItemDecoration;
 import com.example.sagar.myapplication.adapter.EmployeeGridAdapter;
 import com.example.sagar.myapplication.adapter.EmployeeListAdapter;
 import com.example.sagar.myapplication.api.EmployeeApi;
 import com.example.sagar.myapplication.intent.employee.Create_employee_activity;
+import com.example.sagar.myapplication.utill.SpaceItemDecoration;
 
 public class Employee_fragment extends Fragment {
 
-    private EmployeeGridAdapter mEmployeeGridAdapter;
     private EmployeeApi mEmployeeApi;
     private RecyclerView recyclerView;
     private boolean isListLayout ;
     private MenuItem listToGrid;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private FloatingActionButton fab;
-    public Employee_fragment(){}
+    public  Employee_fragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_employee,container,false);
+
+        return inflater.inflate(  R.layout.fragment_employee , container,false);
+
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        mEmployeeGridAdapter = EmployeeGridAdapter.getEmployeeAdapter(getContext());
-        mEmployeeGridAdapter.setmContext(getContext());
-        isListLayout = false;
-        mEmployeeApi = EmployeeApi.getEmloyeeApi( mEmployeeGridAdapter ,getActivity());
+
+            super.onCreate(savedInstanceState);
+            setHasOptionsMenu(true);
+
     }
+
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState){
-        setRecycleView();
-        super.onActivityCreated(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
+            super.onActivityCreated(savedInstanceState);
+            isListLayout = false;
+            mEmployeeApi = EmployeeApi.getEmloyeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()));
+            mSwipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_to_refresh_employee);
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                            mEmployeeApi.listEmployee(mSwipeRefreshLayout);
+                }
+            });
+            createRecycleView();
+
     }
 
-    private ProgressDialog createProgressDialog(){
-            ProgressDialog dialog = new ProgressDialog(getActivity());
-            dialog.setIndeterminate(true);
-            dialog.setCanceledOnTouchOutside(false);
-            return  dialog;
-    }
-    private void setRecycleView(){
-             recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_view);
-             recyclerView.addItemDecoration(new SpaceItemDecoration(1));
-             GridLayoutManager mGridLayoutManager = new GridLayoutManager( getActivity(),2,RecyclerView.VERTICAL , true );
-             recyclerView.setAdapter(mEmployeeGridAdapter);
-             recyclerView.setLayoutManager(mGridLayoutManager);
-             Dialog dialog = createProgressDialog();
-             dialog.show();
-             mEmployeeApi.getEmployee(dialog);
+    private void createRecycleView(){
+
+            recyclerView = (RecyclerView)getView().findViewById(R.id.recycle_view);
+            recyclerView.addItemDecoration(new SpaceItemDecoration(1));
+            GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter( EmployeeGridAdapter.getEmployeeGridAdapter( getActivity()) );
+            recyclerView.setLayoutManager( mGridLayoutManager );
+            mEmployeeApi.setAdapter( EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()) );
+            Dialog dialog = CustumProgressDialog.getProgressDialog( getContext() );
+            dialog.show();
+            mEmployeeApi.listEmployee( dialog );
+
     }
 
     private void changeListToGride(){
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager( getActivity(),2,RecyclerView.VERTICAL , true );
-        recyclerView.setAdapter(mEmployeeGridAdapter);
-        recyclerView.setLayoutManager(mGridLayoutManager);
-        mEmployeeApi.addNewAdapter(mEmployeeGridAdapter);
-        Dialog dialog = createProgressDialog();
-        dialog.show();
-        mEmployeeApi.getEmployee(dialog);
+
+            recyclerView.addItemDecoration(new SpaceItemDecoration(1));
+            GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter( EmployeeGridAdapter.getEmployeeGridAdapter( getActivity()) );
+            recyclerView.setLayoutManager( mGridLayoutManager );
+            mEmployeeApi.setAdapter( EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()) );
+            Dialog dialog = CustumProgressDialog.getProgressDialog( getContext() );
+            dialog.show();
+            mEmployeeApi.listEmployee( dialog );
+
     }
 
     private void changeGridToList(){
-        EmployeeListAdapter mEmployeeListAdapter = EmployeeListAdapter.getmEmployeeListAdapter(getContext());
-        mEmployeeApi.addNewAdapter(mEmployeeListAdapter);
-        recyclerView.setAdapter(mEmployeeListAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        Dialog dialog = createProgressDialog();
-        dialog.show();
-        mEmployeeApi.getEmployee(dialog);
+
+            EmployeeListAdapter mEmployeeListAdapter = EmployeeListAdapter.getmEmployeeListAdapter(getContext());
+            mEmployeeApi.addNewAdapter(mEmployeeListAdapter);
+            recyclerView.setAdapter(mEmployeeListAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
+            dialog.show();
+            mEmployeeApi.listEmployee(dialog);
     }
 
     @Override
     public void onCreateOptionsMenu( Menu menu , MenuInflater inflater ){
-        inflater.inflate(R.menu.menu_employee_fragment ,menu);
-        listToGrid = menu.findItem(R.id.list_to_grid);
 
-        if(isListLayout)
-            listToGrid.setIcon(R.drawable.ic_grid_24dp);
-        else
-            listToGrid.setIcon(R.drawable.ic_list_black_24dp);
+            inflater.inflate(R.menu.menu_employee_fragment ,menu);
+            listToGrid = menu.findItem(R.id.list_to_grid);
+            if(isListLayout)
+                listToGrid.setIcon(R.drawable.ic_grid_24dp);
+            else
+                listToGrid.setIcon(R.drawable.ic_list_black_24dp);
 
-        super.onCreateOptionsMenu(menu,inflater);
+            super.onCreateOptionsMenu(menu,inflater);
     }
 
     @Override
@@ -114,18 +132,14 @@ public class Employee_fragment extends Fragment {
             case  R.id.list_to_grid :
                 if(isListLayout){
                     changeListToGride();
-                    if(listToGrid!=null){
-                       listToGrid.setIcon(R.drawable.ic_list_black_24dp);
-                    }
-                    isListLayout = !isListLayout;
+                    listToGrid.setIcon(R.drawable.ic_list_black_24dp);
+
                 }
                 else{
                     changeGridToList();
-                    if(listToGrid!=null){
-                        listToGrid.setIcon(R.drawable.ic_grid_24dp);
-                    }
-                    isListLayout = !isListLayout;
+                    listToGrid.setIcon(R.drawable.ic_grid_24dp);
                 }
+                isListLayout=!isListLayout;
                 break;
             case R.id.create_employee :
                 Intent intent = new Intent( getActivity().getApplicationContext() , Create_employee_activity.class);
@@ -137,6 +151,8 @@ public class Employee_fragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
    private void creteButtomSheet(){
 
         final RadioButton salary,name,date_of_join;
@@ -147,12 +163,10 @@ public class Employee_fragment extends Fragment {
         salary = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_salery_radiobottom);
         name = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_name_radiobottom);
         date_of_join = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_date_of_join_radiobottm);
-
-
            name.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view){
-                     Dialog dialog = createProgressDialog();
+                     Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
                      dialog.show();
                      mEmployeeApi.getSortByName(dialog);
                      date_of_join.setChecked(false);
@@ -162,9 +176,9 @@ public class Employee_fragment extends Fragment {
             date_of_join.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
-                   Dialog dialog = createProgressDialog();
-                   dialog.show();
-                   mEmployeeApi.getSortByDateOfJoin(dialog);
+                    Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
+                    dialog.show();
+                    mEmployeeApi.getSortByDateOfJoin(dialog);
                     name.setChecked(false);
                     salary.setChecked(false);
                }
@@ -177,6 +191,8 @@ public class Employee_fragment extends Fragment {
                  date_of_join.setChecked(false);
              }
          });
+
        bottomSheetDialog.show();
+
    }
 }

@@ -2,8 +2,8 @@ package com.example.sagar.myapplication.api;
 
 import android.app.Dialog;
 
-import com.example.sagar.myapplication.Err;
-import com.example.sagar.myapplication.Token;
+import com.example.sagar.myapplication.utill.Err;
+import com.example.sagar.myapplication.utill.Token;
 import com.example.sagar.myapplication.api.interfaces.ApiWorkProfileInterface;
 import com.example.sagar.myapplication.modal.Data;
 import com.example.sagar.myapplication.modal.WorkProfile;
@@ -16,13 +16,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class WorkProfileApi{
+
     private List<WorkProfile> mList;
     private static WorkProfileApi mWorkProfileApi;
     private ApiWorkProfileInterface mApiWorkProfileInterface;
 
     public WorkProfileApi(){
+
         mList = new ArrayList<>();
         mApiWorkProfileInterface = ApiClient.getClient().create(ApiWorkProfileInterface.class);
+
+
     }
 
     public  void  addWorkProfile(String work_profile , Integer hr_of_work , Integer salary ,  String right  , final  Dialog dialog ){
@@ -45,6 +49,8 @@ public class WorkProfileApi{
                         Err.e("failed in creating work profile stackTrace");
                     }
                 });
+
+
     }
     public  void  deleteWorkProfile(String id ,final Dialog dialog){
 
@@ -66,13 +72,17 @@ public class WorkProfileApi{
                                 }
                             });
 
+
     }
     public  void  modifyWorkProfile(){
+
             //todo api for modifying work profile api
     }
 
 
     public  void  listWorkProfile(final Dialog dialog){
+
+
             mApiWorkProfileInterface.getWorkProfileList(
                     Token.token
             ).enqueue(new Callback<List<WorkProfile>>() {
@@ -90,11 +100,14 @@ public class WorkProfileApi{
                     Err.e("Error in listing work profile");
                 }
             });
+
+
     }
 
     public static  WorkProfileApi getmWorkProfileApi(){
             if(mWorkProfileApi == null )
                 mWorkProfileApi = new WorkProfileApi();
+
           return  mWorkProfileApi;
     }
 
