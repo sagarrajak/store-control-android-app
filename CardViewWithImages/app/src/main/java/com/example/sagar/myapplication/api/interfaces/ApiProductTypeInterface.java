@@ -24,7 +24,7 @@ public interface ApiProductTypeInterface{
     @POST("api/product-type")
     public Call<Data> addProductType(
         @Field("product_type") String type ,
-        @Field("details")  String details ,
+        @Field("brand")  String details ,
         @Header("token") String token
     );
 

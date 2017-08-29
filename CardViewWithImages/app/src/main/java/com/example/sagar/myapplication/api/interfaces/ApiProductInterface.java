@@ -81,4 +81,20 @@ public interface ApiProductInterface{
             @Header("token") String token,
             @Path("id") String brandId
     );
+
+    @GET("api/routes/product/search-by-category/{id}")
+    Call<List<ProductPopulated>> getProductPopulatedCategoryAssociatedList(
+            @Header("token") String token,
+            @Path("id") String CategoryId
+    );
+
+
+    @DELETE("api/routes/remove-category-from-product/{product_id}/{category_id}")
+    Call<Data> deleteCategoryFromPrticularProduct(
+        @Header("token") String token ,
+        @Path("product_id") String product_id ,
+        @Path("category_id") String category_id
+    );
+
+
 }

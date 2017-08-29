@@ -98,7 +98,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
                                     //Edit items
                                     break;
                                 case  2 :
-                                    //go to details
+                                    //go to brand
                                     break;
                             }
                         }

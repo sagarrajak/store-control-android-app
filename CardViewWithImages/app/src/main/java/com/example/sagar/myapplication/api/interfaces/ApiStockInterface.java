@@ -34,7 +34,7 @@ public interface ApiStockInterface{
             @Field("product")     String  product,
             @Field("buyed_price") Integer buyed_price,
             @Field("exp_date")    Date exp_date,
-            @Field("details")     String details,
+            @Field("brand")     String details,
             @Field("buyed_date")  Date buyed_date ,
             @Header("token") String token
 

@@ -3,6 +3,7 @@ package com.example.sagar.myapplication.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sagar.myapplication.R;
+import com.example.sagar.myapplication.intent.product_category.Product_category_details;
 import com.example.sagar.myapplication.modal.ProductType;
 import com.example.sagar.myapplication.utill.Err;
 
@@ -41,18 +43,39 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
 
 
     @Override
-    public void onBindViewHolder(ProductCategoryAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(ProductCategoryAdapter.MyViewHolder holder, final int position) {
+
+
         holder.category_details.setText(mList.get(position).getDetials());
         holder.category_name.setText(mList.get(position).getProductType());
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(  mContext.getApplicationContext() , Product_category_details.class );
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("Category",mList.get(position));
+                mContext.startActivity(intent);
+
+            }
+        });
+
     }
+
     @Override
     public int getItemCount() {
         return mList.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView category_name , category_details;
-        ImageView mImageView ;
+
+
+        public  TextView category_name , category_details;
+        public ImageView mImageView ;
+        View view ;
+
         public MyViewHolder(View view) {
+
+
             super(view);
             category_name  = (TextView) view.findViewById(R.id.category_card_name);
             category_details = (TextView) view.findViewById(R.id.category_card_details);
@@ -92,6 +115,9 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
                     return false;
                 }
             });
+            this.view = view ;
+
+
         }
     }
 

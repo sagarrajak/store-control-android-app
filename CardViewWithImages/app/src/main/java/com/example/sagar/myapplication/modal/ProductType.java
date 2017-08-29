@@ -3,10 +3,10 @@ package com.example.sagar.myapplication.modal;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by SAGAR on 1/15/2017.
- */
-public class ProductType {
+import java.io.Serializable;
+
+
+public class ProductType implements Serializable{
     @SerializedName("product_type")
     @Expose
     private String productType;

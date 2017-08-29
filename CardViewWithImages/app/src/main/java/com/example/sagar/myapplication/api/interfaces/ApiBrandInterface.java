@@ -29,7 +29,7 @@ public interface ApiBrandInterface {
     @POST("api/product-brand")
     public  Call<Data>  addNewBrand(
           @Field("brand") String brand ,
-          @Field("details") String details,
+          @Field("brand") String details,
           @Field("image") String image,
           @Header("token") String token
     );

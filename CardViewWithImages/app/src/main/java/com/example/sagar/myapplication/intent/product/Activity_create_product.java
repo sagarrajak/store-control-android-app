@@ -398,7 +398,7 @@ public class Activity_create_product extends AppCompatActivity{
               return false;
           }
           else if(details.getText().toString().isEmpty()){
-              Snackbar.make(mCoordinatorLayout , "Add details" , Snackbar.LENGTH_LONG).show();
+              Snackbar.make(mCoordinatorLayout , "Add brand" , Snackbar.LENGTH_LONG).show();
               return  false;
           }
           else if(price.getText().toString().isEmpty() ){
