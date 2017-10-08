@@ -101,8 +101,8 @@ public class BrandAssociatedProductAdapter extends RecyclerView.Adapter<BrandAss
         public MyViewHolder(View itemView) {
             super(itemView);
             view = itemView ;
-            name = (TextView) itemView.findViewById(R.id.product_list_view_name);
-            price = (TextView) itemView.findViewById(R.id.product_list_view_brand);
+            name = (TextView) itemView.findViewById(R.id.product_category_name);
+            price = (TextView) itemView.findViewById(R.id.product_category_details);
             mImageView = (ImageView) itemView.findViewById(R.id.product_list_view_image_view);
         }
     }

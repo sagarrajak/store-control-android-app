@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
-    tools:context=".intent.employee.Create_employee_activity">
+    tools:context=".element.employee.Create_employee_activity">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/activity_create_employee_appbar"
         android:layout_width="match_parent"
@@ -33,8 +33,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                 android:id="@+id/add_employee_image_view"
-                />
+                android:id="@+id/add_employee_image_view"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/view2"

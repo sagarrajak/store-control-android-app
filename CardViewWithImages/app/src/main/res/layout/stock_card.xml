@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:elevation="2dp"
+    app:contentPaddingRight="2dp"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
+    android:layout_height="180dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_delete_black_24dp" />
+        <ImageView
+            android:id="@+id/notification_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_toStartOf="@+id/delete_icon"
+            android:src="@drawable/ic_notifications_black_24dp" />
+        <ImageView
+            android:id="@+id/edit_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_toStartOf="@+id/notification_icon"
+            android:src="@drawable/ic_edit_black_24dp" />
+        <TextView
+            android:id="@+id/stock_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Colgate stock"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/text_size_medium" />
+
+
+        <TextView
+            android:id="@+id/stock_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:text="toothpaste"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/text_size_medium_small"
+            android:layout_below="@+id/stock_name" />
+
+        <TextView
+            android:id="@+id/stock_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:maxLines="4"
+            android:scrollbars="vertical"
+            android:text="something about this stock stock stock  stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock stock"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/text_size_small"
+            android:layout_below="@+id/stock_product_name"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/stock_prduct_image_view" />
+
+        <TextView
+            android:id="@+id/brought_date_View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/stock_expire_date"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="5dp"
+            android:text="Buyed date "
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="bold"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/stock_brought_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="5/12/2015"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="@dimen/text_size_small"
+            android:layout_below="@+id/brought_date_View"
+            android:layout_alignStart="@+id/brought_date_View" />
+
+        <TextView
+            android:id="@+id/expire_date_View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/stock_details"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="12dp"
+            android:text="Expire date"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="bold"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/stock_expire_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/expire_date_View"
+            android:layout_marginLeft="5dp"
+            android:text="5/12/2015"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/items_count_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/brought_date_View"
+            android:layout_alignBottom="@+id/brought_date_View"
+            android:layout_centerHorizontal="true"
+            android:text="Item count"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold" />
+        <ImageView
+            android:src="@drawable/employee"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:id="@+id/stock_prduct_image_view"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:id="@+id/stock_items_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/items_count_label"
+            android:layout_centerHorizontal="true"
+            android:text="10"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="normal" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

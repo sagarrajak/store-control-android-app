@@ -44,7 +44,6 @@ public interface ApiRetailerInterface {
          @Header("token") String token
     );
 
-    @FormUrlEncoded
     @Multipart
     @POST("api/retailer/image")
     Call<Data> uploadRetailerImage(

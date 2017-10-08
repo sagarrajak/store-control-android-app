@@ -14,9 +14,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.api.BrandApi;
-import com.example.sagar.myapplication.intent.brand.Brand_products_details;
+import com.example.sagar.myapplication.element.brand.Brand_products_details;
 import com.example.sagar.myapplication.modal.Brand;
-import com.example.sagar.myapplication.utill.Err;
 
 import java.util.ArrayList;
 import java.util.List;

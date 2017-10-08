@@ -11,10 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.intent.about_store.About_store_activity;
-import com.example.sagar.myapplication.intent.employee.MainActivity;
-import com.example.sagar.myapplication.intent.product.Product_activity;
-import com.example.sagar.myapplication.intent.login.Setting_activity;
+import com.example.sagar.myapplication.element.about_store.About_store_activity;
+import com.example.sagar.myapplication.element.employee.MainActivity;
+import com.example.sagar.myapplication.element.product.Product_activity;
+import com.example.sagar.myapplication.element.login.Setting_activity;
+import com.example.sagar.myapplication.element.stock.activity.Stock_activity;
+import com.example.sagar.myapplication.element.transaction.Transaction_activity;
 
 public class NavigationDrawer{
 
@@ -60,6 +62,15 @@ public class NavigationDrawer{
                             setting.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             mActivity.startActivity(setting);
                             break;
+                        case R.id.store_stock :
+                            Intent  stock_activity  = new Intent(mActivity.getApplicationContext() , Stock_activity.class);
+                            stock_activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            mActivity.startActivity(stock_activity);
+                            break;
+                        case R.id.store_transaction :
+                            Intent transaction  =  new Intent(mActivity.getApplicationContext() , Transaction_activity.class);
+                            transaction.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            mActivity.startActivity(transaction);
                     }
 
                     return false;

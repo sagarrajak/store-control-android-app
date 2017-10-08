@@ -16,9 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.intent.product_category.Product_category_details;
+import com.example.sagar.myapplication.element.product_category.Product_category_details;
 import com.example.sagar.myapplication.modal.ProductType;
-import com.example.sagar.myapplication.utill.Err;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
 
                 Intent intent = new Intent(  mContext.getApplicationContext() , Product_category_details.class );
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("Category",mList.get(position));
+                intent.putExtra("Category", mList.get(position) );
                 mContext.startActivity(intent);
 
             }

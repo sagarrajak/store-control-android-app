@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipe_to_refresh_retailer"
-    tools:context=".fragment.Retailer_fragment">
+    tools:context=".element.employee.fragment.Retailer_fragment">
     <include layout="@layout/recycleview"></include>
 </android.support.v4.widget.SwipeRefreshLayout>

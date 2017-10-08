@@ -23,14 +23,10 @@ public class ProductCategoryDetailsAdapter extends RecyclerView.Adapter<ProductC
     private ApiProductInterface mApiProductInterface;
     private Context context;
 
-
-
     public ProductCategoryDetailsAdapter(){
 
 
     }
-
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

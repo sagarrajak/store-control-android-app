@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.interfaces.EmployeeAdapterInterface;
 import com.example.sagar.myapplication.api.EmployeeApi;
-import com.example.sagar.myapplication.intent.employee.About_employee_activity;
+import com.example.sagar.myapplication.element.employee.About_employee_activity;
 import com.example.sagar.myapplication.modal.Employee;
 import com.example.sagar.myapplication.utill.Err;
 

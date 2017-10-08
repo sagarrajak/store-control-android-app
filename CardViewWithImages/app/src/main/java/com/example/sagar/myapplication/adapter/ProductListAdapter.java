@@ -1,6 +1,5 @@
 package com.example.sagar.myapplication.adapter;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,8 +19,7 @@ import com.example.sagar.myapplication.CustumProgressDialog;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.interfaces.ProductAdapterInterface;
 import com.example.sagar.myapplication.api.ProductApi;
-import com.example.sagar.myapplication.intent.product.About_product_activity;
-import com.example.sagar.myapplication.modal.Product;
+import com.example.sagar.myapplication.element.product.About_product_activity;
 import com.example.sagar.myapplication.modal.ProductPopulated;
 
 import java.util.ArrayList;
@@ -113,8 +111,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         public MyViewHolder(View itemView) {
             super(itemView);
             mImageView = (ImageView) itemView.findViewById(R.id.product_list_view_image_view);
-            mTextViewName = (TextView) itemView.findViewById(R.id.product_list_view_name);
-            mTextViewBrand = (TextView) itemView.findViewById(R.id.product_list_view_brand);
+            mTextViewName = (TextView) itemView.findViewById(R.id.product_category_name);
+            mTextViewBrand = (TextView) itemView.findViewById(R.id.product_category_details);
             view = itemView;
         }
     }

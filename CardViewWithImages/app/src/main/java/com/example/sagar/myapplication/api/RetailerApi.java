@@ -21,15 +21,12 @@ public class RetailerApi{
     private RetailerAdapterInterface mRetailerAdapterInterface;
 
     public RetailerApi(RetailerAdapterInterface mRetailerAdapterInterface){
-
         mRetailerInterface = ApiClient.getClient().create( ApiRetailerInterface.class );
         this.mRetailerAdapterInterface = mRetailerAdapterInterface;
-
     }
 
 
     public void listRetailer(final Dialog dialog){
-
             mRetailerInterface.getRetailer(
                     Token.token
             ).enqueue(new Callback<List<Retailer>>() {
@@ -51,11 +48,9 @@ public class RetailerApi{
                     dialog.dismiss();
                 }
             });
-
     }
 
     public void uploadRetailerImage( MultipartBody.Part bodypart , final  Retailer  retailer , final Dialog dialog ){
-
           mRetailerInterface.uploadRetailerImage( bodypart  , Token.token  ).enqueue(new Callback<Data>() {
               @Override
               public void onResponse(Call<Data> call,Response<Data> response) {
@@ -74,13 +69,9 @@ public class RetailerApi{
                     dialog.dismiss();
               }
           });
-
-
     }
 
     public void deleteRetailerImage(final Dialog dialog , String image , final String retailer_id ){
-
-
         mRetailerInterface.deleteRetailerImage( image  , Token.token ).enqueue(new Callback<Data>() {
                             @Override
                             public void onResponse(Call<Data> call, Response<Data> response){
@@ -99,40 +90,32 @@ public class RetailerApi{
                                 dialog.dismiss();
                             }
         });
-
-
     }
 
     public void createNewRetailer(final Dialog dialog , final Retailer retailer , String imageid ){
-
-                          mRetailerInterface.createRetailer(
-                                retailer.getName() , retailer.getPhoneNum() , retailer.getPhoneNum() ,retailer.getAddress() , imageid , Token.token
-                          ).enqueue(new Callback<Data>(){
-                              @Override
-                              public void onResponse(Call<Data> call, Response<Data> response) {
-                                  if(response.code()==200){
-                                    listRetailer(dialog);
-                                      Err.e("Retailer created!");
-                                  }
-                                  else {
-                                      dialog.dismiss();
-                                      Err.e("Failed to create retailer!");
-                                  }
-                              }
-                              @Override
-                              public void onFailure(Call<Data> call, Throwable t) {
-                                    t.printStackTrace();
-                                    dialog.dismiss();
-                              }
-                          });
-
-
+                  mRetailerInterface.createRetailer(
+                        retailer.getName() , retailer.getPhoneNum() , retailer.getPhoneNum() ,retailer.getAddress() , imageid , Token.token
+                  ).enqueue(new Callback<Data>(){
+                      @Override
+                      public void onResponse(Call<Data> call, Response<Data> response) {
+                          if(response.code()==200){
+                            listRetailer(dialog);
+                              Err.e("Retailer created!");
+                          }
+                          else {
+                              dialog.dismiss();
+                              Err.e("Failed to create retailer!");
+                          }
+                      }
+                      @Override
+                      public void onFailure(Call<Data> call, Throwable t) {
+                            t.printStackTrace();
+                            dialog.dismiss();
+                      }
+                  });
     }
 
-
     public void deleteRetailer(final String id,final Dialog  dialog){
-
-
         mRetailerInterface.deleteRetailer(  id , Token.token  ).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
@@ -150,25 +133,17 @@ public class RetailerApi{
                 dialog.dismiss();
             }
         });
-
-
     }
-
 
     public void setRetailerAdapterInterface(RetailerAdapterInterface mRetailerAdapterInterface){
-
         this.mRetailerAdapterInterface = mRetailerAdapterInterface;
-
     }
 
-
     public static RetailerApi getmReteilerApi(RetailerAdapterInterface mReaRetailerAdapterInterface){
-
         if(retailerApi==null)
             retailerApi = new RetailerApi(mReaRetailerAdapterInterface);
         else
             retailerApi.setRetailerAdapterInterface(mReaRetailerAdapterInterface);
-
         return retailerApi;
     }
 

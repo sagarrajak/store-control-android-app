@@ -22,6 +22,9 @@
         android:title="Work profile"
         android:id="@+id/store_workProfile"/>
     <item
+        android:title="Stock"
+        android:id="@+id/store_stock"/>
+    <item
         android:title="Logout"
         android:id="@+id/logout"/>
 </menu>

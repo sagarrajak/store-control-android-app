@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        app:showAsAction="always"
+        android:id="@+id/stock_menu_filter"
+        android:icon="@drawable/ic_tune_black_24dp"
+        android:title="filter" />
+    <item
+        app:showAsAction="ifRoom"
+        android:title="Add stock"
+        android:id="@+id/stock_menu_add_new_stock"
+        android:icon="@drawable/ic_add_black_24dp"
+        />
+</menu>

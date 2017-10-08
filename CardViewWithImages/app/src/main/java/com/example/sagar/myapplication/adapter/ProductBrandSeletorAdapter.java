@@ -1,10 +1,14 @@
 package com.example.sagar.myapplication.adapter;
 
 import android.content.Context;
+import android.media.MediaRecorder;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -12,6 +16,7 @@ import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.api.ApiClient;
 import com.example.sagar.myapplication.api.interfaces.ApiBrandInterface;
 import com.example.sagar.myapplication.modal.Brand;
+import com.example.sagar.myapplication.utill.Err;
 import com.example.sagar.myapplication.utill.Token;
 
 import java.util.ArrayList;
@@ -26,17 +31,18 @@ public class ProductBrandSeletorAdapter extends RecyclerView.Adapter<ProductBran
     private Context context;
     private List<Brand> brand;
     private ApiBrandInterface mApiBrandInterface;
-    private  boolean checked;
-    private RadioButton radiobutton;
-    private Brand ans_brand;
+    private RadioButton mSelectedRadioButton=null;
+    private Brand selectedBrand = null;
+    private ProgressBar mProgressBar;
 
-    public  ProductBrandSeletorAdapter(Context context){
+    public  ProductBrandSeletorAdapter( Context context , ProgressBar mProgressBar ){
         brand = new ArrayList<>();
         mApiBrandInterface = ApiClient.getClient().create(ApiBrandInterface.class);
         this.context = context;
+        this.mProgressBar = mProgressBar;
         createRecylceView();
-        checked = false;
     }
+
     private void createRecylceView(){
         mApiBrandInterface.listBrand(
                 Token.token
@@ -44,61 +50,66 @@ public class ProductBrandSeletorAdapter extends RecyclerView.Adapter<ProductBran
             @Override
             public void onResponse(Call<List<Brand>> call, Response<List<Brand>> response) {
                     if(response.code()==200){
-                        brand = response.body();
-                        notifyDataSetChanged();
+                        setData(response.body());
+                    }
+                    else{
+                        Err.s(context,"Error in fetching data");
+                        mProgressBar.setVisibility(View.GONE);
                     }
             }
             @Override
-            public void onFailure(Call<List<Brand>> call, Throwable t) {
+            public void onFailure(Call<List<Brand>> call, Throwable t){
                 t.printStackTrace();
+                mProgressBar.setVisibility(View.GONE);
+                Err.s(context , t.getMessage() );
             }
         });
     }
+
+    private void setData(List<Brand> mList){
+          this.brand  = mList;
+          notifyDataSetChanged();
+          mProgressBar.setVisibility(View.GONE);
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_brand_seletor_dialog_layout,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_single_selection_dialog_layout,parent,false);
         return new MyViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position){
-        holder.textView.setText(brand.get(position).getBrand());
-        holder.radioButton.setOnClickListener(new View.OnClickListener() {
+        holder.mTextView.setText(brand.get(position).getBrand());
+        holder.mRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if(!checked){
-                        checked=true;
-                        radiobutton=holder.radioButton;
+            public void onClick(View view) {
+                if(mSelectedRadioButton!=null){
+                    mSelectedRadioButton.setChecked(false);
                 }
-                else if(radiobutton == holder.radioButton){
-                        radiobutton=null;
-                        checked=false;
-                }
-                else{
-                        radiobutton.setChecked(false);
-                        radiobutton = holder.radioButton;
-                }
-                ans_brand = brand.get(position);
+                mSelectedRadioButton =  holder.mRadioButton;
+                selectedBrand        =  brand.get(position);
             }
         });
-
     }
+
     @Override
     public int getItemCount() {
         return brand.size();
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public  TextView textView ;
-        public  RadioButton radioButton;
+        public RadioButton  mRadioButton;
+        public TextView mTextView;
         public MyViewHolder(View itemView){
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.product_brand_dialog_textview);
-            radioButton = (RadioButton) itemView.findViewById(R.id.product_brand_dialog_radioButton);
+            mRadioButton = (RadioButton) itemView.findViewById(R.id.list_radio_button);
+            mTextView    = (TextView) itemView.findViewById(R.id.list_text_view);
         }
     }
+
+    @Nullable
     public  Brand getProductBrand(){
-        if(radiobutton==null)
-            return null;
-        else
-            return  ans_brand;
+            return  selectedBrand;
     }
 }

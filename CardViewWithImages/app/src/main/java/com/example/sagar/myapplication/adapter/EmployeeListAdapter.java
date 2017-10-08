@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.interfaces.EmployeeAdapterInterface;
 import com.example.sagar.myapplication.api.EmployeeApi;
-import com.example.sagar.myapplication.intent.employee.About_employee_activity;
+import com.example.sagar.myapplication.element.employee.About_employee_activity;
 import com.example.sagar.myapplication.modal.Employee;
 import com.example.sagar.myapplication.utill.Err;
 

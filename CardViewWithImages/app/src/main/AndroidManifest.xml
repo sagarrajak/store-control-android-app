@@ -12,39 +12,41 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".intent.login.login_activity">
+        <activity android:name=".element.login.login_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".intent.employee.Create_employee_activity" />
-        <activity android:name=".intent.product.Product_activity" />
-        <activity android:name=".intent.employee.About_employee_activity" />
-        <activity android:name=".intent.transaction.Transaction_activity" />
-        <activity android:name=".intent.about_store.About_store_activity" />
-        <activity android:name=".intent.employee.MainActivity" />
-        <activity android:name=".intent.login.Setting_activity" />
-        <activity android:name=".intent.Setting" />
-        <activity android:name=".intent.dashboard.DashBoard_activity" />
-        <activity android:name=".intent.product.About_product_activity" />
-        <activity android:name=".intent.product.Activity_create_product" />
-        <activity android:name=".intent.stock.Activity_about_stock" />
-        <activity android:name=".intent.work_profile.About_work_profile_activity" />
-        <activity android:name=".intent.stock.Manage_stock_activity" />
-        <activity android:name=".intent.stock.Acitivity_create_new_stock" />
-        <activity android:name=".intent.brand.Brand_products_details" />
-        <activity android:name=".intent.work_profile.Create_work_profle" />
-        <activity android:name=".intent.right.Create_new_right" />
-        <activity android:name=".intent.product_category.Create_new_product_category" />
-        <activity android:name=".intent.product_category.Product_by_category" />
-        <activity android:name=".intent.product_category.Product_category_details" />
-        <activity android:name=".intent.employee.Product_associated_with_retailer" />
-        <activity android:name=".intent.login.SignUpActivity" />
-        <activity android:name=".intent.retailer.Create_retailer_activity" />
-        <activity android:name=".intent.retailer.About_retailer_activity" />
-        <activity android:name=".intent.brand.Create_brand_activity"></activity>
+        <activity android:name=".element.employee.Create_employee_activity" />
+        <activity android:name=".element.product.Product_activity" />
+        <activity android:name=".element.employee.About_employee_activity" />
+        <activity android:name=".element.transaction.Transaction_activity" />
+        <activity android:name=".element.about_store.About_store_activity" />
+        <activity android:name=".element.employee.MainActivity" />
+        <activity android:name=".element.login.Setting_activity" />
+        <activity android:name=".element.Setting" />
+        <activity android:name=".element.dashboard.DashBoard_activity" />
+        <activity android:name=".element.product.About_product_activity" />
+        <activity android:name=".element.product.Activity_create_product" />
+        <activity android:name=".element.stock.activity.Activity_about_stock" />
+        <activity android:name=".element.work_profile.About_work_profile_activity" />
+        <activity android:name=".element.stock.activity.Stock_activity" />
+        <activity android:name=".element.stock.activity.Activity_create_new_stock" />
+        <activity android:name=".element.brand.Brand_products_details" />
+        <activity android:name=".element.work_profile.Create_work_profle" />
+        <activity android:name=".element.right.Create_new_right" />
+        <activity android:name=".element.product_category.Create_new_product_category" />
+        <activity android:name=".element.product_category.Product_by_category" />
+        <activity android:name=".element.product_category.Product_category_details" />
+        <activity android:name=".element.employee.Product_associated_with_retailer" />
+        <activity android:name=".element.login.Sign_up_activity" />
+        <activity android:name=".element.retailer.Create_retailer_activity" />
+        <activity android:name=".element.retailer.About_retailer_activity" />
+        <activity android:name=".element.brand.Create_brand_activity" />
+        <activity android:name=".element.stock.activity.Activity_filter_intent" />
+        <activity android:name=".element.stock.activity.About_stock_activity"></activity>
     </application>
 
 </manifest>

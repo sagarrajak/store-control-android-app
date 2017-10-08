@@ -1,12 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/create_stock_coordinate_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.sagar.myapplication.intent.stock.Acitivity_create_new_stock">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.sagar.myapplication.element.stock.activity.Activity_create_new_stock"
+            android:orientation="vertical">
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/toolbar">
+                </include>
+            </android.support.design.widget.AppBarLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/create_stock_name"
+                        android:hint="Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/create_stock_quantity_of_stock"
+                        android:hint="Quantity"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:id="@+id/create_stock_product"
+                        android:hint="Product:double tap to select"
+                        android:inputType="none"
+                        android:windowSoftInputMode="stateAlwaysHidden|stateHidden"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/create_stock_buyed_price"
+                        android:hint="Buyed price"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:id="@+id/create_stock_retailer"
+                        android:hint="Retailer:double tap to select"
+                        android:windowSoftInputMode="stateAlwaysHidden"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <EditText
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:id="@+id/create_stock_buyed_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Buyed date:tap to select"
+                        android:inputType="none" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/create_stock_selling_price"
+                        android:hint="Selling price"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:id="@+id/create_stock_details"
+                        android:hint="Details"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                <CheckBox
+                    android:layout_marginTop="1dp"
+                    android:text="Set minimum product notification."
+                    android:id="@+id/create_stock_checkbox_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/create_stock_mini_product_notification"
+                        android:layout_width="match_parent"
+                        android:inputType="number"
+                        android:layout_height="match_parent"
+                        android:hint="Minimam product for notification" />
+                </android.support.design.widget.TextInputLayout>
+                <CheckBox
+                    android:layout_marginTop="1dp"
+                    android:text="Do stock expire after some duration?"
+                    android:id="@+id/create_stock_checkbox_expire"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/create_stock_expire_date"
+                        android:windowSoftInputMode="stateAlwaysHidden"
+                        android:hint="Expire date:tap to select"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>
 
-</RelativeLayout>

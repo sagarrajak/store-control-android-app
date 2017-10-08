@@ -4,10 +4,6 @@ import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
-
-/**
- * Created by SAGAR on 12/24/2016.
- */
 public class MyDateSetListener implements DatePickerDialog.OnDateSetListener{
 
     Calendar calendar = Calendar.getInstance();
