@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 
 import com.example.sagar.myapplication.CustumProgressDialog;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.ProductCategoryAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductCategoryAdapter;
 import com.example.sagar.myapplication.api.ProductTypeApi;
 import com.example.sagar.myapplication.element.product_category.Create_new_product_category;
 

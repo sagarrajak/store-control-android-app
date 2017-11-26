@@ -4,50 +4,45 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Employee implements Serializable{
-    public  Employee(){}
-    public Employee(String name, String mail, String  image) {
-        this.name = name;
-        this.mail = mail;
-        this.image = image;
-    }
-
-    public  Employee( String name , String mail , String image , String   dateOfBirth , String  dateOfJoin ){
-        this.name = name ;
-        this.mail = mail;
-        this.image = image;
-        this.dateOfJoin   =  dateOfJoin;
-        this.dateOfBirth  =  dateOfBirth;
-        this.phoneNumber="182892892389";
-    }
-
 
     @SerializedName("_id")
     @Expose
     private String id;
     @SerializedName("name")
     @Expose
-    private String name;
+    private Name name;
     @SerializedName("date_of_birth")
     @Expose
-    private String dateOfBirth;
+    private Date dateOfBirth;
     @SerializedName("mail")
     @Expose
-    private String mail;
+    private Mail mail;
     @SerializedName("pan_num")
     @Expose
     private String panNum;
-
-    @SerializedName("phone_number")
+    @SerializedName("phone_num")
     @Expose
-    private String  phoneNumber ;
+    private PhoneNum  phoneNumber ;
     @SerializedName("date_of_join")
     @Expose
-    private String  dateOfJoin;
+    private Date dateOfJoin;
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("Address")
+    @Expose
+    private Address mAddress;
+
+    public Address getAddress() {
+        return mAddress;
+    }
+
+    public void setAddress(Address mAddress) {
+        this.mAddress = mAddress;
+    }
 
     public String getId() {
         return id;
@@ -57,27 +52,27 @@ public class Employee implements Serializable{
         this.id = id;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
-    public String  getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String  dateOfBirth) {
+    public void setDateOfBirth(Date  dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getMail() {
+    public Mail getMail() {
         return mail;
     }
 
-    public void setMail(String mail) {
+    public void setMail(Mail mail) {
         this.mail = mail;
     }
 
@@ -89,19 +84,19 @@ public class Employee implements Serializable{
         this.panNum = panNum;
     }
 
-    public String getPhoneNumber() {
+    public PhoneNum getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(PhoneNum phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String  getDateOfJoin() {
+    public Date  getDateOfJoin() {
         return dateOfJoin;
     }
 
-    public void setDateOfJoin(String   dateOfJoin) {
+    public void setDateOfJoin(Date   dateOfJoin) {
         this.dateOfJoin = dateOfJoin;
     }
 

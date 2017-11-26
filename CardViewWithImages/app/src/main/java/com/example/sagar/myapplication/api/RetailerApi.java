@@ -1,6 +1,7 @@
 package com.example.sagar.myapplication.api;
 
 import android.app.Dialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.example.sagar.myapplication.utill.Err;
 import com.example.sagar.myapplication.utill.Token;
@@ -35,7 +36,6 @@ public class RetailerApi{
                     if(response.code()==200){
                             mRetailerAdapterInterface.addNewReatilerList(response.body());
                             dialog.dismiss();
-                            Err.e("listed retailer");
                     }
                     else{
                             Err.e("Error in getting employee");
@@ -48,6 +48,27 @@ public class RetailerApi{
                     dialog.dismiss();
                 }
             });
+    }
+    public void listRetailer(final SwipeRefreshLayout mSwipeToRefreshLayout){
+        mRetailerInterface.getRetailer(
+                Token.token
+        ).enqueue(new Callback<List<Retailer>>() {
+            @Override
+            public void onResponse(Call<List<Retailer>> call, Response<List<Retailer>> response) {
+                if(response.code()==200){
+                    mRetailerAdapterInterface.addNewReatilerList(response.body());
+                }
+                else{
+                    Err.e("Error in getting employee");
+                }
+                mSwipeToRefreshLayout.setRefreshing(false);
+            }
+            @Override
+            public void onFailure(Call<List<Retailer>> call, Throwable t) {
+                t.printStackTrace();
+                mSwipeToRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     public void uploadRetailerImage( MultipartBody.Part bodypart , final  Retailer  retailer , final Dialog dialog ){
@@ -92,17 +113,17 @@ public class RetailerApi{
         });
     }
 
-    public void createNewRetailer(final Dialog dialog , final Retailer retailer , String imageid ){
+    public void createNewRetailer(final Dialog dialog , final Retailer retailer , String imageId ){
                   mRetailerInterface.createRetailer(
-                        retailer.getName() , retailer.getPhoneNum() , retailer.getPhoneNum() ,retailer.getAddress() , imageid , Token.token
+                      retailer , Token.token
                   ).enqueue(new Callback<Data>(){
                       @Override
                       public void onResponse(Call<Data> call, Response<Data> response) {
                           if(response.code()==200){
-                            listRetailer(dialog);
+                              listRetailer(dialog);
                               Err.e("Retailer created!");
                           }
-                          else {
+                          else{
                               dialog.dismiss();
                               Err.e("Failed to create retailer!");
                           }
@@ -116,7 +137,8 @@ public class RetailerApi{
     }
 
     public void deleteRetailer(final String id,final Dialog  dialog){
-        mRetailerInterface.deleteRetailer(  id , Token.token  ).enqueue(new Callback<Data>() {
+        mRetailerInterface.deleteRetailer(  id , Token.token  ).
+                enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
                 if(response.code()==200){

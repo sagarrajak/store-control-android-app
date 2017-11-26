@@ -9,6 +9,7 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -27,14 +28,9 @@ public interface ApiProductInterface{
             @Header("token") String token
     );
 
-    @FormUrlEncoded
     @POST("api/product/")
     Call<Data>  createProduct(
-            @Field("name")  String name,
-            @Field("brand")  String brand,
-            @Field("type")   List<String>  type,
-            @Field("detail") String details,
-            @Field("price")  String price ,
+            @Body Product product,
             @Header("token") String token
     );
 
@@ -70,7 +66,6 @@ public interface ApiProductInterface{
             @Path("id") String id
     );
 
-
     @GET("api/routes/product")
     Call<List<ProductPopulated>> getProductPopulatedList(
             @Header("token") String token
@@ -87,7 +82,6 @@ public interface ApiProductInterface{
             @Header("token") String token,
             @Path("id") String CategoryId
     );
-
 
     @DELETE("api/routes/remove-category-from-product/{product_id}/{category_id}")
     Call<Data> deleteCategoryFromPrticularProduct(

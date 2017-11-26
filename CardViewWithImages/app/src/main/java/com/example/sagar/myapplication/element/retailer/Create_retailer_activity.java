@@ -3,15 +3,9 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,71 +16,243 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
+import com.example.sagar.myapplication.Config;
+import com.example.sagar.myapplication.CustumProgressDialog;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.RetailerGridAdapter;
+import com.example.sagar.myapplication.adapter.interfaces.RetailerAdapterInterface;
+import com.example.sagar.myapplication.adapter.retailer.RetailerGridAdapter;
+import com.example.sagar.myapplication.adapter.retailer.RetailerListAdapter;
 import com.example.sagar.myapplication.api.RetailerApi;
+import com.example.sagar.myapplication.modal.Address;
+import com.example.sagar.myapplication.modal.Mail;
+import com.example.sagar.myapplication.modal.Name;
+import com.example.sagar.myapplication.modal.PhoneNum;
 import com.example.sagar.myapplication.modal.Retailer;
-import com.example.sagar.myapplication.utill.Err;
+import com.example.sagar.myapplication.utill.ui.BottomSheetImage;
+import com.example.sagar.myapplication.utill.ui.SpinnerHelper;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class Create_retailer_activity extends AppCompatActivity {
+public class Create_retailer_activity extends AppCompatActivity  {
 
-    private EditText name, mail , phone_num,  address ;
-    private ImageView imageView;
-    private FloatingActionButton mFloatingActionButton;
+    // View associated with the  name
+    @BindView(R.id.add_retailer_name) EditText mNameFirstName ;
+    @BindView(R.id.add_retailer_middle_name) EditText mNameMiddle;
+    @BindView(R.id.add_retailer_last_name) EditText  mNameLast;
+    @BindView(R.id.add_retailer_family_name) EditText mNameFamily;
+    @BindView(R.id.add_retailer_suffix) EditText mNameSuffix;
+    @BindView(R.id.add_retailer_name_view_anchor) ImageView mNameViewAnchor;
+    private  Boolean isHiddenName;
+
+
+    //View associate with address
+    @BindView(R.id.add_retailer_address) EditText mAddress;
+    @BindView(R.id.add_retailer_street) EditText  mAddressStreet;
+    @BindView(R.id.add_retailer_post_office) EditText mAddressPostOffice;
+    @BindView(R.id.add_retailer_neighbourhood) EditText mAddressNeighbourHood;
+    @BindView(R.id.add_retailer_city) EditText mAddressCity;
+    @BindView(R.id.add_retailer_zipcode) EditText mAddressZipCode;
+    @BindView(R.id.add_retailer_state) EditText mAddressState;
+    @BindView(R.id.add_retailer_address_view_anchor) ImageView mAddressViewAnchor;
+    private Boolean isHiddenAddress;
+
+    //View Elements for mail
+    @BindView(R.id.add_retailer_email_address) EditText mEmailAddress;
+    @BindView(R.id.add_retailer_email_spinner) Spinner  mEmailTypeSpinner;
+    private String mSelectedEmailTypeString;
+
+    //View Elements for phone number
+    @BindView(R.id.add_retailer_phone_num) EditText mPhoneNumber;
+    @BindView(R.id.add_retailer_phone_num_spinner) Spinner mPhoneNumberTypeSpinner;
+    private String mSelectedPhoneNumberTypeString;
+
+    //set up floating action button
+    @BindView(R.id.add_retailer_floating_action_bottom) FloatingActionButton mFloatingActionButton;
+
+    //set Toolbar
+    @BindView(R.id.add_retailer_toolbar) Toolbar mToolbar;
+
+    @BindView(R.id.add_retailer_picture) ImageView mRetailerImageView;
+
     private BottomSheetDialog mBottomSheetDialog;
-    private File file;
-    private RetailerGridAdapter mRetailerGridAdapter;
     private RetailerApi mRetailerApi;
+    private RetailerAdapterInterface mRetailerAdapterInterface;
+    private Boolean isListView;
+    private Uri mSelectedImageUri;
+    private BottomSheetImage mBottomSheetImage;
+    private SpinnerHelper mEmailTypeHelper,mPhoneNumberTypeHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_create_retailer);
+            ButterKnife.bind(this);
             setToolbar();
             setUiElement();
             setUpOnClickListener();
+            setPhoneNumberTypeSpinner();
+            setEmailTypeSpinner();
+            setNameAnchor();
+            setAddressAnchor();
     }
 
     private void setUiElement(){
-            name                  = (EditText)  findViewById(R.id.create_retailer_name);
-            mail                  = (EditText)  findViewById(R.id.create_retailer_mail);
-            phone_num             = (EditText)  findViewById(R.id.create_retailer_phone_num);
-            address               = (EditText)  findViewById(R.id.create_retailer_address);
-            imageView             = (ImageView) findViewById(R.id.create_retailer_image_view);
-            mFloatingActionButton = (FloatingActionButton) findViewById(R.id.create_retailer_button_float);
-            mRetailerGridAdapter  = new RetailerGridAdapter(getApplicationContext());
-            mRetailerApi          = new RetailerApi(mRetailerGridAdapter);
+            isListView =  getIntent().getBooleanExtra("isListView",false);
+            if(isListView)
+                mRetailerAdapterInterface = RetailerListAdapter.getRetailerListAdapter(Create_retailer_activity.this);
+            else
+                mRetailerAdapterInterface = RetailerGridAdapter.getRetailerGridAdapter(Create_retailer_activity.this);
+            isHiddenAddress =  true;
+            isHiddenName    =  true;
+            mRetailerApi    = RetailerApi.getmReteilerApi(mRetailerAdapterInterface);
+            mBottomSheetImage = new BottomSheetImage(this, new BottomSheetImage.BottomSheetHelper() {
+                @Override
+                public void resetImageUri() {
+                    mBottomSheetImage.hideDeleteDialog();
+                    mSelectedImageUri = null;
+                }
+            });
     }
 
     private void setToolbar(){
-            Toolbar toolbar = (Toolbar) findViewById(R.id.activity_create_retailer_toolbar);
-            setSupportActionBar(toolbar);
+            setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             setTitle("Create Retailer");
     }
 
-    public String getPath(Uri uri){
-            String res = null;
-            String[] projection = { MediaStore.Images.Media.DATA };
-            Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-            if(cursor.moveToFirst()){;
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                res = cursor.getString(column_index);
+    private void setNameAnchor(){
+        mNameViewAnchor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isHiddenName){
+                    mNameViewAnchor.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+                    mNameFamily.setVisibility(View.VISIBLE);
+                    mNameMiddle.setVisibility(View.VISIBLE);
+                    mNameSuffix.setVisibility(View.VISIBLE);
+                }
+                else{
+                    mNameViewAnchor.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+                    mNameFamily.setVisibility(View.GONE);
+                    mNameMiddle.setVisibility(View.GONE);
+                    mNameSuffix.setVisibility(View.GONE);
+                }
+                isHiddenName=!isHiddenName;
             }
-            cursor.close();
-            return res;
+        });
+        if(isHiddenName){
+            mNameViewAnchor.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+            mNameFamily.setVisibility(View.GONE);
+            mNameMiddle.setVisibility(View.GONE);
+            mNameSuffix.setVisibility(View.GONE);
+        }
+        else{
+            mNameViewAnchor.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+            mNameFamily.setVisibility(View.VISIBLE);
+            mNameMiddle.setVisibility(View.VISIBLE);
+            mNameSuffix.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setAddressAnchor(){
+        mAddressViewAnchor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isHiddenAddress){
+                    mAddressViewAnchor.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+                    mAddressStreet.setVisibility(View.VISIBLE);
+                    mAddressPostOffice.setVisibility(View.VISIBLE);
+                    mAddressNeighbourHood.setVisibility(View.VISIBLE);
+                }
+                else{
+                    mAddressViewAnchor.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+                    mAddressStreet.setVisibility(View.GONE);
+                    mAddressPostOffice.setVisibility(View.GONE);
+                    mAddressNeighbourHood.setVisibility(View.GONE);
+                }
+                isHiddenAddress = !isHiddenAddress;
+            }
+        });
+        if(isHiddenAddress){
+            mAddressViewAnchor.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+            mAddressStreet.setVisibility(View.GONE);
+            mAddressPostOffice.setVisibility(View.GONE);
+            mAddressNeighbourHood.setVisibility(View.GONE);
+        }
+        else{
+            mAddressViewAnchor.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+            mAddressStreet.setVisibility(View.VISIBLE);
+            mAddressPostOffice.setVisibility(View.VISIBLE);
+            mAddressNeighbourHood.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    private  void setName(Retailer mRetailer){
+        Name nameObj = new Name();
+        nameObj.setName(mNameFirstName.getText().toString());
+        nameObj.setName(mNameLast.getText().toString());
+        if(!isHiddenName){
+            nameObj.setMiddle(mNameMiddle.getText().toString());
+            nameObj.setFamilyName(mNameSuffix.getText().toString());
+            nameObj.setFamilyName(mNameFamily.getText().toString());
+        }
+        mRetailer.setName(nameObj);
+    }
+
+    private void setAddress(Retailer mRetailer){
+        Address addressObj = new Address();
+        addressObj.setAddress(mAddress.getText().toString());
+        addressObj.setZipcode(mAddressZipCode.getText().toString());
+        addressObj.setState(mAddressState.getText().toString());
+        addressObj.setCity(mAddressCity.getText().toString());
+        if(!isHiddenAddress){
+            addressObj.setStreet(mAddressStreet.getText().toString());
+            addressObj.setPoBox(mAddressPostOffice.getText().toString());
+            addressObj.setNeighborhood(mAddressNeighbourHood.getText().toString());
+        }
+        mRetailer.setAddress(addressObj);
+    }
+
+    private void setPhoneNumberTypeSpinner(){
+        mPhoneNumberTypeHelper = new SpinnerHelper(this,R.array.phone_number_type,mPhoneNumberTypeSpinner,new SpinnerHelper.ItemSelectListener(){
+            @Override
+            public void selectedString(String str) {
+                mSelectedPhoneNumberTypeString = str;
+            }
+        });
+    }
+
+    private void setEmailTypeSpinner(){
+         mEmailTypeHelper = new SpinnerHelper(this, R.array.email_type, mEmailTypeSpinner, new SpinnerHelper.ItemSelectListener() {
+             @Override
+             public void selectedString(String str) {
+                mSelectedEmailTypeString = str;
+             }
+         });
+    }
+
+    private  void setEmailAddress(Retailer mRetailer){
+        Mail mailObj = new Mail();
+        mailObj.setValue(mEmailAddress.getText().toString());
+        mailObj.setSub(mSelectedEmailTypeString);
+        mRetailer.setMail(mailObj);
+    }
+
+    private void setPhoneNumber(Retailer mRetailer){
+        PhoneNum phoneNumObj = new PhoneNum();
+        phoneNumObj.setValue(mPhoneNumber.getText().toString());
+        phoneNumObj.setSub(mSelectedPhoneNumberTypeString);
+        mRetailer.setPhoneNum(phoneNumObj);
     }
 
     @Override
@@ -99,44 +265,25 @@ public class Create_retailer_activity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
              super.onActivityResult(requestCode, resultCode, data);
              switch (requestCode){
-                 case 12345 :
-                     if(resultCode == RESULT_OK ){
-                         try{
-                             checkPermission();
-                             Uri imageUri = data.getData();
-                             file  = new File(getPath(imageUri));
-                             final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                             imageView.setImageBitmap(selectedImage);
-
-                         }catch (FileNotFoundException e) {
-                             e.printStackTrace();
-                         }
+                 case  CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE :
+                     CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                     if (resultCode == RESULT_OK && result.getUri() != null){
+                         mSelectedImageUri = result.getUri();
+                         mRetailerImageView.setImageURI(mSelectedImageUri);
+                         mBottomSheetImage.showDeleteDialog();
+                     } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                         Exception error = result.getError();
+                         mSelectedImageUri = null;
+                         mBottomSheetImage.hideDeleteDialog();
                      }
                      break;
-                 case 1234 :
-                     if(resultCode == RESULT_OK){
-                          Bitmap  photo = (Bitmap) data.getExtras().get("data");
-                          imageView.setImageBitmap(photo);
-                           if(photo!=null) {
-                               file = new File(getApplicationContext().getCacheDir(), "tem");
-                               try {
-                                   FileOutputStream fo = new FileOutputStream(file);
-                                   photo.compress(Bitmap.CompressFormat.PNG, 0, fo);
-                                   fo.flush();
-                                   fo.close();
-                               } catch (FileNotFoundException e) {
-                                   e.printStackTrace();
-                                   Err.s(getApplicationContext() , "Image not found");
-                               } catch (IOException e) {
-                                   Err.s(getApplicationContext() , "OutPut stream exception");
-                                   e.printStackTrace();
-                               }
-                           }
-                           else{
-                                    Err.s( getApplicationContext() ,"Image not captured");
-                           }
+                 case  Config.SELECT_IMAGE_FROM_STORAGE :
+                     if(resultCode == RESULT_OK ){
+                         mSelectedImageUri = data.getData();
+                         CropImage.activity(mSelectedImageUri)
+                                 .start(Create_retailer_activity.this);
                      }
+                     break;
              }
     }
 
@@ -144,7 +291,7 @@ public class Create_retailer_activity extends AppCompatActivity {
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 createBottomSheet();
+                mBottomSheetImage.showBottomSheet();
             }
         });
     }
@@ -160,62 +307,23 @@ public class Create_retailer_activity extends AppCompatActivity {
     }
 
 
-    // function to create bottom sheet for setting image,
-    private void createBottomSheet(){
-            checkPermission();
-            mBottomSheetDialog  = new BottomSheetDialog(this);
-            mBottomSheetDialog.setTitle("Profile picture");
-            View view = getLayoutInflater().inflate( R.layout.bottom_sheet_image_select_dilaog , null );
-            mBottomSheetDialog.setContentView(view);
-            view.findViewById(R.id.bottom_sheet_gallery).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mBottomSheetDialog.dismiss();
-                    Intent intent = new Intent(Intent.ACTION_PICK , MediaStore.Images.Media.INTERNAL_CONTENT_URI  );
-                    startActivityForResult(intent,12345);
-                }
-            });
-            view.findViewById(R.id.bottom_sheet_delete).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                    //// TODO: 18/8/17  set file to null and stuf
-                }
-            });
-            view.findViewById(R.id.bottom_sheet_camera).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                    mBottomSheetDialog.dismiss();
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent,1234);
-                }
-            });
-            mBottomSheetDialog.show();
-    }
-
-
-    private ProgressDialog createProgressDialog(){
-            ProgressDialog dialog = new ProgressDialog(this);
-            dialog.setIndeterminate(true);
-            dialog.setCanceledOnTouchOutside(false);
-            return  dialog;
-    }
-
     private Retailer getRetailer(){
-            Retailer retailer = new Retailer();
-            retailer.setAddress(address.getText().toString());
-            retailer.setName(name.getText().toString());
-            retailer.setMail(mail.getText().toString());
-            return  retailer;
+            Retailer mRetailer = new Retailer();
+            setPhoneNumber(mRetailer);
+            setEmailAddress(mRetailer);
+            setName(mRetailer);
+            setAddress(mRetailer);
+            return  mRetailer;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.ok:
-                ProgressDialog dialog = createProgressDialog();
+                ProgressDialog dialog = CustumProgressDialog.getProgressDialog(Create_retailer_activity.this);
                 if(checkError()){
                     dialog.show();
-                    Err.s(this,"incoming");
+                    File  file  = new File(mSelectedImageUri.getPath());
                     RequestBody reqfile  =  RequestBody.create(MediaType.parse("image/*"),file);
                     MultipartBody.Part body = MultipartBody.Part.createFormData("upload",file.getName(),reqfile);
                     mRetailerApi.uploadRetailerImage( body , getRetailer() , dialog );
@@ -230,23 +338,24 @@ public class Create_retailer_activity extends AppCompatActivity {
 
     private boolean checkError(){
     //        // TODO: 1/8/2017 to check error in filed
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_create_retailer);
-            if( file==null ){
-                Snackbar.make( coordinatorLayout , "Select image" , Snackbar.LENGTH_LONG).show();
-                return  false;
-            }
-            else if(name.getText().toString().isEmpty()){
-                Snackbar.make( coordinatorLayout , "Input  name" , Snackbar.LENGTH_LONG).show();
-                return  false;
-            }
-            else if( mail.getText().toString().isEmpty() ){
-                Snackbar.make( coordinatorLayout , "Fill mail adress" , Snackbar.LENGTH_LONG).show();
-                return  false;
-            }
-            else if( phone_num.getText().toString().isEmpty() ){
-                Snackbar.make( coordinatorLayout , "Fill phone number" , Snackbar.LENGTH_LONG).show();
-                return  false;
-            }
+            //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_create_retailer);
+//            if( file==null ){
+//                Snackbar.make( coordinatorLayout , "Select image" , Snackbar.LENGTH_LONG).show();
+//                return  false;
+//            }
+//            else if(name.getText().toString().isEmpty()){
+//                Snackbar.make( coordinatorLayout , "Input  name" , Snackbar.LENGTH_LONG).show();
+//                return  false;
+//            }
+//            else if( mail.getText().toString().isEmpty() ){
+//                Snackbar.make( coordinatorLayout , "Fill mail adress" , Snackbar.LENGTH_LONG).show();
+//                return  false;
+//            }
+//            else if( phone_num.getText().toString().isEmpty() ){
+//                Snackbar.make( coordinatorLayout , "Fill phone number" , Snackbar.LENGTH_LONG).show();
+//                return  false;
+//            }
             return  true;
     }
+
 }

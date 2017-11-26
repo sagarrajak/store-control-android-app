@@ -18,7 +18,7 @@ import com.example.sagar.myapplication.CustumProgressDialog;
 import com.example.sagar.myapplication.api.BrandApi;
 import com.example.sagar.myapplication.element.brand.Create_brand_activity;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.BrandAdapter;
+import com.example.sagar.myapplication.adapter.brand.BrandAdapter;
 
 public class Brand_fragment extends Fragment{
 

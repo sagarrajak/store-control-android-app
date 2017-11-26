@@ -7,9 +7,16 @@
         android:icon="@drawable/ic_tune_black_24dp"
         android:title="filter" />
     <item
+        app:showAsAction="always"
+        android:id="@+id/stock_menu_sort"
+        android:icon="@drawable/ic_sort_black_24dp"
+        android:title="sort"
+        />
+    <item
         app:showAsAction="ifRoom"
         android:title="Add stock"
         android:id="@+id/stock_menu_add_new_stock"
         android:icon="@drawable/ic_add_black_24dp"
         />
+
 </menu>

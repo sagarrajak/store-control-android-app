@@ -12,9 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.sagar.myapplication.api.ProductApi;
-import com.example.sagar.myapplication.utill.NavigationDrawer;
+import com.example.sagar.myapplication.utill.ui.NavigationDrawer;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.ProductGridAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductGridAdapter;
 import com.example.sagar.myapplication.element.product.fragment.Brand_fragment;
 import com.example.sagar.myapplication.element.product_category.fragment.Category_fragment;
 import com.example.sagar.myapplication.element.product.fragment.Product_fragment;

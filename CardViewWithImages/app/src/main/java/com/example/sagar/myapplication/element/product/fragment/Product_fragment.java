@@ -19,11 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sagar.myapplication.CustumProgressDialog;
-import com.example.sagar.myapplication.adapter.ProductListAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductListAdapter;
 import com.example.sagar.myapplication.api.ProductApi;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.utill.SpaceItemDecoration;
-import com.example.sagar.myapplication.adapter.ProductGridAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductGridAdapter;
 import com.example.sagar.myapplication.element.product.Activity_create_product;
 
 public class Product_fragment extends Fragment{

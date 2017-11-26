@@ -1,0 +1,16 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sagar.myapplication.element.transaction.fragment.Check_out_items_fragment">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/check_out_customer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select custumer" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

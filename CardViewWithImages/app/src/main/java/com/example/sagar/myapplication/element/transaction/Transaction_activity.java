@@ -14,7 +14,7 @@ import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.element.transaction.fragment.Check_in_stocks_fragment;
 import com.example.sagar.myapplication.element.transaction.fragment.Check_out_items_fragment;
 import com.example.sagar.myapplication.element.transaction.fragment.Transaction_history_fragment;
-import com.example.sagar.myapplication.utill.NavigationDrawer;
+import com.example.sagar.myapplication.utill.ui.NavigationDrawer;
 
 import java.util.ArrayList;
 

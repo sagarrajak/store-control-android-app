@@ -24,9 +24,10 @@ public class login_activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         if( !getApplicationContext().getSharedPreferences("SETTING" , Context.MODE_PRIVATE).getString("token" ,"").isEmpty()  ){
-            Token.setToken(getApplicationContext().getSharedPreferences("SETTING" , Context.MODE_PRIVATE).getString("token" ,""));
+            Token.setToken(getApplicationContext().getSharedPreferences( "SETTING" , Context.MODE_PRIVATE).getString("token" ,""));
             login();
         }
         setContentView(R.layout.activity_login_activity);
@@ -55,10 +56,13 @@ public class login_activity extends AppCompatActivity {
                 }
             }
         });
+
     }
+
     private void login(){
         Intent inten = new Intent(getApplicationContext() , MainActivity.class );
         startActivity(inten);
         finish();
     }
+
 }

@@ -2,13 +2,11 @@ package com.example.sagar.myapplication.api;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.DialogFragment;
 
+import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.StockAdapter;
 import com.example.sagar.myapplication.api.interfaces.ApiStockInterface;
 import com.example.sagar.myapplication.modal.Data;
-import com.example.sagar.myapplication.modal.Errors;
 import com.example.sagar.myapplication.modal.stock.Stock;
 import com.example.sagar.myapplication.modal.stock.StockPopulated;
 import com.example.sagar.myapplication.utill.Err;
@@ -83,11 +81,33 @@ public class StockApi{
         });
     }
 
-
-    public void deleteStock( Dialog dialog , String id  ){
-
-
+    public void sortStock(int key , Dialog dialog ){
+        dialog.dismiss();
+        switch (key){
+            case  R.id.bottom_sheet_stock_name:
+                Err.s(mContext,"name");
+                break;
+            case  R.id.bottom_sheet_stock_expire_date:
+                Err.s(mContext,"expire date");
+                break;
+            case R.id.bottom_sheet_stock_created_date:
+                Err.s(mContext,"created date");
+                break;
+            case R.id.bottom_sheet_stock_selling_price:
+                Err.s(mContext,"selling price");
+                break;
+            case R.id.bottom_sheet_stock_buyed_price:
+                Err.s(mContext,"buyed price");
+                break;
+            case R.id.bottom_sheet_stock_profit_per_item:
+                Err.s(mContext,"profit per item");
+                break;
+            case  R.id.bottom_sheet_stock_quantity:
+                Err.s(mContext,"stock quantity");
+                break;
+        }
     }
+
 }
 
 

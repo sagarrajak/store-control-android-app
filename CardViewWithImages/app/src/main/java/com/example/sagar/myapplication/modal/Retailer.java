@@ -1,58 +1,63 @@
 
 package com.example.sagar.myapplication.modal;
 
+import android.graphics.drawable.AnimationDrawable;
+import android.provider.ContactsContract;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Retailer{
+import java.io.Serializable;
+
+public class Retailer implements Serializable{
     @SerializedName("_id")
     @Expose
     private String id;
     @SerializedName("name")
     @Expose
-    private String name;
+    private Name name;
     @SerializedName("phone_num")
     @Expose
-    private String  phoneNum;
+    private PhoneNum  phoneNum;
     @SerializedName("mail")
     @Expose
-    private String mail;
+    private Mail mail;
     @SerializedName("address")
     @Expose
-    private String address;
+    private Address address;
     @SerializedName("image")
     @Expose
     private String image;
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
-    public String  getPhoneNum() {
+    public PhoneNum getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(String  phoneNum) {
+    public void setPhoneNum(PhoneNum phoneNum) {
         this.phoneNum = phoneNum;
     }
 
-    public String getMail() {
+    public Mail getMail() {
         return mail;
     }
 
-    public void setMail(String mail) {
+    public void setMail(Mail mail) {
         this.mail = mail;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

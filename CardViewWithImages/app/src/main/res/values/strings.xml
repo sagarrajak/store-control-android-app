@@ -8,5 +8,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="share_prefrece">key_value</string>
-
+    <string-array name="phone_number_type">
+        <item>Mobile</item>
+        <item>Home</item>
+        <item>Official</item>
+        <item>Fax</item>
+        <item>Personal</item>
+        <item>Work</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="email_type">
+        <item>Work</item>
+        <item>Home</item>
+        <item>Personal</item>
+        <item>Other</item>
+    </string-array>
 </resources>

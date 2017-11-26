@@ -5,5 +5,6 @@
     <color name="colorAccent">#000000</color>
     <color name="Transparent">#00000000</color>
     <color name="Transparent80">#80000000</color>
+    <color name="deepred">#f75757</color>
 
 </resources>

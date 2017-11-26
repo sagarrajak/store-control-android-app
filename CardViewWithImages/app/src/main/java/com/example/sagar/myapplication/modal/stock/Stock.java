@@ -2,6 +2,9 @@ package com.example.sagar.myapplication.modal.stock;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Date;
+
 public class Stock {
     @SerializedName("_id")
     @Expose
@@ -23,7 +26,7 @@ public class Stock {
     private Integer sellingPrice;
     @SerializedName("buyed_date")
     @Expose
-    private String buyedDate;
+    private Date buyedDate;
     @SerializedName("notification")
     @Expose
     private Notification notification;
@@ -101,11 +104,11 @@ public class Stock {
         this.sellingPrice = sellingPrice;
     }
 
-    public String getBuyedDate() {
+    public Date getBuyedDate() {
         return buyedDate;
     }
 
-    public void setBuyedDate(String buyedDate) {
+    public void setBuyedDate(Date buyedDate) {
         this.buyedDate = buyedDate;
     }
 

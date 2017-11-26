@@ -3,11 +3,10 @@ package com.example.sagar.myapplication.api;
 import android.app.Dialog;
 import android.support.v4.widget.SwipeRefreshLayout;
 
-import com.example.sagar.myapplication.adapter.interfaces.ProductAdapterInterface;
 import com.example.sagar.myapplication.modal.Product;
 import com.example.sagar.myapplication.utill.Err;
 import com.example.sagar.myapplication.utill.Token;
-import com.example.sagar.myapplication.adapter.ProductCategoryAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductCategoryAdapter;
 import com.example.sagar.myapplication.api.interfaces.ApiProductTypeInterface;
 import com.example.sagar.myapplication.modal.Data;
 import com.example.sagar.myapplication.modal.ProductType;

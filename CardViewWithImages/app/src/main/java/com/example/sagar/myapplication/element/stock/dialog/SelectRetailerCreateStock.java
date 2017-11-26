@@ -56,7 +56,7 @@ public class SelectRetailerCreateStock extends RecyclerView.Adapter<SelectRetail
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position){
 
-        holder.mTextView.setText(mRetailer.get(position).getName());
+        holder.mTextView.setText(mRetailer.get(position).getName().getName() + " "+mRetailer.get(position).getName().getLast());
 
         if(mSelectedRetailer!=null && Objects.equals(mSelectedRetailer.getId(), mRetailer.get(position).getId())) {
             // when previously button was selected

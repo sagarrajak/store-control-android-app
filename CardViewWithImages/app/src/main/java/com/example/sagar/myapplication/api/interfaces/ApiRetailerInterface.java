@@ -7,6 +7,7 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -17,9 +18,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
-/**
- * Created by SAGAR on 1/21/2017.
- */
 public interface ApiRetailerInterface {
 
     @GET("api/retailer")
@@ -27,14 +25,9 @@ public interface ApiRetailerInterface {
             @Header("token") String token
     );
 
-    @FormUrlEncoded
     @POST("api/retailer")
     Call<Data> createRetailer(
-        @Field("name") String name  ,
-        @Field("phone_num") String phone_num ,
-        @Field("mail") String mail ,
-        @Field("address") String address ,
-        @Field("image") String image ,
+        @Body Retailer mRetailer,
         @Header("token") String token
     );
 

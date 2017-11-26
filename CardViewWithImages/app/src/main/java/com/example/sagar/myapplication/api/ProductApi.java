@@ -25,23 +25,17 @@ public class ProductApi{
     private ApiProductInterface mApiProductInterface;
 
     public  ProductApi( ProductAdapterInterface mProductGridAdapter){
-
         this.mProductAdapterInterface = mProductGridAdapter;
         this.mApiProductInterface = ApiClient.getClient().create(ApiProductInterface.class);
-
     }
 
     public void addNewAdapter(ProductAdapterInterface mProductAdapterInterface){
-
         this.mProductAdapterInterface = mProductAdapterInterface;
-
     }
 
     public  void  addProduct(Product mProduct , final Dialog dialog , String  message ){
-
-
         mApiProductInterface.createProduct(
-              mProduct.getName() , mProduct.getBrand() , mProduct.getType() , mProduct.getDetail() , mProduct.getPrice() , Token.token
+              mProduct , Token.token
         ).enqueue(new Callback<Data>() {
             @Override
             public void onResponse( Call<Data> call  , Response<Data> response  ){
@@ -49,8 +43,8 @@ public class ProductApi{
                     listProduct(dialog);
                 }
                 else{
-                   Err.e("Not able to add product");
-                   dialog.dismiss();
+                    Err.e("Not able to add product");
+                    dialog.dismiss();
                 }
             }
             @Override
@@ -59,39 +53,35 @@ public class ProductApi{
                     Err.e("Error in stack adding product");
             }
         });
-
-
     }
 
     public  void  deleteProduct(String id , final  Dialog dialog){
-
-            mApiProductInterface.deleteProduct( id , Token.token )
-                        .enqueue(new Callback<Data>() {
-                            @Override
-                            public void onResponse(Call<Data> call, Response<Data> response){
-                                    if(response.code() == 200){
-                                        listProduct(dialog);
-                                    }else{
-                                       Err.e("Failed to delete");
-                                        dialog.dismiss();
-                                    }
-                            }
-                            @Override
-                            public void onFailure(Call<Data> call,Throwable t){
-                                    t.printStackTrace();
-                                    Err.e("failed to load to product");
-                            }
-                        });
+        mApiProductInterface.deleteProduct( id , Token.token )
+                    .enqueue(new Callback<Data>() {
+                        @Override
+                        public void onResponse(Call<Data> call, Response<Data> response){
+                                if(response.code() == 200){
+                                    listProduct(dialog);
+                                }else{
+                                   Err.e("Failed to delete");
+                                    dialog.dismiss();
+                                }
+                        }
+                        @Override
+                        public void onFailure(Call<Data> call,Throwable t){
+                                t.printStackTrace();
+                                Err.e("failed to load to product");
+                        }
+                    });
 
     }
 
     public  void  addImage(MultipartBody.Part part , final Product mProduct , final Dialog dialog ){
-
-
         mApiProductInterface.addProductImage(part , Token.token ).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response){
                         if( response.code() == 200 ){
+                              mProduct.setImage(response.body().getMessage());
                               addProduct( mProduct , dialog , response.body().getMessage() );
                         }
                         else{
@@ -106,12 +96,9 @@ public class ProductApi{
                 dialog.dismiss();
             }
         });
-
-
     }
 
     public  void  deleteImage(final  String id  , final Dialog  dialog ){
-
         mApiProductInterface.deleteProduct( id , Token.token ).enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call,Response<Data> response){
@@ -129,12 +116,9 @@ public class ProductApi{
                 Err.e("Error in deleting product");
             }
         });
-
-
     }
 
     public  void  listProduct(final Dialog dialog){
-
         mApiProductInterface.getProductPopulatedList(Token.token)
         .enqueue(new Callback<List<ProductPopulated>>(){
             @Override
@@ -151,12 +135,9 @@ public class ProductApi{
                 Err.e("Failed to load product");
             }
         });
-
     }
 
     public void listProduct(final SwipeRefreshLayout mSwipeRefreshLayout){
-
-
         mApiProductInterface.getProductPopulatedList(Token.token)
                 .enqueue(new Callback<List<ProductPopulated>>(){
             @Override
@@ -174,17 +155,13 @@ public class ProductApi{
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
-
     }
 
-
     public static ProductApi  getmProductApi( ProductAdapterInterface mProductAdapterInterface ){
-
         if( mProductApi == null )
             mProductApi = new ProductApi(mProductAdapterInterface);
         else
             mProductApi.addNewAdapter(mProductAdapterInterface);
-
       return mProductApi;
     }
 

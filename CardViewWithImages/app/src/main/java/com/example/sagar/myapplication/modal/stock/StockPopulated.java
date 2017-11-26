@@ -5,6 +5,8 @@ import com.example.sagar.myapplication.modal.Retailer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class StockPopulated {
     @SerializedName("_id")
     @Expose
@@ -26,7 +28,7 @@ public class StockPopulated {
     private Integer sellingPrice;
     @SerializedName("buyed_date")
     @Expose
-    private String buyedDate;
+    private Date buyedDate;
     @SerializedName("notification")
     @Expose
     private Notification notification;
@@ -104,11 +106,11 @@ public class StockPopulated {
         this.sellingPrice = sellingPrice;
     }
 
-    public String getBuyedDate() {
+    public Date getBuyedDate() {
         return buyedDate;
     }
 
-    public void setBuyedDate(String buyedDate) {
+    public void setBuyedDate(Date buyedDate) {
         this.buyedDate = buyedDate;
     }
 

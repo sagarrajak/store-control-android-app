@@ -6,7 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.example.sagar.myapplication.utill.NavigationDrawer;
+import com.example.sagar.myapplication.utill.ui.NavigationDrawer;
 import com.example.sagar.myapplication.R;
 
 public class Setting_activity extends AppCompatActivity {

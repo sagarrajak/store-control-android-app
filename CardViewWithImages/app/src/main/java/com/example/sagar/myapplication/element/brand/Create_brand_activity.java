@@ -26,7 +26,7 @@ import android.widget.ImageView;
 
 import com.example.sagar.myapplication.CustumProgressDialog;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.BrandAdapter;
+import com.example.sagar.myapplication.adapter.brand.BrandAdapter;
 import com.example.sagar.myapplication.api.BrandApi;
 import com.example.sagar.myapplication.modal.Brand;
 import com.example.sagar.myapplication.utill.Err;

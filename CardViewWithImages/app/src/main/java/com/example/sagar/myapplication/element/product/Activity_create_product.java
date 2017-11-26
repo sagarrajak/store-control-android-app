@@ -33,15 +33,16 @@ import android.widget.ProgressBar;
 
 import com.example.sagar.myapplication.CustumProgressDialog;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.ProductGridAdapter;
-import com.example.sagar.myapplication.adapter.ProductBrandSeletorAdapter;
-import com.example.sagar.myapplication.adapter.ProductCategoryPickerAdapter;
-import com.example.sagar.myapplication.adapter.RetailerPickerAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductGridAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductBrandSeletorAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductCategoryPickerAdapter;
+import com.example.sagar.myapplication.adapter.retailer.RetailerPickerAdapter;
 import com.example.sagar.myapplication.api.ProductApi;
 import com.example.sagar.myapplication.modal.Brand;
 import com.example.sagar.myapplication.modal.Product;
 import com.example.sagar.myapplication.modal.ProductType;
 import com.example.sagar.myapplication.modal.Retailer;
+import com.example.sagar.myapplication.utill.ui.CreateDetailsDialog;
 import com.example.sagar.myapplication.utill.Err;
 
 import java.io.File;
@@ -61,7 +62,7 @@ public class Activity_create_product extends AppCompatActivity{
 
     private Toolbar toolbar;
 
-    private  EditText name,brand,details,type,price, retailer;
+    private EditText name,brand,details,type,price, retailer;
     private BottomSheetDialog mBottomSheetDialog;
     private FloatingActionButton mFlaotingactionButton;
     private ImageView mImageView;
@@ -134,30 +135,8 @@ public class Activity_create_product extends AppCompatActivity{
     }
 
     private void productDetailsOnClickDialog(){
-        details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder( Activity_create_product.this);
-                LayoutInflater inflater = getLayoutInflater();
-                View inflate = inflater.inflate(R.layout.details_dialog,null);
-                final EditText editText = (EditText) inflate.findViewById(R.id.textView);
-                editText.setText(details.getText());
-                builder.setView(inflate);
-                builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        details.setText(editText.getText());
-                    }
-                });
-                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                builder.show();
-            }
-        });
+        CreateDetailsDialog mCreateDetailsDialog = new CreateDetailsDialog(  Activity_create_product.this , details , getLayoutInflater() );
+        mCreateDetailsDialog.showDialog();
     }
 
     private void setToolbar(){

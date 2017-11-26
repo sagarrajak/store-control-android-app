@@ -1,124 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/coordinate_layout_create_retailer"
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white">
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/activity_create_employee_appbar"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinate_layout_create_retailer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.Toolbar
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/activity_create__appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_create_retailer_toolbar"
-            >
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-    <LinearLayout
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:id="@+id/view1"
-            android:layout_weight="0.7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal">
-            <ImageView
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/create_retailer_image_view"
-                />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:id="@+id/add_retailer_toolbar">
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
         <LinearLayout
-            android:id="@+id/view2"
-            android:layout_weight="0.3"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:orientation="vertical"
+            android:layout_marginBottom="100dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:orientation="vertical">
-            <android.support.design.widget.TextInputLayout
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/add_retailer_picture"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/employee"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp" />
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/add_retailer_picture_anchor"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:padding="5dp"
+                    android:src="@drawable/ic_person_black_24dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
                 <EditText
-                    android:id="@+id/create_retailer_name"
-                    android:layout_width="match_parent"
+                    android:layout_marginStart="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/profile_image"
+                    android:id="@+id/add_retailer_name"
                     android:hint="Name"
-                     />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_height="wrap_content">
+                    android:layout_toStartOf="@+id/add_retailer_name_view_anchor" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp"
+                    android:id="@+id/add_retailer_name_view_anchor"
+                    android:layout_alignParentEnd="true"
+                    android:padding="5dp"
+                    />
                 <EditText
-                    android:id="@+id/create_retailer_mail"
+                    android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/profile_image"
-                    android:inputType="textEmailAddress"
-                    android:hint="Mail"
-                     />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+                    android:id="@+id/add_retailer_middle_name"
+                    android:layout_below="@+id/add_retailer_name"
+                    android:hint="Middle name"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/add_retailer_last_name"
+                    android:layout_below="@+id/add_retailer_middle_name"
+                    android:hint="Last name"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/add_retailer_family_name"
+                    android:layout_below="@+id/add_retailer_last_name"
+                    android:hint="Family name"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/add_retailer_suffix"
+                    android:layout_below="@+id/add_retailer_family_name"
+                    android:hint="Suffix"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/create_retailer_phone_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/profile_image"
-                    android:inputType="number"
-                    android:hint="Phone number"
-                     />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/create_retailer_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/profile_image"
-                    android:hint="Adress"
-                    android:inputType="text"
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_call_black_24dp"
+                    android:id="@+id/add_retailer_call_icon"
                     />
-            </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_retailer_phone_num"
+                    android:hint="Phone number"
+                    android:layout_marginStart="50dp"
+                    android:inputType="phone" />
+                <Spinner
+                    android:layout_below="@id/add_retailer_phone_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_retailer_phone_num_spinner"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp">
+                </Spinner>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_mail_black_24dp"/>
+                <EditText
+                    android:id="@+id/add_retailer_email_address"
+                    android:hint="Email"
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+                <Spinner
+                    android:layout_below="@id/add_retailer_email_address"
+                    android:id="@+id/add_retailer_email_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_height="match_parent">
+                </Spinner>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_home_black_24dp"
+                    android:id="@+id/add_retailer_address_icon"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/add_retailer_address_view_anchor"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp"
+                    android:layout_alignParentEnd="true"
+                    android:padding="5dp"
+                    />
+                <EditText
+                    android:id="@+id/add_retailer_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_alignParentStart="true"
+                    android:hint="Address"
+                    android:layout_toStartOf="@+id/add_retailer_address_view_anchor" />>
+                <EditText
+                    android:layout_below="@+id/add_retailer_address"
+                    android:layout_marginStart="50dp"
+                    android:id="@+id/add_retailer_street"
+                    android:hint="Street"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:hint="Post office"
+                    android:layout_below="@id/add_retailer_street"
+                    android:id="@+id/add_retailer_post_office"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_below="@id/add_retailer_post_office"
+                    android:id="@+id/add_retailer_neighbourhood"
+                    android:hint="Neighbourhood"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:id="@+id/add_retailer_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/add_retailer_neighbourhood"
+                    android:layout_marginStart="50dp"
+                    android:hint="City"/>
+                <EditText
+                    android:id="@+id/add_retailer_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/add_retailer_city"
+                    android:layout_marginStart="50dp"
+                    android:hint="State"/>
+                <EditText
+                    android:id="@+id/add_retailer_zipcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/add_retailer_state"
+                    android:layout_marginStart="50dp"
+                    android:inputType="number"
+                    android:hint="Zipcode"/>
+            </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/create_retailer_button_float"
-        android:clickable="true"
-        android:src="@android:drawable/ic_menu_camera"
-        app:layout_anchor="@id/view1"
-        android:layout_margin="16dp"
-        app:layout_anchorGravity="bottom|right|end"/>
-</android.support.design.widget.CoordinatorLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/add_retailer_floating_action_bottom"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_camera"
+            app:layout_anchor="@id/add_retailer_picture_anchor"
+            app:layout_anchorGravity="right|center" />
+    </android.support.design.widget.CoordinatorLayout>
+</ScrollView>

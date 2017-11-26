@@ -13,12 +13,4 @@
          android:icon="@drawable/ic_delete_black_24dp"
          android:id="@+id/delete_product"
          />
-    <item
-        android:title="Category's"
-        android:id="@+id/product_category"
-        />
-    <item
-        android:id="@+id/product_brand"
-        android:title="Brand"
-        />
 </menu>

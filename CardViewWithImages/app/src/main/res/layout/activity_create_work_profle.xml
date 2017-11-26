@@ -7,5 +7,5 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.sagar.myapplication.element.work_profile.Create_work_profle">
+    tools:context="com.example.sagar.myapplication.element.work_profile.Create_work_profile">
 </RelativeLayout>

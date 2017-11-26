@@ -8,6 +8,7 @@ public class CustumProgressDialog {
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setTitle("please wait!");
         return  progressDialog;
     };
 }

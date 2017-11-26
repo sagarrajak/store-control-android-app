@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".element.customer.Create_customer_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarSize="3dp"
+    android:scrollbars="vertical">
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/activity_create_employee_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="enterAlways|scroll"
+                android:id="@+id/activity_create_customer_toolbar">
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="?actionBarSize"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/add_customer_picture"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/employee"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp" />
+                <ImageView
+                    android:id="@+id/add_customer_picture_anchor"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp">
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/person_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_person_black_24dp" />
+                <EditText
+                    android:id="@+id/add_customer_first_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_toStartOf="@+id/add_customer_name_image_icon"
+                    android:hint="Name*" />
+                <ImageView
+                    android:id="@+id/add_customer_name_image_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp" />
+                <EditText
+                    android:id="@+id/add_customer_middle_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/add_customer_name_image_icon"
+                    android:layout_marginStart="50dp"
+                    android:hint="Middle name" />
+                <EditText
+                    android:id="@+id/add_customer_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/add_customer_middle_name"
+                    android:layout_marginStart="50dp"
+                    android:hint="Last name*" />
+                <EditText
+                    android:id="@+id/add_customer_family_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/add_customer_last_name"
+                    android:layout_marginStart="50dp"
+                    android:hint="Family name" />
+                <EditText
+                    android:id="@+id/add_customer_suffix_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/add_customer_family_name"
+                    android:layout_marginStart="50dp"
+                    android:hint="Suffix" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/add_customer_mail_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:src="@drawable/ic_mail_black_24dp" />
+
+                <EditText
+                    android:id="@+id/add_customer_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:hint="Email*" />
+                <Spinner
+                    android:id="@+id/add_customer_mail_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/add_customer_mail"
+                    android:layout_marginStart="50dp"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+                <ImageView
+                    android:padding="4dp"
+                    android:id="@+id/add_customer_phon_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="2dp"
+                    android:src="@drawable/ic_call_black_24dp" />
+                <EditText
+                    android:id="@+id/add_customer_phon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:hint="Phone number*" />
+                <Spinner
+                    android:id="@+id/add_customer_phon_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="50dp"
+                    android:layout_below="@id/add_customer_phon"
+                    android:layout_alignParentStart="true"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp">
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_home_black_24dp" />
+                <EditText
+                    android:id="@+id/add_customer_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_toStartOf="@+id/add_customer_address_image_icon"
+                    android:hint="Address*" />
+                <ImageView
+                    android:id="@+id/add_customer_address_image_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp" />
+                <EditText
+                    android:id="@+id/add_customer_street"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_below="@+id/add_customer_address_image_icon"
+                    android:hint="Street" />
+                <EditText
+                    android:id="@+id/add_customer_post_office"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_below="@+id/add_customer_street"
+                    android:hint="Post office" />
+                <EditText
+                    android:id="@+id/add_customer_post_neighborhood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_below="@+id/add_customer_post_office"
+                    android:hint="Neighborhood" />
+                <EditText
+                    android:id="@+id/add_customer_post_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp"
+                    android:inputType="number"
+                    android:layout_below="@+id/add_customer_post_neighborhood"
+                    android:hint="City*" />
+                <EditText
+                    android:id="@+id/add_customer_post_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp"
+                    android:inputType="number"
+                    android:layout_below="@+id/add_customer_post_city"
+                    android:hint="State*" />
+                <EditText
+                    android:id="@+id/add_customer_zipcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp"
+                    android:inputType="number"
+                    android:layout_below="@+id/add_customer_post_state"
+                    android:hint="Zipcode*" />
+            </RelativeLayout>
+        </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/add_button_float"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_camera"
+            app:layout_anchor="@id/add_customer_picture_anchor"
+            app:layout_anchorGravity="right|center" />
+    </android.support.design.widget.CoordinatorLayout>
+</ScrollView>

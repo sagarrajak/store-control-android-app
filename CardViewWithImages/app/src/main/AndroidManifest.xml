@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sagar.myapplication">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,14 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".element.employee.Create_employee_activity" />
+        <activity android:name=".element.employee.employee.Create_employee_activity" />
         <activity android:name=".element.product.Product_activity" />
-        <activity android:name=".element.employee.About_employee_activity" />
+        <activity android:name=".element.employee.employee.About_employee_activity" />
         <activity android:name=".element.transaction.Transaction_activity" />
         <activity android:name=".element.about_store.About_store_activity" />
         <activity android:name=".element.employee.MainActivity" />
         <activity android:name=".element.login.Setting_activity" />
-        <activity android:name=".element.Setting" />
         <activity android:name=".element.dashboard.DashBoard_activity" />
         <activity android:name=".element.product.About_product_activity" />
         <activity android:name=".element.product.Activity_create_product" />
@@ -35,18 +32,27 @@
         <activity android:name=".element.stock.activity.Stock_activity" />
         <activity android:name=".element.stock.activity.Activity_create_new_stock" />
         <activity android:name=".element.brand.Brand_products_details" />
-        <activity android:name=".element.work_profile.Create_work_profle" />
-        <activity android:name=".element.right.Create_new_right" />
+        <activity android:name=".element.work_profile.Create_work_profile" />
         <activity android:name=".element.product_category.Create_new_product_category" />
         <activity android:name=".element.product_category.Product_by_category" />
         <activity android:name=".element.product_category.Product_category_details" />
-        <activity android:name=".element.employee.Product_associated_with_retailer" />
+        <activity android:name=".element.retailer.Product_associated_with_retailer" />
         <activity android:name=".element.login.Sign_up_activity" />
         <activity android:name=".element.retailer.Create_retailer_activity" />
-        <activity android:name=".element.retailer.About_retailer_activity" />
         <activity android:name=".element.brand.Create_brand_activity" />
         <activity android:name=".element.stock.activity.Activity_filter_intent" />
-        <activity android:name=".element.stock.activity.About_stock_activity"></activity>
+        <activity android:name=".element.stock.activity.About_stock_activity" />
+        <activity android:name=".element.customer.About_customer_activity" />
+        <activity android:name=".element.customer.Create_customer_activity" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity android:name=".element.retailer.About_retailer_activity" />
+        <activity android:name=".element.work_profile.Work_profile_activity" />
+        <activity android:name=".element.employee.employee.Edit_employee_activity" />
+        <activity android:name=".element.customer.Edit_customer_activity" />
+        <activity android:name=".element.retailer.Edit_retailer_activity" />
+        <activity android:name=".element.product.Edit_product_activity"></activity>
     </application>
 
 </manifest>

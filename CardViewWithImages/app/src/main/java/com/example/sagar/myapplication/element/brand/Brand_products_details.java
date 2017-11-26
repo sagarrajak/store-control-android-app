@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.BrandAssociatedProductAdapter;
+import com.example.sagar.myapplication.adapter.brand.BrandAssociatedProductAdapter;
 import com.example.sagar.myapplication.modal.Brand;
 
 public class Brand_products_details extends AppCompatActivity{
@@ -29,7 +29,6 @@ public class Brand_products_details extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_brand_products_details);
             setToolbar();

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipe_to_refresh_employee"
-    tools:context=".element.employee.fragment.Employee_fragment">
+    tools:context=".element.employee.employee.Employee_fragment">
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

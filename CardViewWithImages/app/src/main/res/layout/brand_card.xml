@@ -1,51 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
+    app:cardElevation="3dp"
+    app:cardCornerRadius="3dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:elevation="2dp"
-    android:layout_marginTop="1dp"
-    android:layout_marginBottom="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:layout_marginLeft="2dp"
     android:layout_marginRight="2dp"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:orientation="vertical">
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/black"
-                android:text="Large Text"
-                android:id="@+id/brand_card_brand_name" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
-                android:text="Small Text"
-                android:id="@+id/brand_card_brand_details"/>
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/brand_card_brand_logo"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/brand_card_brand_name"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:text="Large Text"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:id="@+id/brand_card_brand_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Small Text"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/brand_card_brand_name"
+            android:textSize="12sp" />
+        <ImageView
+            android:padding="4dp"
+            android:id="@+id/brand_card_brand_logo"
+            android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_weight="0.8"
-            android:padding="0.1dp"
-            android:paddingBottom="1dp"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
-            android:paddingTop="1dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             android:src="@drawable/product" />
-    </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

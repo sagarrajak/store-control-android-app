@@ -4,10 +4,11 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Expire {
     public  Expire(){}
-    public  Expire(boolean isExpireable,String expireDate){
+    public  Expire(boolean isExpireable , Date expireDate){
         this.isExpireable =  isExpireable;
         this.expireDate   =  expireDate;
     }
@@ -16,7 +17,7 @@ public class Expire {
     private Boolean isExpireable;
     @SerializedName("expireDate")
     @Expose
-    private String expireDate;
+    private Date expireDate;
 
     public Boolean getIsExpireable() {
         return isExpireable;
@@ -26,11 +27,11 @@ public class Expire {
         this.isExpireable = isExpireable;
     }
 
-    public String getExpireDate() {
+    public Date getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(String expireDate) {
+    public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }
 

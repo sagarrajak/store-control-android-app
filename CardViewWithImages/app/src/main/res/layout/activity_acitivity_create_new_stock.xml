@@ -103,7 +103,7 @@
                         android:layout_marginBottom="1dp"
                         android:id="@+id/create_stock_details"
                         android:hint="Details"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 <CheckBox

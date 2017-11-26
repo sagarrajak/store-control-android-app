@@ -3,9 +3,10 @@ package com.example.sagar.myapplication.modal;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Product{
+public class Product implements Serializable{
 
     @SerializedName("_id")
     @Expose

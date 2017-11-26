@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +10,7 @@
         android:layout_height="wrap_content">
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="250dp"
             android:id="@+id/collapsing_toolbar_layout"
             app:expandedTitleMarginEnd="16dp"
             app:expandedTitleMarginStart="48dp"
@@ -40,7 +38,18 @@
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_height="match_parent">
-        <include layout="@layout/recycleview"></include>
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:clipToPadding="false">
+            </android.support.v7.widget.RecyclerView>
+        </android.support.design.widget.CoordinatorLayout>
     </android.support.v4.widget.NestedScrollView>
     <ProgressBar
         android:id="@+id/brand_product_progressbar"

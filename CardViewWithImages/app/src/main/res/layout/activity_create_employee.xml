@@ -1,190 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/coordinate_layout_create_employee"
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white"
-    tools:context=".element.employee.Create_employee_activity">
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/activity_create_employee_appbar"
+    tools:context=".element.employee.employee.Create_employee_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinate_layout_create_employee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.Toolbar
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/activity_create_employee_appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_create_employee_toolbar"
-            >
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:id="@+id/view1"
-            android:layout_weight="0.6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal">
-            <ImageView
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/add_employee_image_view"/>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:id="@+id/add_employee_toolbar">
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
         <LinearLayout
-            android:id="@+id/view2"
-            android:layout_weight="0.4"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:orientation="vertical"
+            android:layout_marginBottom="100dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:orientation="vertical">
-            <android.support.design.widget.TextInputLayout
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/add_employee_picture"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/employee"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp" />
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/add_employee_picture_anchor"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:padding="5dp"
+                    android:src="@drawable/ic_person_black_24dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
                 <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:id="@+id/add_employee_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/profile_image"
                     android:hint="Name"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_height="wrap_content">
+                    android:layout_toStartOf="@+id/add_employee_name_view_anchor" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp"
+                    android:id="@+id/add_employee_name_view_anchor"
+                    android:layout_alignParentEnd="true"
+                    android:padding="5dp"
+                    />
                 <EditText
-                    android:id="@+id/add_employee_mail"
+                    android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/profile_image"
-                    android:inputType="textEmailAddress"
-                    android:hint="Mail"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
+                    android:id="@+id/add_employee_middle_name"
+                    android:layout_below="@+id/add_employee_name"
+                    android:hint="Middle name"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/add_employee_last_name"
+                    android:layout_below="@+id/add_employee_middle_name"
+                    android:hint="Last name"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/add_employee_family_name"
+                    android:layout_below="@+id/add_employee_last_name"
+                    android:hint="Family name"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/add_employee_suffix"
+                    android:layout_below="@+id/add_employee_family_name"
+                    android:hint="Suffix"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="0.5"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/add_employee_phone_num"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/profile_image"
-                        android:inputType="text"
-                        android:hint="Phone number"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-                    <EditText
-                        android:id="@+id/add_employee_layout_date_of_birth"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/profile_image"
-                        android:hint="Date of birth"
-                        android:inputType="date"
-                        android:singleLine="true" />
-            </LinearLayout>
-
-            <LinearLayout
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_call_black_24dp"
+                    android:id="@+id/add_employee_call_icon"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_employee_phone_num"
+                    android:hint="Phone number"
+                    android:layout_marginStart="50dp"
+                    android:inputType="phone" />
+                <Spinner
+                    android:layout_below="@id/add_employee_phone_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_employee_phone_num_spinner"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="50dp">
+                </Spinner>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_mail_black_24dp"/>
+                <EditText
+                    android:id="@+id/add_employee_email_address"
+                    android:hint="Email"
+                    android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
-                    android:layout_weight="0.5"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/add_employee_pan_num"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/profile_image"
-                        android:inputType="text"
-                        android:hint="Pan num"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/add_employee_layout_date_of_join"
-                    android:layout_width="match_parent"
-                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+                <Spinner
+                    android:layout_below="@id/add_employee_email_address"
+                    android:id="@+id/add_employee_email_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:layout_height="match_parent">
-                    <EditText
-                        android:id="@+id/add_employee_date_of_join"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/profile_image"
-                        android:hint="Date of join"
-                        android:inputType="date"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_marginTop="4dp"
+                </Spinner>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_home_black_24dp"
+                    android:id="@+id/add_employee_address_icon"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/add_employee_address_view_anchor"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp"
+                    android:layout_alignParentEnd="true"
+                    android:padding="5dp" />
+                <EditText
+                    android:id="@+id/add_employee_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_alignParentStart="true"
+                    android:hint="Address"
+                    android:layout_toStartOf="@+id/add_employee_address_view_anchor" />>
+                <EditText
+                    android:layout_below="@+id/add_employee_address"
+                    android:layout_marginStart="50dp"
+                    android:id="@+id/add_employee_street"
+                    android:hint="Street"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:hint="Post office"
+                    android:layout_below="@id/add_employee_street"
+                    android:id="@+id/add_employee_post_office"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_below="@id/add_employee_post_office"
+                    android:id="@+id/add_employee_neighbourhood"
+                    android:hint="Neighbourhood"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:id="@+id/add_employee_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/add_employee_neighbourhood"
+                    android:layout_marginStart="50dp"
+                    android:hint="City"/>
+                <EditText
+                    android:id="@+id/add_employee_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/add_employee_city"
+                    android:layout_marginStart="50dp"
+                    android:hint="State"/>
+                <EditText
+                    android:id="@+id/add_employee_zipcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/add_employee_state"
+                    android:layout_marginStart="50dp"
+                    android:hint="Zipcode"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_date_range_black_24dp"/>
                 <EditText
-                    android:id="@+id/add_employee_adress"
+                    android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/profile_image"
-                    android:hint="Adress"
-                    android:inputType="text"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="match_parent"
+                    android:id="@+id/add_Employee_date_of_birth"
+                    android:hint="Date of birth"
+                    android:inputType="date" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_date_range_black_24dp"/>
                 <EditText
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/add_Employee_date_of_join"
+                    android:hint="Date of join"
+                    android:inputType="date" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_work_black_24dp"/>
+                <EditText
+                    android:layout_marginStart="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:id="@+id/add_employee_work_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/profile_image"
                     android:hint="Work profile"
-                    android:singleLine="true" />
+                    android:inputType="date" />
+            </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
+        <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_button_float"
+            android:layout_height="50dp"
+            android:id="@+id/add_employee_floating_action_bottom"
             android:clickable="true"
             android:src="@android:drawable/ic_menu_camera"
-            app:layout_anchor="@id/view1"
-            android:layout_margin="16dp"
-            app:layout_anchorGravity="bottom|right|end"/>
-</android.support.design.widget.CoordinatorLayout>
+            app:layout_anchor="@id/add_employee_picture_anchor"
+            app:layout_anchorGravity="right|center" />
+    </android.support.design.widget.CoordinatorLayout>
+</ScrollView>

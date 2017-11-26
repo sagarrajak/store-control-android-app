@@ -1,13 +1,11 @@
 package com.example.sagar.myapplication.api;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
 
 import com.example.sagar.myapplication.utill.Err;
 import com.example.sagar.myapplication.utill.Token;
-import com.example.sagar.myapplication.adapter.BrandAdapter;
+import com.example.sagar.myapplication.adapter.brand.BrandAdapter;
 import com.example.sagar.myapplication.api.interfaces.ApiBrandInterface;
 import com.example.sagar.myapplication.modal.Brand;
 import com.example.sagar.myapplication.modal.Data;
@@ -18,7 +16,6 @@ import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Multipart;
 
 public class BrandApi{
 

@@ -25,9 +25,7 @@ import android.widget.ProgressBar;
 import com.example.sagar.myapplication.CustumProgressDialog;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.StockAdapter;
-import com.example.sagar.myapplication.api.ApiClient;
 import com.example.sagar.myapplication.api.StockApi;
-import com.example.sagar.myapplication.api.interfaces.ApiStockInterface;
 import com.example.sagar.myapplication.element.stock.dialog.SelectProductCreateStock;
 import com.example.sagar.myapplication.element.stock.dialog.SelectRetailerCreateStock;
 import com.example.sagar.myapplication.modal.Product;
@@ -35,6 +33,7 @@ import com.example.sagar.myapplication.modal.Retailer;
 import com.example.sagar.myapplication.modal.stock.Expire;
 import com.example.sagar.myapplication.modal.stock.Notification;
 import com.example.sagar.myapplication.modal.stock.Stock;
+import com.example.sagar.myapplication.utill.ui.CreateDetailsDialog;
 import com.example.sagar.myapplication.utill.Err;
 
 import java.text.SimpleDateFormat;
@@ -52,8 +51,8 @@ public class Activity_create_new_stock extends AppCompatActivity {
     private  StockAdapter mStockAdapter;
     private  Product  selectedProduct ;
     private  Retailer selectedRetailer;
-    private   SelectRetailerCreateStock mSelectedRetailerCreateStock;
-    private   SelectProductCreateStock  mSelectedProductCreateStock;
+    private  SelectRetailerCreateStock mSelectedRetailerCreateStock;
+    private  SelectProductCreateStock  mSelectedProductCreateStock;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -63,19 +62,44 @@ public class Activity_create_new_stock extends AppCompatActivity {
         setContentView(R.layout.activity_acitivity_create_new_stock);
         setUiElement();
         disableKeyBoardOnFocus();
-        setDatePickerDialog();
-        createProductPickerDialog();
-        createRetailerPickerDialog();
-        createDetailsEditDialog();
+        setDialogPopUp();
         setNotificationCheckBox();
         setExpireCheckBox();
         setToolbar();
     }
 
-    private void createRetailerPickerDialog() {
+    private void setDialogPopUp(){
+        product.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus){
+                if(hasFocus)
+                    createProductPickerDialog();
+            }
+        });
+        product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createProductPickerDialog();
+            }
+        });
+        retailer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus ){
+                if(hasFocus)
+                    createRetailerPickerDialog();
+            }
+        });
         retailer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
+                createProductPickerDialog();
+            }
+        });
+        setDatePickerDialog();
+        createDetailsEditDialog();
+    }
+
+    private void createRetailerPickerDialog(){
                 final AlertDialog.Builder mAlertDialogBuilder =  new AlertDialog.Builder(Activity_create_new_stock.this);
                 mAlertDialogBuilder.setTitle("Select Retailer");
                 LayoutInflater inflater = getLayoutInflater();
@@ -91,7 +115,7 @@ public class Activity_create_new_stock extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         selectedRetailer = mSelectedRetailerCreateStock.getSelectedRetailer();
                         if(selectedRetailer!=null){
-                           retailer.setText(selectedRetailer.getName());
+                           retailer.setText(selectedRetailer.getName().getName()+" "+selectedRetailer.getName().getLast());
                         }
                         else{
                            retailer.setText("");
@@ -105,14 +129,9 @@ public class Activity_create_new_stock extends AppCompatActivity {
                     }
                 });
                 mAlertDialogBuilder.show();
-            }
-        });
     }
 
     private void createProductPickerDialog(){
-        product.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 final AlertDialog.Builder mAlertDialogBuilder =  new AlertDialog.Builder(Activity_create_new_stock.this);
                 LayoutInflater inflater = getLayoutInflater();
                 View dialogView = inflater.inflate( R.layout.genral_dialog , null );
@@ -142,15 +161,11 @@ public class Activity_create_new_stock extends AppCompatActivity {
                     }
                 });
                 mAlertDialogBuilder.show();
-            }
-        });
     }
 
-
     private void createDetailsEditDialog(){
-        final AlertDialog.Builder mAlerDialogBuilder = new AlertDialog.Builder(Activity_create_new_stock.this);
-
-
+        CreateDetailsDialog  mDetailsDialog =  new CreateDetailsDialog( Activity_create_new_stock.this , details , getLayoutInflater() );
+        mDetailsDialog.showDialog();
     }
 
     private void setToolbar(){
@@ -237,13 +252,22 @@ public class Activity_create_new_stock extends AppCompatActivity {
                 editText.setText( new SimpleDateFormat("dd/MM/yyyy").format( calendar.getTime() ) );
            }
        };
-       editText.setOnClickListener(new View.OnClickListener() {
+        editText.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                 Calendar currentDateCalender = Calendar.getInstance();
                 new DatePickerDialog( Activity_create_new_stock.this , calenderPickerListener , currentDateCalender.get(Calendar.YEAR) , currentDateCalender.get(Calendar.MONTH) , currentDateCalender.get(Calendar.DAY_OF_MONTH)  ).show();
-           }
+            }
        });
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus){
+                if(hasFocus){
+                    Calendar currentDateCalender = Calendar.getInstance();
+                    new DatePickerDialog( Activity_create_new_stock.this , calenderPickerListener , currentDateCalender.get(Calendar.YEAR) , currentDateCalender.get(Calendar.MONTH) , currentDateCalender.get(Calendar.DAY_OF_MONTH)  ).show();
+                }
+            }
+        });
     }
 
     private boolean isNumber(String str){
@@ -287,10 +311,6 @@ public class Activity_create_new_stock extends AppCompatActivity {
             Snackbar.make(coordinateLayout,"Buy date must not be empty" , Snackbar.LENGTH_LONG).show();
             return  false;
         }
-        if(expire_date.getText().toString().isEmpty()){
-            Snackbar.make(coordinateLayout,"Expire date must not be empty",Snackbar.LENGTH_LONG).show();
-            return false;
-        }
         return  true;
     }
 
@@ -310,11 +330,11 @@ public class Activity_create_new_stock extends AppCompatActivity {
         stock.setQuantity(Integer.parseInt(quantity.getText().toString()));
         stock.setSeller(selectedRetailer.getId());
         stock.setProduct(selectedProduct.getId());
-        stock.setBuyedDate(buyed_date_calender.getTime().toString());
+        stock.setBuyedDate(buyed_date_calender.getTime());
         stock.setSellingPrice(Integer.parseInt(selling_price.getText().toString()));
-        stock.setExpire(new Expire(isProductExpire , expire_date_calender.getTime().toString()));
+        stock.setExpire(new Expire(isProductExpire , expire_date_calender.getTime()));
         stock.setNotification(new Notification( isNotificationChecked , Integer.parseInt(minimum_product.getText().toString())));
-        stock.setBuyedDate(buyed_date_calender.getTime().toString());
+        stock.setBuyedDate(buyed_date_calender.getTime());
         stock.setDetails(details.getText().toString());
         return  stock;
     }
@@ -328,7 +348,7 @@ public class Activity_create_new_stock extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.ok :
+            case R.id.ok:
                 postData();
                 break;
             case R.id.cancel :

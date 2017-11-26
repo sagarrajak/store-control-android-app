@@ -21,7 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.sagar.myapplication.R;
-import com.example.sagar.myapplication.adapter.ProductCategoryAdapter;
+import com.example.sagar.myapplication.adapter.product.ProductCategoryAdapter;
 import com.example.sagar.myapplication.api.ApiClient;
 import com.example.sagar.myapplication.api.ProductTypeApi;
 import com.example.sagar.myapplication.api.interfaces.ApiProductInterface;

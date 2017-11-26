@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-
     android:orientation="vertical">
     <RelativeLayout
         android:layout_marginTop="20dp"
@@ -23,7 +23,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bottom_sheet_employee_name_radiobottom"
+            android:id="@+id/bottom_sheet_employee_name_radiobuttom"
             android:layout_marginRight="10dp"
             android:layout_gravity="right"
             android:layout_centerVertical="true"
@@ -44,7 +44,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
         <RadioButton
-            android:id="@+id/bottom_sheet_employee_date_of_join_radiobottm"
+            android:id="@+id/bottom_sheet_employee_date_of_join_radiobuttom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -53,7 +53,7 @@
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/bottom_sheet_employee_sallery"
+        android:id="@+id/bottom_sheet_employee_salary"
         android:layout_width="match_parent"
         android:layout_marginBottom="20dp"
         android:layout_height="wrap_content">
@@ -69,7 +69,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
         <RadioButton
-            android:id="@+id/bottom_sheet_employee_salery_radiobottom"
+            android:id="@+id/bottom_sheet_employee_salary_radiobuttom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
