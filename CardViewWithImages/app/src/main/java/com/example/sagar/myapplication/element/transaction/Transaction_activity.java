@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.element.transaction.fragment.Check_in_stocks_fragment;
 import com.example.sagar.myapplication.element.transaction.fragment.Check_out_items_fragment;
-import com.example.sagar.myapplication.element.transaction.fragment.Transaction_history_fragment;
 import com.example.sagar.myapplication.utill.ui.NavigationDrawer;
 
 import java.util.ArrayList;
@@ -52,12 +51,10 @@ public class Transaction_activity extends AppCompatActivity{
     }
     private void setTabLayout(){
            ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-           Fragment f1,f2,f3;
-           f1 = new Check_out_items_fragment();
-           f2 = new Transaction_history_fragment();
-           f3 = new Check_in_stocks_fragment();
-           mViewPagerAdapter.addFragment(f1 , "History");
-           mViewPagerAdapter.addFragment(f3 , "Checkin stocks");
+           Fragment f1,f2;
+           f1 = new Check_in_stocks_fragment();
+           f2 = new Check_out_items_fragment();
+           mViewPagerAdapter.addFragment(f1 , "Checkin  stocks");
            mViewPagerAdapter.addFragment(f2 , "Checkout items");
            mViewPager.setAdapter(mViewPagerAdapter);
            mViewPager.setOffscreenPageLimit(2);

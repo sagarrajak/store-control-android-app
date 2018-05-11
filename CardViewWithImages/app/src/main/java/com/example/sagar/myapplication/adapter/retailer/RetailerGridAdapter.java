@@ -34,9 +34,9 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
     private RetailerApi mRetailerApi;
     private static RetailerGridAdapter mRetailerGridAdapter;
 
-    public  RetailerGridAdapter(Context mContext){
+    private   RetailerGridAdapter(Context mContext){
          this.mContext = mContext;
-         mRetailerApi = RetailerApi.getmReteilerApi(this);
+         mRetailerApi = RetailerApi.getmReteilerApi(this, mContext);
          retailer = new ArrayList<>();
     }
 
@@ -60,7 +60,7 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
         Picasso.with(mContext)
                 .load(url+retailer.get(i).getImage())
                 .placeholder(R.drawable.employee)
-                .into(holder.mImageView);
+                .into(holder.employeePicture);
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -96,10 +96,10 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
         public MyViewHolder(View view){
             super(view);
             this.view = view;
-            name  = (TextView) view.findViewById(R.id.name);
-            email = (TextView) view.findViewById(R.id.mail);
-            mImageView = (ImageView)view.findViewById(R.id.imageViewLog);
-            employeePicture = (ImageView)view.findViewById(R.id.add_customer_picture);
+            name  =  view.findViewById(R.id.name);
+            email =  view.findViewById(R.id.mail);
+            mImageView = view.findViewById(R.id.imageViewLog);
+            employeePicture = view.findViewById(R.id.add_customer_picture);
         }
     }
 

@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import com.example.sagar.myapplication.R;
 public class Sign_up_activity extends AppCompatActivity {
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

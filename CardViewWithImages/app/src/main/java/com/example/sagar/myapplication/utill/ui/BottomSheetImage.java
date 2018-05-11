@@ -11,7 +11,7 @@ import com.example.sagar.myapplication.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-public class BottomSheetImage extends  Activity {
+public class BottomSheetImage  {
 
     private BottomSheetDialog mBottomSheetDialog;
     private View view;
@@ -19,11 +19,12 @@ public class BottomSheetImage extends  Activity {
     private BottomSheetHelper mBottomSheetHelper;
 
     public BottomSheetImage(Activity mActivity, BottomSheetHelper mBottomSheetHeler){
-        this.mActivity          =  mActivity;
-        mBottomSheetDialog      =  new BottomSheetDialog(mActivity);
+        this.mActivity   =  mActivity;
+        mBottomSheetDialog  =  new BottomSheetDialog(mActivity);
         this.mBottomSheetHelper =  mBottomSheetHeler;
         configureBottomSheet();
     }
+    public BottomSheetImage() {}
 
     private void configureBottomSheet(){
         view = mActivity.getLayoutInflater().inflate(R.layout.bottom_sheet_image_select_dilaog,null);
@@ -33,7 +34,7 @@ public class BottomSheetImage extends  Activity {
             public void onClick(View view) {
                 mBottomSheetDialog.dismiss();
                 Intent intent = new Intent(Intent.ACTION_PICK , MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(intent,Config.SELECT_IMAGE_FROM_STORAGE);
+                mActivity.startActivityForResult(intent, Config.SELECT_IMAGE_FROM_STORAGE);
             }
         });
         view.findViewById(R.id.bottom_sheet_delete).setOnClickListener(new View.OnClickListener() {

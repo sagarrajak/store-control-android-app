@@ -93,9 +93,9 @@ public class Edit_retailer_activity extends AppCompatActivity {
         mPhoneNumberFiledUiHelper = new PhoneNumFieldUiHelper(this,mPhoneNumber,mPhoneSpinner,R.array.phone_number_type);
         setToolbar();
         if(!isLinearLayout)
-            mRetailerApi = RetailerApi.getmReteilerApi(RetailerGridAdapter.getRetailerGridAdapter(this));
+            mRetailerApi = RetailerApi.getmReteilerApi(RetailerGridAdapter.getRetailerGridAdapter(this), this.getBaseContext());
         else
-            mRetailerApi = RetailerApi.getmReteilerApi(RetailerListAdapter.getRetailerListAdapter(this));
+            mRetailerApi = RetailerApi.getmReteilerApi(RetailerListAdapter.getRetailerListAdapter(this), this.getBaseContext());
         Retailer mRetailer = (Retailer) getIntent().getSerializableExtra("Retailer");
         if(mRetailer ==null){
             finish();

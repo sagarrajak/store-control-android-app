@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Edit"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
+        app:showAsAction="always"
+        android:id="@+id/about_store_edit"
+        />
+</menu>

@@ -26,10 +26,9 @@ public interface ApiEmployeeInterface {
         @Header("token") String token
      );
 
-     @Multipart
+
      @POST("api/employee/")
      Call<Responce>  createEmployee(
-         @Part   MultipartBody.Part image,
          @Body   Employee mEmployee,
          @Header("token") String token
      );
@@ -39,12 +38,6 @@ public interface ApiEmployeeInterface {
              @Path("id") String mEmployeeId,
              @Header("token") String token
      );
-
-    @DELETE("api/routes/employee/image/{id}")
-    Call<Data> deleteEmployeeImage(
-            @Path("id") String mEmployeeId,
-            @Header("token") String token
-    );
 
     @GET("api/routes/employee/name/{id}")
     Call<List<Employee>> sortByName(
@@ -64,10 +57,8 @@ public interface ApiEmployeeInterface {
             @Header("token") String token
     );
 
-    @Multipart
     @PUT("api/employee/{id}")
     Call<Data> editEmployee(
-          @Part MultipartBody.Part image ,
           @Body Employee mEmployee ,
           @Header("token") String  token
     );

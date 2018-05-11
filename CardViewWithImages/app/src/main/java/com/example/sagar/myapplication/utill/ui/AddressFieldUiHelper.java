@@ -5,9 +5,8 @@ import android.widget.EditText;
 import com.example.sagar.myapplication.modal.Address;
 import com.example.sagar.myapplication.modal.Customer;
 
-public class AddressFieldUiHelper{
-
-    private EditText mAddress,mStreet,mNeighbourHood,mState,mZipCode,mPostOffice,mCity;
+public class AddressFieldUiHelper {
+    private EditText mAddress, mStreet, mNeighbourHood, mState, mZipCode, mPostOffice, mCity;
 
     public AddressFieldUiHelper(EditText mAddress, EditText mStreet, EditText mNeighbourHood, EditText mState, EditText mZipCode, EditText mPostOffice, EditText mCity) {
         this.mAddress = mAddress;
@@ -43,7 +42,4 @@ public class AddressFieldUiHelper{
         if(mAddress.getStreet()!=null)
             this.mStreet.setText(mAddress.getStreet());
     }
-
-
-
 }

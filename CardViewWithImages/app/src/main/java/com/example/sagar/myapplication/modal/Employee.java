@@ -32,7 +32,7 @@ public class Employee implements Serializable{
     @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("Address")
+    @SerializedName("address")
     @Expose
     private Address mAddress;
 
@@ -107,5 +107,6 @@ public class Employee implements Serializable{
     public void setImage(String image) {
         this.image = image;
     }
+
 }
 

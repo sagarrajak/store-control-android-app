@@ -34,6 +34,5 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </android.support.v4.view.ViewPager>
 </android.support.design.widget.CoordinatorLayout>
-<include layout="@layout/navigation_drawer">
-        </include>
+<include layout="@layout/navigation_drawer"></include>
 </android.support.v4.widget.DrawerLayout>

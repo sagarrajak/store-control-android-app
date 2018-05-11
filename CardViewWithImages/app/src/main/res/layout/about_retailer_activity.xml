@@ -208,76 +208,150 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/about_retailer_address_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="2dp"
-                            android:text="Address"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/about_retailer_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="2dp"
-                            android:text="Address"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="normal" />
-                        <TextView
-                            android:id="@+id/about_retailer_address_street"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="2dp"
-                            android:text="Street"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="normal" />
-                        <TextView
-                            android:id="@+id/about_retailer_address_neighbourhood"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="2dp"
-                            android:text="Neighbourhood"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="normal" />
-                        <TextView
-                            android:id="@+id/about_retailer_address_city"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="2dp"
-                            android:text="City"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="normal" />
-                        <TextView
-                            android:id="@+id/about_retailer_address_state"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="2dp"
-                            android:text="State"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="normal" />
-                        <TextView
-                            android:id="@+id/about_retailer_address_zipcode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="2dp"
-                            android:text="731004"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="normal" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text="Address :"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/about_retailer_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text="Street :"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/about_retailer_address_street"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text="Neighbourhood :"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/about_retailer_address_neighbourhood"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text="City :"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/about_retailer_address_city"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text="State :"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/about_retailer_address_state"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text="Zipcode :"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/about_retailer_address_zipcode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="2dp"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="@dimen/text_size_small"
+                                android:textStyle="bold" />
+                        </LinearLayout>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>

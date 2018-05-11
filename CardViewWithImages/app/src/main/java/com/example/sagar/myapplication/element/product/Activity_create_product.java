@@ -61,7 +61,6 @@ import okhttp3.RequestBody;
 public class Activity_create_product extends AppCompatActivity{
 
     private Toolbar toolbar;
-
     private EditText name,brand,details,type,price, retailer;
     private BottomSheetDialog mBottomSheetDialog;
     private FloatingActionButton mFlaotingactionButton;

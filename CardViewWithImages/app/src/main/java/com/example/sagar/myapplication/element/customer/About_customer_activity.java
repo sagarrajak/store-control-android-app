@@ -3,7 +3,10 @@ package com.example.sagar.myapplication.element.customer;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,9 +20,9 @@ import com.example.sagar.myapplication.modal.PhoneNum;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class About_customer_activity extends AppCompatActivity{
-
-
+public class About_customer_activity extends AppCompatActivity {
+    //tollbar
+    @BindView(R.id.about_customer_toolbar) Toolbar mToobar;
     @BindView(R.id.about_customer_name) TextView mName;
     @BindView(R.id.about_customer_full_name) TextView mFullName;
     //Email  component
@@ -44,15 +47,26 @@ public class About_customer_activity extends AppCompatActivity{
         setContentView(R.layout.activity_about_customer_);
         ButterKnife.bind(this);
         Customer mCustomer = (Customer) getIntent().getSerializableExtra("Customer");
-        if(mCustomer!=null){
-            setData(mCustomer);
-            setMailClickListener(mCustomer.getMail());
-            setPhoneNumberClickListener(mCustomer.getPhoneNum());
-        }
+        setToolbar();
+        setData(mCustomer);
+        setMailClickListener(mCustomer.getMail());
+        setPhoneNumberClickListener(mCustomer.getPhoneNum());
+    }
+
+    private void setToolbar() {
+        setSupportActionBar(mToobar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_about_employee_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private String getString(String tem){
-        if(  tem == null||tem.isEmpty())
+        if(tem == null||tem.isEmpty())
             return  "";
         else
             return  tem+" ";
@@ -62,40 +76,54 @@ public class About_customer_activity extends AppCompatActivity{
         if(text!=null && !text.isEmpty())
             mTextView.setText(text);
         else
-            mTextView.setVisibility(View.GONE);
-
+            mTextView.setText("");
     }
-    private void setData(Customer mCustomer){
-        if(mCustomer.getName()!=null){
-            mName.setText(mCustomer.getName().getName()+" "+mCustomer.getName().getLast());
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.about_employee_edit_menu:
+
+                break;
         }
-        //full Name
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setData(Customer mCustomer){
+        mName.setText(mCustomer.getName().getName()+" "+mCustomer.getName().getLast());
+        //full Name required filed
         String mBuilder = getString(mCustomer.getName().getName()) +
                 getString(mCustomer.getName().getMiddle()) +
                 getString(mCustomer.getName().getLast()) +
                 getString(mCustomer.getName().getSuffix());
         mFullName.setText(mBuilder);
-        //set phone number
-        mPhoneNumber.setText(mCustomer.getPhoneNum().getValue());
-        mPhoneNumberType.setText(mCustomer.getPhoneNum().getSub());
-        //set mail  type
-        mEmail.setText(mCustomer.getMail().getValue());
-        mEmailType.setText(mCustomer.getMail().getSub());
-        //addressComponent
-        addressHelperMethod(mAddress,mCustomer.getAddress().getAddress());
-        addressHelperMethod(mAddressCity,mCustomer.getAddress().getCity());
-        addressHelperMethod(mAddressNeighbourHood,mCustomer.getAddress().getNeighborhood());
-        addressHelperMethod(mAddressStreet,mCustomer.getAddress().getStreet());
-        addressHelperMethod(mAddressState,mCustomer.getAddress().getState());
-        addressHelperMethod(mAddressZipCode,mCustomer.getAddress().getZipcode());
+        //set phone number(can be nullable)
+        if(mCustomer.getPhoneNum() != null) {
+           if(mCustomer.getPhoneNum().getValue() != null)  mPhoneNumber.setText(mCustomer.getPhoneNum().getValue());
+           if(mCustomer.getPhoneNum().getSub() != null)  mPhoneNumberType.setText(mCustomer.getPhoneNum().getSub());
+        }
+        //set mail type (can be nullable)
+        if(mCustomer.getMail() != null) {
+            if(mCustomer.getMail().getValue() != null) mEmail.setText(mCustomer.getMail().getValue());
+            if(mCustomer.getMail().getSub() != null) mEmailType.setText(mCustomer.getMail().getSub());
+        }
+        //addressComponent(can be nullable)
+        if(mCustomer.getAddress() != null) {
+            if(mCustomer.getAddress().getAddress() != null ) addressHelperMethod(mAddress,mCustomer.getAddress().getAddress());
+            if(mCustomer.getAddress().getCity() != null) addressHelperMethod(mAddressCity,mCustomer.getAddress().getCity());
+            if(mCustomer.getAddress().getNeighborhood() != null) addressHelperMethod(mAddressNeighbourHood,mCustomer.getAddress().getNeighborhood());
+            if(mCustomer.getAddress().getStreet() != null) addressHelperMethod(mAddressStreet,mCustomer.getAddress().getStreet());
+            if(mCustomer.getAddress().getState() != null) addressHelperMethod(mAddressState,mCustomer.getAddress().getState());
+            if(mCustomer.getAddress().getZipcode() != null ) addressHelperMethod(mAddressZipCode,mCustomer.getAddress().getZipcode());
+        }
     }
 
     private void setMailClickListener(final Mail mEmail){
         mMailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(Intent.ACTION_SENDTO , Uri.fromParts("mailto" , mEmail.getValue() , null)) ;
-                startActivity(Intent.createChooser(intent , "Send email..."));
+            Intent intent = new Intent(Intent.ACTION_SENDTO , Uri.fromParts("mailto" , mEmail.getValue() , null)) ;
+            startActivity(Intent.createChooser(intent , "Send email..."));
             }
         });
     }

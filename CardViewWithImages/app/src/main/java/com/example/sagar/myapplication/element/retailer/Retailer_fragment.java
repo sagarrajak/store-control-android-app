@@ -59,7 +59,7 @@ public class Retailer_fragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        mRetailerApi = RetailerApi.getmReteilerApi(RetailerGridAdapter.getRetailerGridAdapter(getActivity()));
+        mRetailerApi = RetailerApi.getmReteilerApi(RetailerGridAdapter.getRetailerGridAdapter(getActivity().getBaseContext()), this.getActivity().getBaseContext());
         mSwipeRefreshLayout  = (SwipeRefreshLayout) getView().findViewById(swipe_to_refresh_retailer);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

@@ -338,19 +338,19 @@ public class Create_customer_activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.ok:
                 Customer customer = postData();
                 ProgressDialog mProgessDialog = CustumProgressDialog.getProgressDialog(Create_customer_activity.this);
                 mProgessDialog.show();
-                if(imageResultUri!=null) {
+                if(imageResultUri != null) {
                     File file = new File(imageResultUri.getPath());
                     RequestBody body = RequestBody.create(MediaType.parse("image/"), file);
                     MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName(), body);
                     mCustomerApi.addCustomer(image, customer, mProgessDialog);
                 }
                 else
-                    mCustomerApi.addCustomerMain(customer,mProgessDialog);
+                    mCustomerApi.addCustomer(null, customer, mProgessDialog);
                 break;
             case R.id.cancel:
                 finish();

@@ -177,9 +177,9 @@ public class Edit_employee_activity extends AppCompatActivity{
     private void setUiElement(){
         boolean isLinearLayout = getIntent().getBooleanExtra("isLinearLayout", false);
         if(!isLinearLayout)
-            mEmployeeApi  =  EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext()),getBaseContext());
+            mEmployeeApi = EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext()),getBaseContext());
         else
-            mEmployeeApi  =  EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext()),getBaseContext());
+            mEmployeeApi = EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext()),getBaseContext());
     }
 
     @Override
@@ -212,11 +212,11 @@ public class Edit_employee_activity extends AppCompatActivity{
                        RequestBody body = RequestBody.create(MediaType.parse("image/") , file);
                        MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName() , body);
                        mProgressDialog.show();
-                       mEmployeeApi.updateEmployee(mEmployee,image,mProgressDialog);
+                     //  mEmployeeApi.updateEmployee(mEmployee,image,mProgressDialog);
                    }
                    else{
                      mProgressDialog.show();
-                     mEmployeeApi.updateEmployee(mEmployee,null,mProgressDialog);
+                     //mEmployeeApi.updateEmployee(mEmployee,null,mProgressDialog);
                    }
                 }
                 break;

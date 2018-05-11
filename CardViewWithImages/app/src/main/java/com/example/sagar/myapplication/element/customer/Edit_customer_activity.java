@@ -163,11 +163,11 @@ public class Edit_customer_activity extends Activity {
                         RequestBody body = RequestBody.create(MediaType.parse("image/") , file);
                         MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName() , body);
                         mProgressDialog.show();
-                        mCustomerApi.updateCustomer(image,mCustomer,mProgressDialog);
+//                        mCustomerApi.updateCustomer(image, mCustomer, mProgressDialog);
                     }
                     else{
                         mProgressDialog.show();
-                        mCustomerApi.updateCustomer( null,mCustomer,mProgressDialog);
+//                        mCustomerApi.updateCustomer( null, mCustomer, mProgressDialog);
                     }
                 }
                 break;

@@ -12,6 +12,11 @@ public class Data {
     @SerializedName("id")
     @Expose
     private String id ;
+
+    @SerializedName("success")
+    @Expose
+    private Boolean success;
+
     public String getId() {
         return id;
     }
@@ -21,11 +26,11 @@ public class Data {
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String message) {
         this.message = message;
     }
-
+    public boolean getSuccess(){ return success; }
+    public  void setSuccess(Boolean success) { this.success = success; }
     @Override
     public String toString() {
         return message;

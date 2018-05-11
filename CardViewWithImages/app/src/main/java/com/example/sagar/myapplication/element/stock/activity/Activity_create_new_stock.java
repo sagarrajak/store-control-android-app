@@ -217,18 +217,18 @@ public class Activity_create_new_stock extends AppCompatActivity {
     }
 
     private void setUiElement(){
-        name             = (EditText) findViewById(R.id.create_stock_name);
-        quantity         = (EditText) findViewById(R.id.create_stock_quantity_of_stock);
-        product          = (EditText) findViewById(R.id.create_stock_product);
-        buyed_price      = (EditText) findViewById(R.id.create_stock_buyed_price);
-        retailer         = (EditText) findViewById(R.id.create_stock_retailer);
-        expire_date      = (EditText) findViewById(R.id.create_stock_expire_date);
-        buy_date         = (EditText) findViewById(R.id.create_stock_buyed_date);
-        selling_price    = (EditText) findViewById(R.id.create_stock_selling_price);
-        minimum_product  = (EditText) findViewById(R.id.create_stock_mini_product_notification);
-        notification_box = (CheckBox) findViewById(R.id.create_stock_checkbox_notification);
-        expire_box       = (CheckBox) findViewById(R.id.create_stock_checkbox_expire);
-        details          = (EditText) findViewById(R.id.create_stock_details);
+        name             =  findViewById(R.id.create_stock_name);
+        quantity         =  findViewById(R.id.create_stock_quantity_of_stock);
+        product          =  findViewById(R.id.create_stock_product);
+        buyed_price      =  findViewById(R.id.create_stock_buyed_price);
+        retailer         =  findViewById(R.id.create_stock_retailer);
+        expire_date      =  findViewById(R.id.create_stock_expire_date);
+        buy_date         =  findViewById(R.id.create_stock_buyed_date);
+        selling_price    =  findViewById(R.id.create_stock_selling_price);
+        minimum_product  =  findViewById(R.id.create_stock_mini_product_notification);
+        notification_box =  findViewById(R.id.create_stock_checkbox_notification);
+        expire_box       =  findViewById(R.id.create_stock_checkbox_expire);
+        details          =  findViewById(R.id.create_stock_details);
         mStockAdapter    = StockAdapter.getStockAdapter(getBaseContext());
         mStockApi        = new StockApi( getBaseContext());
         minimum_product.setVisibility(View.GONE);

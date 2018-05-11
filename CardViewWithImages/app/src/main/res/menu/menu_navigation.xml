@@ -9,15 +9,15 @@
     <item
         android:title="Transaction"
         android:id="@+id/store_transaction"/>
-    <item
-        android:title="Dashboard"
-        android:id="@+id/store_dashboard"/>
+    <!--<item-->
+        <!--android:title="Dashboard"-->
+        <!--android:id="@+id/store_dashboard"/>-->
     <item
         android:title="Product"
         android:id="@+id/store_Product"/>
-    <item
-        android:title="Setting"
-        android:id="@+id/store_Setting"/>
+    <!--<item-->
+        <!--android:title="Setting"-->
+        <!--android:id="@+id/store_Setting"/>-->
     <item
         android:title="Work profile"
         android:id="@+id/store_workProfile"/>

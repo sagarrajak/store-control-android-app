@@ -98,6 +98,26 @@ public class Address implements Serializable{
     @Expose
     private String address;
 
+    private String getStringBuilder() {
+        StringBuilder sbd = new StringBuilder();
+        sbd.append("{");
+        if(address != null && !address.isEmpty()) { sbd.append("address : ");  sbd.append(address); sbd.append(" \n"); }
+        if(street != null &&  !street.isEmpty()) { sbd.append("street : "); sbd.append(street); sbd.append(" \n"); }
+        if(nation != null && !nation.isEmpty()) { sbd.append("nation : "); sbd.append(nation); sbd.append(" \n"); }
+        if(state != null && !state.isEmpty()) { sbd.append("state :"); sbd.append(state); sbd.append(" \n"); }
+        if(city != null && !city.isEmpty()) { sbd.append("city :"); sbd.append(city); sbd.append(" \n"); }
+        if(zipcode != null && !zipcode.isEmpty()) { sbd.append("zipcode :"); sbd.append(zipcode); sbd.append(" \n"); }
+        if(neighborhood != null && !neighborhood.isEmpty()) { sbd.append("neighborhood :"); sbd.append(neighborhood); sbd.append(" \n"); }
+        if(poBox != null && !poBox.isEmpty()){ sbd.append("po box :"); sbd.append(poBox); sbd.append(" \n"); }
+        sbd.append("}");
+        return  sbd.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getStringBuilder();
+    }
+
     /**
      * No args constructor for use in serialization
      * 

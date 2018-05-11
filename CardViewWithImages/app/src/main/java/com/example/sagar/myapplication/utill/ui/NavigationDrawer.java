@@ -60,11 +60,11 @@ public class NavigationDrawer{
                             workProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             mActivity.startActivity(workProfile);
                             break;
-                        case R.id.store_Setting :
-                            Intent setting  = new Intent(mActivity.getApplicationContext() , Setting_activity.class);
-                            setting.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            mActivity.startActivity(setting);
-                            break;
+//                        case R.id.store_Setting :
+//                            Intent setting  = new Intent(mActivity.getApplicationContext() , Setting_activity.class);
+//                            setting.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            mActivity.startActivity(setting);
+//                            break;
                         case R.id.store_stock :
                             Intent  stock_activity  = new Intent(mActivity.getApplicationContext() , Stock_activity.class);
                             stock_activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

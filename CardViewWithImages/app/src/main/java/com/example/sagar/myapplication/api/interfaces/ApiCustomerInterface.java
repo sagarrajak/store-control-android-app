@@ -24,10 +24,8 @@ public interface ApiCustomerInterface{
              @Header("token") String token
      );
 
-     @Multipart
      @PUT("api/customer/{id}")
      Call<Data> updateCustomer(
-            @Part MultipartBody.Part image,
             @Body Customer customer,
             @Path("id") String id,
             @Header("token") String token
@@ -44,34 +42,6 @@ public interface ApiCustomerInterface{
            @Path("id") String id,
            @Header("token") String token
      );
-
-     @Multipart
-     @POST("api/customer/image")
-     Call<Data> addImage(
-             @Header("token") String token ,
-             @Part MultipartBody.Part image
-     );
-
-     @Multipart
-     @PUT("api/cutomer/image/{id}")
-     Call<Data> replaceCurrentImage(
-        @Part MultipartBody.Part image ,
-        @Path("id") String id ,
-        @Header("token") String token
-     );
-
-     @DELETE("api/customer/image/{id}")
-     Call<Data> deleteImageAndSetDefaultOne(
-        @Path("id") String id ,
-        @Header("token") String token
-     );
-
-     @DELETE("api/customer/{id}")
-     Call<Data> deleteImage(
-           @Path("id") String id,
-           @Header("token") String token
-      );
-
 
 }
 

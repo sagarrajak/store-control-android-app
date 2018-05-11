@@ -31,10 +31,10 @@ public class RetailerListAdapter extends RecyclerView.Adapter<RetailerListAdapte
         private RetailerApi mRetailerApi;
         private  static   RetailerListAdapter mRetailerListAdapter;
 
-        public RetailerListAdapter(Context mContext){
+        private  RetailerListAdapter(Context mContext){
               this.mContext = mContext;
               retailer = new ArrayList<>();
-              mRetailerApi = RetailerApi.getmReteilerApi(this);
+              mRetailerApi = RetailerApi.getmReteilerApi(this, mContext);
         }
 
         @Override

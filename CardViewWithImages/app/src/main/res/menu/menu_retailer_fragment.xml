@@ -12,7 +12,9 @@
         android:title="List to Grid"
         android:id="@+id/list_to_grid"/>
     <item
-        android:title="Sort"
+        app:showAsAction="ifRoom"
+        android:title="sort"
+        android:icon="@drawable/ic_sort_black_24dp"
         android:id="@+id/fragment_menu_sort"
         />
 </menu>

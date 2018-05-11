@@ -113,7 +113,7 @@ public class Create_retailer_activity extends AppCompatActivity  {
                 mRetailerAdapterInterface = RetailerGridAdapter.getRetailerGridAdapter(Create_retailer_activity.this);
             isHiddenAddress =  true;
             isHiddenName    =  true;
-            mRetailerApi    = RetailerApi.getmReteilerApi(mRetailerAdapterInterface);
+            mRetailerApi    = RetailerApi.getmReteilerApi(mRetailerAdapterInterface, this.getBaseContext());
             mBottomSheetImage = new BottomSheetImage(this, new BottomSheetImage.BottomSheetHelper() {
                 @Override
                 public void resetImageUri() {
@@ -200,7 +200,7 @@ public class Create_retailer_activity extends AppCompatActivity  {
     private  void setName(Retailer mRetailer){
         Name nameObj = new Name();
         nameObj.setName(mNameFirstName.getText().toString());
-        nameObj.setName(mNameLast.getText().toString());
+        nameObj.setLast(mNameLast.getText().toString());
         if(!isHiddenName){
             nameObj.setMiddle(mNameMiddle.getText().toString());
             nameObj.setFamilyName(mNameSuffix.getText().toString());
@@ -209,7 +209,7 @@ public class Create_retailer_activity extends AppCompatActivity  {
         mRetailer.setName(nameObj);
     }
 
-    private void setAddress(Retailer mRetailer){
+    private void setAddress(Retailer mRetailer) {
         Address addressObj = new Address();
         addressObj.setAddress(mAddress.getText().toString());
         addressObj.setZipcode(mAddressZipCode.getText().toString());
@@ -323,10 +323,14 @@ public class Create_retailer_activity extends AppCompatActivity  {
                 ProgressDialog dialog = CustumProgressDialog.getProgressDialog(Create_retailer_activity.this);
                 if(checkError()){
                     dialog.show();
-                    File  file  = new File(mSelectedImageUri.getPath());
-                    RequestBody reqfile  =  RequestBody.create(MediaType.parse("image/*"),file);
-                    MultipartBody.Part body = MultipartBody.Part.createFormData("upload",file.getName(),reqfile);
-                    mRetailerApi.uploadRetailerImage( body , getRetailer() , dialog );
+                    if(mSelectedImageUri != null) {
+                        File file = new File(mSelectedImageUri.getPath());
+                        RequestBody reqfile = RequestBody.create(MediaType.parse("image/*"), file);
+                        MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), reqfile);
+                        mRetailerApi.createNewRetailer(body, getRetailer(), dialog);
+                    } else {
+                        mRetailerApi.createNewRetailer(null, getRetailer(), dialog);
+                    }
                 }
                 break;
             case R.id.cancel:

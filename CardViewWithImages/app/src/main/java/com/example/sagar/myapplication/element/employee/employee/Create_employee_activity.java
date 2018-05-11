@@ -275,13 +275,13 @@ public class Create_employee_activity extends AppCompatActivity  {
             mEmployee.setName(nameObj);
     }
 
-    private void setAddress(Employee mEmployee){
+    private void setAddress(Employee mEmployee) {
             Address addressObj = new Address();
             addressObj.setAddress(address.getText().toString());
             addressObj.setZipcode(addressZipCode.getText().toString());
             addressObj.setState(addressState.getText().toString());
             addressObj.setCity(addressCity.getText().toString());
-            if(!isAddressHidden){
+            if(!isAddressHidden) {
                 addressObj.setStreet(addressStreet.getText().toString());
                 addressObj.setPoBox(addressPostOffice.getText().toString());
                 addressObj.setNeighborhood(addressNeighbour.getText().toString());
@@ -289,7 +289,7 @@ public class Create_employee_activity extends AppCompatActivity  {
             mEmployee.setAddress(addressObj);
     }
 
-    private void setEmailTypeSpinner(){
+    private void setEmailTypeSpinner() {
             ArrayAdapter<CharSequence> emailTypeAdapter = ArrayAdapter.createFromResource(getBaseContext() , R.array.email_type, android.R.layout.simple_spinner_item);
             emailTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             mEmailAddressTypeSelected.setAdapter(emailTypeAdapter);
@@ -304,7 +304,7 @@ public class Create_employee_activity extends AppCompatActivity  {
             });
     }
 
-    private void setPhoneNumberTypeSpinner(){
+    private void setPhoneNumberTypeSpinner() {
             ArrayAdapter<CharSequence> phoneNumberTypeAdapter = ArrayAdapter.createFromResource(getBaseContext() , R.array.phone_number_type , android.R.layout.simple_spinner_item);
             phoneNumberTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             mPhoneNumberTypeSelected.setAdapter(phoneNumberTypeAdapter);
@@ -319,29 +319,29 @@ public class Create_employee_activity extends AppCompatActivity  {
             });
     }
 
-    private void setEmail(Employee mEmployee){
+    private void setEmail(Employee mEmployee) {
             Mail mailObj = new Mail();
             mailObj.setValue(mEmailAddress.getText().toString());
             mailObj.setSub(mEmailTypeSelectedString);
             mEmployee.setMail(mailObj);
     }
 
-    private void setPhoneNumber(Employee mEmployee){
+    private void setPhoneNumber(Employee mEmployee) {
             PhoneNum mPhoneNumObj = new PhoneNum();
             mPhoneNumObj.setValue(mPhoneNumber.getText().toString());
             mPhoneNumObj.setSub(mPhoneNumberTypeSelectedString);
             mEmployee.setPhoneNumber(mPhoneNumObj);
     }
 
-    private void setUiElement(){
+    private void setUiElement() {
         boolean isLinearLayout = getIntent().getBooleanExtra("isLinearLayout", false);
             if(!isLinearLayout)
                 employeeAdapterInterface  =  EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext());
             else
                 employeeAdapterInterface  =  EmployeeListAdapter.getEmployeeListAdapter(getBaseContext());
-            mEmployeeApi         =  EmployeeApi.getEmployeeApi(employeeAdapterInterface , getBaseContext());
-            isNameHidden         =  true;
-            isAddressHidden      =  true;
+            mEmployeeApi  =  EmployeeApi.getEmployeeApi(employeeAdapterInterface , getBaseContext());
+            isNameHidden  =  true;
+            isAddressHidden =  true;
     }
 
     @Override
@@ -350,11 +350,11 @@ public class Create_employee_activity extends AppCompatActivity  {
             return true;
     }
 
-    public void createAlertForSelectingWorkProfile(){
+    public void createAlertForSelectingWorkProfile() {
             //// TODO: 22/10/17 add work profile selection
     }
 
-    private void createBottomSheet(){
+    private void createBottomSheet() {
             checkPermission();
             mBottomSheetDialog  = new BottomSheetDialog(this);
             mBottomSheetDialog.setTitle("Profile picture");
@@ -419,7 +419,7 @@ public class Create_employee_activity extends AppCompatActivity  {
             }
     }
 
-    public void checkPermission(){
+    public void checkPermission() {
         if( ContextCompat.checkSelfPermission(
                 this ,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE  ) != PackageManager.PERMISSION_GRANTED ){
@@ -487,12 +487,15 @@ public class Create_employee_activity extends AppCompatActivity  {
                 ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(Create_employee_activity.this);
                 if(!checkIfError()){
                     mProgressDialog.show();
-                    File file  = new File(mSelectedImage.getPath());
-                    RequestBody body = RequestBody.create(MediaType.parse("image/") , file);
-                    MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName() , body);
-                    Employee mEmployee =  postEmployeeData();
-                    mProgressDialog.show();
-                    mEmployeeApi.createEmployee(image , mEmployee , mProgressDialog);
+                    Employee mEmployee = postEmployeeData();
+                    if (mSelectedImage != null) {
+                        File file = new File(mSelectedImage.getPath());
+                        RequestBody body = RequestBody.create(MediaType.parse("image/"), file);
+                        MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName(), body);
+                        mEmployeeApi.createEmployee(image, mEmployee, mProgressDialog);
+                    } else {
+                        mEmployeeApi.createEmployee(null, mEmployee, mProgressDialog);
+                    }
                 }
                 break;
             case R.id.cancel :

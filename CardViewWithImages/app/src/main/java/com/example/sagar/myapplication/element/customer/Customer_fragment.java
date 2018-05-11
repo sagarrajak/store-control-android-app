@@ -104,7 +104,7 @@ public class Customer_fragment extends Fragment{
                     listToGrid.setIcon(R.drawable.ic_list_black_24dp);
                 }
                 else{
-                    changeGridToList();
+                   changeGridToList();
                     listToGrid.setIcon(R.drawable.ic_grid_24dp);
                 }
                 isListView=!isListView;
@@ -113,6 +113,8 @@ public class Customer_fragment extends Fragment{
                 Intent intent =  new Intent(getActivity().getApplicationContext() , Create_customer_activity.class);
                 intent.putExtra("isLinearLayout",isListView);
                 startActivity(intent);
+                break;
+            case R.id.sort_items:
                 break;
         }
         return super.onOptionsItemSelected(item);

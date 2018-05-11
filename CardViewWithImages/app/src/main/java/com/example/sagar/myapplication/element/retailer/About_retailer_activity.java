@@ -2,11 +2,15 @@ package com.example.sagar.myapplication.element.retailer;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.modal.Customer;
@@ -18,10 +22,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class About_retailer_activity extends AppCompatActivity {
-
-
-    @BindView(R.id.about_retailer_name)
-    TextView mName;
+    //toolbar
+    @BindView(R.id.about_retailer_toolbar) Toolbar mToolbar;
+    @BindView(R.id.about_retailer_name) TextView mName;
     @BindView(R.id.about_retailer_full_name) TextView mFullName;
     //Email  component
     @BindView(R.id.about_retailer_mail)  TextView mEmail;
@@ -45,16 +48,20 @@ public class About_retailer_activity extends AppCompatActivity {
         setContentView(R.layout.about_retailer_activity);
         ButterKnife.bind(this);
         Retailer mRetailer = (Retailer) getIntent().getSerializableExtra("Retailer");
-        if(mRetailer!=null){
-            setData(mRetailer);
-            setMailClickListener(mRetailer.getMail());
-            setPhoneNumberClickListener(mRetailer.getPhoneNum());
-        }
+        setToolbar();
+        setData(mRetailer);
+        setMailClickListener(mRetailer.getMail());
+        setPhoneNumberClickListener(mRetailer.getPhoneNum());
     }
 
+    private void setToolbar() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
 
     private String getString(String tem){
-        if(  tem == null||tem.isEmpty())
+        if(tem == null||tem.isEmpty())
             return  "";
         else
             return  tem+" ";
@@ -64,53 +71,77 @@ public class About_retailer_activity extends AppCompatActivity {
         if(text!=null && !text.isEmpty())
             mTextView.setText(text);
         else
-            mTextView.setVisibility(View.GONE);
-
+            mTextView.setText("");
     }
-    private void setData(Retailer mCustomer){
-        if(mCustomer.getName()!=null){
-            mName.setText(mCustomer.getName().getName()+" "+mCustomer.getName().getLast());
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case  R.id.about_employee_edit_menu :
+
+            break;
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setData(Retailer mCustomer) {
+        mName.setText(mCustomer.getName().getName()+" "+mCustomer.getName().getLast());
+        setTitle(mCustomer.getName().getName());
         //full Name
         String mBuilder = getString(mCustomer.getName().getName()) +
                 getString(mCustomer.getName().getMiddle()) +
                 getString(mCustomer.getName().getLast()) +
                 getString(mCustomer.getName().getSuffix());
         mFullName.setText(mBuilder);
-        //set phone number
-        mPhoneNumber.setText(mCustomer.getPhoneNum().getValue());
-        mPhoneNumberType.setText(mCustomer.getPhoneNum().getSub());
-        //set mail  type
-        mEmail.setText(mCustomer.getMail().getValue());
-        mEmailType.setText(mCustomer.getMail().getSub());
-        //addressComponent
-        addressHelperMethod(mAddress,mCustomer.getAddress().getAddress());
-        addressHelperMethod(mAddressCity,mCustomer.getAddress().getCity());
-        addressHelperMethod(mAddressNeighbourHood,mCustomer.getAddress().getNeighborhood());
-        addressHelperMethod(mAddressStreet,mCustomer.getAddress().getStreet());
-        addressHelperMethod(mAddressState,mCustomer.getAddress().getState());
-        addressHelperMethod(mAddressZipCode,mCustomer.getAddress().getZipcode());
+        //set phone number (can be nullable)
+        if(mCustomer.getPhoneNum() != null) {
+            if(mCustomer.getPhoneNum().getValue() != null)  mPhoneNumber.setText(mCustomer.getPhoneNum().getValue());
+            if(mCustomer.getPhoneNum().getSub() != null )  mPhoneNumberType.setText(mCustomer.getPhoneNum().getSub());
+        }
+        //set mail type (can be nullable)
+        if(mCustomer.getMail() != null ) {
+            if(mCustomer.getMail().getValue() != null) mEmail.setText(mCustomer.getMail().getValue());
+            if(mCustomer.getMail().getSub() != null) mEmailType.setText(mCustomer.getMail().getSub());
+        }
+        //addressComponent(can be nullbale)
+        if(mCustomer.getAddress() != null) {
+            if(mCustomer.getAddress().getAddress() != null) addressHelperMethod(mAddress, mCustomer.getAddress().getAddress());
+            if(mCustomer.getAddress().getCity() != null) addressHelperMethod(mAddressCity, mCustomer.getAddress().getCity());
+            if(mCustomer.getAddress().getNeighborhood() != null) addressHelperMethod(mAddressNeighbourHood, mCustomer.getAddress().getNeighborhood());
+            if(mCustomer.getAddress().getStreet() != null) addressHelperMethod(mAddressStreet, mCustomer.getAddress().getStreet());
+            if(mCustomer.getAddress().getState() != null) addressHelperMethod(mAddressState, mCustomer.getAddress().getState());
+            if(mCustomer.getAddress().getZipcode() != null) addressHelperMethod(mAddressZipCode, mCustomer.getAddress().getZipcode());
+        }
     }
 
     private void setMailClickListener(final Mail mEmail){
-        mMailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(Intent.ACTION_SENDTO , Uri.fromParts("mailto" , mEmail.getValue() , null)) ;
-                startActivity(Intent.createChooser(intent , "Send email..."));
-            }
-        });
+        if(mEmail.getValue() != null ) {
+            mMailButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view){
+                    Intent intent = new Intent(Intent.ACTION_SENDTO , Uri.fromParts("mailto" , mEmail.getValue() , null)) ;
+                    startActivity(Intent.createChooser(intent , "Send email..."));
+                }
+            });
+        }
     }
 
     private void setPhoneNumberClickListener(final PhoneNum mPhoneNum){
-        mImagePhoneNumberButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+mPhoneNum.getValue()));
-                startActivity(intent);
-            }
-        });
+        if(mPhoneNum.getValue() != null ) {
+            mImagePhoneNumberButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:"+mPhoneNum.getValue()));
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
 }

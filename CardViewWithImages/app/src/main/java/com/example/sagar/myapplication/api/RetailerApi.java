@@ -1,8 +1,10 @@
 package com.example.sagar.myapplication.api;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 
+import com.example.sagar.myapplication.api.interfaces.ApiImageInterface;
 import com.example.sagar.myapplication.utill.Err;
 import com.example.sagar.myapplication.utill.Token;
 import com.example.sagar.myapplication.adapter.interfaces.RetailerAdapterInterface;
@@ -20,12 +22,15 @@ public class RetailerApi{
     private static  RetailerApi retailerApi;
     private ApiRetailerInterface mRetailerInterface;
     private RetailerAdapterInterface mRetailerAdapterInterface;
+    private ApiImageInterface mApiImageInterface;
+    private Context mContext;
 
-    public RetailerApi(RetailerAdapterInterface mRetailerAdapterInterface){
+    private  RetailerApi(RetailerAdapterInterface mRetailerAdapterInterface, Context mContext) {
         mRetailerInterface = ApiClient.getClient().create( ApiRetailerInterface.class );
+        mApiImageInterface = ApiClient.getClient().create(ApiImageInterface.class);
+        this.mContext = mContext;
         this.mRetailerAdapterInterface = mRetailerAdapterInterface;
     }
-
 
     public void listRetailer(final Dialog dialog){
             mRetailerInterface.getRetailer(
@@ -33,13 +38,13 @@ public class RetailerApi{
             ).enqueue(new Callback<List<Retailer>>() {
                 @Override
                 public void onResponse(Call<List<Retailer>> call, Response<List<Retailer>> response) {
-                    if(response.code()==200){
-                            mRetailerAdapterInterface.addNewReatilerList(response.body());
-                            dialog.dismiss();
+                    if(response.code() == 200) {
+                        mRetailerAdapterInterface.addNewReatilerList(response.body());
+                        dialog.dismiss();
                     }
                     else{
-                            Err.e("Error in getting employee");
-                            dialog.dismiss();
+                        Err.s(mContext, "Error in getting employee");
+                        dialog.dismiss();
                     }
                 }
                 @Override
@@ -49,17 +54,17 @@ public class RetailerApi{
                 }
             });
     }
-    public void listRetailer(final SwipeRefreshLayout mSwipeToRefreshLayout){
+
+    public void listRetailer(final SwipeRefreshLayout mSwipeToRefreshLayout) {
         mRetailerInterface.getRetailer(
                 Token.token
         ).enqueue(new Callback<List<Retailer>>() {
             @Override
             public void onResponse(Call<List<Retailer>> call, Response<List<Retailer>> response) {
-                if(response.code()==200){
+                if(response.code() == 200) {
                     mRetailerAdapterInterface.addNewReatilerList(response.body());
-                }
-                else{
-                    Err.e("Error in getting employee");
+                } else{
+                    Err.s(mContext, "Error in getting retailer");
                 }
                 mSwipeToRefreshLayout.setRefreshing(false);
             }
@@ -71,61 +76,72 @@ public class RetailerApi{
         });
     }
 
-    public void uploadRetailerImage( MultipartBody.Part bodypart , final  Retailer  retailer , final Dialog dialog ){
-          mRetailerInterface.uploadRetailerImage( bodypart  , Token.token  ).enqueue(new Callback<Data>() {
-              @Override
-              public void onResponse(Call<Data> call,Response<Data> response) {
-                    if(response.code()==200){
-                        Err.e("Image uploaded");
-                        createNewRetailer( dialog , retailer , response.body().getMessage()  );
-                    }
-                    else{
-                        Err.e("failed to upload image");
-                        dialog.dismiss();
-                    }
-              }
-              @Override
-              public void onFailure(Call<Data> call, Throwable t) {
-                    t.printStackTrace();
-                    dialog.dismiss();
-              }
-          });
-    }
-
-    public void deleteRetailerImage(final Dialog dialog , String image , final String retailer_id ){
-        mRetailerInterface.deleteRetailerImage( image  , Token.token ).enqueue(new Callback<Data>() {
-                            @Override
-                            public void onResponse(Call<Data> call, Response<Data> response){
-                                    if(response.code()==200){
-                                        deleteRetailer(retailer_id,dialog);
-
-                                    }
-                                    else{
-                                        dialog.dismiss();
-                                        Err.e("failed to delete image");
-                                    }
+    public void createNewRetailer(MultipartBody.Part bodypart, final Retailer retailer, final Dialog dialog) {
+        if(bodypart != null) {
+            mApiImageInterface.addImage(Token.token, bodypart)
+                    .enqueue(new Callback<Data>() {
+                        @Override
+                        public void onResponse(Call<Data> call, Response<Data> response) {
+                            if(response.code() == 200 && response.body().getSuccess()) {
+                                retailer.setImage(response.body().getId());
+                                createNewRetailerHelper(dialog, retailer);
                             }
-                            @Override
-                            public void onFailure(Call<Data> call, Throwable t){
-                                t.printStackTrace();
+                            else{
+                                Err.s(mContext, "failed to upload image");
                                 dialog.dismiss();
                             }
-        });
+                        }
+                        @Override
+                        public void onFailure(Call<Data> call, Throwable t) {
+                            t.printStackTrace();
+                            Err.s(mContext, "failed to upload image");
+                            dialog.dismiss();
+                        }
+                    });
+        }
+        else {
+            createNewRetailerHelper(dialog, retailer);
+        }
     }
 
-    public void createNewRetailer(final Dialog dialog , final Retailer retailer , String imageId ){
+    public void deleteRetailer(final Dialog dialog,final  Retailer mRetailer) {
+        if(mRetailer.getId() == null) {
+            deleteRetailerHelper(mRetailer, dialog);
+        } else {
+            mApiImageInterface.deleteImage(mRetailer.getId() ,Token.token)
+                    .enqueue(new Callback<Data>() {
+                        @Override
+                        public void onResponse(Call<Data> call, Response<Data> response) {
+                            if(response.code() == 200 && response.body().getSuccess()){
+                                deleteRetailerHelper(mRetailer, dialog);
+                            }
+                            else{
+                                dialog.dismiss();
+                                Err.s(mContext, "failed to delete image");
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<Data> call, Throwable t) {
+                            t.printStackTrace();
+                            dialog.dismiss();
+                        }
+                    });
+        }
+    }
+
+    private void createNewRetailerHelper(final Dialog dialog , final Retailer retailer) {
                   mRetailerInterface.createRetailer(
                       retailer , Token.token
-                  ).enqueue(new Callback<Data>(){
+                  ).enqueue(new Callback<Data>() {
                       @Override
                       public void onResponse(Call<Data> call, Response<Data> response) {
-                          if(response.code()==200){
+                          if(response.code()==200) {
                               listRetailer(dialog);
-                              Err.e("Retailer created!");
+                              Err.s(mContext, "Retailer created!");
                           }
                           else{
                               dialog.dismiss();
-                              Err.e("Failed to create retailer!");
+                              Err.s(mContext,"Failed to create retailer!");
                           }
                       }
                       @Override
@@ -136,16 +152,16 @@ public class RetailerApi{
                   });
     }
 
-    public void deleteRetailer(final String id,final Dialog  dialog){
-        mRetailerInterface.deleteRetailer(  id , Token.token  ).
+    private  void deleteRetailerHelper(Retailer mRetailer, final Dialog  dialog){
+        mRetailerInterface.deleteRetailer(mRetailer.getId(), Token.token).
                 enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
-                if(response.code()==200){
+                if(response.code()==200) {
                     listRetailer(dialog);
                 }
-                else{
-                    Err.e("error in deleting employee");
+                else {
+                    Err.s(mContext, "error in deleting employee");
                     dialog.dismiss();
                 }
             }
@@ -161,9 +177,9 @@ public class RetailerApi{
         this.mRetailerAdapterInterface = mRetailerAdapterInterface;
     }
 
-    public static RetailerApi getmReteilerApi(RetailerAdapterInterface mReaRetailerAdapterInterface){
-        if(retailerApi==null)
-            retailerApi = new RetailerApi(mReaRetailerAdapterInterface);
+    public static RetailerApi getmReteilerApi(RetailerAdapterInterface mReaRetailerAdapterInterface, Context mContext){
+        if(retailerApi == null)
+            retailerApi = new RetailerApi(mReaRetailerAdapterInterface, mContext);
         else
             retailerApi.setRetailerAdapterInterface(mReaRetailerAdapterInterface);
         return retailerApi;

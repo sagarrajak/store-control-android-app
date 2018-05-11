@@ -17,10 +17,17 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <include
-                android:id="@+id/about_store_toolbar"
-                layout="@layout/toolbar"></include>
+            <android.support.v7.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/view_about_store_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="enterAlways|scroll">
+            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
+        <include layout="@layout/about_store_xml"></include>
     </android.support.design.widget.CoordinatorLayout>
     <include layout="@layout/navigation_drawer"></include>
 </android.support.v4.widget.DrawerLayout>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sagar.myapplication">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -52,7 +54,9 @@
         <activity android:name=".element.employee.employee.Edit_employee_activity" />
         <activity android:name=".element.customer.Edit_customer_activity" />
         <activity android:name=".element.retailer.Edit_retailer_activity" />
-        <activity android:name=".element.product.Edit_product_activity"></activity>
+        <activity android:name=".element.product.Edit_product_activity" />
+        <activity android:name=".element.about_store.Edit_about_store_activity"></activity>
+        <activity android:name=".utill.ui.BottomSheetImage" />
     </application>
 
 </manifest>
