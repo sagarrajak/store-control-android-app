@@ -52,24 +52,24 @@ public class Responce {
     }
 
     @Override
-    public String toString(){
-        String out="";
-        if(status!=null) {
+    public String toString() {
+        String out = "";
+        if (status != null) {
             out += status.toString();
             out += "\n";
         }
-        if(statusText!=null) {
+        if (statusText != null) {
             out += statusText.toString();
-            out+="\n";
+            out += "\n";
         }
-        if(data!=null) {
-             out += data.toString();
-             out+="\n";
+        if (data != null) {
+            out += data.toString();
+            out += "\n";
         }
 
-        if(errors!=null){
+        if (errors != null) {
             out += errors.toString();
-            out+="\n";
+            out += "\n";
         }
         return out;
     }

@@ -26,11 +26,11 @@ import retrofit2.Response;
 public class RetailerPickerAdapter extends RecyclerView.Adapter<RetailerPickerAdapter.MyViewHolder> {
 
     private List<Retailer> mRetailer;
-    private HashMap<Retailer,Integer> mMap;
+    private HashMap<Retailer, Integer> mMap;
     private ApiRetailerInterface mApiRetailerInterface;
     private Context mContext;
 
-    public RetailerPickerAdapter( Context mContext ){
+    public RetailerPickerAdapter(Context mContext) {
         mRetailer = new ArrayList<>();
         mMap = new HashMap<>();
         this.mContext = mContext;
@@ -38,58 +38,58 @@ public class RetailerPickerAdapter extends RecyclerView.Adapter<RetailerPickerAd
         listRetailer();
     }
 
-    private void listRetailer(){
+    private void listRetailer() {
         mApiRetailerInterface.getRetailer(Token.token).enqueue(new Callback<List<Retailer>>() {
             @Override
-            public void onResponse( Call<List<Retailer>> call, Response<List<Retailer>> response) {
-                 if(response.code()==200) setList(response.body());
-                 else Err.s( mContext , "Error in fetching data" );
+            public void onResponse(Call<List<Retailer>> call, Response<List<Retailer>> response) {
+                if (response.code() == 200) setList(response.body());
+                else Err.s(mContext, "Error in fetching data");
             }
+
             @Override
             public void onFailure(Call<List<Retailer>> call, Throwable t) {
-                    t.printStackTrace();
-                    Err.s( mContext , "Error in fetching data" );
+                t.printStackTrace();
+                Err.s(mContext, "Error in fetching data");
             }
         });
     }
 
-    private void setList( List<Retailer> mReatiler ){
+    private void setList(List<Retailer> mReatiler) {
         this.mRetailer = mReatiler;
         notifyDataSetChanged();
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.dialog_fragment_brand_picker_layout_row , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dialog_fragment_brand_picker_layout_row, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder( MyViewHolder holder , final int position ) {
-        holder.mTextView.setText(mRetailer.get(position).getName().getName() + " "+mRetailer.get(position).getName().getLast());
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        holder.mTextView.setText(mRetailer.get(position).getName().getName() + " " + mRetailer.get(position).getName().getLast());
         holder.mCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mMap.containsKey(mRetailer.get(position))){
+                if (mMap.containsKey(mRetailer.get(position))) {
                     mMap.remove(mRetailer.get(position));
-                }
-                else{
-                    mMap.put(mRetailer.get(position),1);
+                } else {
+                    mMap.put(mRetailer.get(position), 1);
                 }
             }
         });
     }
 
-    public List<Retailer> getSelectedList(){
+    public List<Retailer> getSelectedList() {
         List<Retailer> temList = new ArrayList<>();
-        for( Retailer obj : mMap.keySet()  ){
+        for (Retailer obj : mMap.keySet()) {
             temList.add(obj);
         }
-        return  temList;
+        return temList;
     }
 
-    public HashMap< Retailer , Integer > getMap(){
-        return  mMap;
+    public HashMap<Retailer, Integer> getMap() {
+        return mMap;
     }
 
     @Override
@@ -98,9 +98,10 @@ public class RetailerPickerAdapter extends RecyclerView.Adapter<RetailerPickerAd
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public CheckBox mCheckBox ;
+        public CheckBox mCheckBox;
         public TextView mTextView;
-        public MyViewHolder(View itemView){
+
+        public MyViewHolder(View itemView) {
             super(itemView);
             mCheckBox = (CheckBox) itemView.findViewById(R.id.dialog_fragment_brand_picker_checkbox);
             mTextView = (TextView) itemView.findViewById(R.id.dialog_fragment_brand_picker_textView);

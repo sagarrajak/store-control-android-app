@@ -28,36 +28,38 @@ public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.
     private Context mContext;
     private List<ProductPopulated> mList;
     private int position;
-    private  static ProductGridAdapter mProductGridAdapter =null;
-    private ProductApi mProductApi ;
+    private static ProductGridAdapter mProductGridAdapter = null;
+    private ProductApi mProductApi;
 
-    public ProductGridAdapter(Context  mContext ){
-          this.mContext = mContext;
-          mList = new ArrayList<>();
-          mProductApi = ProductApi.getmProductApi(this);
+    public ProductGridAdapter(Context mContext) {
+        this.mContext = mContext;
+        mList = new ArrayList<>();
+        mProductApi = ProductApi.getmProductApi(this);
     }
 
     @Override
-    public MyProductViewHodler onCreateViewHolder(ViewGroup parent, int viewType){
-            View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.product_grid_card, parent , false );
-            return  new MyProductViewHodler(view);
+    public MyProductViewHodler onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_grid_card, parent, false);
+        return new MyProductViewHodler(view);
     }
 
     @Override
     public void addNewproductList(List<ProductPopulated> mList) {
-            this.mList = mList;
-            notifyDataSetChanged();
+        this.mList = mList;
+        notifyDataSetChanged();
     }
 
-    class  MyMenuCLickListener implements  PopupMenu.OnMenuItemClickListener{
-        int position ;
-        public  MyMenuCLickListener(int position){
+    class MyMenuCLickListener implements PopupMenu.OnMenuItemClickListener {
+        int position;
+
+        public MyMenuCLickListener(int position) {
             this.position = position;
         }
+
         @Override
-        public boolean onMenuItemClick(MenuItem item){
-            switch(item.getItemId()){
-                case R.id.product_menu_delete :
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.product_menu_delete:
                     alertDialogDeleteBuilder(position);
                     break;
                 case R.id.product_menu_edit:
@@ -68,56 +70,56 @@ public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final MyProductViewHodler holder,final int i){
+    public void onBindViewHolder(final MyProductViewHodler holder, final int i) {
 
-            String url = "http://res.cloudinary.com/droxr0kdp/image/upload/v1482011353/";
-            holder.mTextViewPrice.setText(mList.get(i).getPrice());
-            holder.mTextViewName.setText(mList.get(i).getName());
-            holder.mImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showMenu(holder.mImageView , i);
-                }
-            });
+        String url = "http://res.cloudinary.com/droxr0kdp/image/upload/v1482011353/";
+        holder.mTextViewPrice.setText(mList.get(i).getPrice());
+        holder.mTextViewName.setText(mList.get(i).getName());
+        holder.mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showMenu(holder.mImageView, i);
+            }
+        });
 
-            Glide
+        Glide
                 .with(mContext.getApplicationContext())
-                 .load(url+mList.get(i).getImage())
-                    .centerCrop()
-                      .placeholder(R.drawable.product)
-                                .crossFade()
-                                    .into(holder.mProductView);
+                .load(url + mList.get(i).getImage())
+                .centerCrop()
+                .placeholder(R.drawable.product)
+                .crossFade()
+                .into(holder.mProductView);
 
     }
 
-    private ProgressDialog createProgressDialog(){
+    private ProgressDialog createProgressDialog() {
         ProgressDialog dialog = new ProgressDialog(mContext);
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
-        return  dialog;
+        return dialog;
     }
 
 
-    private void alertDialogDeleteBuilder(final int position){
+    private void alertDialogDeleteBuilder(final int position) {
 
         new AlertDialog
                 .Builder(mContext)
-                    .setMessage("Are you sure to want to delete this product")
-                       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialogInterface, int i){
-                                    ProgressDialog mProgressDialog =  createProgressDialog();
-                                    mProgressDialog.show();
-                                    mProductApi.deleteProduct(mList.get(position).getId(),mProgressDialog);
-                            }
-                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                    Err.s(mContext,"Delete Canceled");
-                            }
-                        }).show();
+                .setMessage("Are you sure to want to delete this product")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ProgressDialog mProgressDialog = createProgressDialog();
+                        mProgressDialog.show();
+                        mProductApi.deleteProduct(mList.get(position).getId(), mProgressDialog);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Err.s(mContext, "Delete Canceled");
+                    }
+                }).show();
 
     }
 
@@ -126,33 +128,34 @@ public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.
         return mList.size();
     }
 
-    private void showMenu(View view , int position){
-        PopupMenu  popupMenu = new PopupMenu(mContext,view);
+    private void showMenu(View view, int position) {
+        PopupMenu popupMenu = new PopupMenu(mContext, view);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
-        menuInflater.inflate(R.menu.menu_product,popupMenu.getMenu());
+        menuInflater.inflate(R.menu.menu_product, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new MyMenuCLickListener(position));
         popupMenu.show();
     }
 
-    public class MyProductViewHodler extends  RecyclerView.ViewHolder{
-        public TextView mTextViewName ,mTextViewPrice;
-        public ImageView mImageView,mProductView;
-        public MyProductViewHodler(View itemView){
+    public class MyProductViewHodler extends RecyclerView.ViewHolder {
+        public TextView mTextViewName, mTextViewPrice;
+        public ImageView mImageView, mProductView;
+
+        public MyProductViewHodler(View itemView) {
             super(itemView);
             mTextViewName = (TextView) itemView.findViewById(R.id.product_name);
-            mImageView   =   (ImageView) itemView.findViewById(R.id.ic_menu_dots);
+            mImageView = (ImageView) itemView.findViewById(R.id.ic_menu_dots);
             mTextViewPrice = (TextView) itemView.findViewById(R.id.product_price);
             mProductView = (ImageView) itemView.findViewById(R.id.image_product);
         }
     }
 
-    public void setmContext(Context mContext){
+    public void setmContext(Context mContext) {
         this.mContext = mContext;
     }
 
-    public static ProductGridAdapter getProductAdapter(Context Con){
+    public static ProductGridAdapter getProductAdapter(Context Con) {
 
-        if(mProductGridAdapter == null )
+        if (mProductGridAdapter == null)
             mProductGridAdapter = new ProductGridAdapter(Con);
         else
             mProductGridAdapter.setmContext(Con);

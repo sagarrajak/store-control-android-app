@@ -22,21 +22,21 @@ import com.example.sagar.myapplication.modal.ProductType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategoryAdapter.MyViewHolder>{
+public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategoryAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<ProductType> mList;
     private static ProductCategoryAdapter mProductCategoryAdapter;
 
-    public ProductCategoryAdapter(Context mContext){
-          this.mContext = mContext;
-          mList  = new ArrayList<>();
+    public ProductCategoryAdapter(Context mContext) {
+        this.mContext = mContext;
+        mList = new ArrayList<>();
     }
 
     @Override
     public ProductCategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-         View view  = LayoutInflater.from(parent.getContext()).inflate( R.layout.category_card , parent , false);
-         return  new MyViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_card, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -46,9 +46,9 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(  mContext.getApplicationContext() , Product_category_details.class );
+                Intent intent = new Intent(mContext.getApplicationContext(), Product_category_details.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("Category", mList.get(position) );
+                intent.putExtra("Category", mList.get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -58,13 +58,15 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
     public int getItemCount() {
         return mList.size();
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public  TextView category_name , category_details;
-        public ImageView mImageView ;
-        View view ;
+        public TextView category_name, category_details;
+        public ImageView mImageView;
+        View view;
+
         public MyViewHolder(View view) {
             super(view);
-            category_name  = (TextView) view.findViewById(R.id.category_card_name);
+            category_name = (TextView) view.findViewById(R.id.category_card_name);
             category_details = (TextView) view.findViewById(R.id.category_card_details);
             mImageView = (ImageView) view.findViewById(R.id.product_category_view_image_view_menu);
             mImageView.setOnClickListener(new View.OnClickListener() {
@@ -75,14 +77,14 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
             });
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public boolean onLongClick(View v){
-                    final CharSequence[] items = {"Details" , "Delete" , "Edit" , "Products" , "Add new product" };
+                public boolean onLongClick(View v) {
+                    final CharSequence[] items = {"Details", "Delete", "Edit", "Products", "Add new product"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            switch (which){
-                                case 0 :
+                            switch (which) {
+                                case 0:
 
                                     break;
                                 case 1:
@@ -102,29 +104,29 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
                     return false;
                 }
             });
-            this.view = view ;
+            this.view = view;
 
 
         }
     }
 
-    private void showPopUpMenu(View view){
-        PopupMenu popupMenu = new PopupMenu(mContext,view);
+    private void showPopUpMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(mContext, view);
         MenuInflater mMenuInflater = popupMenu.getMenuInflater();
-        mMenuInflater.inflate(R.menu.product_category_menu , popupMenu.getMenu());
+        mMenuInflater.inflate(R.menu.product_category_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item){
-                switch (item.getItemId()){
-                    case R.id.product_category_menu_add_new_product :
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.product_category_menu_add_new_product:
                         break;
-                    case R.id.product_category_menu_delete :
+                    case R.id.product_category_menu_delete:
                         break;
-                    case R.id.product_category_menu_details :
+                    case R.id.product_category_menu_details:
                         break;
-                    case R.id.product_category_menu_edit :
+                    case R.id.product_category_menu_edit:
                         break;
-                    case R.id.product_category_menu_product :
+                    case R.id.product_category_menu_product:
                         break;
                 }
                 return false;
@@ -133,17 +135,17 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         popupMenu.show();
     }
 
-    public  void  setmList( List<ProductType> categories){
+    public void setmList(List<ProductType> categories) {
         this.mList = categories;
         notifyDataSetChanged();
     }
 
-    public void setContext(Context mContext){
+    public void setContext(Context mContext) {
         this.mContext = mContext;
-     }
+    }
 
-    public static ProductCategoryAdapter getCategoryAdapter(Context context){
-        if(mProductCategoryAdapter ==null)
+    public static ProductCategoryAdapter getCategoryAdapter(Context context) {
+        if (mProductCategoryAdapter == null)
             mProductCategoryAdapter = new ProductCategoryAdapter(context);
         else
             mProductCategoryAdapter.setContext(context);

@@ -16,9 +16,9 @@ public class About_store_activity extends AppCompatActivity {
 
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
-    private TextView mName, mMail,mPhoneNumber;
-    private TextView  mAboutStore, mAddressMain, mAddressStreet;
-    private TextView  mAddressNeighbourHood, mAddressCity, mAddressState, mAddressZipCode;
+    private TextView mName, mMail, mPhoneNumber;
+    private TextView mAboutStore, mAddressMain, mAddressStreet;
+    private TextView mAddressNeighbourHood, mAddressCity, mAddressState, mAddressZipCode;
     private Toolbar mToolbar;
 
     @Override
@@ -32,22 +32,22 @@ public class About_store_activity extends AppCompatActivity {
     }
 
     private void setUiElement() {
-      mName = findViewById(R.id.view_about_store_name);
-      mMail = findViewById(R.id.view_about_store_mail);
-      mPhoneNumber = findViewById(R.id.view_about_store_phone_num);
-      mAboutStore = findViewById(R.id.view_about_store_details);
-      mAddressMain = findViewById(R.id.view_about_store_address);
-      mAddressStreet = findViewById(R.id.view_about_store_address_street);
-      mAddressNeighbourHood = findViewById(R.id.view_about_store_address_neighbourhood);
-      mAddressCity = findViewById(R.id.view_about_store_address_city);
-      mAddressState = findViewById(R.id.view_about_store_address_state);
-      mAddressZipCode = findViewById(R.id.view_about_store_address_zipcode);
-      mToolbar = findViewById(R.id.view_about_store_toolbar);
+        mName = findViewById(R.id.view_about_store_name);
+        mMail = findViewById(R.id.view_about_store_mail);
+        mPhoneNumber = findViewById(R.id.view_about_store_phone_num);
+        mAboutStore = findViewById(R.id.view_about_store_details);
+        mAddressMain = findViewById(R.id.view_about_store_address);
+        mAddressStreet = findViewById(R.id.view_about_store_address_street);
+        mAddressNeighbourHood = findViewById(R.id.view_about_store_address_neighbourhood);
+        mAddressCity = findViewById(R.id.view_about_store_address_city);
+        mAddressState = findViewById(R.id.view_about_store_address_state);
+        mAddressZipCode = findViewById(R.id.view_about_store_address_zipcode);
+        mToolbar = findViewById(R.id.view_about_store_toolbar);
     }
 
-    private void setNavigationView(){
+    private void setNavigationView() {
         mNavigationView = findViewById(R.id.navigation_view);
-        NavigationDrawer navigationDrawer = new NavigationDrawer(mToolbar,mDrawerLayout,mNavigationView,this);
+        NavigationDrawer navigationDrawer = new NavigationDrawer(mToolbar, mDrawerLayout, mNavigationView, this);
         navigationDrawer.setNavigationDrawer();
     }
 
@@ -65,8 +65,8 @@ public class About_store_activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.about_Store_details :
+        switch (item.getItemId()) {
+            case R.id.about_Store_details:
                 break;
         }
         return super.onOptionsItemSelected(item);

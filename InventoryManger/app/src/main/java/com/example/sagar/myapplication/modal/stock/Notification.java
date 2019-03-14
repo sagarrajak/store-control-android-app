@@ -7,11 +7,14 @@ import java.io.Serializable;
 
 public class Notification {
 
-    public Notification(){}
-    public Notification(boolean isAllowed , Integer minimumQuantity){
-       this.isAllowed =  isAllowed;
-       this.minimumQuantity = minimumQuantity;
+    public Notification() {
     }
+
+    public Notification(boolean isAllowed, Integer minimumQuantity) {
+        this.isAllowed = isAllowed;
+        this.minimumQuantity = minimumQuantity;
+    }
+
     @SerializedName("isAllowed")
     @Expose
     private Boolean isAllowed;

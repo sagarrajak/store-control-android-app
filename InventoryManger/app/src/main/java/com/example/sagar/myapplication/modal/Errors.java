@@ -30,6 +30,6 @@ public class Errors {
 
     @Override
     public String toString() {
-        return message.toString() +" "+name;
+        return message.toString() + " " + name;
     }
 }

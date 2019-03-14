@@ -15,13 +15,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WorkProfileApi{
+public class WorkProfileApi {
 
     private List<WorkProfile> mList;
     private static WorkProfileApi mWorkProfileApi;
     private ApiWorkProfileInterface mApiWorkProfileInterface;
 
-    public WorkProfileApi(){
+    public WorkProfileApi() {
 
         mList = new ArrayList<>();
         mApiWorkProfileInterface = ApiClient.getClient().create(ApiWorkProfileInterface.class);
@@ -29,20 +29,21 @@ public class WorkProfileApi{
 
     }
 
-    public  void  addWorkProfile(String work_profile , Integer hr_of_work , Integer salary ,  String right  , final  Dialog dialog ){
+    public void addWorkProfile(String work_profile, Integer hr_of_work, Integer salary, String right, final Dialog dialog) {
 
         mApiWorkProfileInterface
-                .addWorkProfile( work_profile , hr_of_work , salary , right , Token.token )
+                .addWorkProfile(work_profile, hr_of_work, salary, right, Token.token)
                 .enqueue(new Callback<Data>() {
                     @Override
                     public void onResponse(Call<Data> call, Response<Data> response) {
-                        if( response.code() == 200 )
-                              listWorkProfile(dialog);
-                        else{
+                        if (response.code() == 200)
+                            listWorkProfile(dialog);
+                        else {
                             dialog.dismiss();
                             Err.e("failed in  creating   work profile");
                         }
                     }
+
                     @Override
                     public void onFailure(Call<Data> call, Throwable t) {
                         t.printStackTrace();
@@ -52,63 +53,67 @@ public class WorkProfileApi{
 
 
     }
-    public  void  deleteWorkProfile(String id ,final Dialog dialog){
 
-            mApiWorkProfileInterface
-                        .deleteWorkProfile( id , Token.token )
-                            .enqueue(new Callback<Data>() {
-                                @Override
-                                public void onResponse( Call<Data> call , Response<Data> response ){
+    public void deleteWorkProfile(String id, final Dialog dialog) {
 
-                                        if( response.code() == 200 )
-                                               listWorkProfile(dialog);
-                                        else
-                                               Err.e("Deleting workprofile failed");
-                                }
-                                @Override
-                                public void onFailure(Call<Data> call, Throwable t) {
-                                    t.printStackTrace();
-                                    Err.e("Deleting work profile failed");
-                                }
-                            });
+        mApiWorkProfileInterface
+                .deleteWorkProfile(id, Token.token)
+                .enqueue(new Callback<Data>() {
+                    @Override
+                    public void onResponse(Call<Data> call, Response<Data> response) {
 
+                        if (response.code() == 200)
+                            listWorkProfile(dialog);
+                        else
+                            Err.e("Deleting workprofile failed");
+                    }
 
-    }
-    public  void  modifyWorkProfile(){
-
-            //todo api for modifying work profile api
-    }
-
-
-    public  void  listWorkProfile(final Dialog dialog){
-
-
-            mApiWorkProfileInterface.getWorkProfileList(
-                    Token.token
-            ).enqueue(new Callback<List<WorkProfile>>() {
-                @Override
-                public void onResponse( Call<List<WorkProfile>> call , Response<List<WorkProfile>> response){
-
-                        if(response.code() == 200) mList = response.body();
-                        else Err.e("Error in updating list of of workProfile");
-
-                    dialog.dismiss();
-                }
-                @Override
-                public void onFailure(Call<List<WorkProfile>> call, Throwable t) {
-                    t.printStackTrace();
-                    Err.e("Error in listing work profile");
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Data> call, Throwable t) {
+                        t.printStackTrace();
+                        Err.e("Deleting work profile failed");
+                    }
+                });
 
 
     }
 
-    public static  WorkProfileApi getmWorkProfileApi(){
-            if(mWorkProfileApi == null )
-                mWorkProfileApi = new WorkProfileApi();
+    public void modifyWorkProfile() {
 
-          return  mWorkProfileApi;
+        //todo api for modifying work profile api
+    }
+
+
+    public void listWorkProfile(final Dialog dialog) {
+
+
+        mApiWorkProfileInterface.getWorkProfileList(
+                Token.token
+        ).enqueue(new Callback<List<WorkProfile>>() {
+            @Override
+            public void onResponse(Call<List<WorkProfile>> call, Response<List<WorkProfile>> response) {
+
+                if (response.code() == 200) mList = response.body();
+                else Err.e("Error in updating list of of workProfile");
+
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<WorkProfile>> call, Throwable t) {
+                t.printStackTrace();
+                Err.e("Error in listing work profile");
+            }
+        });
+
+
+    }
+
+    public static WorkProfileApi getmWorkProfileApi() {
+        if (mWorkProfileApi == null)
+            mWorkProfileApi = new WorkProfileApi();
+
+        return mWorkProfileApi;
     }
 
 }

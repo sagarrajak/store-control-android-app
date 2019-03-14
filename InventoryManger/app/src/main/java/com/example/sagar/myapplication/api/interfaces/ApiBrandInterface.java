@@ -27,14 +27,14 @@ public interface ApiBrandInterface {
 
     @FormUrlEncoded
     @POST("api/product-brand")
-    public  Call<Data>  addNewBrand(
-          @Field("brand") String brand ,
-          @Field("brand") String details,
-          @Field("image") String image,
-          @Header("token") String token
+    public Call<Data> addNewBrand(
+            @Field("brand") String brand,
+            @Field("brand") String details,
+            @Field("image") String image,
+            @Header("token") String token
     );
 
-    @DELETE ("api/product-brand/{id}")
+    @DELETE("api/product-brand/{id}")
     public Call<Data> deleteBrand(
             @Path("id") String id,
             @Header("token") String token
@@ -43,7 +43,7 @@ public interface ApiBrandInterface {
     @Multipart
     @POST("api/product-brand/image/")
     public Call<Data> addBrandImage(
-            @Part MultipartBody.Part  image ,
+            @Part MultipartBody.Part image,
             @Header("token") String Token
     );
 

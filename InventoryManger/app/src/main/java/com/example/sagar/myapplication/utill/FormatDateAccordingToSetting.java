@@ -6,7 +6,6 @@ import android.support.annotation.RequiresApi;
 import android.text.format.DateFormat;
 
 
-
-public class FormatDateAccordingToSetting{
+public class FormatDateAccordingToSetting {
 
 }

@@ -13,7 +13,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-public interface ApiProductTypeInterface{
+
+public interface ApiProductTypeInterface {
 
     @GET("api/product-type")
     public Call<List<ProductType>> getProductTypeList(
@@ -23,15 +24,15 @@ public interface ApiProductTypeInterface{
     @FormUrlEncoded
     @POST("api/product-type")
     public Call<Data> addProductType(
-        @Field("product_type") String type ,
-        @Field("brand")  String details ,
-        @Header("token") String token
+            @Field("product_type") String type,
+            @Field("brand") String details,
+            @Header("token") String token
     );
 
     @DELETE("api/product-type/{id}")
-    public Call<Data>  deleteProduct(
-        @Path("id") String id ,
-        @Header("token") String token
+    public Call<Data> deleteProduct(
+            @Path("id") String id,
+            @Header("token") String token
     );
 
 }

@@ -1,7 +1,5 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sagar.myapplication.element.transaction.fragment.Check_in_stocks_fragment">
-</android.support.design.widget.CoordinatorLayout>
+    tools:context="com.example.sagar.myapplication.element.transaction.fragment.Check_in_stocks_fragment"></android.support.design.widget.CoordinatorLayout>

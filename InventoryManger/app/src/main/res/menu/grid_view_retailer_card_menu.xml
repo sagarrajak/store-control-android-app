@@ -3,12 +3,12 @@
     <item
         android:title="Edit details"
         android:id="@+id/edit_retailer"
-        android:orderInCategory="100"/>
+        android:orderInCategory="100" />
     <item
         android:title="Delete"
         android:id="@+id/delete_retailer"
-        android:orderInCategory="101"/>
+        android:orderInCategory="101" />
     <item
         android:title="products"
-        android:id="@+id/retailer_products"/>
+        android:id="@+id/retailer_products" />
 </menu>

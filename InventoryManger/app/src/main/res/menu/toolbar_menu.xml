@@ -6,6 +6,5 @@
         android:title="search"
         android:id="@+id/employee_search"
         app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="always|collapseActionView">
-    </item>
+        app:showAsAction="always|collapseActionView"></item>
 </menu>

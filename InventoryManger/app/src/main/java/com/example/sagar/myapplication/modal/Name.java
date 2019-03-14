@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Name implements Serializable{
+public class Name implements Serializable {
 
     public String getName() {
         return name;
@@ -50,29 +50,27 @@ public class Name implements Serializable{
 
     @SerializedName("name")
     @Expose
-    private  String name;
+    private String name;
     @SerializedName("middle")
     @Expose
     private String middle;
     @SerializedName("last")
     @Expose
-    private  String last;
+    private String last;
     @SerializedName("family_name")
     @Expose
-    private  String familyName;
+    private String familyName;
     @SerializedName("suffix")
     @Expose
-    private  String suffix;
+    private String suffix;
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Name() {
     }
 
     /**
-     * 
      * @param last
      * @param name
      * @param familyName

@@ -25,65 +25,63 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SelectRetailerCreateStock extends RecyclerView.Adapter<SelectRetailerCreateStock.MyViewHolder>  {
+public class SelectRetailerCreateStock extends RecyclerView.Adapter<SelectRetailerCreateStock.MyViewHolder> {
 
-    private Context mContext ;
+    private Context mContext;
     private List<Retailer> mRetailer;
     private RadioButton mSelectedRadioButton;
     private ApiRetailerInterface mApiRetailerInterface;
     private Retailer mSelectedRetailer;
     private ProgressBar mProgessBar;
 
-    public SelectRetailerCreateStock(Context mContext , ProgressBar mProgressBar , Retailer  mSelectedRetailer ){
-        mRetailer              =  new ArrayList<>();
-        this.mSelectedRetailer =  mSelectedRetailer;
-        mainConstructor(mContext,mProgressBar);
+    public SelectRetailerCreateStock(Context mContext, ProgressBar mProgressBar, Retailer mSelectedRetailer) {
+        mRetailer = new ArrayList<>();
+        this.mSelectedRetailer = mSelectedRetailer;
+        mainConstructor(mContext, mProgressBar);
     }
 
-    private void mainConstructor(Context mContext , ProgressBar mProgressBar){
-        this.mContext =  mContext;
-        mApiRetailerInterface  = ApiClient.getClient().create(ApiRetailerInterface.class);
+    private void mainConstructor(Context mContext, ProgressBar mProgressBar) {
+        this.mContext = mContext;
+        mApiRetailerInterface = ApiClient.getClient().create(ApiRetailerInterface.class);
         this.mProgessBar = mProgressBar;
         getData();
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_single_selection_dialog_layout , parent , false );
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_single_selection_dialog_layout, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position){
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        holder.mTextView.setText(mRetailer.get(position).getName().getName() + " "+mRetailer.get(position).getName().getLast());
+        holder.mTextView.setText(mRetailer.get(position).getName().getName() + " " + mRetailer.get(position).getName().getLast());
 
-        if(mSelectedRetailer!=null && Objects.equals(mSelectedRetailer.getId(), mRetailer.get(position).getId())) {
+        if (mSelectedRetailer != null && Objects.equals(mSelectedRetailer.getId(), mRetailer.get(position).getId())) {
             // when previously button was selected
             holder.mRadioButton.setChecked(true);
-            mSelectedRadioButton =  holder.mRadioButton;
+            mSelectedRadioButton = holder.mRadioButton;
         }
 
         holder.mRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 if( mSelectedRadioButton!=null && mSelectedRadioButton != holder.mRadioButton  ){
-                     //when user jump between two radio button
-                     mSelectedRadioButton.setChecked(false);
-                     mSelectedRadioButton =  holder.mRadioButton;
-                     mSelectedRetailer    =  mRetailer.get(position);
-                 }
-                 else if( mSelectedRetailer != null  && mSelectedRadioButton!=null ){
-                     // when user is clicking same radio button
-                     mSelectedRetailer=null;
-                     mSelectedRadioButton.setChecked(false);
-                     mSelectedRadioButton = null;
-                 }
-                 else{
-                     // when user is clicking new radio button , no button was selected before
-                     mSelectedRetailer =  mRetailer.get(position);
-                     mSelectedRadioButton =  holder.mRadioButton;
-                 }
+                if (mSelectedRadioButton != null && mSelectedRadioButton != holder.mRadioButton) {
+                    //when user jump between two radio button
+                    mSelectedRadioButton.setChecked(false);
+                    mSelectedRadioButton = holder.mRadioButton;
+                    mSelectedRetailer = mRetailer.get(position);
+                } else if (mSelectedRetailer != null && mSelectedRadioButton != null) {
+                    // when user is clicking same radio button
+                    mSelectedRetailer = null;
+                    mSelectedRadioButton.setChecked(false);
+                    mSelectedRadioButton = null;
+                } else {
+                    // when user is clicking new radio button , no button was selected before
+                    mSelectedRetailer = mRetailer.get(position);
+                    mSelectedRadioButton = holder.mRadioButton;
+                }
             }
         });
     }
@@ -96,6 +94,7 @@ public class SelectRetailerCreateStock extends RecyclerView.Adapter<SelectRetail
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public RadioButton mRadioButton;
         public TextView mTextView;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             mTextView = (TextView) itemView.findViewById(R.id.list_text_view);
@@ -103,34 +102,34 @@ public class SelectRetailerCreateStock extends RecyclerView.Adapter<SelectRetail
         }
     }
 
-    public Retailer getSelectedRetailer(){
-         return  mSelectedRetailer;
+    public Retailer getSelectedRetailer() {
+        return mSelectedRetailer;
     }
 
-    private void getData(){
+    private void getData() {
         mApiRetailerInterface
                 .getRetailer(Token.token)
-                    .enqueue(new Callback<List<Retailer>>() {
-                        @Override
-                        public void onResponse(Call<List<Retailer>> call, Response<List<Retailer>> response) {
-                            if(response.code() == 200 ){
-                                 setList(response.body());
-                            }
-                            else{
-                                Err.s( mContext , "Error in fetching data"  );
-                            }
-                            mProgessBar.setVisibility(View.GONE);
+                .enqueue(new Callback<List<Retailer>>() {
+                    @Override
+                    public void onResponse(Call<List<Retailer>> call, Response<List<Retailer>> response) {
+                        if (response.code() == 200) {
+                            setList(response.body());
+                        } else {
+                            Err.s(mContext, "Error in fetching data");
                         }
-                        @Override
-                        public void onFailure(Call<List<Retailer>> call, Throwable t) {
-                            t.printStackTrace();
-                            Err.s(mContext , t.getMessage() );
-                            mProgessBar.setVisibility(View.GONE);
-                        }
-                    });
+                        mProgessBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Retailer>> call, Throwable t) {
+                        t.printStackTrace();
+                        Err.s(mContext, t.getMessage());
+                        mProgessBar.setVisibility(View.GONE);
+                    }
+                });
     }
 
-    private void setList(List<Retailer> body){
+    private void setList(List<Retailer> body) {
         this.mRetailer = body;
         notifyDataSetChanged();
         mProgessBar.setVisibility(View.GONE);

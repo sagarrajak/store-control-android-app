@@ -44,7 +44,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class Edit_employee_activity extends AppCompatActivity{
+public class Edit_employee_activity extends AppCompatActivity {
 
     //Name ui components
     @BindView(R.id.edit_employee_name)
@@ -109,7 +109,7 @@ public class Edit_employee_activity extends AppCompatActivity{
     FloatingActionButton mFloatingActionButton;
 
     // temporary variable to store calender
-    private Calendar mCalendarDateOfJoin,mCalendarDateOfBirth;
+    private Calendar mCalendarDateOfJoin, mCalendarDateOfBirth;
 
     private EmployeeApi mEmployeeApi;
     // to store selected image uri
@@ -133,17 +133,17 @@ public class Edit_employee_activity extends AppCompatActivity{
         ButterKnife.bind(this);
         setUiElement();
         mEmployee = (Employee) getIntent().getSerializableExtra("Employee");
-        mBottomSheetImage = new BottomSheetImage(this, new BottomSheetImage.BottomSheetHelper(){
+        mBottomSheetImage = new BottomSheetImage(this, new BottomSheetImage.BottomSheetHelper() {
             @Override
-            public void resetImageUri(){
-                mSelectedImage  = null;
+            public void resetImageUri() {
+                mSelectedImage = null;
                 mBottomSheetImage.hideDeleteDialog();
             }
         });
-        mAddressFieldUiHelper = new AddressFieldUiHelper(mAddress,mAddressStreet,mAddressNeighbour,mAddressState,mAddressZipCode,mAddressPostOffice,mAddressCity);
-        mNameFieldUiHelper = new NameFieldUiHelper(mName,mNameMiddle,mNameLast,mNameSuffix,mNameFamilyName);
-        mPhoneNumberFileUiHelper = new PhoneNumFieldUiHelper(this,mPhoneNumber,mPhoneSpinner,R.array.phone_number_type );
-        mMailFieldUiHelper  = new MailFieldUiHelper(this,mEmailAddress,mPhoneSpinner,R.array.email_type );
+        mAddressFieldUiHelper = new AddressFieldUiHelper(mAddress, mAddressStreet, mAddressNeighbour, mAddressState, mAddressZipCode, mAddressPostOffice, mAddressCity);
+        mNameFieldUiHelper = new NameFieldUiHelper(mName, mNameMiddle, mNameLast, mNameSuffix, mNameFamilyName);
+        mPhoneNumberFileUiHelper = new PhoneNumFieldUiHelper(this, mPhoneNumber, mPhoneSpinner, R.array.phone_number_type);
+        mMailFieldUiHelper = new MailFieldUiHelper(this, mEmailAddress, mPhoneSpinner, R.array.email_type);
         mAddressFieldUiHelper.setAddress(mEmployee.getAddress());
         mNameFieldUiHelper.setName(mEmployee.getName());
         mMailFieldUiHelper.setEmailAddress(mEmployee.getMail());
@@ -154,7 +154,7 @@ public class Edit_employee_activity extends AppCompatActivity{
         setUpOnClickListener();
     }
 
-    private void  setToolbar(){
+    private void setToolbar() {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -162,24 +162,24 @@ public class Edit_employee_activity extends AppCompatActivity{
     }
 
 
-    private void setDateOfBirth(Date dateOfBirth){
+    private void setDateOfBirth(Date dateOfBirth) {
         mDateOfBirth.setText(new SimpleDateFormat("dd/MM/yyyy").format(dateOfBirth));
         mCalendarDateOfBirth = Calendar.getInstance();
         mCalendarDateOfBirth.setTime(dateOfBirth);
     }
 
-    private void setDateOfJoin(Date dateOfJoin){
+    private void setDateOfJoin(Date dateOfJoin) {
         mDateOfBirth.setText(new SimpleDateFormat("dd/MM/yyyy").format(dateOfJoin));
         mCalendarDateOfBirth = Calendar.getInstance();
         mCalendarDateOfBirth.setTime(dateOfJoin);
     }
 
-    private void setUiElement(){
+    private void setUiElement() {
         boolean isLinearLayout = getIntent().getBooleanExtra("isLinearLayout", false);
-        if(!isLinearLayout)
-            mEmployeeApi = EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext()),getBaseContext());
+        if (!isLinearLayout)
+            mEmployeeApi = EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext()), getBaseContext());
         else
-            mEmployeeApi = EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext()),getBaseContext());
+            mEmployeeApi = EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getBaseContext()), getBaseContext());
     }
 
     @Override
@@ -188,7 +188,7 @@ public class Edit_employee_activity extends AppCompatActivity{
         return true;
     }
 
-    private Employee postEmployeeData(){
+    private Employee postEmployeeData() {
         Employee mEmployee = new Employee();
         mEmployee.setName(mNameFieldUiHelper.getName());
         mEmployee.setAddress(mAddressFieldUiHelper.getAddress());
@@ -196,63 +196,62 @@ public class Edit_employee_activity extends AppCompatActivity{
         mEmployee.setPhoneNumber(mPhoneNumberFileUiHelper.getPhoneNumber());
         mEmployee.setDateOfBirth(mCalendarDateOfBirth.getTime());
         mEmployee.setDateOfJoin(mCalendarDateOfJoin.getTime());
-        return  mEmployee;
+        return mEmployee;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.ok :
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.ok:
                 ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(Edit_employee_activity.this);
-                if(!checkIfError()){
-                    Employee mEmployee =  postEmployeeData();
-                   if(mSelectedImage!=null){
-                       mProgressDialog.show();
-                       File file  = new File(mSelectedImage.getPath());
-                       RequestBody body = RequestBody.create(MediaType.parse("image/") , file);
-                       MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName() , body);
-                       mProgressDialog.show();
-                     //  mEmployeeApi.updateEmployee(mEmployee,image,mProgressDialog);
-                   }
-                   else{
-                     mProgressDialog.show();
-                     //mEmployeeApi.updateEmployee(mEmployee,null,mProgressDialog);
-                   }
+                if (!checkIfError()) {
+                    Employee mEmployee = postEmployeeData();
+                    if (mSelectedImage != null) {
+                        mProgressDialog.show();
+                        File file = new File(mSelectedImage.getPath());
+                        RequestBody body = RequestBody.create(MediaType.parse("image/"), file);
+                        MultipartBody.Part image = MultipartBody.Part.createFormData("upload", file.getName(), body);
+                        mProgressDialog.show();
+                        //  mEmployeeApi.updateEmployee(mEmployee,image,mProgressDialog);
+                    } else {
+                        mProgressDialog.show();
+                        //mEmployeeApi.updateEmployee(mEmployee,null,mProgressDialog);
+                    }
                 }
                 break;
-            case R.id.cancel :
+            case R.id.cancel:
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean checkIfError(){
+    private boolean checkIfError() {
         //// TODO: 28/10/17
-        return  false;
+        return false;
     }
 
-    private void setUpCalender(final EditText mEditText ,final Calendar mCalender){
-        final  DatePickerDialog.OnDateSetListener datePicker =  new DatePickerDialog.OnDateSetListener() {
+    private void setUpCalender(final EditText mEditText, final Calendar mCalender) {
+        final DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dateOfMonth) {
-                mCalender.set(Calendar.YEAR , year);
-                mCalender.set(Calendar.MONTH , month);
-                mCalender.set(Calendar.DAY_OF_MONTH , dateOfMonth);
+                mCalender.set(Calendar.YEAR, year);
+                mCalender.set(Calendar.MONTH, month);
+                mCalender.set(Calendar.DAY_OF_MONTH, dateOfMonth);
                 mEditText.setText(new SimpleDateFormat("dd/MM/yyyy").format(mCalender.getTime()));
             }
         };
         mEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(Edit_employee_activity.this , datePicker , mCalender.get(Calendar.YEAR) , mCalender.get(Calendar.MONTH) , mCalender.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(Edit_employee_activity.this, datePicker, mCalender.get(Calendar.YEAR), mCalender.get(Calendar.MONTH), mCalender.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean isFocusGain) {
-                if(isFocusGain)
-                    new DatePickerDialog(Edit_employee_activity.this , datePicker , mCalender.get(Calendar.YEAR) , mCalender.get(Calendar.MONTH) , mCalender.get(Calendar.DAY_OF_MONTH)).show();
+                if (isFocusGain)
+                    new DatePickerDialog(Edit_employee_activity.this, datePicker, mCalender.get(Calendar.YEAR), mCalender.get(Calendar.MONTH), mCalender.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
     }
@@ -260,18 +259,18 @@ public class Edit_employee_activity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case  CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE :
+        switch (requestCode) {
+            case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE:
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
-                if ( resultCode == RESULT_OK &&  result.getUri() != null){
+                if (resultCode == RESULT_OK && result.getUri() != null) {
                     mSelectedImage = result.getUri();
                     mBottomSheetImage.showDeleteDialog();
-                }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                     Exception error = result.getError();
                 }
                 break;
-            case  Config.SELECT_IMAGE_FROM_STORAGE :
-                if(resultCode == RESULT_OK ){
+            case Config.SELECT_IMAGE_FROM_STORAGE:
+                if (resultCode == RESULT_OK) {
                     mSelectedImage = data.getData();
                     CropImage.activity(mSelectedImage)
                             .start(Edit_employee_activity.this);
@@ -280,13 +279,13 @@ public class Edit_employee_activity extends AppCompatActivity{
         }
     }
 
-    private void setUpOnClickListener(){
-        setUpCalender(mDateOfBirth,mCalendarDateOfBirth);
-        setUpCalender(mDateOfJoin,mCalendarDateOfJoin);
+    private void setUpOnClickListener() {
+        setUpCalender(mDateOfBirth, mCalendarDateOfBirth);
+        setUpCalender(mDateOfJoin, mCalendarDateOfJoin);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               mBottomSheetImage.showBottomSheet();
+                mBottomSheetImage.showBottomSheet();
             }
         });
         mWorkProfile.setOnClickListener(new View.OnClickListener() {
@@ -298,7 +297,7 @@ public class Edit_employee_activity extends AppCompatActivity{
         });
     }
 
-    private void createAlertForSelectingWorkProfile(){
+    private void createAlertForSelectingWorkProfile() {
         //// TODO: 27/10/17 create work profile selecting dialog
     }
 

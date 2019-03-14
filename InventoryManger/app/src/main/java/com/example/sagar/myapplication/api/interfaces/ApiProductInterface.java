@@ -21,7 +21,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface ApiProductInterface{
+public interface ApiProductInterface {
 
     @GET("api/product/")
     public Call<List<Product>> getProductList(
@@ -29,7 +29,7 @@ public interface ApiProductInterface{
     );
 
     @POST("api/product/")
-    Call<Data>  createProduct(
+    Call<Data> createProduct(
             @Body Product product,
             @Header("token") String token
     );
@@ -37,28 +37,28 @@ public interface ApiProductInterface{
     @Multipart
     @POST("api/product/image")
     Call<Data> addProductImage(
-            @Part MultipartBody.Part image ,
+            @Part MultipartBody.Part image,
             @Header("token") String token
     );
 
     @DELETE("api/product/image/{id}")
     Call<Data> deleteProductImage(
-        @Path("id")  String id ,
-        @Header("token") String token
+            @Path("id") String id,
+            @Header("token") String token
     );
 
     @DELETE("api/product/{id}")
     Call<Data> deleteProduct(
-            @Path("id") String id ,
+            @Path("id") String id,
             @Header("token") String token
     );
 
     @POST("api/routes/product")
     Call<Data> addProductTypeToProducts(
-            @Query("isList") boolean isList ,
-            @Field("product_id") String product_id ,
+            @Query("isList") boolean isList,
+            @Field("product_id") String product_id,
             @Field("product_list") ArrayList<Product> productList
-     );
+    );
 
     @GET("api/routes/product/{id}")
     Call<ProductPopulated> getProductPopulated(
@@ -85,9 +85,9 @@ public interface ApiProductInterface{
 
     @DELETE("api/routes/remove-category-from-product/{product_id}/{category_id}")
     Call<Data> deleteCategoryFromPrticularProduct(
-        @Header("token") String token ,
-        @Path("product_id") String product_id ,
-        @Path("category_id") String category_id
+            @Header("token") String token,
+            @Path("product_id") String product_id,
+            @Path("category_id") String category_id
     );
 
 

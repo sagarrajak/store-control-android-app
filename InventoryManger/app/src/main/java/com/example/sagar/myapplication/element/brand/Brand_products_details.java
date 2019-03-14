@@ -17,7 +17,7 @@ import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.brand.BrandAssociatedProductAdapter;
 import com.example.sagar.myapplication.modal.Brand;
 
-public class Brand_products_details extends AppCompatActivity{
+public class Brand_products_details extends AppCompatActivity {
 
     private Toolbar toolbar;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -29,47 +29,47 @@ public class Brand_products_details extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_brand_products_details);
-            setToolbar();
-            setUiElement();
-            setRecycleView();
-            if(brand!=null){
-                    Glide.with(getApplicationContext())
-                      .load(url+brand.getLogo())
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .centerCrop()
-                                        .placeholder(R.drawable.employee)
-                                            .crossFade()
-                                                    .into(imageView);
-                    mCollapsingToolbarLayout.setTitle(brand.getBrand());
-            }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_brand_products_details);
+        setToolbar();
+        setUiElement();
+        setRecycleView();
+        if (brand != null) {
+            Glide.with(getApplicationContext())
+                    .load(url + brand.getLogo())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
+                    .placeholder(R.drawable.employee)
+                    .crossFade()
+                    .into(imageView);
+            mCollapsingToolbarLayout.setTitle(brand.getBrand());
+        }
 
     }
 
-    private void setUiElement(){
+    private void setUiElement() {
 
-         imageView                = (ImageView) findViewById(R.id.brand_product_imageview);
-         mCollapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar_layout);
-         brand                    = (Brand) getIntent().getSerializableExtra("brand");
-         mProgressBar             = (ProgressBar) findViewById(R.id.brand_product_progressbar);
+        imageView = (ImageView) findViewById(R.id.brand_product_imageview);
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
+        brand = (Brand) getIntent().getSerializableExtra("brand");
+        mProgressBar = (ProgressBar) findViewById(R.id.brand_product_progressbar);
 
-         mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
-         mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
+        mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
+        mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
 
     }
 
-    private void setRecycleView(){
+    private void setRecycleView() {
 
-        RecyclerView mRecycleView   = (RecyclerView) findViewById(R.id.recycle_view);
-        LinearLayoutManager mLinearLayoutManager =  new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
+        RecyclerView mRecycleView = (RecyclerView) findViewById(R.id.recycle_view);
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycleView.setLayoutManager(mLinearLayoutManager);
-        mBrandAssociatedProductAdapter = new BrandAssociatedProductAdapter( getBaseContext() , mProgressBar , brand );
+        mBrandAssociatedProductAdapter = new BrandAssociatedProductAdapter(getBaseContext(), mProgressBar, brand);
         mRecycleView.setAdapter(mBrandAssociatedProductAdapter);
 
     }
 
-    private void setToolbar(){
+    private void setToolbar() {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,44 +79,46 @@ public class Brand_products_details extends AppCompatActivity{
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_brand_product_details , menu );
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_brand_product_details, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.menu_brand_product_delete :
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_brand_product_delete:
 
                 break;
-            case R.id.menu_brand_product_add :
+            case R.id.menu_brand_product_add:
 
                 break;
-            case R.id.menu_brand_product_details :
+            case R.id.menu_brand_product_details:
 
                 break;
-            case R.id.menu_brand_product_edit :
+            case R.id.menu_brand_product_edit:
 
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void deleteBrand(){
+    private void deleteBrand() {
 
 
     }
-    private void editBrand(){
+
+    private void editBrand() {
 
 
     }
-    private void details(){
+
+    private void details() {
 
 
     }
-    private void addProduct(){
 
+    private void addProduct() {
 
 
     }

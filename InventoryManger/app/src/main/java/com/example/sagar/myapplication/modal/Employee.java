@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Employee implements Serializable{
+public class Employee implements Serializable {
 
     @SerializedName("_id")
     @Expose
@@ -25,7 +25,7 @@ public class Employee implements Serializable{
     private String panNum;
     @SerializedName("phone_num")
     @Expose
-    private PhoneNum  phoneNumber ;
+    private PhoneNum phoneNumber;
     @SerializedName("date_of_join")
     @Expose
     private Date dateOfJoin;
@@ -64,7 +64,7 @@ public class Employee implements Serializable{
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date  dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -92,11 +92,11 @@ public class Employee implements Serializable{
         this.phoneNumber = phoneNumber;
     }
 
-    public Date  getDateOfJoin() {
+    public Date getDateOfJoin() {
         return dateOfJoin;
     }
 
-    public void setDateOfJoin(Date   dateOfJoin) {
+    public void setDateOfJoin(Date dateOfJoin) {
         this.dateOfJoin = dateOfJoin;
     }
 

@@ -16,7 +16,7 @@ public class ProductCategoryDetailsAdapter extends RecyclerView.Adapter<ProductC
     private ApiProductInterface mApiProductInterface;
     private Context context;
 
-    public ProductCategoryDetailsAdapter(){
+    public ProductCategoryDetailsAdapter() {
 
 
     }
@@ -25,16 +25,23 @@ public class ProductCategoryDetailsAdapter extends RecyclerView.Adapter<ProductC
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
     }
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
     }
+
     @Override
     public int getItemCount() {
         return 0;
     }
-    public void listProduct() {}
-    public  void deleteProduct(int position ){}
+
+    public void listProduct() {
+    }
+
+    public void deleteProduct(int position) {
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public MyViewHolder(View itemView) {
             super(itemView);

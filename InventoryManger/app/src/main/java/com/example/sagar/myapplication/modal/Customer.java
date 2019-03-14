@@ -60,16 +60,16 @@ public class Customer implements Serializable {
     private String id;
     @SerializedName("name")
     @Expose
-    private  Name name;
+    private Name name;
     @SerializedName("address")
     @Expose
-    private  Address address;
+    private Address address;
     @SerializedName("mail")
     @Expose
-    private  Mail mail;
+    private Mail mail;
     @SerializedName("phone_num")
     @Expose
-    private  PhoneNum phoneNum;
+    private PhoneNum phoneNum;
     @SerializedName("image")
     @Expose
     private String image;

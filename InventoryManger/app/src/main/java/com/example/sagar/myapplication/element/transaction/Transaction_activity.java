@@ -1,4 +1,5 @@
 package com.example.sagar.myapplication.element.transaction;
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -17,71 +18,82 @@ import com.example.sagar.myapplication.utill.ui.NavigationDrawer;
 
 import java.util.ArrayList;
 
-public class Transaction_activity extends AppCompatActivity{
+public class Transaction_activity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private TabLayout mTablayout;
     private ViewPager mViewPager;
     private NavigationView mNavigationView;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_transection_intent);
-            setUiElement();
-            setToolbar();
-            setNavigationView();
-            setTabLayout();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_transection_intent);
+        setUiElement();
+        setToolbar();
+        setNavigationView();
+        setTabLayout();
     }
-    private void setUiElement(){
-            toolbar         = (Toolbar)        findViewById(R.id.toolbar);
-            mDrawerLayout   = (DrawerLayout)   findViewById(R.id.drawer_layout_transaction);
-            mTablayout      = (TabLayout)      findViewById(R.id.tab_layout_transcation);
-            mViewPager      = (ViewPager)      findViewById(R.id.view_pager_transaction);
-            mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+    private void setUiElement() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_transaction);
+        mTablayout = (TabLayout) findViewById(R.id.tab_layout_transcation);
+        mViewPager = (ViewPager) findViewById(R.id.view_pager_transaction);
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
     }
-    private void setNavigationView(){
-            NavigationDrawer navigationDrawer =  new NavigationDrawer(toolbar,mDrawerLayout,mNavigationView,this);
-            navigationDrawer.setNavigationDrawer();
+
+    private void setNavigationView() {
+        NavigationDrawer navigationDrawer = new NavigationDrawer(toolbar, mDrawerLayout, mNavigationView, this);
+        navigationDrawer.setNavigationDrawer();
     }
-    private void setToolbar(){
-            setTitle("Transaction");
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    private void setToolbar() {
+        setTitle("Transaction");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
-    private void setTabLayout(){
-           ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-           Fragment f1,f2;
-           f1 = new Check_in_stocks_fragment();
-           f2 = new Check_out_items_fragment();
-           mViewPagerAdapter.addFragment(f1 , "Checkin  stocks");
-           mViewPagerAdapter.addFragment(f2 , "Checkout items");
-           mViewPager.setAdapter(mViewPagerAdapter);
-           mViewPager.setOffscreenPageLimit(2);
-           mTablayout.setupWithViewPager(mViewPager);
+
+    private void setTabLayout() {
+        ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        Fragment f1, f2;
+        f1 = new Check_in_stocks_fragment();
+        f2 = new Check_out_items_fragment();
+        mViewPagerAdapter.addFragment(f1, "Checkin  stocks");
+        mViewPagerAdapter.addFragment(f2, "Checkout items");
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.setOffscreenPageLimit(2);
+        mTablayout.setupWithViewPager(mViewPager);
     }
-    public  class  ViewPagerAdapter extends FragmentPagerAdapter{
-            ArrayList<Fragment> mListFragment = new ArrayList<>();
-            ArrayList<String> mListString = new ArrayList<>();
-            public ViewPagerAdapter(FragmentManager fm) {
-                super(fm);
-            }
-            @Override
-            public Fragment getItem(int position) {
-                return  mListFragment.get(position);
-            }
-            public void addFragment(Fragment fragment , String  title ){
-                mListFragment.add(fragment);
-                mListString.add(title);
-            }
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return mListString.get(position);
-            }
-            @Override
-            public int getCount() {
-                return mListString.size();
-            }
+
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
+        ArrayList<Fragment> mListFragment = new ArrayList<>();
+        ArrayList<String> mListString = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mListFragment.get(position);
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mListFragment.add(fragment);
+            mListString.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mListString.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mListString.size();
+        }
     }
 
 }

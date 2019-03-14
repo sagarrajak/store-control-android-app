@@ -5,15 +5,15 @@
         android:id="@+id/ok"
         android:icon="@drawable/ic_add_black_24dp"
         android:title="Add customer"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
     <item
         app:showAsAction="always"
         android:icon="@drawable/ic_grid_24dp"
         android:title="Switch layout"
-        android:id="@+id/list_to_grid"/>
+        android:id="@+id/list_to_grid" />
     <item
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_sort_black_24dp"
         android:title="sort"
-        android:id="@+id/sort_items"/>
+        android:id="@+id/sort_items" />
 </menu>

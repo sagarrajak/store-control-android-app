@@ -18,8 +18,8 @@ public class Edit_about_store_activity extends AppCompatActivity {
     private EditText emailAdress;
     private EditText address, street, postOffice, neighbourHood, city, state, zipcode;
     private EditText details;
-    private Spinner  emailSpinner, phoneNumberSpinner;
-    private Toolbar  mToolbar;
+    private Spinner emailSpinner, phoneNumberSpinner;
+    private Toolbar mToolbar;
     private CoordinatorLayout mCoordinateLayout;
 
     @Override
@@ -36,13 +36,13 @@ public class Edit_about_store_activity extends AppCompatActivity {
         emailAdress = findViewById(R.id.edit_store_email_address);
         address = findViewById(R.id.edit_store_address);
         street = findViewById(R.id.edit_store_street);
-        postOffice =  findViewById(R.id.edit_store_post_office);
+        postOffice = findViewById(R.id.edit_store_post_office);
         neighbourHood = findViewById(R.id.edit_store_neighbourhood);
         city = findViewById(R.id.edit_store_city);
         state = findViewById(R.id.edit_store_state);
         zipcode = findViewById(R.id.edit_store_zipcode);
         details = findViewById(R.id.about_Store_details);
-        phoneNumberSpinner =  findViewById(R.id.edit_store_phone_num_spinner);
+        phoneNumberSpinner = findViewById(R.id.edit_store_phone_num_spinner);
         emailSpinner = findViewById(R.id.edit_store_email_spinner);
         mToolbar = findViewById(R.id.edit_store_toolbar);
         mCoordinateLayout = findViewById(R.id.edit_store_coordinatorlayout);
@@ -63,9 +63,9 @@ public class Edit_about_store_activity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.ok :
+            case R.id.ok:
                 break;
-           case  R.id.cancel:
+            case R.id.cancel:
                 break;
         }
         return true;

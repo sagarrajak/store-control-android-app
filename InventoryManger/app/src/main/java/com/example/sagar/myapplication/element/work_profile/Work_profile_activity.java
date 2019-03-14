@@ -22,11 +22,11 @@ public class Work_profile_activity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
-    private TabLayout  mTabLayout;
+    private TabLayout mTabLayout;
     private ViewPager mViewPager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_profile_activity);
         setTitle("Work profile");
@@ -36,58 +36,64 @@ public class Work_profile_activity extends AppCompatActivity {
         setTabLayout();
     }
 
-    private void  setToolbar(){
-        mToolbar =  (Toolbar)findViewById(R.id.work_profile_toolbar);
+    private void setToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.work_profile_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setNavigationView(){
+    private void setNavigationView() {
         NavigationView mNavigationView = (NavigationView) findViewById(R.id.work_profile_navigation_view);
-        NavigationDrawer navigationDrawer = new NavigationDrawer(mToolbar,mDrawerLayout,mNavigationView,this);
+        NavigationDrawer navigationDrawer = new NavigationDrawer(mToolbar, mDrawerLayout, mNavigationView, this);
         navigationDrawer.setNavigationDrawer();
     }
 
-    private void setUiElement(){
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.work_profile_drawer_layout);
-        mTabLayout  =  (TabLayout) findViewById(R.id.work_profile_tab_layout);
-        mViewPager  =  (ViewPager) findViewById(R.id.work_profile_view_pager);
+    private void setUiElement() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.work_profile_drawer_layout);
+        mTabLayout = (TabLayout) findViewById(R.id.work_profile_tab_layout);
+        mViewPager = (ViewPager) findViewById(R.id.work_profile_view_pager);
     }
 
-    private void setTabLayout(){
+    private void setTabLayout() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        Fragment f1,f2;
-        f1  = new Employee_right_fragment();
-        f2  = new Work_profile_fragment();;
-        adapter.addFragemnt("Work profile",f1);
-        adapter.addFragemnt("Employee right",f2);
+        Fragment f1, f2;
+        f1 = new Employee_right_fragment();
+        f2 = new Work_profile_fragment();
+        ;
+        adapter.addFragemnt("Work profile", f1);
+        adapter.addFragemnt("Employee right", f2);
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(2);
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-    private class  ViewPagerAdapter extends FragmentPagerAdapter{
-        ArrayList<Fragment>  mListFrgament  =  new ArrayList<>();
-        ArrayList<String>    mListString    =  new ArrayList<>();
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+        ArrayList<Fragment> mListFrgament = new ArrayList<>();
+        ArrayList<String> mListString = new ArrayList<>();
+
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
+
         @Override
         public Fragment getItem(int i) {
             return mListFrgament.get(i);
         }
+
         @Override
-        public int getCount(){
+        public int getCount() {
             return mListFrgament.size();
         }
-        public  void addFragemnt(String name,Fragment mFragment){
+
+        public void addFragemnt(String name, Fragment mFragment) {
             mListFrgament.add(mFragment);
             mListString.add(name);
         }
+
         @Override
         public CharSequence getPageTitle(int i) {
-            return  mListString.get(i);
+            return mListString.get(i);
         }
     }
 }

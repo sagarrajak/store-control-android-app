@@ -16,18 +16,18 @@ import retrofit2.http.Part;
 
 public interface ApiImageInterface {
 
-  @Multipart
-  @POST("api/image")
-  Call<Data> addImage(
-      @Header("token") String token,
-      @Part MultipartBody.Part mImage
-  );
+    @Multipart
+    @POST("api/image")
+    Call<Data> addImage(
+            @Header("token") String token,
+            @Part MultipartBody.Part mImage
+    );
 
 
-  @DELETE("api/image")
-  Call<Data> deleteImage(
-     @Header("token") String token,
-     @Field("image") String image
-   );
+    @DELETE("api/image")
+    Call<Data> deleteImage(
+            @Header("token") String token,
+            @Field("image") String image
+    );
 
 }

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Retailer implements Serializable{
+public class Retailer implements Serializable {
     @SerializedName("_id")
     @Expose
     private String id;
@@ -18,7 +18,7 @@ public class Retailer implements Serializable{
     private Name name;
     @SerializedName("phone_num")
     @Expose
-    private PhoneNum  phoneNum;
+    private PhoneNum phoneNum;
     @SerializedName("mail")
     @Expose
     private Mail mail;

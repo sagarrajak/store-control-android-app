@@ -27,77 +27,78 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public  class AlertDialogBuilderAdapterFilterStock extends RecyclerView.Adapter<AlertDialogBuilderAdapterFilterStock.MyViewHolder>{
+public class AlertDialogBuilderAdapterFilterStock extends RecyclerView.Adapter<AlertDialogBuilderAdapterFilterStock.MyViewHolder> {
 
     private List<Product> availAbleProductInStock;
     private Context mContext;
     private ApiProductInterface mApiProductInterface;
-    private Map<Product,Integer> mProductMap;
+    private Map<Product, Integer> mProductMap;
 
 
-    public AlertDialogBuilderAdapterFilterStock(Context mContext ){
-            availAbleProductInStock = new ArrayList<>();
-            this.mContext = mContext;
-            mApiProductInterface = ApiClient.getClient().create(ApiProductInterface.class);
-            mProductMap = new HashMap<>();
-            fetchData();
+    public AlertDialogBuilderAdapterFilterStock(Context mContext) {
+        availAbleProductInStock = new ArrayList<>();
+        this.mContext = mContext;
+        mApiProductInterface = ApiClient.getClient().create(ApiProductInterface.class);
+        mProductMap = new HashMap<>();
+        fetchData();
     }
 
-    public void fetchData(){
-            mApiProductInterface.getProductList(Token.token)
-                            .enqueue(new Callback<List<Product>>() {
-                                @Override
-                                public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                                        if(response.code() == 200 ){
-                                             updateData(response.body());
-                                        }
-                                        else{
-                                            Err.s( mContext , "Error in fetching product list" );
-                                        }
-                                }
-                                @Override
-                                public void onFailure(Call<List<Product>> call, Throwable t) {
-                                        t.printStackTrace();
-                                        Err.s( mContext , "Error in fetching product list" );
-                                }
-                            });
+    public void fetchData() {
+        mApiProductInterface.getProductList(Token.token)
+                .enqueue(new Callback<List<Product>>() {
+                    @Override
+                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                        if (response.code() == 200) {
+                            updateData(response.body());
+                        } else {
+                            Err.s(mContext, "Error in fetching product list");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Product>> call, Throwable t) {
+                        t.printStackTrace();
+                        Err.s(mContext, "Error in fetching product list");
+                    }
+                });
     }
 
-    private void  updateData(List<Product> list){
-            availAbleProductInStock  = list;
-            notifyDataSetChanged();
-    }
-
-    @Override
-    public AlertDialogBuilderAdapterFilterStock.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType  ) {
-            View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.alert_dialog_linear_layout_card , parent , false );
-            return new MyViewHolder(view);
+    private void updateData(List<Product> list) {
+        availAbleProductInStock = list;
+        notifyDataSetChanged();
     }
 
     @Override
-    public void onBindViewHolder(AlertDialogBuilderAdapterFilterStock.MyViewHolder holder , final int position ){
-            if( mProductMap.containsKey( availAbleProductInStock.get(position) ) )
-                 holder.checkBox.setChecked(true);
-            holder.textView.setText( availAbleProductInStock.get(position).getName() );
-            holder.checkBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if( mProductMap.containsKey( availAbleProductInStock.get(position) ) )
-                          mProductMap.remove( availAbleProductInStock.get(position) );
-                    else
-                          mProductMap.put( availAbleProductInStock.get(position) , 1 );
-                }
-            });
+    public AlertDialogBuilderAdapterFilterStock.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.alert_dialog_linear_layout_card, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public int getItemCount(){
+    public void onBindViewHolder(AlertDialogBuilderAdapterFilterStock.MyViewHolder holder, final int position) {
+        if (mProductMap.containsKey(availAbleProductInStock.get(position)))
+            holder.checkBox.setChecked(true);
+        holder.textView.setText(availAbleProductInStock.get(position).getName());
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mProductMap.containsKey(availAbleProductInStock.get(position)))
+                    mProductMap.remove(availAbleProductInStock.get(position));
+                else
+                    mProductMap.put(availAbleProductInStock.get(position), 1);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
         return availAbleProductInStock.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public CheckBox checkBox;
         public TextView textView;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             checkBox = (CheckBox) itemView.findViewById(R.id.alert_dialog_linear_layout_checkbox);
@@ -105,11 +106,11 @@ public  class AlertDialogBuilderAdapterFilterStock extends RecyclerView.Adapter<
         }
     }
 
-    public Set<Product> getSelectedList(){
+    public Set<Product> getSelectedList() {
         return mProductMap.keySet();
     }
 
-    public void resetSelectedList(){
+    public void resetSelectedList() {
         mProductMap.clear();
     }
 

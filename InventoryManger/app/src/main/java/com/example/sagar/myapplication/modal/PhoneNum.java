@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class PhoneNum implements Serializable{
+public class PhoneNum implements Serializable {
 
     public String getValue() {
         return value;
@@ -26,20 +26,18 @@ public class PhoneNum implements Serializable{
 
     @SerializedName("value")
     @Expose
-    private  String value;
+    private String value;
     @SerializedName("sub")
     @Expose
-    private  String sub;
+    private String sub;
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public PhoneNum() {
     }
 
     /**
-     * 
      * @param sub
      * @param value
      */

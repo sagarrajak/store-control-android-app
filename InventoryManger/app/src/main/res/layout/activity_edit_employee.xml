@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sagar.myapplication.element.employee.employee.Edit_employee_activity">
+
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinate_layout_create_employee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <android.support.design.widget.AppBarLayout
             android:id="@+id/activity_create_employee_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edit_employee_toolbar">
-            </android.support.v7.widget.Toolbar>
+                android:id="@+id/edit_employee_toolbar"></android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
+
         <LinearLayout
             android:layout_marginTop="?attr/actionBarSize"
             android:orientation="vertical"
             android:layout_marginBottom="100dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <RelativeLayout
                 android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/edit_employee_picture"
                     android:layout_width="150dp"
@@ -42,6 +46,7 @@
                     android:src="@drawable/employee"
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="3dp" />
+
                 <ImageView
                     android:layout_width="130dp"
                     android:layout_height="100dp"
@@ -49,8 +54,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/edit_employee_picture_anchor"/>
+                    android:id="@+id/edit_employee_picture_anchor" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
@@ -58,11 +64,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:padding="5dp"
                     android:src="@drawable/ic_person_black_24dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
@@ -71,6 +79,7 @@
                     android:id="@+id/edit_employee_name"
                     android:hint="Name"
                     android:layout_toStartOf="@+id/edit_employee_name_view_anchor" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
@@ -78,7 +87,8 @@
                     android:layout_alignParentStart="true"
                     android:id="@+id/edit_employee_middle_name"
                     android:layout_below="@+id/edit_employee_name"
-                    android:hint="Middle name"/>
+                    android:hint="Middle name" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
@@ -86,7 +96,8 @@
                     android:layout_alignParentStart="true"
                     android:id="@+id/edit_employee_last_name"
                     android:layout_below="@+id/edit_employee_middle_name"
-                    android:hint="Last name"/>
+                    android:hint="Last name" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
@@ -94,7 +105,8 @@
                     android:layout_alignParentStart="true"
                     android:id="@+id/edit_employee_family_name"
                     android:layout_below="@+id/edit_employee_last_name"
-                    android:hint="Family name"/>
+                    android:hint="Family name" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
@@ -102,8 +114,9 @@
                     android:layout_alignParentStart="true"
                     android:id="@+id/edit_employee_suffix"
                     android:layout_below="@+id/edit_employee_family_name"
-                    android:hint="Suffix"/>
+                    android:hint="Suffix" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
@@ -111,13 +124,14 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="5dp"
                     android:src="@drawable/ic_call_black_24dp"
-                    android:id="@+id/edit_employee_call_icon"
-                    />
+                    android:id="@+id/edit_employee_call_icon" />
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -125,15 +139,16 @@
                     android:hint="Phone number"
                     android:layout_marginStart="50dp"
                     android:inputType="phone" />
+
                 <Spinner
                     android:layout_below="@id/edit_employee_phone_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/edit_employee_phone_num_spinner"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="50dp">
-                </Spinner>
+                    android:layout_marginStart="50dp"></Spinner>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
@@ -141,11 +156,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="5dp"
-                    android:src="@drawable/ic_mail_black_24dp"/>
+                    android:src="@drawable/ic_mail_black_24dp" />
+
                 <EditText
                     android:id="@+id/edit_employee_email_address"
                     android:hint="Email"
@@ -153,14 +170,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress" />
+
                 <Spinner
                     android:layout_below="@id/edit_employee_email_address"
                     android:id="@+id/edit_employee_email_spinner"
                     android:layout_width="wrap_content"
                     android:layout_marginStart="50dp"
-                    android:layout_height="match_parent">
-                </Spinner>
+                    android:layout_height="match_parent"></Spinner>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
@@ -168,12 +186,14 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="5dp"
                     android:src="@drawable/ic_home_black_24dp"
-                    android:id="@+id/edit_employee_address_icon"/>
+                    android:id="@+id/edit_employee_address_icon" />
+
                 <EditText
                     android:id="@+id/edit_employee_address"
                     android:layout_width="match_parent"
@@ -182,6 +202,7 @@
                     android:layout_alignParentStart="true"
                     android:hint="Address"
                     android:layout_toStartOf="@+id/edit_employee_address_view_anchor" />>
+
                 <EditText
                     android:layout_below="@+id/edit_employee_address"
                     android:layout_marginStart="50dp"
@@ -189,42 +210,48 @@
                     android:hint="Street"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:hint="Post office"
                     android:layout_below="@id/edit_employee_street"
                     android:id="@+id/edit_employee_post_office"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_below="@id/edit_employee_post_office"
                     android:id="@+id/edit_employee_neighbourhood"
                     android:hint="Neighbourhood"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
+
                 <EditText
                     android:id="@+id/edit_employee_city"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/edit_employee_neighbourhood"
                     android:layout_marginStart="50dp"
-                    android:hint="City"/>
+                    android:hint="City" />
+
                 <EditText
                     android:id="@+id/edit_employee_state"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/edit_employee_city"
                     android:layout_marginStart="50dp"
-                    android:hint="State"/>
+                    android:hint="State" />
+
                 <EditText
                     android:id="@+id/edit_employee_zipcode"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/edit_employee_state"
                     android:layout_marginStart="50dp"
-                    android:hint="Zipcode"/>
+                    android:hint="Zipcode" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
@@ -232,11 +259,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:padding="5dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_date_range_black_24dp"/>
+                    android:src="@drawable/ic_date_range_black_24dp" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
@@ -245,6 +274,7 @@
                     android:hint="Date of birth"
                     android:inputType="date" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
@@ -252,11 +282,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:padding="5dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_date_range_black_24dp"/>
+                    android:src="@drawable/ic_date_range_black_24dp" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
@@ -265,6 +297,7 @@
                     android:hint="Date of join"
                     android:inputType="date" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="8dp"
@@ -272,11 +305,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:padding="5dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_work_black_24dp"/>
+                    android:src="@drawable/ic_work_black_24dp" />
+
                 <EditText
                     android:layout_marginStart="50dp"
                     android:layout_width="match_parent"
@@ -286,6 +321,7 @@
                     android:inputType="date" />
             </RelativeLayout>
         </LinearLayout>
+
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="50dp"

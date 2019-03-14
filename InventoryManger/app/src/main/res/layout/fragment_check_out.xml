@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sagar.myapplication.element.transaction.fragment.Check_out_items_fragment">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <EditText
             android:id="@+id/check_out_customer"
             android:layout_width="match_parent"

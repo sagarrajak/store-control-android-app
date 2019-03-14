@@ -35,10 +35,10 @@ public class Stock {
     private Expire expire;
     @SerializedName("details")
     @Expose
-    private  String details;
+    private String details;
     @SerializedName("buyed_price")
     @Expose
-    private Integer  buyedPrice;
+    private Integer buyedPrice;
 
     public String getDetails() {
         return details;

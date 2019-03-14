@@ -28,89 +28,89 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SelectProductCreateStock extends RecyclerView.Adapter<SelectProductCreateStock.MyViewHolder>  {
+public class SelectProductCreateStock extends RecyclerView.Adapter<SelectProductCreateStock.MyViewHolder> {
 
     private List<Product> mProductList;
     private Context mContext;
-    private Product selectedProduct =null;
-    private RadioButton mSelectedRadioButton=null;
+    private Product selectedProduct = null;
+    private RadioButton mSelectedRadioButton = null;
     private ApiProductInterface mApiProductInterface;
     private ProgressBar mProgressbar;
 
-    public SelectProductCreateStock(Context mContext , ProgressBar mProgressbar , Product selectedProduct ){
-           mProductList  = new ArrayList<>();
-           this.mContext = mContext;
-           this.mProgressbar = mProgressbar;
-           this.mApiProductInterface = ApiClient.getClient().create(ApiProductInterface.class);
-           this.selectedProduct      = selectedProduct;
-           getData();
+    public SelectProductCreateStock(Context mContext, ProgressBar mProgressbar, Product selectedProduct) {
+        mProductList = new ArrayList<>();
+        this.mContext = mContext;
+        this.mProgressbar = mProgressbar;
+        this.mApiProductInterface = ApiClient.getClient().create(ApiProductInterface.class);
+        this.selectedProduct = selectedProduct;
+        getData();
     }
 
     @Override
-    public SelectProductCreateStock.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-          View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_single_selection_dialog_layout , parent , false );
-          return new MyViewHolder(view);
+    public SelectProductCreateStock.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_single_selection_dialog_layout, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final SelectProductCreateStock.MyViewHolder holder, final int position ) {
+    public void onBindViewHolder(final SelectProductCreateStock.MyViewHolder holder, final int position) {
 
-          holder.mTextView.setText(mProductList.get(position).getName());
+        holder.mTextView.setText(mProductList.get(position).getName());
 
-          if( selectedProduct !=null &&  Objects.equals( mProductList.get(position).getId(), selectedProduct.getId() ) ) {
-              //if user previously selected  product
-              holder.mRadioButton.setChecked(true);
-              mSelectedRadioButton = holder.mRadioButton;
-          }
+        if (selectedProduct != null && Objects.equals(mProductList.get(position).getId(), selectedProduct.getId())) {
+            //if user previously selected  product
+            holder.mRadioButton.setChecked(true);
+            mSelectedRadioButton = holder.mRadioButton;
+        }
 
-          holder.mRadioButton.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  if( mSelectedRadioButton!=null && mSelectedRadioButton!=holder.mRadioButton ){
-                      // when user is jumping back and forward between radio button
-                      mSelectedRadioButton.setChecked(false);
-                      mSelectedRadioButton  =  holder.mRadioButton;
-                      selectedProduct       =  mProductList.get(position);
-                  }
-                  else if( mSelectedRadioButton!=null ){
-                      //case when user click double at the same radio button
-                      mSelectedRadioButton.setChecked(false);
-                      selectedProduct=null;
-                  }
-                  else{
-                     //when user is clicking first time in radio button
-                     mSelectedRadioButton = holder.mRadioButton;
-                     selectedProduct      = mProductList.get(position);
-                  }
-              }
-          });
+        holder.mRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mSelectedRadioButton != null && mSelectedRadioButton != holder.mRadioButton) {
+                    // when user is jumping back and forward between radio button
+                    mSelectedRadioButton.setChecked(false);
+                    mSelectedRadioButton = holder.mRadioButton;
+                    selectedProduct = mProductList.get(position);
+                } else if (mSelectedRadioButton != null) {
+                    //case when user click double at the same radio button
+                    mSelectedRadioButton.setChecked(false);
+                    selectedProduct = null;
+                } else {
+                    //when user is clicking first time in radio button
+                    mSelectedRadioButton = holder.mRadioButton;
+                    selectedProduct = mProductList.get(position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-         return mProductList.size();
+        return mProductList.size();
     }
 
-    public  Product getSelectedProduct(){
-        return  selectedProduct;
+    public Product getSelectedProduct() {
+        return selectedProduct;
     }
+
     private void getData() {
         mApiProductInterface.getProductList(Token.token)
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if(response.code()==200){
+                        if (response.code() == 200) {
                             setList(response.body());
-                        }else{
-                            Err.s(mContext,"Error in fetching  product list");
+                        } else {
+                            Err.s(mContext, "Error in fetching  product list");
                             mProgressbar.setVisibility(View.GONE);
                         }
                     }
+
                     @Override
                     public void onFailure(Call<List<Product>> call, Throwable t) {
                         t.printStackTrace();
                         mProgressbar.setVisibility(View.GONE);
-                        Err.s(mContext , t.getMessage() );
+                        Err.s(mContext, t.getMessage());
                     }
                 });
     }
@@ -118,15 +118,16 @@ public class SelectProductCreateStock extends RecyclerView.Adapter<SelectProduct
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public RadioButton mRadioButton;
         public TextView mTextView;
-        public MyViewHolder(View itemView){
+
+        public MyViewHolder(View itemView) {
             super(itemView);
             mRadioButton = (RadioButton) itemView.findViewById(R.id.list_radio_button);
-            mTextView    = (TextView) itemView.findViewById(R.id.list_text_view);
+            mTextView = (TextView) itemView.findViewById(R.id.list_text_view);
         }
     }
 
-    private void setList(List<Product> mList){
-        this.mProductList =  mList;
+    private void setList(List<Product> mList) {
+        this.mProductList = mList;
         notifyDataSetChanged();
         mProgressbar.setVisibility(View.GONE);
     }

@@ -18,12 +18,12 @@ public class Check_out_items_fragment extends Fragment {
 
     private EditText mCustomerEditText;
 
-    public Check_out_items_fragment(){
+    public Check_out_items_fragment() {
 
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
@@ -39,10 +39,10 @@ public class Check_out_items_fragment extends Fragment {
         setUiElement();
         mCustomerEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View view, boolean isFocusGain ) {
-                  if(isFocusGain){
-                      setOnClickListenerDialogCreator();
-                  }
+            public void onFocusChange(View view, boolean isFocusGain) {
+                if (isFocusGain) {
+                    setOnClickListenerDialogCreator();
+                }
             }
         });
         mCustomerEditText.setOnClickListener(new View.OnClickListener() {
@@ -53,14 +53,14 @@ public class Check_out_items_fragment extends Fragment {
         });
     }
 
-    private void setUiElement(){
+    private void setUiElement() {
         mCustomerEditText = (EditText) getView().findViewById(R.id.check_out_customer);
     }
 
-    private void setOnClickListenerDialogCreator(){
+    private void setOnClickListenerDialogCreator() {
         AlertDialog.Builder Builder = new AlertDialog.Builder(getActivity());
-        View view                   =  getActivity().getLayoutInflater().inflate(R.layout.dialog_check_out_items,null);
-        RecyclerView recyclerView   = (RecyclerView) view.findViewById(R.id.recycle_view_dialog_check_out);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_check_out_items, null);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_view_dialog_check_out);
 
     }
 

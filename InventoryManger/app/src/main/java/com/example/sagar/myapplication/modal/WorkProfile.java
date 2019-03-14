@@ -2,6 +2,7 @@ package com.example.sagar.myapplication.modal;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 public class WorkProfile {
     public class Example {
 

@@ -6,6 +6,7 @@
     android:layout_marginTop="?attr/actionBarSize"
     android:background="@android:color/black"
     android:orientation="vertical">
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:clickable="true"
@@ -15,12 +16,14 @@
         app:cardBackgroundColor="@color/colorPrimary"
         android:layout_marginBottom="2dp"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/setting_product_category"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:background="?attr/selectableItemBackground"
             android:layout_height="50dp">
+
             <TextView
                 android:text="Product Category"
                 android:layout_width="wrap_content"
@@ -31,6 +34,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true" />
+
             <ImageView
                 android:src="@drawable/ic_icon_right"
                 android:layout_width="wrap_content"
@@ -50,6 +54,7 @@
         android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/setting_work_profile"
             android:clickable="true"
@@ -57,6 +62,7 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="50dp">
+
             <TextView
                 android:text="Work profile"
                 android:layout_width="wrap_content"
@@ -67,6 +73,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true" />
+
             <ImageView
                 android:src="@drawable/ic_icon_right"
                 android:layout_width="wrap_content"
@@ -77,6 +84,7 @@
                 android:id="@+id/setting_work_profile_imageView" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView
         app:elevation="2dp"
         app:cardCornerRadius="1dp"
@@ -85,12 +93,14 @@
         android:layout_marginBottom="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/setting_stock"
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="50dp">
+
             <TextView
                 android:text="Stock"
                 android:layout_width="wrap_content"
@@ -101,6 +111,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true" />
+
             <ImageView
                 android:src="@drawable/ic_icon_right"
                 android:layout_width="wrap_content"
@@ -111,6 +122,7 @@
                 android:id="@+id/setting_stock_imageView" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView
         app:elevation="2dp"
         app:cardCornerRadius="1dp"
@@ -119,12 +131,14 @@
         android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/setting_manage_right"
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="50dp">
+
             <TextView
                 android:text="Manage right"
                 android:layout_width="wrap_content"
@@ -135,6 +149,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true" />
+
             <ImageView
                 android:src="@drawable/ic_icon_right"
                 android:layout_width="wrap_content"
@@ -145,6 +160,7 @@
                 android:id="@+id/setting_manage_right_imageView" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView
         app:elevation="2dp"
         app:cardCornerRadius="1dp"
@@ -153,12 +169,14 @@
         app:cardBackgroundColor="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/setting_employee"
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="50dp">
+
             <TextView
                 android:text="Employee"
                 android:layout_width="wrap_content"
@@ -169,6 +187,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true" />
+
             <ImageView
                 android:src="@drawable/ic_icon_right"
                 android:layout_width="wrap_content"
@@ -179,6 +198,7 @@
                 android:id="@+id/setting_employee_imageView" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView
         app:elevation="2dp"
         app:cardCornerRadius="1dp"
@@ -187,12 +207,14 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="2dp"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/setting_product"
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="50dp">
+
             <TextView
                 android:text="Product"
                 android:layout_width="wrap_content"
@@ -203,6 +225,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true" />
+
             <ImageView
                 android:src="@drawable/ic_icon_right"
                 android:layout_width="wrap_content"
@@ -213,7 +236,6 @@
                 android:id="@+id/setting_product_imageView" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
 
 
 </LinearLayout>

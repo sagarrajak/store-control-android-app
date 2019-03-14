@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_height="match_parent"
+    android:layout_height="match_parent"
     android:layout_width="match_parent">
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
+
+    <android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".element.employee.employee.About_employee_activity">
+
         <android.support.design.widget.AppBarLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent">
-            <android.support.v7.widget.Toolbar
-                xmlns:android="http://schemas.android.com/apk/res/android"
+
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/about_employee_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_collapseMode="pin"
-                app:layout_scrollFlags="enterAlways|scroll">
-            </android.support.v7.widget.Toolbar>
+                app:layout_scrollFlags="enterAlways|scroll"></android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/about_employee_image"
                     android:layout_width="150dp"
@@ -44,6 +46,7 @@
                     android:src="@drawable/employee"
                     app:civ_border_color="@color/cardview_dark_background"
                     app:civ_border_width="3dp" />
+
                 <ImageView
                     android:id="@+id/about_employee_picture_anchor"
                     android:layout_width="130dp"
@@ -53,6 +56,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp" />
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -62,6 +66,7 @@
                 android:layout_marginTop="1dp"
                 android:background="@android:color/white"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -69,9 +74,11 @@
                     android:layout_margin="2dp"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:layout_marginTop="10dp"
                             android:id="@+id/about_employee_name"
@@ -84,8 +91,9 @@
                             android:text="Sumit kumar"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textStyle="bold" />
+
                         <TextView
-                           android:id="@+id/about_employee_full_name"
+                            android:id="@+id/about_employee_full_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/about_employee_name"
@@ -93,18 +101,21 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textSize="@dimen/text_size_medium_small"
                             android:text="jdfjfd dfkjfkjf dfkfdkf fkfklf fkfkj"
-                            android:layout_marginBottom="20dp"/>
+                            android:layout_marginBottom="20dp" />
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_margin="2dp"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:layout_marginTop="10dp"
                             android:layout_width="wrap_content"
@@ -115,6 +126,7 @@
                             android:textSize="@dimen/text_size_small"
                             android:layout_marginStart="10dp"
                             android:text="Email" />
+
                         <TextView
                             android:id="@+id/about_employee_mail"
                             android:layout_width="wrap_content"
@@ -126,6 +138,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textSize="@dimen/text_size_medium_small"
                             android:textStyle="normal" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -135,6 +148,7 @@
                             android:text="work"
                             android:id="@+id/about_employee_email_type"
                             android:layout_below="@+id/about_employee_mail" />
+
                         <ImageView
                             android:id="@+id/about_employee_mail_button"
                             android:layout_width="25dp"
@@ -145,15 +159,18 @@
                             android:layout_alignParentEnd="true" />
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_margin="2dp"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:layout_marginTop="10dp"
                             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -163,8 +180,8 @@
                             android:layout_height="wrap_content"
                             android:text="Phone number"
                             android:layout_marginStart="10dp"
-                            android:id="@+id/about_employee_phone_num_label"
-                            />
+                            android:id="@+id/about_employee_phone_num_label" />
+
                         <TextView
                             android:id="@+id/about_employee_phone_num"
                             android:layout_width="wrap_content"
@@ -175,6 +192,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textSize="@dimen/text_size_medium_small"
                             android:textStyle="normal" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -184,6 +202,7 @@
                             android:text="work"
                             android:id="@+id/about_employee_phone_number_type"
                             android:layout_below="@+id/about_employee_phone_num" />
+
                         <ImageView
                             android:id="@+id/about_employee_call_phone_number"
                             android:layout_width="25dp"
@@ -194,15 +213,18 @@
                             android:src="@drawable/ic_call_black_24dp" />
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_margin="2dp"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:id="@+id/about_employee_work_profile_anchor"
                             android:layout_width="wrap_content"
@@ -213,6 +235,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textSize="@dimen/text_size_small"
                             android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/about_employee_work_profile"
                             android:layout_width="wrap_content"
@@ -225,6 +248,7 @@
                             android:textSize="@dimen/text_size_medium_small"
                             android:textStyle="normal"
                             android:layout_alignBottom="@+id/about_employee_work_profile_info" />
+
                         <ImageView
                             android:id="@+id/about_employee_work_profile_info"
                             android:layout_width="25dp"
@@ -235,15 +259,18 @@
                             android:layout_alignParentEnd="true" />
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_margin="2dp"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:id="@+id/about_employee_anchor"
                             android:layout_width="match_parent"
@@ -254,6 +281,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textSize="@dimen/text_size_small"
                             android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/about_employee_date_of_join"
                             android:layout_width="wrap_content"
@@ -267,15 +295,18 @@
                             android:textStyle="normal" />
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_margin="2dp"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:id="@+id/about_employee_date_of_birth_anchor"
                             android:layout_width="wrap_content"
@@ -286,6 +317,7 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:textSize="@dimen/text_size_small"
                             android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/about_employee_date_of_birth"
                             android:layout_width="wrap_content"
@@ -299,6 +331,7 @@
                             android:textStyle="normal" />
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -306,16 +339,19 @@
                     android:minHeight="70dp"
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
+
                     <LinearLayout
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="50dp"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -326,6 +362,7 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/about_employee_address"
                                 android:layout_width="wrap_content"
@@ -336,10 +373,12 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -349,6 +388,7 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/about_employee_address_street"
                                 android:layout_width="wrap_content"
@@ -359,10 +399,12 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -373,6 +415,7 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/about_employee_address_neighbourhood"
                                 android:layout_width="wrap_content"
@@ -383,10 +426,12 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -396,6 +441,7 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/about_employee_address_city"
                                 android:layout_width="wrap_content"
@@ -406,10 +452,12 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -419,6 +467,7 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/about_employee_address_state"
                                 android:layout_width="wrap_content"
@@ -429,10 +478,12 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -442,6 +493,7 @@
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="@dimen/text_size_small"
                                 android:textStyle="bold" />
+
                             <TextView
                                 android:id="@+id/about_employee_address_zipcode"
                                 android:layout_width="wrap_content"

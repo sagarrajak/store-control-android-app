@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CardViewWithImages.iml" filepath="$PROJECT_DIR$/CardViewWithImages.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InventoryManger.iml" filepath="$PROJECT_DIR$/InventoryManger.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

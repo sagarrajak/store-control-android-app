@@ -10,9 +10,8 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_grid_24dp"
         android:title="List to Grid"
-        android:id="@+id/list_to_grid"/>
+        android:id="@+id/list_to_grid" />
     <item
         android:title="Sort"
-        android:id="@+id/fragment_menu_sort"
-        />
+        android:id="@+id/fragment_menu_sort" />
 </menu>

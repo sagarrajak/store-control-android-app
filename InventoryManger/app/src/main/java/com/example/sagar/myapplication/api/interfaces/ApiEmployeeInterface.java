@@ -21,46 +21,46 @@ import retrofit2.http.Path;
 
 public interface ApiEmployeeInterface {
 
-     @GET("api/employee/")
-     public  Call<List<Employee>> getEmployee(
-        @Header("token") String token
-     );
+    @GET("api/employee/")
+    Call<List<Employee>> getEmployee(
+            @Header("token") String token
+    );
 
 
-     @POST("api/employee/")
-     Call<Responce>  createEmployee(
-         @Body   Employee mEmployee,
-         @Header("token") String token
-     );
+    @POST("api/employee/")
+    Call<Responce> createEmployee(
+            @Body Employee mEmployee,
+            @Header("token") String token
+    );
 
     @DELETE("api/employee/{id}")
     Call<Data> deleteEmployee(
-             @Path("id") String mEmployeeId,
-             @Header("token") String token
-     );
+            @Path("id") String mEmployeeId,
+            @Header("token") String token
+    );
 
     @GET("api/routes/employee/name/{id}")
     Call<List<Employee>> sortByName(
-            @Path("id") Integer id ,
+            @Path("id") Integer id,
             @Header("token") String token
     );
 
     @GET("api/routes/employee/age/{id}")
     Call<List<Employee>> sortByAge(
-            @Path("id") Integer id ,
+            @Path("id") Integer id,
             @Header("token") String token
     );
 
     @GET("api/routes/employee/date-of-join/{id}")
-    Call<List<Employee>>  sortByDateOFJoin(
-            @Path("id") Integer id ,
+    Call<List<Employee>> sortByDateOFJoin(
+            @Path("id") Integer id,
             @Header("token") String token
     );
 
     @PUT("api/employee/{id}")
     Call<Data> editEmployee(
-          @Body Employee mEmployee ,
-          @Header("token") String  token
+            @Body Employee mEmployee,
+            @Header("token") String token
     );
 
 }

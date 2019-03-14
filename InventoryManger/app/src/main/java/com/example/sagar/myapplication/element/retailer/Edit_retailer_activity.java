@@ -33,29 +33,46 @@ import butterknife.BindView;
 public class Edit_retailer_activity extends AppCompatActivity {
 
     //address ui element
-    @BindView(R.id.edit_retailer_address) EditText mAddress;
-    @BindView(R.id.edit_retailer_street) EditText   mAddressStreet;
-    @BindView(R.id.edit_retailer_post_office) EditText  mAddressPostOffice;
-    @BindView(R.id.edit_retailer_neighborhood) EditText  mAddressNeighbourHood;
-    @BindView(R.id.edit_retailer_zipcode) EditText  mAddressZipcode;
-    @BindView(R.id.edit_retailer_city) EditText  mAddressCity;
-    @BindView(R.id.edit_retailer_state) EditText  mAddressState;
+    @BindView(R.id.edit_retailer_address)
+    EditText mAddress;
+    @BindView(R.id.edit_retailer_street)
+    EditText mAddressStreet;
+    @BindView(R.id.edit_retailer_post_office)
+    EditText mAddressPostOffice;
+    @BindView(R.id.edit_retailer_neighborhood)
+    EditText mAddressNeighbourHood;
+    @BindView(R.id.edit_retailer_zipcode)
+    EditText mAddressZipcode;
+    @BindView(R.id.edit_retailer_city)
+    EditText mAddressCity;
+    @BindView(R.id.edit_retailer_state)
+    EditText mAddressState;
     //name ui element
-    @BindView(R.id.edit_retailer_first_name) EditText mName;
-    @BindView(R.id.edit_retailer_middle_name) EditText mMiddleName;
-    @BindView(R.id.edit_retailer_last_name) EditText  mLastName;
-    @BindView(R.id.edit_retailer_suffix_name) EditText mSuffixName;
-    @BindView(R.id.edit_retailer_family_name) EditText mFamilyName;
+    @BindView(R.id.edit_retailer_first_name)
+    EditText mName;
+    @BindView(R.id.edit_retailer_middle_name)
+    EditText mMiddleName;
+    @BindView(R.id.edit_retailer_last_name)
+    EditText mLastName;
+    @BindView(R.id.edit_retailer_suffix_name)
+    EditText mSuffixName;
+    @BindView(R.id.edit_retailer_family_name)
+    EditText mFamilyName;
     //Phone number ui element
-    @BindView(R.id.edit_retailer_phon)  EditText mPhoneNumber;
-    @BindView(R.id.edit_retailer_phon_spinner) Spinner mPhoneSpinner;
+    @BindView(R.id.edit_retailer_phon)
+    EditText mPhoneNumber;
+    @BindView(R.id.edit_retailer_phon_spinner)
+    Spinner mPhoneSpinner;
     //Email Ui element
-    @BindView(R.id.edit_retailer_mail) EditText mEmailAddress;
-    @BindView(R.id.edit_retailer_mail_spinner)  Spinner mEmailSpinner;
+    @BindView(R.id.edit_retailer_mail)
+    EditText mEmailAddress;
+    @BindView(R.id.edit_retailer_mail_spinner)
+    Spinner mEmailSpinner;
 
-    @BindView(R.id.edit_retailer_toolbar) Toolbar mToolbar;
-    @BindView(R.id.edit_retailer_floating_action_bottom)  FloatingActionButton mFloatingActionButton;
-
+    @BindView(R.id.edit_retailer_toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.edit_retailer_floating_action_bottom)
+    FloatingActionButton mFloatingActionButton;
 
 
     private RetailerApi mRetailerApi;
@@ -73,47 +90,47 @@ public class Edit_retailer_activity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_retailer);
         try {
             setUiElement();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void setUiElement() throws Exception {
         Boolean isLinearLayout = getIntent().getBooleanExtra("isLinearLayout", false);
-        mBottomSheetImage =  new BottomSheetImage(this, new BottomSheetImage.BottomSheetHelper() {
+        mBottomSheetImage = new BottomSheetImage(this, new BottomSheetImage.BottomSheetHelper() {
             @Override
             public void resetImageUri() {
                 mBottomSheetImage.hideDeleteDialog();
                 mSelectedImageUri = null;
             }
         });
-        mAddressFieldUiHelper = new AddressFieldUiHelper(mAddress,mAddressStreet,mAddressNeighbourHood,mAddressState,mAddressZipcode,mAddressPostOffice,mAddressCity);
-        mNameFieldUiHelper    = new NameFieldUiHelper(mName,mMiddleName,mLastName,mSuffixName,mFamilyName);
-        mMailFieldUiHelper    = new MailFieldUiHelper(this,mEmailAddress,mEmailSpinner,R.array.email_type);
-        mPhoneNumberFiledUiHelper = new PhoneNumFieldUiHelper(this,mPhoneNumber,mPhoneSpinner,R.array.phone_number_type);
+        mAddressFieldUiHelper = new AddressFieldUiHelper(mAddress, mAddressStreet, mAddressNeighbourHood, mAddressState, mAddressZipcode, mAddressPostOffice, mAddressCity);
+        mNameFieldUiHelper = new NameFieldUiHelper(mName, mMiddleName, mLastName, mSuffixName, mFamilyName);
+        mMailFieldUiHelper = new MailFieldUiHelper(this, mEmailAddress, mEmailSpinner, R.array.email_type);
+        mPhoneNumberFiledUiHelper = new PhoneNumFieldUiHelper(this, mPhoneNumber, mPhoneSpinner, R.array.phone_number_type);
         setToolbar();
-        if(!isLinearLayout)
+        if (!isLinearLayout)
             mRetailerApi = RetailerApi.getmReteilerApi(RetailerGridAdapter.getRetailerGridAdapter(this), this.getBaseContext());
         else
             mRetailerApi = RetailerApi.getmReteilerApi(RetailerListAdapter.getRetailerListAdapter(this), this.getBaseContext());
         Retailer mRetailer = (Retailer) getIntent().getSerializableExtra("Retailer");
-        if(mRetailer ==null){
+        if (mRetailer == null) {
             finish();
         }
-       mAddressFieldUiHelper.setAddress(mRetailer.getAddress());
-       mNameFieldUiHelper.setName(mRetailer.getName());
-       mPhoneNumberFiledUiHelper.setPhoneNum(mRetailer.getPhoneNum());
-       mMailFieldUiHelper.setEmailAddress(mRetailer.getMail());
+        mAddressFieldUiHelper.setAddress(mRetailer.getAddress());
+        mNameFieldUiHelper.setName(mRetailer.getName());
+        mPhoneNumberFiledUiHelper.setPhoneNum(mRetailer.getPhoneNum());
+        mMailFieldUiHelper.setEmailAddress(mRetailer.getMail());
     }
 
-    private void setToolbar(){
+    private void setToolbar() {
         setTitle("Edit retailer");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private Retailer getRetailer(){
+    private Retailer getRetailer() {
         Retailer retailer = new Retailer();
         retailer.setName(mNameFieldUiHelper.getName());
         retailer.setAddress(mAddressFieldUiHelper.getAddress());
@@ -123,9 +140,9 @@ public class Edit_retailer_activity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case  R.id.ok :
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.ok:
 
                 break;
             case R.id.cancel:
@@ -137,24 +154,24 @@ public class Edit_retailer_activity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_ok_cancel,menu);
+        getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        switch(requestCode){
-            case  CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE :
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE:
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
-                if ( resultCode == RESULT_OK &&  result.getUri() != null){
+                if (resultCode == RESULT_OK && result.getUri() != null) {
                     mSelectedImageUri = result.getUri();
                     mBottomSheetImage.showDeleteDialog();
-                }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                     Exception error = result.getError();
                 }
                 break;
-            case  Config.SELECT_IMAGE_FROM_STORAGE :
-                if(resultCode == RESULT_OK ){
+            case Config.SELECT_IMAGE_FROM_STORAGE:
+                if (resultCode == RESULT_OK) {
                     mSelectedImageUri = data.getData();
                     CropImage.activity(mSelectedImageUri)
                             .start(Edit_retailer_activity.this);

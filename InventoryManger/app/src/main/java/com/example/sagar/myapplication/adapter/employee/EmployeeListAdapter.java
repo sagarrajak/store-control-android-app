@@ -23,111 +23,113 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeListAdapter  extends RecyclerView.Adapter<EmployeeListAdapter.MyViewHolder> implements EmployeeAdapterInterface {
+public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapter.MyViewHolder> implements EmployeeAdapterInterface {
 
     private Context mContext;
     private EmployeeApi mEmployeeApi;
-    private static  EmployeeListAdapter mEmployeeListAdapter;
+    private static EmployeeListAdapter mEmployeeListAdapter;
     private List<Employee> employees;
 
-    public EmployeeListAdapter( Context mContext ){
+    public EmployeeListAdapter(Context mContext) {
         this.mContext = mContext;
-        mEmployeeApi = EmployeeApi.getEmployeeApi(this,mContext);
+        mEmployeeApi = EmployeeApi.getEmployeeApi(this, mContext);
         employees = new ArrayList<>();
     }
 
-    public void setmContext(Context mContext){
+    public void setmContext(Context mContext) {
         this.mContext = mContext;
     }
+
     @Override
-    public EmployeeListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.employee_list_card,parent,false);
+    public EmployeeListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.employee_list_card, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final EmployeeListAdapter.MyViewHolder holder, final int position){
+    public void onBindViewHolder(final EmployeeListAdapter.MyViewHolder holder, final int position) {
         String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_300,h_300,c_crop/w_200/v1482011353/";
-        holder.name.setText(employees.get(position).getName().getName()+" "+employees.get(position).getName().getLast());
+        holder.name.setText(employees.get(position).getName().getName() + " " + employees.get(position).getName().getLast());
         holder.mail.setText(employees.get(position).getMail().getValue());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                Intent intent = new Intent( mContext.getApplicationContext() , About_employee_activity.class );
-                intent.putExtra("Employee" , employees.get(position));
+                Intent intent = new Intent(mContext.getApplicationContext(), About_employee_activity.class);
+                intent.putExtra("Employee", employees.get(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });
 
         Picasso.with(mContext)
-                .load(url+employees.get(position).getImage())
+                .load(url + employees.get(position).getImage())
                 .placeholder(R.drawable.employee)
                 .into(holder.mEmployeeImage);
 
         holder.view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View view){
-                CharSequence[] items = { "Edit details" , "Delete" , "Send message" , "Details" };
+            public boolean onLongClick(View view) {
+                CharSequence[] items = {"Edit details", "Delete", "Send message", "Details"};
                 new AlertDialog.Builder(mContext)
-                        .setItems( items, new DialogInterface.OnClickListener() {
+                        .setItems(items, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                switch (i){
-                                    case  0 :
+                                switch (i) {
+                                    case 0:
                                         //// TODO: 18/10/17  
                                         break;
-                                    case  1 :
+                                    case 1:
                                         //// TODO: 18/10/17
                                         break;
-                                    case  2:
+                                    case 2:
                                         //// TODO: 18/10/17  
                                         break;
-                                    case   3:
+                                    case 3:
                                         //// TODO: 18/10/17
                                         break;
                                 }
                             }
                         })
                         .show();
-                return  false;
+                return false;
             }
         });
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return employees.size();
     }
 
     @Override
     public void addNewEmployeeList(List<Employee> mEmployee) {
-        if(mEmployee!=null)
+        if (mEmployee != null)
             this.employees = mEmployee;
         notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name,mail;
+        public TextView name, mail;
         public ImageView mEmployeeImage;
         public View view;
-        public MyViewHolder(View itemView){
+
+        public MyViewHolder(View itemView) {
             super(itemView);
             this.view = itemView;
             name = (TextView) itemView.findViewById(R.id.employee_list_view_name);
             mail = (TextView) itemView.findViewById(R.id.employee_list_view_mail);
-            mEmployeeImage = (ImageView)itemView.findViewById(R.id.employee_list_view_image_view);
+            mEmployeeImage = (ImageView) itemView.findViewById(R.id.employee_list_view_image_view);
         }
     }
 
 
-    public static  EmployeeListAdapter getEmployeeListAdapter(Context mContext){
-        if(mEmployeeListAdapter==null)
+    public static EmployeeListAdapter getEmployeeListAdapter(Context mContext) {
+        if (mEmployeeListAdapter == null)
             mEmployeeListAdapter = new EmployeeListAdapter(mContext);
         else
             mEmployeeListAdapter.setmContext(mContext);
-        return  mEmployeeListAdapter;
+        return mEmployeeListAdapter;
     }
 
 }

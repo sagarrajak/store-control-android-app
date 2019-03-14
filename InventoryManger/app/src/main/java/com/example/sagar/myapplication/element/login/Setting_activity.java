@@ -14,22 +14,23 @@ public class Setting_activity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationDrawer mNavigationDrawer;
-    private  NavigationView mNavigationView;
+    private NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         toolbar = (Toolbar) findViewById(R.id.setting_toolbar);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.setting_drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.setting_drawer_layout);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setNavigationView();
     }
-    private void setNavigationView(){
+
+    private void setNavigationView() {
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-        NavigationDrawer navigationDrawer = new NavigationDrawer(toolbar,mDrawerLayout,mNavigationView,this);
+        NavigationDrawer navigationDrawer = new NavigationDrawer(toolbar, mDrawerLayout, mNavigationView, this);
         navigationDrawer.setNavigationDrawer();
     }
 }

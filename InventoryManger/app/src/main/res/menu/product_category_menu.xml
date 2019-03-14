@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:title="Details"
-        android:id="@+id/product_category_menu_details"/>
+        android:id="@+id/product_category_menu_details" />
     <item
         android:title="Delete"
-        android:id="@+id/product_category_menu_delete"/>
+        android:id="@+id/product_category_menu_delete" />
     <item
         android:title="Edit"
-        android:id="@+id/product_category_menu_edit"/>
+        android:id="@+id/product_category_menu_edit" />
     <item
         android:title="Products"
-        android:id="@+id/product_category_menu_product"/>
+        android:id="@+id/product_category_menu_product" />
     <item
         android:title="Add New Product"
-        android:id="@+id/product_category_menu_add_new_product"/>
+        android:id="@+id/product_category_menu_add_new_product" />
 </menu>

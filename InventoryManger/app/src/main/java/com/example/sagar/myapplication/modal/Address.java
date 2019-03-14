@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Address implements Serializable{
+public class Address implements Serializable {
 
 
     public String getStreet() {
@@ -75,22 +75,22 @@ public class Address implements Serializable{
 
     @SerializedName("po_box")
     @Expose
-    private  String poBox;
+    private String poBox;
     @SerializedName("neighborhood")
     @Expose
-    private  String neighborhood;
+    private String neighborhood;
     @SerializedName("zipcode")
     @Expose
-    private  String zipcode;
+    private String zipcode;
     @SerializedName("city")
     @Expose
     private String city;
     @SerializedName("state")
     @Expose
-    private  String state;
+    private String state;
     @SerializedName("nation")
     @Expose
-    private  String nation;
+    private String nation;
     @SerializedName("street")
     @Expose
     private String street;
@@ -101,16 +101,48 @@ public class Address implements Serializable{
     private String getStringBuilder() {
         StringBuilder sbd = new StringBuilder();
         sbd.append("{");
-        if(address != null && !address.isEmpty()) { sbd.append("address : ");  sbd.append(address); sbd.append(" \n"); }
-        if(street != null &&  !street.isEmpty()) { sbd.append("street : "); sbd.append(street); sbd.append(" \n"); }
-        if(nation != null && !nation.isEmpty()) { sbd.append("nation : "); sbd.append(nation); sbd.append(" \n"); }
-        if(state != null && !state.isEmpty()) { sbd.append("state :"); sbd.append(state); sbd.append(" \n"); }
-        if(city != null && !city.isEmpty()) { sbd.append("city :"); sbd.append(city); sbd.append(" \n"); }
-        if(zipcode != null && !zipcode.isEmpty()) { sbd.append("zipcode :"); sbd.append(zipcode); sbd.append(" \n"); }
-        if(neighborhood != null && !neighborhood.isEmpty()) { sbd.append("neighborhood :"); sbd.append(neighborhood); sbd.append(" \n"); }
-        if(poBox != null && !poBox.isEmpty()){ sbd.append("po box :"); sbd.append(poBox); sbd.append(" \n"); }
+        if (address != null && !address.isEmpty()) {
+            sbd.append("address : ");
+            sbd.append(address);
+            sbd.append(" \n");
+        }
+        if (street != null && !street.isEmpty()) {
+            sbd.append("street : ");
+            sbd.append(street);
+            sbd.append(" \n");
+        }
+        if (nation != null && !nation.isEmpty()) {
+            sbd.append("nation : ");
+            sbd.append(nation);
+            sbd.append(" \n");
+        }
+        if (state != null && !state.isEmpty()) {
+            sbd.append("state :");
+            sbd.append(state);
+            sbd.append(" \n");
+        }
+        if (city != null && !city.isEmpty()) {
+            sbd.append("city :");
+            sbd.append(city);
+            sbd.append(" \n");
+        }
+        if (zipcode != null && !zipcode.isEmpty()) {
+            sbd.append("zipcode :");
+            sbd.append(zipcode);
+            sbd.append(" \n");
+        }
+        if (neighborhood != null && !neighborhood.isEmpty()) {
+            sbd.append("neighborhood :");
+            sbd.append(neighborhood);
+            sbd.append(" \n");
+        }
+        if (poBox != null && !poBox.isEmpty()) {
+            sbd.append("po box :");
+            sbd.append(poBox);
+            sbd.append(" \n");
+        }
         sbd.append("}");
-        return  sbd.toString();
+        return sbd.toString();
     }
 
     @Override
@@ -120,13 +152,11 @@ public class Address implements Serializable{
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Address() {
     }
 
     /**
-     *
      * @param address
      * @param zipcode
      * @param poBox
@@ -136,7 +166,7 @@ public class Address implements Serializable{
      * @param nation
      * @param city
      */
-    public Address(String address,String street, String poBox, String neighborhood, String zipcode, String city, String state, String nation) {
+    public Address(String address, String street, String poBox, String neighborhood, String zipcode, String city, String state, String nation) {
         this.address = address;
         this.street = street;
         this.poBox = poBox;

@@ -5,9 +5,8 @@
         android:id="@+id/menu_category_add"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_add_black_24dp"
-        android:title="Add new Category"/>
+        android:title="Add new Category" />
     <item
         android:title="sort"
-        android:id="@+id/menu_category_sort"
-        />
+        android:id="@+id/menu_category_sort" />
 </menu>

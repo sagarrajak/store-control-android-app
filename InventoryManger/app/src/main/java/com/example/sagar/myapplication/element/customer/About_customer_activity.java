@@ -22,24 +22,39 @@ import butterknife.ButterKnife;
 
 public class About_customer_activity extends AppCompatActivity {
     //tollbar
-    @BindView(R.id.about_customer_toolbar) Toolbar mToobar;
-    @BindView(R.id.about_customer_name) TextView mName;
-    @BindView(R.id.about_customer_full_name) TextView mFullName;
+    @BindView(R.id.about_customer_toolbar)
+    Toolbar mToobar;
+    @BindView(R.id.about_customer_name)
+    TextView mName;
+    @BindView(R.id.about_customer_full_name)
+    TextView mFullName;
     //Email  component
-    @BindView(R.id.about_customer_mail)  TextView mEmail;
-    @BindView(R.id.about_customer_mail_type) TextView mEmailType;
-    @BindView(R.id.about_customer_mail_button) ImageView mMailButton;
+    @BindView(R.id.about_customer_mail)
+    TextView mEmail;
+    @BindView(R.id.about_customer_mail_type)
+    TextView mEmailType;
+    @BindView(R.id.about_customer_mail_button)
+    ImageView mMailButton;
     //Phone number component
-    @BindView(R.id.about_customer_phone_num) TextView mPhoneNumber;
-    @BindView(R.id.about_customer_phone_number_type) TextView mPhoneNumberType;
-    @BindView(R.id.about_customer_phone_number_bottom) ImageView mImagePhoneNumberButton;
+    @BindView(R.id.about_customer_phone_num)
+    TextView mPhoneNumber;
+    @BindView(R.id.about_customer_phone_number_type)
+    TextView mPhoneNumberType;
+    @BindView(R.id.about_customer_phone_number_bottom)
+    ImageView mImagePhoneNumberButton;
     //address component
-    @BindView(R.id.about_customer_address) TextView mAddress;
-    @BindView(R.id.about_customer_address_city) TextView mAddressCity;
-    @BindView(R.id.about_customer_address_state) TextView mAddressState;
-    @BindView(R.id.about_customer_address_street) TextView mAddressStreet;
-    @BindView(R.id.about_customer_address_neighbourhood) TextView mAddressNeighbourHood;
-    @BindView(R.id.about_customer_address_zipcode) TextView mAddressZipCode;
+    @BindView(R.id.about_customer_address)
+    TextView mAddress;
+    @BindView(R.id.about_customer_address_city)
+    TextView mAddressCity;
+    @BindView(R.id.about_customer_address_state)
+    TextView mAddressState;
+    @BindView(R.id.about_customer_address_street)
+    TextView mAddressStreet;
+    @BindView(R.id.about_customer_address_neighbourhood)
+    TextView mAddressNeighbourHood;
+    @BindView(R.id.about_customer_address_zipcode)
+    TextView mAddressZipCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +80,15 @@ public class About_customer_activity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private String getString(String tem){
-        if(tem == null||tem.isEmpty())
-            return  "";
+    private String getString(String tem) {
+        if (tem == null || tem.isEmpty())
+            return "";
         else
-            return  tem+" ";
+            return tem + " ";
     }
 
-    private void addressHelperMethod(TextView mTextView , String text){
-        if(text!=null && !text.isEmpty())
+    private void addressHelperMethod(TextView mTextView, String text) {
+        if (text != null && !text.isEmpty())
             mTextView.setText(text);
         else
             mTextView.setText("");
@@ -81,7 +96,7 @@ public class About_customer_activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.about_employee_edit_menu:
 
                 break;
@@ -89,8 +104,8 @@ public class About_customer_activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setData(Customer mCustomer){
-        mName.setText(mCustomer.getName().getName()+" "+mCustomer.getName().getLast());
+    private void setData(Customer mCustomer) {
+        mName.setText(mCustomer.getName().getName() + " " + mCustomer.getName().getLast());
         //full Name required filed
         String mBuilder = getString(mCustomer.getName().getName()) +
                 getString(mCustomer.getName().getMiddle()) +
@@ -98,42 +113,52 @@ public class About_customer_activity extends AppCompatActivity {
                 getString(mCustomer.getName().getSuffix());
         mFullName.setText(mBuilder);
         //set phone number(can be nullable)
-        if(mCustomer.getPhoneNum() != null) {
-           if(mCustomer.getPhoneNum().getValue() != null)  mPhoneNumber.setText(mCustomer.getPhoneNum().getValue());
-           if(mCustomer.getPhoneNum().getSub() != null)  mPhoneNumberType.setText(mCustomer.getPhoneNum().getSub());
+        if (mCustomer.getPhoneNum() != null) {
+            if (mCustomer.getPhoneNum().getValue() != null)
+                mPhoneNumber.setText(mCustomer.getPhoneNum().getValue());
+            if (mCustomer.getPhoneNum().getSub() != null)
+                mPhoneNumberType.setText(mCustomer.getPhoneNum().getSub());
         }
         //set mail type (can be nullable)
-        if(mCustomer.getMail() != null) {
-            if(mCustomer.getMail().getValue() != null) mEmail.setText(mCustomer.getMail().getValue());
-            if(mCustomer.getMail().getSub() != null) mEmailType.setText(mCustomer.getMail().getSub());
+        if (mCustomer.getMail() != null) {
+            if (mCustomer.getMail().getValue() != null)
+                mEmail.setText(mCustomer.getMail().getValue());
+            if (mCustomer.getMail().getSub() != null)
+                mEmailType.setText(mCustomer.getMail().getSub());
         }
         //addressComponent(can be nullable)
-        if(mCustomer.getAddress() != null) {
-            if(mCustomer.getAddress().getAddress() != null ) addressHelperMethod(mAddress,mCustomer.getAddress().getAddress());
-            if(mCustomer.getAddress().getCity() != null) addressHelperMethod(mAddressCity,mCustomer.getAddress().getCity());
-            if(mCustomer.getAddress().getNeighborhood() != null) addressHelperMethod(mAddressNeighbourHood,mCustomer.getAddress().getNeighborhood());
-            if(mCustomer.getAddress().getStreet() != null) addressHelperMethod(mAddressStreet,mCustomer.getAddress().getStreet());
-            if(mCustomer.getAddress().getState() != null) addressHelperMethod(mAddressState,mCustomer.getAddress().getState());
-            if(mCustomer.getAddress().getZipcode() != null ) addressHelperMethod(mAddressZipCode,mCustomer.getAddress().getZipcode());
+        if (mCustomer.getAddress() != null) {
+            if (mCustomer.getAddress().getAddress() != null)
+                addressHelperMethod(mAddress, mCustomer.getAddress().getAddress());
+            if (mCustomer.getAddress().getCity() != null)
+                addressHelperMethod(mAddressCity, mCustomer.getAddress().getCity());
+            if (mCustomer.getAddress().getNeighborhood() != null)
+                addressHelperMethod(mAddressNeighbourHood, mCustomer.getAddress().getNeighborhood());
+            if (mCustomer.getAddress().getStreet() != null)
+                addressHelperMethod(mAddressStreet, mCustomer.getAddress().getStreet());
+            if (mCustomer.getAddress().getState() != null)
+                addressHelperMethod(mAddressState, mCustomer.getAddress().getState());
+            if (mCustomer.getAddress().getZipcode() != null)
+                addressHelperMethod(mAddressZipCode, mCustomer.getAddress().getZipcode());
         }
     }
 
-    private void setMailClickListener(final Mail mEmail){
+    private void setMailClickListener(final Mail mEmail) {
         mMailButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-            Intent intent = new Intent(Intent.ACTION_SENDTO , Uri.fromParts("mailto" , mEmail.getValue() , null)) ;
-            startActivity(Intent.createChooser(intent , "Send email..."));
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", mEmail.getValue(), null));
+                startActivity(Intent.createChooser(intent, "Send email..."));
             }
         });
     }
 
-    private void setPhoneNumberClickListener(final PhoneNum mPhoneNum){
+    private void setPhoneNumberClickListener(final PhoneNum mPhoneNum) {
         mImagePhoneNumberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+mPhoneNum.getValue()));
+                intent.setData(Uri.parse("tel:" + mPhoneNum.getValue()));
                 startActivity(intent);
             }
         });

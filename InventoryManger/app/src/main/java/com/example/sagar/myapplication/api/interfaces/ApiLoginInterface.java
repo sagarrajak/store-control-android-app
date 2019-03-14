@@ -9,19 +9,19 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
-public interface ApiLoginInterface{
+public interface ApiLoginInterface {
 
     @FormUrlEncoded
     @POST("api/login")
     public Call<LoginData> login(
-      @Field("username") String username ,
-      @Field("password") String password
+            @Field("username") String username,
+            @Field("password") String password
     );
 
     @FormUrlEncoded
     @POST("api/signup")
     public Call<LoginData> signup(
-      @Field("username") String username ,
-      @Field("password") String password
+            @Field("username") String username,
+            @Field("password") String password
     );
 }

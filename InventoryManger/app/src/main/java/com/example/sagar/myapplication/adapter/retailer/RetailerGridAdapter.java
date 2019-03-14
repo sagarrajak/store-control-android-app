@@ -26,7 +26,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapter.MyViewHolder> implements RetailerAdapterInterface {
+
+public class RetailerGridAdapter extends RecyclerView.Adapter<RetailerGridAdapter.MyViewHolder> implements RetailerAdapterInterface {
 
 
     private List<Retailer> retailer;
@@ -34,45 +35,45 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
     private RetailerApi mRetailerApi;
     private static RetailerGridAdapter mRetailerGridAdapter;
 
-    private   RetailerGridAdapter(Context mContext){
-         this.mContext = mContext;
-         mRetailerApi = RetailerApi.getmReteilerApi(this, mContext);
-         retailer = new ArrayList<>();
+    private RetailerGridAdapter(Context mContext) {
+        this.mContext = mContext;
+        mRetailerApi = RetailerApi.getmReteilerApi(this, mContext);
+        retailer = new ArrayList<>();
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.emploee_card,parent,false);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.emploee_card, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int i) {
         String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_300,h_300,c_crop/w_200/v1482011353/";
-        holder.name.setText(retailer.get(i).getName().getName()+" "+retailer.get(i).getName().getLast());
+        holder.name.setText(retailer.get(i).getName().getName() + " " + retailer.get(i).getName().getLast());
         holder.email.setText(retailer.get(i).getMail().getValue());
-        holder.mImageView.setOnClickListener(new View.OnClickListener(){
+        holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopUpMenu(holder.mImageView , i);
+                showPopUpMenu(holder.mImageView, i);
             }
         });
         Picasso.with(mContext)
-                .load(url+retailer.get(i).getImage())
+                .load(url + retailer.get(i).getImage())
                 .placeholder(R.drawable.employee)
                 .into(holder.employeePicture);
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent = new Intent(mContext, About_retailer_activity.class);
-                intent.putExtra("Retailer",retailer.get(i));
+                intent.putExtra("Retailer", retailer.get(i));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });
     }
 
-    public  void setmContext(Context mConetext){
+    public void setmContext(Context mConetext) {
         this.mContext = mConetext;
     }
 
@@ -87,44 +88,47 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
         notifyDataSetChanged();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
-        public  View view;
-        public TextView name,email;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public View view;
+        public TextView name, email;
         public ImageView mImageView;
-        public  ImageView employeePicture;
-        public  int position;
-        public MyViewHolder(View view){
+        public ImageView employeePicture;
+        public int position;
+
+        public MyViewHolder(View view) {
             super(view);
             this.view = view;
-            name  =  view.findViewById(R.id.name);
-            email =  view.findViewById(R.id.mail);
+            name = view.findViewById(R.id.name);
+            email = view.findViewById(R.id.mail);
             mImageView = view.findViewById(R.id.imageViewLog);
             employeePicture = view.findViewById(R.id.add_customer_picture);
         }
     }
 
-    private void  showPopUpMenu( View view , int i){
-        PopupMenu popupMenu = new PopupMenu(mContext,view);
+    private void showPopUpMenu(View view, int i) {
+        PopupMenu popupMenu = new PopupMenu(mContext, view);
         MenuInflater mMenuInflater = popupMenu.getMenuInflater();
-        mMenuInflater.inflate(R.menu.grid_view_retailer_card_menu , popupMenu.getMenu());
+        mMenuInflater.inflate(R.menu.grid_view_retailer_card_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new MyMenuOnClickListerner(i));
         popupMenu.show();
     }
 
-    class  MyMenuOnClickListerner implements  PopupMenu.OnMenuItemClickListener{
+    class MyMenuOnClickListerner implements PopupMenu.OnMenuItemClickListener {
         private int position;
-        public MyMenuOnClickListerner(int position ){
+
+        public MyMenuOnClickListerner(int position) {
             this.position = position;
         }
+
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
 
             }
-            return  false;
+            return false;
         }
 
-        private void createDeleteDialog(final int position){
+        private void createDeleteDialog(final int position) {
             /*Dialog   to  delete   employee*/
             new AlertDialog.Builder(mContext)
                     .setTitle("Delete Employee")
@@ -142,16 +146,16 @@ public class RetailerGridAdapter  extends RecyclerView.Adapter<RetailerGridAdapt
                         }
                     })
                     .show();
-           }
         }
+    }
 
 
-       public static  RetailerGridAdapter getRetailerGridAdapter(Context mContext){
-         if(mRetailerGridAdapter==null)
-             mRetailerGridAdapter  = new RetailerGridAdapter(mContext);
-         else
-             mRetailerGridAdapter.setmContext(mContext);
-        return  mRetailerGridAdapter;
+    public static RetailerGridAdapter getRetailerGridAdapter(Context mContext) {
+        if (mRetailerGridAdapter == null)
+            mRetailerGridAdapter = new RetailerGridAdapter(mContext);
+        else
+            mRetailerGridAdapter.setmContext(mContext);
+        return mRetailerGridAdapter;
     }
 }
 

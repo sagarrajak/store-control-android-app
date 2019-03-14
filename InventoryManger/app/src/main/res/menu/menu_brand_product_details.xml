@@ -5,23 +5,20 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_add_black_24dp"
         android:title="Add product"
-        android:id="@+id/menu_brand_product_add"
-        />
-    <item android:title="Delete"
-          app:showAsAction="always"
-          android:icon="@drawable/ic_delete_black_24dp"
-          android:id="@+id/menu_brand_product_delete"
-        />
+        android:id="@+id/menu_brand_product_add" />
+    <item
+        android:title="Delete"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:id="@+id/menu_brand_product_delete" />
     <item
         android:title="Edit"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_edit_black_24dp"
-        android:id="@+id/menu_brand_product_edit"
-        />
+        android:id="@+id/menu_brand_product_edit" />
     <item
         android:title="Details"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_info_outline_black_24dp"
-        android:id="@+id/menu_brand_product_details"
-        />
+        android:id="@+id/menu_brand_product_details" />
 </menu>

@@ -26,7 +26,7 @@ import com.example.sagar.myapplication.utill.SpaceItemDecoration;
 import com.example.sagar.myapplication.adapter.product.ProductGridAdapter;
 import com.example.sagar.myapplication.element.product.Activity_create_product;
 
-public class Product_fragment extends Fragment{
+public class Product_fragment extends Fragment {
 
     private ProductApi mProductApi;
     private RecyclerView recyclerView;
@@ -35,16 +35,18 @@ public class Product_fragment extends Fragment{
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
-    public Product_fragment(){}
+    public Product_fragment() {
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate( R.layout.fragment_product_frag , container , false );
+        return inflater.inflate(R.layout.fragment_product_frag, container, false);
     }
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState){
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         isListLayout = false;
         mSwipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_to_refresh_product);
@@ -64,77 +66,75 @@ public class Product_fragment extends Fragment{
     }
 
 
-    private void createRecycleView(){
+    private void createRecycleView() {
 
-            recyclerView = (RecyclerView)getView().findViewById( R.id.recycle_product_view );
-            recyclerView.addItemDecoration(new SpaceItemDecoration(1));
-            GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
-            recyclerView.setLayoutManager(mGridLayoutManager);
-            ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(getActivity());
-            mProgressDialog.show();
-            mProductApi = ProductApi.getmProductApi(ProductGridAdapter.getProductAdapter(getActivity()));
-            mProductApi.listProduct(mProgressDialog);
-
-    }
-
-
-
-    private void changeGridToList(){
-
-            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager( getActivity() , LinearLayoutManager.VERTICAL , false);
-            recyclerView.setLayoutManager(mLinearLayoutManager);
-            recyclerView.setAdapter(ProductListAdapter.getProductListAdapter(getActivity()));
-            ProgressDialog mProgressDialog  = CustumProgressDialog.getProgressDialog(getActivity());
-            mProgressDialog.show();
-            mProductApi.addNewAdapter(ProductListAdapter.getProductListAdapter(getActivity()));
-            mProductApi.listProduct(mProgressDialog);
+        recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_product_view);
+        recyclerView.addItemDecoration(new SpaceItemDecoration(1));
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
+        recyclerView.setLayoutManager(mGridLayoutManager);
+        ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(getActivity());
+        mProgressDialog.show();
+        mProductApi = ProductApi.getmProductApi(ProductGridAdapter.getProductAdapter(getActivity()));
+        mProductApi.listProduct(mProgressDialog);
 
     }
 
-    private void changeListToGrid(){
 
-            recyclerView.addItemDecoration(new SpaceItemDecoration(1));
-            GridLayoutManager mGridLayoutManager = new GridLayoutManager(  getActivity() , 2 , RecyclerView.VERTICAL , true );
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
-            recyclerView.setLayoutManager(mGridLayoutManager);
-            ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(getActivity());
-            mProgressDialog.show();
-            mProductApi.addNewAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
-            mProductApi.listProduct(mProgressDialog);
+    private void changeGridToList() {
+
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.setAdapter(ProductListAdapter.getProductListAdapter(getActivity()));
+        ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(getActivity());
+        mProgressDialog.show();
+        mProductApi.addNewAdapter(ProductListAdapter.getProductListAdapter(getActivity()));
+        mProductApi.listProduct(mProgressDialog);
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    private void changeListToGrid() {
 
-            inflater.inflate(R.menu.menu_product_fragment  , menu);
-            listToGrid = menu.findItem(R.id.list_to_grid);
-            if(isListLayout) listToGrid.setIcon(R.drawable.ic_grid_24dp);
-            else  listToGrid.setIcon(R.drawable.ic_list_black_24dp);
-            super.onCreateOptionsMenu( menu , inflater );
+        recyclerView.addItemDecoration(new SpaceItemDecoration(1));
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
+        recyclerView.setLayoutManager(mGridLayoutManager);
+        ProgressDialog mProgressDialog = CustumProgressDialog.getProgressDialog(getActivity());
+        mProgressDialog.show();
+        mProductApi.addNewAdapter(ProductGridAdapter.getProductAdapter(getActivity()));
+        mProductApi.listProduct(mProgressDialog);
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case   R.id.product_product :
-                Intent intent = new Intent( getActivity().getApplicationContext() , Activity_create_product.class);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.menu_product_fragment, menu);
+        listToGrid = menu.findItem(R.id.list_to_grid);
+        if (isListLayout) listToGrid.setIcon(R.drawable.ic_grid_24dp);
+        else listToGrid.setIcon(R.drawable.ic_list_black_24dp);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.product_product:
+                Intent intent = new Intent(getActivity().getApplicationContext(), Activity_create_product.class);
                 startActivity(intent);
                 break;
-            case R.id.list_to_grid :
-                if(isListLayout){
+            case R.id.list_to_grid:
+                if (isListLayout) {
                     listToGrid.setIcon(R.drawable.ic_list_black_24dp);
                     changeListToGrid();
-                }
-                else{
+                } else {
                     listToGrid.setIcon(R.drawable.ic_grid_24dp);
                     changeGridToList();
                 }
-                isListLayout=!isListLayout;
+                isListLayout = !isListLayout;
                 break;
         }
         return super.onOptionsItemSelected(item);

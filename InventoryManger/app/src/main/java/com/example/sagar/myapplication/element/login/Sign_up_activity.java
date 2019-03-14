@@ -4,8 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.sagar.myapplication.R;
-public class Sign_up_activity extends AppCompatActivity {
 
+public class Sign_up_activity extends AppCompatActivity {
 
 
     @Override

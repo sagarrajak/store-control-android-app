@@ -22,45 +22,47 @@ import com.example.sagar.myapplication.adapter.product.ProductCategoryAdapter;
 import com.example.sagar.myapplication.api.ProductTypeApi;
 import com.example.sagar.myapplication.element.product_category.Create_new_product_category;
 
-public class Category_fragment extends Fragment{
+public class Category_fragment extends Fragment {
 
 
     private ProductCategoryAdapter mProductCategoryAdapter;
     private ProductTypeApi mProductTypeApi;
     private SwipeRefreshLayout mSwipetoRefresh;
-    public Category_fragment(){}
+
+    public Category_fragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProductCategoryAdapter =   new ProductCategoryAdapter(getActivity());
-        mProductTypeApi         =   ProductTypeApi.getProductTypeApi(mProductCategoryAdapter);
+        mProductCategoryAdapter = new ProductCategoryAdapter(getActivity());
+        mProductTypeApi = ProductTypeApi.getProductTypeApi(mProductCategoryAdapter);
         setHasOptionsMenu(true);
     }
 
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        return inflater.inflate( R.layout.fragment_category ,  container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState){
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRecycleView();
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.menu_category_fragment  , menu);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_category_fragment, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private void setRecycleView(){
+    private void setRecycleView() {
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_view);
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager( getContext() , LinearLayoutManager.VERTICAL , false );
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLinearLayoutManager);
         recyclerView.setAdapter(mProductCategoryAdapter);
-        Dialog dialog       =   CustumProgressDialog.getProgressDialog(getActivity());
+        Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
         dialog.show();
         mProductTypeApi.listProductType(dialog);
         mSwipetoRefresh = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_to_refresh_category);
@@ -73,10 +75,10 @@ public class Category_fragment extends Fragment{
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.menu_category_add :
-                Intent intent  = new Intent( getActivity().getApplicationContext() , Create_new_product_category.class );
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_category_add:
+                Intent intent = new Intent(getActivity().getApplicationContext(), Create_new_product_category.class);
                 startActivity(intent);
                 break;
         }

@@ -19,63 +19,67 @@ import com.example.sagar.myapplication.modal.Brand;
 
 import java.util.ArrayList;
 import java.util.List;
-public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder>{
 
-    private   Context   mContext;
-    private   BrandApi mBrandApi;
-    private List<Brand> mList ;
-    private static  BrandAdapter brandAdapter;
+public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder> {
+
+    private Context mContext;
+    private BrandApi mBrandApi;
+    private List<Brand> mList;
+    private static BrandAdapter brandAdapter;
     private final String url = "http://res.cloudinary.com/droxr0kdp/image/upload/v1482011353/";
 
-    public BrandAdapter(Context mContext){
-           this.mContext   = mContext;
-           this.mBrandApi  = BrandApi.getBrandApi(this);
-           mList = new ArrayList<>();
-    }
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
-         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.brand_card , parent , false );
-         return new MyViewHolder(view);
+    public BrandAdapter(Context mContext) {
+        this.mContext = mContext;
+        this.mBrandApi = BrandApi.getBrandApi(this);
+        mList = new ArrayList<>();
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position){
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.brand_card, parent, false);
+        return new MyViewHolder(view);
+    }
 
-            holder.brandName.setText(mList.get(position).getBrand());
-            holder.brandDetails.setText(mList.get(position).getDetails());
-            Glide.with(mContext.getApplicationContext())
-                    .load(url+mList.get(position).getLogo())
-                        .centerCrop()
-                            .placeholder(R.drawable.employee)
-                                .crossFade()
-                                         .into(holder.imageView);
-            holder.view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(  mContext.getApplicationContext() ,  Brand_products_details.class  );
-                    intent.putExtra("brand", mList.get(position) );
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(intent);
-                }
-            });
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        }
+        holder.brandName.setText(mList.get(position).getBrand());
+        holder.brandDetails.setText(mList.get(position).getDetails());
+        Glide.with(mContext.getApplicationContext())
+                .load(url + mList.get(position).getLogo())
+                .centerCrop()
+                .placeholder(R.drawable.employee)
+                .crossFade()
+                .into(holder.imageView);
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext.getApplicationContext(), Brand_products_details.class);
+                intent.putExtra("brand", mList.get(position));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
+
+    }
+
     @Override
     public int getItemCount() {
         return mList.size();
     }
-    public void addNewItems(List<Brand> mBrand){
+
+    public void addNewItems(List<Brand> mBrand) {
         this.mList = mBrand;
         notifyDataSetChanged();
     }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public  TextView brandName , brandDetails;
+        public TextView brandName, brandDetails;
         public ImageView imageView;
-        public View view ;
+        public View view;
 
-        public MyViewHolder(View itemView){
+        public MyViewHolder(View itemView) {
             super(itemView);
             brandName = (TextView) itemView.findViewById(R.id.brand_card_brand_name);
             brandDetails = (TextView) itemView.findViewById(R.id.brand_card_brand_details);
@@ -83,20 +87,20 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
             view = itemView;
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public boolean onLongClick(View v){
-                     final  CharSequence[] items  = { "Delete" , "Edit" , "Details" };
-                    AlertDialog.Builder builder =  new AlertDialog.Builder(mContext);
+                public boolean onLongClick(View v) {
+                    final CharSequence[] items = {"Delete", "Edit", "Details"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            switch (which){
-                                case  0 :
+                            switch (which) {
+                                case 0:
                                     //delete item ;
                                     break;
-                                case  1 :
+                                case 1:
                                     //Edit items
                                     break;
-                                case  2 :
+                                case 2:
                                     //go to brand
                                     break;
                             }
@@ -109,9 +113,10 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.MyViewHolder
         }
 
     }
-    public  static BrandAdapter getmBrandAdapter(Context mContext){
-        if(brandAdapter == null)
+
+    public static BrandAdapter getmBrandAdapter(Context mContext) {
+        if (brandAdapter == null)
             brandAdapter = new BrandAdapter(mContext);
-        return  brandAdapter;
+        return brandAdapter;
     }
 }

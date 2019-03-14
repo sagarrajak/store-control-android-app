@@ -11,7 +11,7 @@ public class Data {
     private String message;
     @SerializedName("id")
     @Expose
-    private String id ;
+    private String id;
 
     @SerializedName("success")
     @Expose
@@ -20,17 +20,27 @@ public class Data {
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
     public String getMessage() {
         return message;
     }
+
     public void setMessage(String message) {
         this.message = message;
     }
-    public boolean getSuccess(){ return success; }
-    public  void setSuccess(Boolean success) { this.success = success; }
+
+    public boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
     @Override
     public String toString() {
         return message;

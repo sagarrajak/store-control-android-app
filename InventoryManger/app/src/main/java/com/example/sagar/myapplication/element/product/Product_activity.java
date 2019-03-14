@@ -21,7 +21,7 @@ import com.example.sagar.myapplication.element.product.fragment.Product_fragment
 
 import java.util.ArrayList;
 
-public class Product_activity extends AppCompatActivity{
+public class Product_activity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
@@ -29,12 +29,12 @@ public class Product_activity extends AppCompatActivity{
     private TabLayout mTabLayout;
     private DrawerLayout mDrawerLayout;
 
-    private ProductApi mProductApi ;
+    private ProductApi mProductApi;
     private ProductGridAdapter mProductGridAdapter;
 
 
     @Override
-    protected void onCreate( Bundle savedInstanceState ){
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
@@ -43,17 +43,17 @@ public class Product_activity extends AppCompatActivity{
 
     }
 
-    private void setUiElement(){
+    private void setUiElement() {
 
-        mToolbar        =  (Toolbar) findViewById(R.id.toolbar);
-        mViewPager      =  (ViewPager)findViewById(R.id.product_view_pager);
-        mTabLayout      =  (TabLayout)findViewById(R.id.product_tablayout);
-        mDrawerLayout   =  (DrawerLayout) findViewById(R.id.product_drawer_layout);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mViewPager = (ViewPager) findViewById(R.id.product_view_pager);
+        mTabLayout = (TabLayout) findViewById(R.id.product_tablayout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.product_drawer_layout);
         mProductGridAdapter = ProductGridAdapter.getProductAdapter(this);
-        mProductApi  = ProductApi.getmProductApi(mProductGridAdapter);
+        mProductApi = ProductApi.getmProductApi(mProductGridAdapter);
     }
 
-    private void setToolbar(){
+    private void setToolbar() {
 
         setSupportActionBar(mToolbar);
         setTitle("Product");
@@ -64,50 +64,55 @@ public class Product_activity extends AppCompatActivity{
 
     }
 
-    private void setNavigationView(){
+    private void setNavigationView() {
 
-        mNavigationView =  (NavigationView)findViewById(R.id.navigation_view);
-        NavigationDrawer mNavigationDrawer = new NavigationDrawer(mToolbar , mDrawerLayout , mNavigationView ,this);
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        NavigationDrawer mNavigationDrawer = new NavigationDrawer(mToolbar, mDrawerLayout, mNavigationView, this);
         mNavigationDrawer.setNavigationDrawer();
 
     }
 
-    private void setTabLayout(){
+    private void setTabLayout() {
 
         CustumViewPager custumViewPager = new CustumViewPager(getSupportFragmentManager());
-        custumViewPager.addNewFragment(new Category_fragment(),"CATEGORY");
-        custumViewPager.addNewFragment(new Product_fragment(),"PRODUCT");
-        custumViewPager.addNewFragment(new Brand_fragment(),"BRAND");
+        custumViewPager.addNewFragment(new Category_fragment(), "CATEGORY");
+        custumViewPager.addNewFragment(new Product_fragment(), "PRODUCT");
+        custumViewPager.addNewFragment(new Brand_fragment(), "BRAND");
         mViewPager.setAdapter(custumViewPager);
         mViewPager.setOffscreenPageLimit(3);
         mTabLayout.setupWithViewPager(mViewPager);
 
     }
 
-    class  CustumViewPager extends FragmentPagerAdapter{
+    class CustumViewPager extends FragmentPagerAdapter {
 
-       ArrayList<Fragment> frag = new ArrayList<>();
-       ArrayList<String>   tag = new ArrayList<>();
-       public CustumViewPager(FragmentManager fm) {
-           super(fm);
-       }
-       @Override
-       public Fragment getItem(int i) {
-           return frag.get(i);
-       }
-       @Override
-       public int getCount() {
-           return frag.size();
-       }
-       public void addNewFragment( Fragment mFragment , String  mTag ){
-           frag.add(mFragment);
-           tag.add(mTag);
-       }
-       @Override
-       public CharSequence getPageTitle(int i) {
-           return tag.get(i);
-       }
+        ArrayList<Fragment> frag = new ArrayList<>();
+        ArrayList<String> tag = new ArrayList<>();
 
-   }
+        public CustumViewPager(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return frag.get(i);
+        }
+
+        @Override
+        public int getCount() {
+            return frag.size();
+        }
+
+        public void addNewFragment(Fragment mFragment, String mTag) {
+            frag.add(mFragment);
+            tag.add(mTag);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int i) {
+            return tag.get(i);
+        }
+
+    }
 
 }

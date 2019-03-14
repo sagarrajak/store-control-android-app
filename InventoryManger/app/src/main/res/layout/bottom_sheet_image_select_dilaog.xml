@@ -5,6 +5,7 @@
     android:background="@color/colorPrimary"
     android:padding="16dp"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/bottom_sheet_gallery"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         android:background="@color/colorAccent"
         android:text="Gallery"
         android:textColor="@android:color/white" />
+
     <Button
         android:id="@+id/bottom_sheet_camera"
         android:layout_width="match_parent"
@@ -25,6 +27,7 @@
         android:background="@color/colorAccent"
         android:text="Camera"
         android:textColor="@android:color/white" />
+
     <Button
         android:id="@+id/bottom_sheet_delete"
         android:layout_width="match_parent"

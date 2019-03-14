@@ -1,4 +1,5 @@
 package com.example.sagar.myapplication.element.customer;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,28 +24,29 @@ import com.example.sagar.myapplication.adapter.customer.CustomerListAdapter;
 import com.example.sagar.myapplication.api.CustomerApi;
 import com.example.sagar.myapplication.utill.SpaceItemDecoration;
 
-public class Customer_fragment extends Fragment{
+public class Customer_fragment extends Fragment {
 
-    private CustomerApi  mCustomerApi;
+    private CustomerApi mCustomerApi;
     private RecyclerView mRecycleView;
-    private boolean  isListView;
+    private boolean isListView;
     private MenuItem listToGrid;
     private SwipeRefreshLayout mSwipeToRefresh;
 
-    public Customer_fragment(){}
+    public Customer_fragment() {
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_admin, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        isListView   = false;
+        isListView = false;
         mSwipeToRefresh = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipe_to_refresh_customer);
-        mRecycleView    = (RecyclerView) getActivity().findViewById(R.id.recycle_view_customer);
-        mCustomerApi = CustomerApi.getCustomerApi(getContext() , CustomerGridAdapter.getCustomerGridAdapter(getContext()));
+        mRecycleView = (RecyclerView) getActivity().findViewById(R.id.recycle_view_customer);
+        mCustomerApi = CustomerApi.getCustomerApi(getContext(), CustomerGridAdapter.getCustomerGridAdapter(getContext()));
         changeListToGrid();
         mSwipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -61,9 +63,9 @@ public class Customer_fragment extends Fragment{
         setHasOptionsMenu(true);
     }
 
-    private  void changeListToGrid(){
+    private void changeListToGrid() {
         mRecycleView.addItemDecoration(new SpaceItemDecoration(1));
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity() , 2 , RecyclerView.VERTICAL , true);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, true);
         mRecycleView.setItemAnimator(new DefaultItemAnimator());
         mCustomerApi.setCustomerAdapter(CustomerGridAdapter.getCustomerGridAdapter(getContext()));
         mRecycleView.setAdapter(CustomerGridAdapter.getCustomerGridAdapter(getContext()));
@@ -74,10 +76,10 @@ public class Customer_fragment extends Fragment{
         mCustomerApi.listCustomer(mProgressDialog);
     }
 
-    private void changeGridToList(){
+    private void changeGridToList() {
         mCustomerApi.setCustomerAdapter(CustomerListAdapter.getCustomerListAdapter(getContext()));
         mCustomerApi.setCustomerAdapter(CustomerListAdapter.getCustomerListAdapter(getContext()));
-        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext() , LinearLayoutManager.VERTICAL , false));
+        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mRecycleView.setAdapter(CustomerListAdapter.getCustomerListAdapter(getContext()));
         ProgressDialog dialog = CustumProgressDialog.getProgressDialog(getContext());
         dialog.show();
@@ -85,10 +87,10 @@ public class Customer_fragment extends Fragment{
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.menu_customer_fragment , menu);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_customer_fragment, menu);
         listToGrid = menu.findItem(R.id.list_to_grid);
-        if(isListView)
+        if (isListView)
             listToGrid.setIcon(R.drawable.ic_grid_24dp);
         else
             listToGrid.setIcon(R.drawable.ic_list_black_24dp);
@@ -96,22 +98,21 @@ public class Customer_fragment extends Fragment{
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.list_to_grid :
-                if(isListView){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.list_to_grid:
+                if (isListView) {
                     changeListToGrid();
                     listToGrid.setIcon(R.drawable.ic_list_black_24dp);
-                }
-                else{
-                   changeGridToList();
+                } else {
+                    changeGridToList();
                     listToGrid.setIcon(R.drawable.ic_grid_24dp);
                 }
-                isListView=!isListView;
+                isListView = !isListView;
                 break;
             case R.id.ok:
-                Intent intent =  new Intent(getActivity().getApplicationContext() , Create_customer_activity.class);
-                intent.putExtra("isLinearLayout",isListView);
+                Intent intent = new Intent(getActivity().getApplicationContext(), Create_customer_activity.class);
+                intent.putExtra("isLinearLayout", isListView);
                 startActivity(intent);
                 break;
             case R.id.sort_items:

@@ -1,4 +1,5 @@
 package com.example.sagar.myapplication.element.product.fragment;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +21,14 @@ import com.example.sagar.myapplication.element.brand.Create_brand_activity;
 import com.example.sagar.myapplication.R;
 import com.example.sagar.myapplication.adapter.brand.BrandAdapter;
 
-public class Brand_fragment extends Fragment{
+public class Brand_fragment extends Fragment {
 
     private BrandAdapter brandAdapter;
     private BrandApi bradApi;
-    private SwipeRefreshLayout swipeRefreshLayout ;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    public Brand_fragment(){}
+    public Brand_fragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,14 +36,14 @@ public class Brand_fragment extends Fragment{
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState){
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
 
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -56,7 +58,7 @@ public class Brand_fragment extends Fragment{
         swipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_to_refresh_brand);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh(){
+            public void onRefresh() {
 //                swipeRefreshLayout.setVisibility(SwipeRefreshLayout.VISIBLE);
                 bradApi.listBrand(swipeRefreshLayout);
             }
@@ -64,9 +66,9 @@ public class Brand_fragment extends Fragment{
     }
 
 
-    private void creatRecycleView(){
+    private void creatRecycleView() {
 
-        brandAdapter  = BrandAdapter.getmBrandAdapter(getContext());
+        brandAdapter = BrandAdapter.getmBrandAdapter(getContext());
         bradApi = BrandApi.getBrandApi(brandAdapter);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -79,17 +81,17 @@ public class Brand_fragment extends Fragment{
 
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.menu_brand_fragment,menu);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_brand_fragment, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case   R.id.brand_product :
-                Intent intent = new Intent(getActivity().getApplicationContext()  , Create_brand_activity.class);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.brand_product:
+                Intent intent = new Intent(getActivity().getApplicationContext(), Create_brand_activity.class);
                 startActivity(intent);
                 break;
         }

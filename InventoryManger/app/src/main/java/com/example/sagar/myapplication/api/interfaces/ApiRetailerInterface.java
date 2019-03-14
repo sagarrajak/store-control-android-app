@@ -24,20 +24,20 @@ public interface ApiRetailerInterface {
 
     @POST("api/retailer")
     Call<Data> createRetailer(
-        @Body Retailer mRetailer,
-        @Header("token") String token
+            @Body Retailer mRetailer,
+            @Header("token") String token
     );
 
     @PUT("api/retailer")
     Call<Data> modifyRetailer(
-        @Body Retailer retailer,
-        @Header("token") String mToken
+            @Body Retailer retailer,
+            @Header("token") String mToken
     );
 
     @DELETE("api/retailer/{id}")
-    Call<Data>  deleteRetailer(
-         @Path("id") String id ,
-         @Header("token") String token
+    Call<Data> deleteRetailer(
+            @Path("id") String id,
+            @Header("token") String token
     );
 
 }

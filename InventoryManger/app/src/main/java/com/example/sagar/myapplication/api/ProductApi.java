@@ -18,77 +18,78 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductApi{
+public class ProductApi {
 
     private static ProductApi mProductApi;
     private ProductAdapterInterface mProductAdapterInterface;
     private ApiProductInterface mApiProductInterface;
 
-    public  ProductApi( ProductAdapterInterface mProductGridAdapter){
+    public ProductApi(ProductAdapterInterface mProductGridAdapter) {
         this.mProductAdapterInterface = mProductGridAdapter;
         this.mApiProductInterface = ApiClient.getClient().create(ApiProductInterface.class);
     }
 
-    public void addNewAdapter(ProductAdapterInterface mProductAdapterInterface){
+    public void addNewAdapter(ProductAdapterInterface mProductAdapterInterface) {
         this.mProductAdapterInterface = mProductAdapterInterface;
     }
 
-    public  void  addProduct(Product mProduct , final Dialog dialog , String  message ){
+    public void addProduct(Product mProduct, final Dialog dialog, String message) {
         mApiProductInterface.createProduct(
-              mProduct , Token.token
+                mProduct, Token.token
         ).enqueue(new Callback<Data>() {
             @Override
-            public void onResponse( Call<Data> call  , Response<Data> response  ){
-                if( response.code() == 200 ){
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                if (response.code() == 200) {
                     listProduct(dialog);
-                }
-                else{
+                } else {
                     Err.e("Not able to add product");
                     dialog.dismiss();
                 }
             }
+
             @Override
             public void onFailure(Call<Data> call, Throwable t) {
-                    t.printStackTrace();
-                    Err.e("Error in stack adding product");
+                t.printStackTrace();
+                Err.e("Error in stack adding product");
             }
         });
     }
 
-    public  void  deleteProduct(String id , final  Dialog dialog){
-        mApiProductInterface.deleteProduct( id , Token.token )
-                    .enqueue(new Callback<Data>() {
-                        @Override
-                        public void onResponse(Call<Data> call, Response<Data> response){
-                                if(response.code() == 200){
-                                    listProduct(dialog);
-                                }else{
-                                   Err.e("Failed to delete");
-                                    dialog.dismiss();
-                                }
+    public void deleteProduct(String id, final Dialog dialog) {
+        mApiProductInterface.deleteProduct(id, Token.token)
+                .enqueue(new Callback<Data>() {
+                    @Override
+                    public void onResponse(Call<Data> call, Response<Data> response) {
+                        if (response.code() == 200) {
+                            listProduct(dialog);
+                        } else {
+                            Err.e("Failed to delete");
+                            dialog.dismiss();
                         }
-                        @Override
-                        public void onFailure(Call<Data> call,Throwable t){
-                                t.printStackTrace();
-                                Err.e("failed to load to product");
-                        }
-                    });
+                    }
+
+                    @Override
+                    public void onFailure(Call<Data> call, Throwable t) {
+                        t.printStackTrace();
+                        Err.e("failed to load to product");
+                    }
+                });
 
     }
 
-    public  void  addImage(MultipartBody.Part part , final Product mProduct , final Dialog dialog ){
-        mApiProductInterface.addProductImage(part , Token.token ).enqueue(new Callback<Data>() {
+    public void addImage(MultipartBody.Part part, final Product mProduct, final Dialog dialog) {
+        mApiProductInterface.addProductImage(part, Token.token).enqueue(new Callback<Data>() {
             @Override
-            public void onResponse(Call<Data> call, Response<Data> response){
-                        if( response.code() == 200 ){
-                              mProduct.setImage(response.body().getMessage());
-                              addProduct( mProduct , dialog , response.body().getMessage() );
-                        }
-                        else{
-                            Err.e("failed to create employee");
-                            dialog.dismiss();
-                        }
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                if (response.code() == 200) {
+                    mProduct.setImage(response.body().getMessage());
+                    addProduct(mProduct, dialog, response.body().getMessage());
+                } else {
+                    Err.e("failed to create employee");
+                    dialog.dismiss();
+                }
             }
+
             @Override
             public void onFailure(Call<Data> call, Throwable t) {
                 t.printStackTrace();
@@ -98,71 +99,71 @@ public class ProductApi{
         });
     }
 
-    public  void  deleteImage(final  String id  , final Dialog  dialog ){
-        mApiProductInterface.deleteProduct( id , Token.token ).enqueue(new Callback<Data>() {
+    public void deleteImage(final String id, final Dialog dialog) {
+        mApiProductInterface.deleteProduct(id, Token.token).enqueue(new Callback<Data>() {
             @Override
-            public void onResponse(Call<Data> call,Response<Data> response){
-                if(response.code() == 200){
-                    deleteProduct(id,dialog);
-                }
-                else{
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                if (response.code() == 200) {
+                    deleteProduct(id, dialog);
+                } else {
                     Err.e("failed to delete product");
                     dialog.dismiss();
                 }
             }
+
             @Override
-            public void onFailure(Call<Data> call,Throwable t){
+            public void onFailure(Call<Data> call, Throwable t) {
                 t.printStackTrace();
                 Err.e("Error in deleting product");
             }
         });
     }
 
-    public  void  listProduct(final Dialog dialog){
+    public void listProduct(final Dialog dialog) {
         mApiProductInterface.getProductPopulatedList(Token.token)
-        .enqueue(new Callback<List<ProductPopulated>>(){
-            @Override
-            public void onResponse(Call<List<ProductPopulated>> call, Response<List<ProductPopulated>> response){
-                if ( response.code() == 200 ){
-                    mProductAdapterInterface.addNewproductList(response.body());
-                }
-                else Err.e("failed to List product");
-                dialog.dismiss();
-            }
-            @Override
-            public void onFailure(Call<List<ProductPopulated>> call, Throwable t){
-                t.printStackTrace();
-                Err.e("Failed to load product");
-            }
-        });
+                .enqueue(new Callback<List<ProductPopulated>>() {
+                    @Override
+                    public void onResponse(Call<List<ProductPopulated>> call, Response<List<ProductPopulated>> response) {
+                        if (response.code() == 200) {
+                            mProductAdapterInterface.addNewproductList(response.body());
+                        } else Err.e("failed to List product");
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ProductPopulated>> call, Throwable t) {
+                        t.printStackTrace();
+                        Err.e("Failed to load product");
+                    }
+                });
     }
 
-    public void listProduct(final SwipeRefreshLayout mSwipeRefreshLayout){
+    public void listProduct(final SwipeRefreshLayout mSwipeRefreshLayout) {
         mApiProductInterface.getProductPopulatedList(Token.token)
-                .enqueue(new Callback<List<ProductPopulated>>(){
-            @Override
-            public void onResponse(Call<List<ProductPopulated>> call, Response<List<ProductPopulated>> response){
-                if ( response.code() == 200 ){
-                    mProductAdapterInterface.addNewproductList(response.body());
-                }
-                else Err.e("failed to List product");
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-            @Override
-            public void onFailure(Call<List<ProductPopulated>> call, Throwable t){
-                t.printStackTrace();
-                Err.e("Failed to load product");
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
+                .enqueue(new Callback<List<ProductPopulated>>() {
+                    @Override
+                    public void onResponse(Call<List<ProductPopulated>> call, Response<List<ProductPopulated>> response) {
+                        if (response.code() == 200) {
+                            mProductAdapterInterface.addNewproductList(response.body());
+                        } else Err.e("failed to List product");
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ProductPopulated>> call, Throwable t) {
+                        t.printStackTrace();
+                        Err.e("Failed to load product");
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                });
     }
 
-    public static ProductApi  getmProductApi( ProductAdapterInterface mProductAdapterInterface ){
-        if( mProductApi == null )
+    public static ProductApi getmProductApi(ProductAdapterInterface mProductAdapterInterface) {
+        if (mProductApi == null)
             mProductApi = new ProductApi(mProductAdapterInterface);
         else
             mProductApi.addNewAdapter(mProductAdapterInterface);
-      return mProductApi;
+        return mProductApi;
     }
 
 }

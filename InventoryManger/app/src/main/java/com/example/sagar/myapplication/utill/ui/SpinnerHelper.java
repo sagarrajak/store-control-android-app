@@ -10,46 +10,48 @@ import java.util.Objects;
 
 public class SpinnerHelper {
 
-     private Spinner mSpinner;
-     private int textArrResId;
-     private String selectedString;
-     private Activity mActivity;
-     private String[] strArray;
-     private ItemSelectListener mItemSelectListener;
+    private Spinner mSpinner;
+    private int textArrResId;
+    private String selectedString;
+    private Activity mActivity;
+    private String[] strArray;
+    private ItemSelectListener mItemSelectListener;
 
-     public SpinnerHelper(Activity mActivity, int textArrResId , Spinner mSpinner , ItemSelectListener mItemSelectListener){
-         this.mSpinner     =  mSpinner;
-         this.textArrResId =  textArrResId;
-         this.mActivity    =  mActivity;
-         strArray          =  mActivity.getResources().getStringArray(textArrResId);
-         this.mItemSelectListener = mItemSelectListener;
-         setSpinner();
-     }
+    public SpinnerHelper(Activity mActivity, int textArrResId, Spinner mSpinner, ItemSelectListener mItemSelectListener) {
+        this.mSpinner = mSpinner;
+        this.textArrResId = textArrResId;
+        this.mActivity = mActivity;
+        strArray = mActivity.getResources().getStringArray(textArrResId);
+        this.mItemSelectListener = mItemSelectListener;
+        setSpinner();
+    }
 
-     public String  getSelectedString(){
+    public String getSelectedString() {
         return selectedString;
-     }
+    }
 
-     private void setSpinner(){
-         ArrayAdapter<CharSequence> stringAdapter = ArrayAdapter.createFromResource(mActivity, textArrResId, android.R.layout.simple_spinner_item);
-         stringAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-         mSpinner.setAdapter(stringAdapter);
-         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-             @Override
-             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l){
+    private void setSpinner() {
+        ArrayAdapter<CharSequence> stringAdapter = ArrayAdapter.createFromResource(mActivity, textArrResId, android.R.layout.simple_spinner_item);
+        stringAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(stringAdapter);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mItemSelectListener.selectedString((String) adapterView.getSelectedItem());
-             }
-             @Override
-             public void onNothingSelected(AdapterView<?> adapterView){}
-         });
-     }
+            }
 
-    public void setDefaultItem(String str){
-        if(str.isEmpty())
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+    }
+
+    public void setDefaultItem(String str) {
+        if (str.isEmpty())
             return;
-        int index=0;
-        for (String aStrArray : strArray){
-            if(Objects.equals(aStrArray,str)){
+        int index = 0;
+        for (String aStrArray : strArray) {
+            if (Objects.equals(aStrArray, str)) {
                 mSpinner.setSelection(index);
                 break;
             }
@@ -57,7 +59,7 @@ public class SpinnerHelper {
         }
     }
 
-    public interface  ItemSelectListener{
+    public interface ItemSelectListener {
         public void selectedString(String str);
     }
 }

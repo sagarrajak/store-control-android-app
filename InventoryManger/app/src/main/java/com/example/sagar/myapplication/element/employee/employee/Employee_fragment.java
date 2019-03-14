@@ -31,138 +31,139 @@ public class Employee_fragment extends Fragment {
 
     private EmployeeApi mEmployeeApi;
     private RecyclerView recyclerView;
-    private boolean isListLayout ;
+    private boolean isListLayout;
     private MenuItem listToGrid;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    public  Employee_fragment(){}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_employee , container , false);
+    public Employee_fragment() {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            setHasOptionsMenu(true);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_employee, container, false);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
-            isListLayout = false;
-            mEmployeeApi = EmployeeApi.getEmployeeApi( EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()) , getActivity() );
-            mSwipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_to_refresh_employee);
-            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                            mEmployeeApi.listEmployee(mSwipeRefreshLayout);
-                }
-            });
-            createRecycleView();
+        super.onActivityCreated(savedInstanceState);
+        isListLayout = false;
+        mEmployeeApi = EmployeeApi.getEmployeeApi(EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()), getActivity());
+        mSwipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_to_refresh_employee);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mEmployeeApi.listEmployee(mSwipeRefreshLayout);
+            }
+        });
+        createRecycleView();
     }
 
-    private void createRecycleView(){
-            recyclerView = (RecyclerView)getView().findViewById(R.id.recycle_view);
-            changeListToGride();
+    private void createRecycleView() {
+        recyclerView = (RecyclerView) getView().findViewById(R.id.recycle_view);
+        changeListToGride();
     }
 
-    private void changeListToGride(){
-            recyclerView.addItemDecoration(new SpaceItemDecoration(1));
-            GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity() , 2 , RecyclerView.VERTICAL , true);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setLayoutManager(mGridLayoutManager);
-            mEmployeeApi.setAdapter(EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()));
-            recyclerView.setAdapter(EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()));
-            Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
-            dialog.show();
-            mEmployeeApi.listEmployee(dialog);
+    private void changeListToGride() {
+        recyclerView.addItemDecoration(new SpaceItemDecoration(1));
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(mGridLayoutManager);
+        mEmployeeApi.setAdapter(EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()));
+        recyclerView.setAdapter(EmployeeGridAdapter.getEmployeeGridAdapter(getActivity()));
+        Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
+        dialog.show();
+        mEmployeeApi.listEmployee(dialog);
     }
 
-    private void changeGridToList(){
-            EmployeeListAdapter mEmployeeListAdapter = EmployeeListAdapter.getEmployeeListAdapter(getActivity());
-            mEmployeeApi.addNewAdapter(mEmployeeListAdapter);
-            recyclerView.setAdapter(mEmployeeListAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
-            dialog.show();
-            mEmployeeApi.listEmployee(dialog);
+    private void changeGridToList() {
+        EmployeeListAdapter mEmployeeListAdapter = EmployeeListAdapter.getEmployeeListAdapter(getActivity());
+        mEmployeeApi.addNewAdapter(mEmployeeListAdapter);
+        recyclerView.setAdapter(mEmployeeListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
+        dialog.show();
+        mEmployeeApi.listEmployee(dialog);
     }
 
     @Override
-    public void onCreateOptionsMenu( Menu menu , MenuInflater inflater ){
-            inflater.inflate(R.menu.menu_employee_fragment ,menu);
-            listToGrid = menu.findItem(R.id.list_to_grid);
-            if(isListLayout)
-                listToGrid.setIcon(R.drawable.ic_grid_24dp);
-            else
-                listToGrid.setIcon(R.drawable.ic_list_black_24dp);
-            super.onCreateOptionsMenu(menu,inflater);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_employee_fragment, menu);
+        listToGrid = menu.findItem(R.id.list_to_grid);
+        if (isListLayout)
+            listToGrid.setIcon(R.drawable.ic_grid_24dp);
+        else
+            listToGrid.setIcon(R.drawable.ic_list_black_24dp);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case  R.id.list_to_grid :
-                if(isListLayout){
+        switch (item.getItemId()) {
+            case R.id.list_to_grid:
+                if (isListLayout) {
                     changeListToGride();
                     listToGrid.setIcon(R.drawable.ic_list_black_24dp);
-                }
-                else{
+                } else {
                     changeGridToList();
                     listToGrid.setIcon(R.drawable.ic_grid_24dp);
                 }
-                isListLayout=!isListLayout;
+                isListLayout = !isListLayout;
                 break;
             case R.id.ok:
-                Intent intent = new Intent(getActivity().getApplicationContext() , Create_employee_activity.class);
-                intent.putExtra("isLinearLayout",isListLayout);
+                Intent intent = new Intent(getActivity().getApplicationContext(), Create_employee_activity.class);
+                intent.putExtra("isLinearLayout", isListLayout);
                 startActivity(intent);
                 break;
-            case R.id.fragment_menu_sort :
+            case R.id.fragment_menu_sort:
                 creteButtomSheet();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-   private void creteButtomSheet(){
-        final RadioButton salary,name,date_of_join;
+    private void creteButtomSheet() {
+        final RadioButton salary, name, date_of_join;
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
-        View view = getActivity().getLayoutInflater().inflate(R.layout.buttom_sheet_employee_fragment,null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.buttom_sheet_employee_fragment, null);
         bottomSheetDialog.setContentView(view);
         salary = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_salary_radiobuttom);
         name = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_name_radiobuttom);
         date_of_join = (RadioButton) view.findViewById(R.id.bottom_sheet_employee_date_of_join_radiobuttom);
-           name.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view){
-                     Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
-                     dialog.show();
-                     mEmployeeApi.getSortByName(dialog);
-                     date_of_join.setChecked(false);
-                     salary.setChecked(false);
-                 }
-             });
-            date_of_join.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View view) {
-                    Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
-                    dialog.show();
-                    mEmployeeApi.getSortByDateOfJoin(dialog);
-                    name.setChecked(false);
-                    salary.setChecked(false);
-               }
-           });
-            salary.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
+                dialog.show();
+                mEmployeeApi.getSortByName(dialog);
+                date_of_join.setChecked(false);
+                salary.setChecked(false);
+            }
+        });
+        date_of_join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = CustumProgressDialog.getProgressDialog(getActivity());
+                dialog.show();
+                mEmployeeApi.getSortByDateOfJoin(dialog);
+                name.setChecked(false);
+                salary.setChecked(false);
+            }
+        });
+        salary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 //// TODO: 1/20/2017
-                 name.setChecked(false);
-                 date_of_join.setChecked(false);
-             }
-         });
-       bottomSheetDialog.show();
-   }
+                name.setChecked(false);
+                date_of_join.setChecked(false);
+            }
+        });
+        bottomSheetDialog.show();
+    }
 
 }

@@ -18,8 +18,8 @@ public class AddressFieldUiHelper {
         this.mCity = mCity;
     }
 
-    public Address getAddress(){
-        Address mAddressObj  = new Address();
+    public Address getAddress() {
+        Address mAddressObj = new Address();
         mAddressObj.setCity(mCity.getText().toString());
         mAddressObj.setNeighborhood(mNeighbourHood.getText().toString());
         mAddressObj.setPoBox(mPostOffice.getText().toString());
@@ -30,16 +30,16 @@ public class AddressFieldUiHelper {
         return mAddressObj;
     }
 
-    public void setAddress(Address mAddress){
+    public void setAddress(Address mAddress) {
         this.mAddress.setText(mAddress.getAddress());
         this.mCity.setText(mAddress.getCity());
         this.mZipCode.setText(mAddress.getZipcode());
         this.mState.setText(mAddress.getState());
-        if(mAddress.getPoBox()!=null)
+        if (mAddress.getPoBox() != null)
             this.mState.setText(mAddress.getPoBox());
-        if(mAddress.getNeighborhood()!=null)
+        if (mAddress.getNeighborhood() != null)
             this.mNeighbourHood.setText(mAddress.getNeighborhood());
-        if(mAddress.getStreet()!=null)
+        if (mAddress.getStreet() != null)
             this.mStreet.setText(mAddress.getStreet());
     }
 }

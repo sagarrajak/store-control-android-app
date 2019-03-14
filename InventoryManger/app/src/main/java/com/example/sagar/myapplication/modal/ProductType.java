@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 
-public class ProductType implements Serializable{
+public class ProductType implements Serializable {
     @SerializedName("product_type")
     @Expose
     private String productType;
@@ -20,18 +20,23 @@ public class ProductType implements Serializable{
     public String getProductType() {
         return productType;
     }
+
     public void setProductType(String productType) {
         this.productType = productType;
     }
+
     public String getDetials() {
         return detials;
     }
+
     public void setDetials(String detials) {
         this.detials = detials;
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }

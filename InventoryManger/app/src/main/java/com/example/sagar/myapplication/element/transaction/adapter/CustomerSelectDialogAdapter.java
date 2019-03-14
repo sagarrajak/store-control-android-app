@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CustomerSelectDialogAdapter extends RecyclerView.Adapter<CustomerSelectDialogAdapter.MyViewHolder>{
+public class CustomerSelectDialogAdapter extends RecyclerView.Adapter<CustomerSelectDialogAdapter.MyViewHolder> {
 
 
     @Override

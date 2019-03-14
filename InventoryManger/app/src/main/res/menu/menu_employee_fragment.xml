@@ -2,19 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-         android:id="@+id/ok"
-         android:icon="@drawable/ic_add_black_24dp"
-         android:title="Ok"
-         app:showAsAction="always"/>
+        android:id="@+id/ok"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:title="Ok"
+        app:showAsAction="always" />
     <item
-          app:showAsAction="ifRoom"
-          android:icon="@drawable/ic_grid_24dp"
-          android:title="List to Grid"
-          android:id="@+id/list_to_grid"/>
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_grid_24dp"
+        android:title="List to Grid"
+        android:id="@+id/list_to_grid" />
     <item
-         app:showAsAction="ifRoom"
-         android:icon="@drawable/ic_sort_black_24dp"
-         android:title="Sort"
-         android:id="@+id/fragment_menu_sort"
-        />
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_sort_black_24dp"
+        android:title="Sort"
+        android:id="@+id/fragment_menu_sort" />
 </menu>

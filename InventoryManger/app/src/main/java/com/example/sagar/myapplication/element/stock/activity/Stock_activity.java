@@ -22,16 +22,16 @@ import com.example.sagar.myapplication.api.*;
 
 public class Stock_activity extends AppCompatActivity {
 
-    private Toolbar toolbar ;
+    private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private RecyclerView   mRecycleView;
-    private StockAdapter  mStockAdapter;
+    private RecyclerView mRecycleView;
+    private StockAdapter mStockAdapter;
     private StockApi mStockApi;
 
 
     //bottomSheetElement
-    private RadioButton mBottomSheetRadioButton=null;
+    private RadioButton mBottomSheetRadioButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +44,12 @@ public class Stock_activity extends AppCompatActivity {
         setRecycleView();
     }
 
-    private void setAdapter(){
-        mStockAdapter =  StockAdapter.getStockAdapter(getBaseContext());
-        mStockApi     =  new StockApi(getBaseContext());
+    private void setAdapter() {
+        mStockAdapter = StockAdapter.getStockAdapter(getBaseContext());
+        mStockApi = new StockApi(getBaseContext());
     }
 
-    private  void setToolbar(){
+    private void setToolbar() {
         setTitle("Stock");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,47 +57,47 @@ public class Stock_activity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    private  void setNavigationView(){
+    private void setNavigationView() {
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-        NavigationDrawer navigationDrawer = new NavigationDrawer( toolbar , mDrawerLayout , mNavigationView ,this );
+        NavigationDrawer navigationDrawer = new NavigationDrawer(toolbar, mDrawerLayout, mNavigationView, this);
         navigationDrawer.setNavigationDrawer();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate( R.menu.stock_menu , menu );
+        getMenuInflater().inflate(R.menu.stock_menu, menu);
         return true;
     }
 
-    private void setRecycleView(){
-        mRecycleView = (RecyclerView)findViewById(R.id.recycle_view_stock_activity);
-        mRecycleView.setLayoutManager(new LinearLayoutManager(getBaseContext() , LinearLayoutManager.VERTICAL , false));
-        ProgressDialog mProgessDialog =  CustumProgressDialog.getProgressDialog(Stock_activity.this);
+    private void setRecycleView() {
+        mRecycleView = (RecyclerView) findViewById(R.id.recycle_view_stock_activity);
+        mRecycleView.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
+        ProgressDialog mProgessDialog = CustumProgressDialog.getProgressDialog(Stock_activity.this);
         mProgessDialog.show();
         mStockApi.listStock(mProgessDialog);
         mRecycleView.setAdapter(mStockAdapter);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case  R.id.stock_menu_filter :
-                  Intent intent =  new Intent( getBaseContext() ,  Activity_filter_intent.class );
-                  startActivity(intent);
-                  break;
-            case  R.id.stock_menu_add_new_stock :
-                  Intent create_stock = new Intent(  getBaseContext() , Activity_create_new_stock.class );
-                  startActivity(create_stock);
-                  break;
-            case  R.id.stock_menu_sort :
-                  bottomSheetHelper();
-                  break;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.stock_menu_filter:
+                Intent intent = new Intent(getBaseContext(), Activity_filter_intent.class);
+                startActivity(intent);
+                break;
+            case R.id.stock_menu_add_new_stock:
+                Intent create_stock = new Intent(getBaseContext(), Activity_create_new_stock.class);
+                startActivity(create_stock);
+                break;
+            case R.id.stock_menu_sort:
+                bottomSheetHelper();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void bottomSheetHelper(){
-        BottomSheetHelper mBottomSheetHelper = new BottomSheetHelper( Stock_activity.this , mStockApi ,  getLayoutInflater() );
+    private void bottomSheetHelper() {
+        BottomSheetHelper mBottomSheetHelper = new BottomSheetHelper(Stock_activity.this, mStockApi, getLayoutInflater());
         mBottomSheetHelper.showButtomSheet();
     }
 }

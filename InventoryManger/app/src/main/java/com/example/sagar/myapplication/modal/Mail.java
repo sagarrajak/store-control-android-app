@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Mail implements Serializable{
+public class Mail implements Serializable {
 
     public String getValue() {
         return value;
@@ -26,12 +26,14 @@ public class Mail implements Serializable{
 
     @SerializedName("value")
     @Expose
-    private  String value;
+    private String value;
     @SerializedName("sub")
     @Expose
-    private  String sub;
+    private String sub;
+
     public Mail() {
     }
+
     public Mail(String value, String sub) {
         this.value = value;
         this.sub = sub;

@@ -7,11 +7,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Expire {
-    public  Expire(){}
-    public  Expire(boolean isExpireable , Date expireDate){
-        this.isExpireable =  isExpireable;
-        this.expireDate   =  expireDate;
+    public Expire() {
     }
+
+    public Expire(boolean isExpireable, Date expireDate) {
+        this.isExpireable = isExpireable;
+        this.expireDate = expireDate;
+    }
+
     @SerializedName("isExpireable")
     @Expose
     private Boolean isExpireable;

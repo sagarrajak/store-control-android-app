@@ -32,7 +32,7 @@ public class CustomerGridAdapter extends RecyclerView.Adapter<CustomerGridAdapte
     public CustomerGridAdapter(Context mContext) {
         this.mContext = mContext;
         mCustomerList = new ArrayList<>();
-        mCustomerApi  = CustomerApi.getCustomerApi(mContext, this);
+        mCustomerApi = CustomerApi.getCustomerApi(mContext, this);
     }
 
     @Override
@@ -63,14 +63,14 @@ public class CustomerGridAdapter extends RecyclerView.Adapter<CustomerGridAdapte
         holder.mCustomerName.setText(getCustomerName(position));
         holder.mCustomerMail.setText(mCustomerList.get(position).getMail().getValue());
         Picasso.with(mContext)
-                .load(url+mCustomerList.get(position).getImage())
+                .load(url + mCustomerList.get(position).getImage())
                 .placeholder(R.drawable.employee)
                 .into(holder.mCustomerImage);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  = new Intent(mContext.getApplicationContext() , About_customer_activity.class);
-                intent.putExtra("Customer",mCustomerList.get(position));
+                Intent intent = new Intent(mContext.getApplicationContext(), About_customer_activity.class);
+                intent.putExtra("Customer", mCustomerList.get(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
@@ -86,6 +86,7 @@ public class CustomerGridAdapter extends RecyclerView.Adapter<CustomerGridAdapte
         public View mView;
         public ImageView mCustomerImage, menuImage;
         public TextView mCustomerName, mCustomerMail;
+
         public MyViewHolder(View view) {
             super(view);
             mView = view;
@@ -111,15 +112,18 @@ public class CustomerGridAdapter extends RecyclerView.Adapter<CustomerGridAdapte
     private void showPopUpMenuDialog(View view, int i) {
         PopupMenu mPopUpMenu = new PopupMenu(mContext, view);
         MenuInflater mMenuInflater = mPopUpMenu.getMenuInflater();
-        mMenuInflater.inflate(R.menu.customer_card_menu , mPopUpMenu.getMenu());
+        mMenuInflater.inflate(R.menu.customer_card_menu, mPopUpMenu.getMenu());
         mPopUpMenu.setOnMenuItemClickListener(new MyMenuOnClickListerner(i));
         mPopUpMenu.show();
     }
-    private class  MyMenuOnClickListerner implements  PopupMenu.OnMenuItemClickListener {
+
+    private class MyMenuOnClickListerner implements PopupMenu.OnMenuItemClickListener {
         private int position;
+
         public MyMenuOnClickListerner(int position) {
             this.position = position;
         }
+
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {

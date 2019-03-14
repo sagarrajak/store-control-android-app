@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/coordinate_layout_create_brand"
+<android.support.design.widget.CoordinatorLayout android:id="@+id/coordinate_layout_create_brand"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/activity_create_employee_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/activity_create_brand_toolbar"
-            >
-        </android.support.v7.widget.Toolbar>
+            android:id="@+id/activity_create_brand_toolbar"></android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/view1"
             android:layout_weight="0.7"
@@ -30,12 +31,13 @@
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/create_brand_image_view"
-                />
+                android:id="@+id/create_brand_image_view" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/view2"
             android:layout_weight="0.3"
@@ -43,6 +45,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/white"
             android:orientation="vertical">
+
             <android.support.design.widget.TextInputLayout
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="8dp"
@@ -50,15 +53,16 @@
                 android:layout_marginBottom="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/create_brand_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/profile_image"
-                    android:hint="Name"
-                    />
+                    android:hint="Name" />
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_marginLeft="8dp"
@@ -66,6 +70,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_height="match_parent">
+
                 <EditText
                     android:id="@+id/create_brand_details"
                     android:layout_width="match_parent"
@@ -74,11 +79,11 @@
                     android:layout_below="@+id/profile_image"
                     android:inputType="textEmailAddress"
                     android:scrollHorizontally="true"
-                    android:hint="Details"
-                    />
+                    android:hint="Details" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </LinearLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,5 +92,5 @@
         android:src="@android:drawable/ic_menu_camera"
         app:layout_anchor="@id/view1"
         android:layout_margin="16dp"
-        app:layout_anchorGravity="bottom|right|end"/>
+        app:layout_anchorGravity="bottom|right|end" />
 </android.support.design.widget.CoordinatorLayout>

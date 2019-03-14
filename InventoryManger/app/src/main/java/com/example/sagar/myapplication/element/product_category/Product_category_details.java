@@ -35,79 +35,79 @@ import retrofit2.Response;
 
 public class Product_category_details extends AppCompatActivity {
 
-    private  RecyclerView mRecyclerView;
-    private  Toolbar toolbar;
-    private  TextView  mCategoryDetails;
-    private  ApiProductInterface mApiProductInterface;
-    private  ProgressBar mProgressBar;
-    private  MyAdapter myAdapter;
-    private  ProgressDialog mProgressDialog;
-    private  ProductType  mProductType;
+    private RecyclerView mRecyclerView;
+    private Toolbar toolbar;
+    private TextView mCategoryDetails;
+    private ApiProductInterface mApiProductInterface;
+    private ProgressBar mProgressBar;
+    private MyAdapter myAdapter;
+    private ProgressDialog mProgressDialog;
+    private ProductType mProductType;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
 
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_product_category_details);
-            setUiElement();
-            setToolbar();
-            setRecycleView();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_product_category_details);
+        setUiElement();
+        setToolbar();
+        setRecycleView();
     }
 
-    private void setUiElement(){
+    private void setUiElement() {
 
-            mCategoryDetails      = (TextView) findViewById(R.id.TextViewDetails);
-            mProgressBar          = (ProgressBar) findViewById(R.id.product_category_recycle_view);
-            mApiProductInterface  = ApiClient.getClient().create(ApiProductInterface.class);
-            myAdapter             = new MyAdapter();
-            mProgressDialog       = CustumProgressDialog.getProgressDialog(getBaseContext());
-            mProductType          = (ProductType)getIntent().getSerializableExtra("Category");
-
-    }
-
-    private void setToolbar(){
-
-            setTitle(mProductType.getProductType());
-            toolbar  = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mCategoryDetails = (TextView) findViewById(R.id.TextViewDetails);
+        mProgressBar = (ProgressBar) findViewById(R.id.product_category_recycle_view);
+        mApiProductInterface = ApiClient.getClient().create(ApiProductInterface.class);
+        myAdapter = new MyAdapter();
+        mProgressDialog = CustumProgressDialog.getProgressDialog(getBaseContext());
+        mProductType = (ProductType) getIntent().getSerializableExtra("Category");
 
     }
 
-    private void setRecycleView(){
+    private void setToolbar() {
 
-            mRecyclerView = (RecyclerView) findViewById(R.id.recycle_product_category_details);
-            mRecyclerView.setAdapter(myAdapter);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL , false ));
+        setTitle(mProductType.getProductType());
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    private void setRecycleView() {
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycle_product_category_details);
+        mRecyclerView.setAdapter(myAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 //            mCategoryDetails.setText(mProductType.getDetials());
-            mCategoryDetails.setMovementMethod(new ScrollingMovementMethod());
-            myAdapter.listProduct();
+        mCategoryDetails.setMovementMethod(new ScrollingMovementMethod());
+        myAdapter.listProduct();
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-            getMenuInflater().inflate( R.menu.menu_about_category , menu );
-            return true;
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_about_category, menu);
+        return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.about_category_edit :
-
-
-                //// TODO: 29/8/17 implement menu
-                break;
-            case R.id.about_category_delete :
+        switch (item.getItemId()) {
+            case R.id.about_category_edit:
 
 
                 //// TODO: 29/8/17 implement menu
                 break;
-            case R.id.about_category_add_product :
+            case R.id.about_category_delete:
+
+
+                //// TODO: 29/8/17 implement menu
+                break;
+            case R.id.about_category_add_product:
 
 
                 //// TODO: 29/8/17 implement menu
@@ -117,22 +117,22 @@ public class Product_category_details extends AppCompatActivity {
     }
 
 
-    private class  MyAdapter  extends  RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    private class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         private List<ProductPopulated> mlist;
 
-        public MyAdapter(){
+        public MyAdapter() {
             mlist = new ArrayList<>();
         }
 
         @Override
-        public MyViewHolder onCreateViewHolder( ViewGroup parent, int viewType ) {
-            View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_product_category_details_list_card , parent , false);
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_product_category_details_list_card, parent, false);
             return new MyViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, final int position ) {
+        public void onBindViewHolder(MyViewHolder holder, final int position) {
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -151,69 +151,70 @@ public class Product_category_details extends AppCompatActivity {
 
         public void listProduct() {
 
-            mApiProductInterface.getProductPopulatedCategoryAssociatedList(Token.token , mProductType.getId() )
-                            .enqueue(new Callback<List<ProductPopulated>>() {
-                                @Override
-                                public void onResponse(Call<List<ProductPopulated>> call, Response<List<ProductPopulated>> response) {
-                                        if(response.code() == 200 ){
-                                            setData(response.body());
-                                        }
-                                        else{
-                                            Err.s( getBaseContext() ,  "Error in Loading Data");
-                                        }
-                                        mProgressBar.setVisibility(View.GONE);
-                                        mProgressDialog.dismiss();
-                                }
-                                @Override
-                                public void onFailure(Call<List<ProductPopulated>> call, Throwable t) {
-                                        t.printStackTrace();
-                                        Err.s( getBaseContext() ,  "Error in Loading Data");
-                                }
-                            });
+            mApiProductInterface.getProductPopulatedCategoryAssociatedList(Token.token, mProductType.getId())
+                    .enqueue(new Callback<List<ProductPopulated>>() {
+                        @Override
+                        public void onResponse(Call<List<ProductPopulated>> call, Response<List<ProductPopulated>> response) {
+                            if (response.code() == 200) {
+                                setData(response.body());
+                            } else {
+                                Err.s(getBaseContext(), "Error in Loading Data");
+                            }
+                            mProgressBar.setVisibility(View.GONE);
+                            mProgressDialog.dismiss();
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<ProductPopulated>> call, Throwable t) {
+                            t.printStackTrace();
+                            Err.s(getBaseContext(), "Error in Loading Data");
+                        }
+                    });
 
         }
 
-        public  void deleteProduct(int position ){
+        public void deleteProduct(int position) {
 
-            mApiProductInterface.deleteCategoryFromPrticularProduct( Token.token , mlist.get(position).getId()  , mProductType.getId() )
-                        .enqueue(new Callback<Data>() {
-                            @Override
-                            public void onResponse(Call<Data> call, Response<Data> response) {
-                                    if(response.code() == 200 ){
-                                        Err.s(getBaseContext() , "Success in removing product from category");
-                                        listProduct();
-                                    }
-                                    else{
-                                        Err.s(getBaseContext() , "Failed in removing product from category");
-                                        mProgressDialog.dismiss();
-                                    }
+            mApiProductInterface.deleteCategoryFromPrticularProduct(Token.token, mlist.get(position).getId(), mProductType.getId())
+                    .enqueue(new Callback<Data>() {
+                        @Override
+                        public void onResponse(Call<Data> call, Response<Data> response) {
+                            if (response.code() == 200) {
+                                Err.s(getBaseContext(), "Success in removing product from category");
+                                listProduct();
+                            } else {
+                                Err.s(getBaseContext(), "Failed in removing product from category");
+                                mProgressDialog.dismiss();
+                            }
 
-                            }
-                            @Override
-                            public void onFailure(Call<Data> call, Throwable t) {
-                                    t.printStackTrace();
-                                    Err.s(getBaseContext() , "Failed in removing product from category");
-                                    mProgressDialog.dismiss();
-                            }
-                        });
+                        }
+
+                        @Override
+                        public void onFailure(Call<Data> call, Throwable t) {
+                            t.printStackTrace();
+                            Err.s(getBaseContext(), "Failed in removing product from category");
+                            mProgressDialog.dismiss();
+                        }
+                    });
 
         }
 
 
-        private void setData(List<ProductPopulated> mList){
+        private void setData(List<ProductPopulated> mList) {
             this.mlist = mList;
             notifyDataSetChanged();
         }
 
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            public TextView name , brand;
-            public ImageView imageView ;
+            public TextView name, brand;
+            public ImageView imageView;
+
             public MyViewHolder(View itemView) {
                 super(itemView);
-                name        = (TextView) itemView.findViewById(R.id.product_category_name);
-                brand       = (TextView) itemView.findViewById(R.id.product_category_details);
-                imageView   = (ImageView) itemView.findViewById(R.id.product_category_delete_view);
+                name = (TextView) itemView.findViewById(R.id.product_category_name);
+                brand = (TextView) itemView.findViewById(R.id.product_category_details);
+                imageView = (ImageView) itemView.findViewById(R.id.product_category_delete_view);
             }
         }
 

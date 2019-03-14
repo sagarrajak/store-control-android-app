@@ -1,20 +1,19 @@
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipe_to_refresh_product"
     tools:context=".element.product.fragment.Product_fragment">
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
+
+    <android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle_product_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
-            android:clipToPadding="false">
-        </android.support.v7.widget.RecyclerView>
+            android:clipToPadding="false"></android.support.v7.widget.RecyclerView>
     </android.support.design.widget.CoordinatorLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

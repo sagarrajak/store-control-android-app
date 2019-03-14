@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class Product implements Serializable{
+public class Product implements Serializable {
 
     @SerializedName("_id")
     @Expose
@@ -34,7 +34,7 @@ public class Product implements Serializable{
     private Integer v;
     @SerializedName("retailer")
     @Expose
-    private  List<String> retailer;
+    private List<String> retailer;
 
     public List<String> getRetailer() {
         return retailer;

@@ -26,15 +26,15 @@ import java.util.Set;
 public class Activity_filter_intent extends AppCompatActivity {
 
     private Button mButton;
-    private EditText mProductList , adding_date_lower_bound, adding_date_upper_bound, expire_date_lower_bound, expire_date_upper_bound, item_count_lower_bound, item_count_upper_bound;
+    private EditText mProductList, adding_date_lower_bound, adding_date_upper_bound, expire_date_lower_bound, expire_date_upper_bound, item_count_lower_bound, item_count_upper_bound;
     private ApiStockInterface mApiStockInterface;
     private AlertDialogBuilderAdapterFilterStock mAlertDialogBuilderAdapterFilterStock;
     private Set<Product> mProductSelectedSet;
-    private Calendar addingDateLowerCalender,addingDateUpperCalender,expireDateUpperCalender,expireDateLowerCalender;
+    private Calendar addingDateLowerCalender, addingDateUpperCalender, expireDateUpperCalender, expireDateLowerCalender;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_intent);
         mApiStockInterface = ApiClient.getClient().create(ApiStockInterface.class);
@@ -44,77 +44,75 @@ public class Activity_filter_intent extends AppCompatActivity {
         dateOnClickDialogSetup();
     }
 
-    private void  setUiElement(){
-        mProductList             = (EditText) findViewById(R.id.filter_stock_product_list);
-        adding_date_lower_bound  = (EditText) findViewById(R.id.filter_stock_adding_date_lower_bound);
-        adding_date_upper_bound  = (EditText) findViewById(R.id.filter_stock_adding_date_upper_bound);
-        expire_date_lower_bound  = (EditText) findViewById(R.id.filter_stock_expire_date_lower_bound);
-        expire_date_upper_bound  = (EditText) findViewById(R.id.filter_Stock_expire_date_upper_bound);
-        item_count_lower_bound   = (EditText) findViewById(R.id.filter_stock_item_count_lower_bound);
-        item_count_upper_bound   = (EditText) findViewById(R.id.filter_stock_item_count_greather_then);
+    private void setUiElement() {
+        mProductList = (EditText) findViewById(R.id.filter_stock_product_list);
+        adding_date_lower_bound = (EditText) findViewById(R.id.filter_stock_adding_date_lower_bound);
+        adding_date_upper_bound = (EditText) findViewById(R.id.filter_stock_adding_date_upper_bound);
+        expire_date_lower_bound = (EditText) findViewById(R.id.filter_stock_expire_date_lower_bound);
+        expire_date_upper_bound = (EditText) findViewById(R.id.filter_Stock_expire_date_upper_bound);
+        item_count_lower_bound = (EditText) findViewById(R.id.filter_stock_item_count_lower_bound);
+        item_count_upper_bound = (EditText) findViewById(R.id.filter_stock_item_count_greather_then);
     }
 
-    private void setDatePicker(final Calendar calendar , final EditText mEditText  ){
-        final DatePickerDialog.OnDateSetListener calenderPickerListener = new DatePickerDialog.OnDateSetListener(){
+    private void setDatePicker(final Calendar calendar, final EditText mEditText) {
+        final DatePickerDialog.OnDateSetListener calenderPickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int  month , int  day_of_month ) {
-                calendar.set(Calendar.MONTH , month);
-                calendar.set(Calendar.YEAR , year);
-                calendar.set(Calendar.DAY_OF_MONTH , day_of_month);
-                mEditText.setText( new SimpleDateFormat("dd/MM/yyyy").format( calendar.getTime() ) );
+            public void onDateSet(DatePicker datePicker, int year, int month, int day_of_month) {
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.DAY_OF_MONTH, day_of_month);
+                mEditText.setText(new SimpleDateFormat("dd/MM/yyyy").format(calendar.getTime()));
             }
         };
         mEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 Calendar temCalender =  Calendar.getInstance();
-                 new DatePickerDialog( Activity_filter_intent.this , calenderPickerListener , temCalender.get(Calendar.YEAR)   , temCalender.get(Calendar.MONTH) , temCalender.get(Calendar.DAY_OF_MONTH)).show();
+                Calendar temCalender = Calendar.getInstance();
+                new DatePickerDialog(Activity_filter_intent.this, calenderPickerListener, temCalender.get(Calendar.YEAR), temCalender.get(Calendar.MONTH), temCalender.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
     }
 
-    private void dateOnClickDialogSetup(){
-        addingDateUpperCalender  =  Calendar.getInstance();
-        addingDateLowerCalender  =  Calendar.getInstance();
-        expireDateLowerCalender  =  Calendar.getInstance();
-        expireDateUpperCalender  =  Calendar.getInstance();
-        setDatePicker( addingDateLowerCalender , adding_date_lower_bound );
-        setDatePicker( addingDateUpperCalender , adding_date_upper_bound );
-        setDatePicker( expireDateLowerCalender , expire_date_lower_bound );
-        setDatePicker( expireDateUpperCalender , expire_date_upper_bound );
+    private void dateOnClickDialogSetup() {
+        addingDateUpperCalender = Calendar.getInstance();
+        addingDateLowerCalender = Calendar.getInstance();
+        expireDateLowerCalender = Calendar.getInstance();
+        expireDateUpperCalender = Calendar.getInstance();
+        setDatePicker(addingDateLowerCalender, adding_date_lower_bound);
+        setDatePicker(addingDateUpperCalender, adding_date_upper_bound);
+        setDatePicker(expireDateLowerCalender, expire_date_lower_bound);
+        setDatePicker(expireDateUpperCalender, expire_date_upper_bound);
     }
 
-    private void submit(){
+    private void submit() {
 
 
-    }
-
-
-    private void alertDialogForSelectingProduct(){
-          View itemView = getLayoutInflater().inflate(R.layout.recycleview,null);
-          RecyclerView mRecyclerView = (RecyclerView) itemView.findViewById(R.id.recycle_view);
-          mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(),LinearLayoutManager.VERTICAL,false));
-          mRecyclerView.setAdapter(mAlertDialogBuilderAdapterFilterStock);
-
-          AlertDialog.Builder  builder = new AlertDialog.Builder(Activity_filter_intent.this);
-          builder.setView(itemView);
-          builder.setCancelable(false);
-          builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialogInterface, int i) {
-                    mProductSelectedSet = mAlertDialogBuilderAdapterFilterStock.getSelectedList();
-              }
-          });
-          builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialogInterface, int i){
-                    finish();
-              }
-          });
-          builder.show();
     }
 
 
+    private void alertDialogForSelectingProduct() {
+        View itemView = getLayoutInflater().inflate(R.layout.recycleview, null);
+        RecyclerView mRecyclerView = (RecyclerView) itemView.findViewById(R.id.recycle_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setAdapter(mAlertDialogBuilderAdapterFilterStock);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Activity_filter_intent.this);
+        builder.setView(itemView);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mProductSelectedSet = mAlertDialogBuilderAdapterFilterStock.getSelectedList();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        builder.show();
+    }
 
 
 }

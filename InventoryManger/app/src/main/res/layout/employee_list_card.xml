@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:elevation="3dp"
@@ -9,9 +8,11 @@
     android:layout_marginBottom="2dp"
     android:layout_marginStart="3dp"
     android:layout_height="70dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/employee_list_view_name"
             android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
             android:textSize="16sp"
             android:textColor="@android:color/black"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
         <TextView
             android:textColor="@android:color/black"
             android:id="@+id/employee_list_view_mail"
@@ -36,6 +38,7 @@
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="12sp" />
+
         <ImageView
             android:id="@+id/employee_list_view_image_view"
             android:layout_width="70dp"

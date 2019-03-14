@@ -13,19 +13,19 @@ import com.example.sagar.myapplication.modal.ProductType;
 
 import java.util.List;
 
-public class AboutProductCategoryAdapter extends RecyclerView.Adapter<AboutProductCategoryAdapter.MyViewHolder>{
+public class AboutProductCategoryAdapter extends RecyclerView.Adapter<AboutProductCategoryAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<ProductType> mType;
 
-    public AboutProductCategoryAdapter(Context mContext , List<ProductType> mType){
+    public AboutProductCategoryAdapter(Context mContext, List<ProductType> mType) {
         this.mContext = mContext;
-        this.mType    = mType;
+        this.mType = mType;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.about_product_linear_view , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.about_product_linear_view, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -48,11 +48,12 @@ public class AboutProductCategoryAdapter extends RecyclerView.Adapter<AboutProdu
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView mInfoButtom;
-        public TextView  mTextView;
-        public MyViewHolder(View view){
+        public TextView mTextView;
+
+        public MyViewHolder(View view) {
             super(view);
             mInfoButtom = (ImageView) view.findViewById(R.id.about_product_linear_view_image_bottom);
-            mTextView   = (TextView) view.findViewById(R.id.about_product_linear_view_text_view);
+            mTextView = (TextView) view.findViewById(R.id.about_product_linear_view_text_view);
         }
     }
 }

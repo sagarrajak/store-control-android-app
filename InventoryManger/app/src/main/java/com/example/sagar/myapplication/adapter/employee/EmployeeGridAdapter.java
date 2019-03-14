@@ -28,93 +28,95 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
     private Context mContext;
     private List<Employee> mlist;
     private EmployeeApi mEmployeeApi;
-    private static  EmployeeGridAdapter mEmployeeGridAdapter;
+    private static EmployeeGridAdapter mEmployeeGridAdapter;
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-         View itemView = LayoutInflater.from(parent.getContext()).inflate( R.layout.emploee_card, parent , false);
-         return new MyViewHolder(itemView);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.emploee_card, parent, false);
+        return new MyViewHolder(itemView);
     }
 
-    public EmployeeGridAdapter(Context mContext){
+    public EmployeeGridAdapter(Context mContext) {
         this.mContext = mContext;
         this.mlist = new ArrayList<>();
-        this.mEmployeeApi = EmployeeApi.getEmployeeApi(this,mContext);
+        this.mEmployeeApi = EmployeeApi.getEmployeeApi(this, mContext);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int i ){
+    public void onBindViewHolder(final MyViewHolder holder, final int i) {
         String url = "http://res.cloudinary.com/droxr0kdp/image/upload/w_300,h_300,c_crop/w_200/v1482011353/";
-        holder.name.setText(mlist.get(i).getName().getName()+" "+mlist.get(i).getName().getLast());
+        holder.name.setText(mlist.get(i).getName().getName() + " " + mlist.get(i).getName().getLast());
         holder.email.setText(mlist.get(i).getMail().getValue());
-        holder.mImageView.setOnClickListener(new View.OnClickListener(){
+        holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               showPopUpMenu(holder.mImageView , i);
+                showPopUpMenu(holder.mImageView, i);
             }
         });
         Glide.with(mContext.getApplicationContext())
-                    .load(url+mlist.get(i).getImage())
-                        .centerCrop()
-                                .placeholder(R.drawable.employee)
-                                  .crossFade()
-                                    .into(holder.employeePicture);
+                .load(url + mlist.get(i).getImage())
+                .centerCrop()
+                .placeholder(R.drawable.employee)
+                .crossFade()
+                .into(holder.employeePicture);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                      Intent intent = new Intent( mContext.getApplicationContext() , About_employee_activity.class );
-                      intent.putExtra("Employee" , mlist.get(i));
-                      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                      mContext.startActivity(intent);
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext.getApplicationContext(), About_employee_activity.class);
+                intent.putExtra("Employee", mlist.get(i));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
             }
         });
     }
 
-    private void  showPopUpMenu(View view , int i){
-        PopupMenu popupMenu = new PopupMenu(mContext,view);
+    private void showPopUpMenu(View view, int i) {
+        PopupMenu popupMenu = new PopupMenu(mContext, view);
         MenuInflater mMenuInflater = popupMenu.getMenuInflater();
         mMenuInflater.inflate(R.menu.grid_view_employee_card_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new MyMenuOnClickListerner(i));
         popupMenu.show();
     }
 
-    private ProgressDialog createProgressDialog(){
+    private ProgressDialog createProgressDialog() {
         ProgressDialog dialog = new ProgressDialog(mContext);
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
-        return  dialog;
+        return dialog;
     }
 
     @Override
-    public void addNewEmployeeList(List<Employee> mEmployee){
-        if(mEmployee!=null)
+    public void addNewEmployeeList(List<Employee> mEmployee) {
+        if (mEmployee != null)
             this.mlist = mEmployee;
         notifyDataSetChanged();
     }
 
-    private class  MyMenuOnClickListerner implements  PopupMenu.OnMenuItemClickListener{
+    private class MyMenuOnClickListerner implements PopupMenu.OnMenuItemClickListener {
         private int position;
-        public MyMenuOnClickListerner(int position ){
-             this.position = position;
-        }
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()){
-                case  R.id.delete :
-                      createDeleteDialog(position);
-                      break;
-                case  R.id.edit_employee :
-                      //// TODO: 17/10/17  
-                      break;
-                case  R.id.send_message :
-                      //// TODO: 17/10/17  
-                      break;
-            }
-            return  false;
+
+        public MyMenuOnClickListerner(int position) {
+            this.position = position;
         }
 
-        private void createDeleteDialog(final int position){
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.delete:
+                    createDeleteDialog(position);
+                    break;
+                case R.id.edit_employee:
+                    //// TODO: 17/10/17
+                    break;
+                case R.id.send_message:
+                    //// TODO: 17/10/17
+                    break;
+            }
+            return false;
+        }
+
+        private void createDeleteDialog(final int position) {
 //            new AlertDialog.Builder(mContext)
 //                    .setTitle("Delete Employee")
 //                    .setMessage("Are you sure to want to delete this employee")
@@ -137,37 +139,38 @@ public class EmployeeGridAdapter extends RecyclerView.Adapter<EmployeeGridAdapte
         }
     }
 
-    public  void setmContext(Context mContext){
+    public void setmContext(Context mContext) {
         this.mContext = mContext;
     }
 
     @Override
-    public int getItemCount(){
-          return mlist.size();
+    public int getItemCount() {
+        return mlist.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
-            public  View view;
-            public  TextView name,email;
-            public  ImageView mImageView;
-            public  ImageView employeePicture;
-            public  int position;
-            public MyViewHolder(View view){
-                super(view);
-                this.view = view;
-                name  = (TextView)view.findViewById(R.id.name);
-                email = (TextView)view.findViewById(R.id.mail);
-                mImageView = (ImageView)view.findViewById(R.id.imageViewLog);
-                employeePicture = (ImageView)view.findViewById(R.id.add_customer_picture);
-            }
-     }
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public View view;
+        public TextView name, email;
+        public ImageView mImageView;
+        public ImageView employeePicture;
+        public int position;
 
-     public  static EmployeeGridAdapter getEmployeeGridAdapter(Context mContext){
-          if(mEmployeeGridAdapter == null)
-              mEmployeeGridAdapter = new EmployeeGridAdapter(mContext);
-          else
-              mEmployeeGridAdapter.setmContext(mContext);
-          return  mEmployeeGridAdapter;
-     }
+        public MyViewHolder(View view) {
+            super(view);
+            this.view = view;
+            name = (TextView) view.findViewById(R.id.name);
+            email = (TextView) view.findViewById(R.id.mail);
+            mImageView = (ImageView) view.findViewById(R.id.imageViewLog);
+            employeePicture = (ImageView) view.findViewById(R.id.add_customer_picture);
+        }
+    }
 
-  }
+    public static EmployeeGridAdapter getEmployeeGridAdapter(Context mContext) {
+        if (mEmployeeGridAdapter == null)
+            mEmployeeGridAdapter = new EmployeeGridAdapter(mContext);
+        else
+            mEmployeeGridAdapter.setmContext(mContext);
+        return mEmployeeGridAdapter;
+    }
+
+}

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.sagar.myapplication.R;
 
-public class    Product_by_category extends AppCompatActivity {
+public class Product_by_category extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

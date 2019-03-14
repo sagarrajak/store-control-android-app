@@ -1,9 +1,9 @@
-<android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/swipe_to_refresh_brand"
+<android.support.v4.widget.SwipeRefreshLayout android:id="@+id/swipe_to_refresh_brand"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sagar.myapplication.element.product.fragment.Brand_fragment">
+
     <include layout="@layout/recycleview"></include>
 </android.support.v4.widget.SwipeRefreshLayout>

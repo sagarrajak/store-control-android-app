@@ -10,11 +10,10 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_grid_24dp"
         android:title="List to Grid"
-        android:id="@+id/list_to_grid"/>
+        android:id="@+id/list_to_grid" />
     <item
         app:showAsAction="ifRoom"
         android:title="sort"
         android:icon="@drawable/ic_sort_black_24dp"
-        android:id="@+id/fragment_menu_sort"
-        />
+        android:id="@+id/fragment_menu_sort" />
 </menu>

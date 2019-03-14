@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_marginTop="20dp"
         android:id="@+id/bottom_sheet_employee_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="165dp"
             android:layout_height="wrap_content"
@@ -20,6 +21,7 @@
             android:text="Sort by name"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
+
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,10 +31,12 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/bottom_sheet_employee_date_of_join"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="165dp"
             android:layout_height="wrap_content"
@@ -43,6 +47,7 @@
             android:text="Sort by date of join"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
+
         <RadioButton
             android:id="@+id/bottom_sheet_employee_date_of_join_radiobuttom"
             android:layout_width="wrap_content"
@@ -52,11 +57,13 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/bottom_sheet_employee_salary"
         android:layout_width="match_parent"
         android:layout_marginBottom="20dp"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="165dp"
             android:layout_height="wrap_content"
@@ -68,6 +75,7 @@
             android:id="@+id/textView2"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
+
         <RadioButton
             android:id="@+id/bottom_sheet_employee_salary_radiobuttom"
             android:layout_width="wrap_content"
